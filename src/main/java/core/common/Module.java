@@ -73,10 +73,8 @@ public abstract class Module implements ModuleInterface {
 	}
 	// End getters.
 	
-	public CommandState callCommand(String command, String storageID) throws Exception {
-		// TODO: Integrate ExternalCommandHandler here!
-		return CommandState.FAIL;
-	}
+	@Override
+	public abstract CommandState callCommand(String command, Module storageID) throws CommandFailedException;
 	// End methods.
 
 }

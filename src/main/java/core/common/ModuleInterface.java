@@ -62,7 +62,7 @@ public interface ModuleInterface {
 	 * @return CommandState cState
 	 * @throws Exception
 	 */
-	public CommandState callCommand(String command, String storrageID) throws Exception;
+	public CommandState callCommand(String command, Module module) throws CommandFailedException;
 	// TODO: Intergrate new Exception.
 	
 	// End methods.

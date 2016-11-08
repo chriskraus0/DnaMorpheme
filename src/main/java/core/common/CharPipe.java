@@ -50,7 +50,7 @@ public class CharPipe implements Pipe {
 	
 	/**
 	 * CharPipe writes data in form of buffered char arrays.
-	 * @see java.io.PipedWrite#writechar[], int, int) PipedReader.write 
+	 * @see java.io.PipedWrite#write(char[], int, int) PipedReader.write 
 	 * @param char[] data - write text as char array of specific length
 	 * @param int offset - the start offset of the buffered char array data
 	 * @param int length - length of each buffered char array

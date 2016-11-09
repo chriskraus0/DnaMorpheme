@@ -2805,8 +2805,8 @@ encapsulates common attributes of OutputPort and InputPort</panel_attributes>
     </coordinates>
     <panel_attributes>*/Port/*
 --
-getName()
-setName()
+String getName()
+setName(String name)
 supportsPipe(Pipe pipe)
 supportsPipeClass(Class&lt;? extends Pipe&gt; pipeClass)
 Map&lt;String, Class&lt;? extends Pipe&gt;&gt; getSupportedPipeClasses()
@@ -3118,43 +3118,28 @@ layer=3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1542</x>
-      <y>1014</y>
-      <w>186</w>
-      <h>114</h>
-    </coordinates>
-    <panel_attributes>*CommandFailedException*
-Package::core.common
-{extends java.lang.Exception}
---
-// Variables
-
---
-// Methods
-CommandFailedException(String message)
-
---
-Responsibilities:
-unchecked exception for failed commands</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
       <x>1134</x>
       <y>642</y>
       <w>222</w>
-      <h>114</h>
+      <h>126</h>
     </coordinates>
     <panel_attributes>*CheckExternalProgrammes*
 Package::core.common
-{throw ProgrammeMissingException}
+//{}
 --
 // Variables
+final String SAMTOOLS
+final String CDHIT
+final String QPMS9
+final String BOWTIE2
+final String TOMTOM
 
+String configurationPath
+String configEntries
 --
 // Methods
-CheckExternalProgrammes()
+CheckExternalProgrammes(String configPath)
+readConfig(String cPath)
 
 
 --
@@ -3182,6 +3167,60 @@ CommandFailedException(String message)
 --
 Responsibilities:
 unchecked exception for missing programs</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1248</x>
+      <y>678</y>
+      <w>102</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>*done*
+fontsize=50
+bg=black</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1662</x>
+      <y>738</y>
+      <w>102</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>*done*
+fontsize=50
+bg=black</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1908</x>
+      <y>1026</y>
+      <w>102</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>*done*
+fontsize=50
+bg=black
+layer=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>2256</x>
+      <y>990</y>
+      <w>102</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>*done*
+fontsize=50
+bg=black
+layer=2</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

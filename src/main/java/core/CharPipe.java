@@ -1,9 +1,11 @@
-package core.common;
+package core;
 
 // Imports.
 import java.io.IOException;
 import java.io.PipedReader;
 import java.io.PipedWriter;
+
+import core.common.Pipe;
 
 /**
  * This class sets up a char pipe for inter-module communication. 

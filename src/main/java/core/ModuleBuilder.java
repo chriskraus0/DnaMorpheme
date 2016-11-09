@@ -1,10 +1,14 @@
-package core.common;
+package core;
 
 // Imports.
 
 // Java utility imports.
 import java.util.TreeMap;
 
+import core.common.Module;
+import core.common.ModuleBuilderInterface;
+import core.common.ModuleState;
+import core.common.ModuleType;
 // DnaMorpheme specific imports.
 import modules.CdHitJob;
 

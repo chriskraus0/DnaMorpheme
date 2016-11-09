@@ -1,4 +1,8 @@
-package core.common;
+package core;
+
+import core.common.CommandFailedException;
+import core.common.CommandState;
+import core.common.Module;
 
 //Imports
 

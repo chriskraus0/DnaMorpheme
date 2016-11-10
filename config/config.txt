@@ -1,0 +1,5 @@
+SAMTOOLS	samtools
+CDHIT	cdhit
+QPMS9	qpms9
+BOWTIE2	bowtie2
+TOMTOM	tomtom

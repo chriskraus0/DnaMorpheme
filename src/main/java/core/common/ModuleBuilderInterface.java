@@ -1,5 +1,6 @@
 package core.common;
 
+import java.util.Set;
 
 /**
  * This interface defines the core of the abstract factory (design pattern) "ModuleBuilder".
@@ -23,7 +24,7 @@ public interface ModuleBuilderInterface {
 	 * @see enum ModuleType
 	 * @return Module
 	 */
-	public Module createNewModule(String moduleID, String storageID, ModuleType mType);
+	public Module createNewModule(int moduleID, int storageID, ModuleType mType);
 	
 	/**
 	 * Create new InputPort for given module.
@@ -41,7 +42,7 @@ public interface ModuleBuilderInterface {
 	 * Request storage for a module and return the storage ID.
 	 * @return String storageID
 	 */
-	public String requestStorage();
+	public int requestStorage();
 	
 	/**
 	 * Destroy given module if no longer needed.

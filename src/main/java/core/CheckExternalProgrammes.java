@@ -24,15 +24,23 @@ public class CheckExternalProgrammes {
 	// TODO: change this to an appropriate format.
 	private String configEntries;
 	
-	public CheckExternalProgrammes(String configPath) {
-		this.configurationPath = configPath;
-		// Read configuration file.
-		this.readConfig(this.configurationPath);
+	public CheckExternalProgrammes() {
 		
-		// TODO: Parse the read configuration entries.
 	}
 	
-	private void readConfig(String cPath) { 
+	public CheckExternalProgrammes(String configPath) {
+		this.configurationPath = configPath;	
+	}
+	
+
+	// TODO: Parse the read configuration entries.
+	
+	
+	/**
+	 * Reads configuration file and keeps track of paths for required programs.
+	 * @param String cPath
+	 */
+	public void readConfig(String cPath) { 
 		
 		try {
 			File configFile = new File (cPath);
@@ -40,6 +48,53 @@ public class CheckExternalProgrammes {
 			// Test for existing configuration file.
 			if (!configFile.exists()) {
 				String message = "Error: Configuration file \"config.txt\" not found in path \"" + cPath + "\""; 
+				throw new FileNotFoundException(message);
+			}
+			
+			FileReader fReader = new FileReader(configFile);
+			
+			BufferedReader bReader = new BufferedReader(fReader);
+			
+			String line = null;
+			
+			while ((line = bReader.readLine()) != null) {
+				this.configEntries += line;
+			} 
+			
+			// Close the bReader.
+			bReader.close();
+		} 
+		
+		// Catch "write-read privileges" error for the configuration file.
+		catch (SecurityException es) {
+			System.err.println(es.getMessage());
+			es.printStackTrace();
+		}
+		
+		// Catch IOException for the bReader.
+		catch (IOException ei) {
+			System.err.println(ei.getMessage());
+			ei.printStackTrace();
+		}
+		
+		// Catch unspecified exception.
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Reads configuration file and keeps track of paths for required programs.
+	 * @param String cPath
+	 */
+	public void readConfig() { 
+		
+		try {
+			File configFile = new File (this.configurationPath);
+			
+			// Test for existing configuration file.
+			if (!configFile.exists()) {
+				String message = "Error: Configuration file \"config.txt\" not found in path \"" + this.configurationPath + "\""; 
 				throw new FileNotFoundException(message);
 			}
 			

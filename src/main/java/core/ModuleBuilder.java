@@ -2,14 +2,20 @@ package core;
 
 // Imports.
 
+// Project specific imports.
+import modules.CdHitJob;
+
+
 // Java utility imports.
 import java.util.TreeMap;
+import java.util.Set;
 
+// Project specific imports.
 import core.common.Module;
 import core.common.ModuleBuilderInterface;
 import core.common.ModuleState;
 import core.common.ModuleType;
-// DnaMorpheme specific imports.
+
 import modules.CdHitJob;
 
 /**
@@ -25,13 +31,18 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	
 	// Variables.
 	
-	private TreeMap <String, Module> moduleMap;
+	// Keep an instance independent sorted map of all modules and IDs.
+	private static TreeMap <Integer, Module> moduleMap;
+	
+	// Keep count of all module objects created.
+	private static int moduleCount;
 	
 	// Constructors.
 	
 	public ModuleBuilder () {
 		super();
-		this.moduleMap = new TreeMap<String, Module> ();
+		ModuleBuilder.moduleMap = new TreeMap<Integer, Module> ();
+		ModuleBuilder.moduleCount = 0;
 	}
 
 
@@ -40,30 +51,50 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	// Methods.
 	/**
 	 * Return a newly generated moduleID for a new module.
+	 * @param Module module
 	 * @return String moduleID
 	 */
-	private String generateNewModuleID () {
-		String newID = "";
+	private static int generateNewModuleID () {
+		ModuleBuilder.moduleCount ++;
 		// TODO: Create unique hash-key generator;
-		return newID;
+		return ModuleBuilder.moduleCount;
+	}
+	
+	/**
+	 * Returns a Set of the current ModuleIDs.
+	 * @return Set moduleIDs
+	 */
+	public static Set<Integer> getModuleIDs() {
+		return ModuleBuilder.moduleMap.keySet();
+	}
+	
+	/**
+	 * Returns a specific Module.
+	 * @param moduleID
+	 * @return Module
+	 */
+	public static Module getModule(int moduleID) {
+		return ModuleBuilder.moduleMap.get(moduleID);
 	}
 	
 	
 	public void createNewCdHitJob() {
-		String moduleID = this.generateNewModuleID();
-		String storageID = this.requestStorage();
+		int moduleID = ModuleBuilder.generateNewModuleID();
+		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.CDHIT_JOB;
 		
-		// Add module with the ID "moduleID" to the new module TreeMap. TODO: Is there a reason to use TreeMap instead of HashMap?
-		// TODO: Create CdHitJob class.
-		//this.moduleMap.put(moduleID, new CdHitJob(moduleID, storageID, mType));
+		Module newCdHitJob = this.createNewModule(moduleID, storageID, mType);
+		
+		// Add module with the "moduleID" and module to the new module TreeMap.
+		ModuleBuilder.moduleMap.put(newCdHitJob.getModuleID(), newCdHitJob);
+		
 		// TODO: implement "connectModuleObserver" method
-		//this.connectModuleObserver(this.moduleMap.get(moduleID);
+		//this.connectModuleObserver(ModuleBuilder.moduleMap.get(moduleID));
 	}
 	
 	public void createNewQpms9Job() {
-		String moduleID = this.generateNewModuleID();
-		String storageID = this.requestStorage();
+		int moduleID = ModuleBuilder.generateNewModuleID();
+		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.QPMS9_JOB;
 		
 		// Add module with the ID "moduleID" to the new module TreeMap. TODO: Is there a reason to use TreeMap instead of HashMap?
@@ -74,8 +105,8 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 	
 	public void createNewBowtie2Job() {
-		String moduleID = this.generateNewModuleID();
-		String storageID = this.requestStorage();
+		int moduleID = ModuleBuilder.generateNewModuleID();
+		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.BOWTIE2_JOB;
 		
 		// Add module with the ID "moduleID" to the new module TreeMap. TODO: Is there a reason to use TreeMap instead of HashMap?
@@ -86,8 +117,8 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 	
 	public void createNewSamtoolsJob() {
-		String moduleID = this.generateNewModuleID();
-		String storageID = this.requestStorage();
+		int moduleID = ModuleBuilder.generateNewModuleID();
+		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.SAMTOOLS_JOB;
 		
 		// Add module with the ID "moduleID" to the new module TreeMap. TODO: Is there a reason to use TreeMap instead of HashMap?
@@ -98,8 +129,8 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 	
 	public void createNewTomtomJob() {
-		String moduleID = this.generateNewModuleID();
-		String storageID = this.requestStorage();
+		int moduleID = ModuleBuilder.generateNewModuleID();
+		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.TOMTOM_JOB;
 		
 		// Add module with the ID "moduleID" to the new module TreeMap. TODO: Is there a reason to use TreeMap instead of HashMap?
@@ -110,8 +141,8 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 	
 	public void createNewSequenceLogoJob() {
-		String moduleID = this.generateNewModuleID();
-		String storageID = this.requestStorage();
+		int moduleID = ModuleBuilder.generateNewModuleID();
+		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.SEQ_LOGO_JOB;
 		
 		// Add module with the ID "moduleID" to the new module TreeMap. TODO: Is there a reason to use TreeMap instead of HashMap?
@@ -122,8 +153,8 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 	
 	public void createNewPmsConsensusJob() {
-		String moduleID = this.generateNewModuleID();
-		String storageID = this.requestStorage();
+		int moduleID = ModuleBuilder.generateNewModuleID();
+		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.PMS_CONSENSUS_JOB;
 		
 		// Add module with the ID "moduleID" to the new module TreeMap. TODO: Is there a reason to use TreeMap instead of HashMap?
@@ -134,8 +165,8 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 	
 	public void createNewNucFreqJob() {
-		String moduleID = this.generateNewModuleID();
-		String storageID = this.requestStorage();
+		int moduleID = ModuleBuilder.generateNewModuleID();
+		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.NUCFREQ_JOB;
 		
 		// Add module with the ID "moduleID" to the new module TreeMap. TODO: Is there a reason to use TreeMap instead of HashMap?
@@ -146,8 +177,8 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 	
 	public void createNewExternalCommandHandler() {
-		String moduleID = this.generateNewModuleID();
-		String storageID = this.requestStorage();
+		int moduleID = ModuleBuilder.generateNewModuleID();
+		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.EXTERNAL_COMMAND;
 		
 		// Add module with the ID "moduleID" to the new module TreeMap. TODO: Is there a reason to use TreeMap instead of HashMap?
@@ -158,10 +189,21 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 	
 	@Override
-	public Module createNewModule(String moduleID, String storageID, ModuleType mType) {
+	public Module createNewModule(int moduleID, int storageID, ModuleType mType) {
 		
-		Module newModule = new CdHitJob(moduleID, storageID, mType);
+		Module newModule = null;
+		
+		switch (mType) {
+			case CDHIT_JOB:
+				newModule = new CdHitJob (moduleID, storageID, mType);
+				break;
+			case UNDEFINED:
+				break;
+			default:
+				break;
+		}
 		return newModule;
+		
 	}
 
 	@Override
@@ -177,9 +219,9 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 
 	@Override
-	public String requestStorage() {
+	public int requestStorage() {
 		// TODO Auto-generated method stub
-		return null;
+		return 1;
 	}
 
 	@Override

@@ -13,16 +13,17 @@ import core.common.ModuleType;
 
 public class ExternalCommandHandler extends Module {
 
-	public ExternalCommandHandler(String moduleID, String storageID, ModuleType mType) {
+	public ExternalCommandHandler(int moduleID, int storageID, ModuleType mType) {
 		super(moduleID, storageID, mType);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public CommandState callCommand(String command, Module module) throws CommandFailedException {
+	public CommandState callCommand(String command, int storageID) throws CommandFailedException {
 		// TODO Auto-generated method stub
 		
-		switch (module.getModuleType()) {
+		// TODO resolve this:
+		/*switch (storageID.getModuleType()) {
 		case CDHIT_JOB:
 			
 			break;
@@ -44,7 +45,7 @@ public class ExternalCommandHandler extends Module {
 			break;
 		case UNDEFINED:
 			break;
-		}
+		}*/
 		
 		return CommandState.SUCCESS;
 	}

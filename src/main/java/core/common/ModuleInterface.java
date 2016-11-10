@@ -38,7 +38,7 @@ public interface ModuleInterface {
 	 * Return the unique moduleID of a module.
 	 * @return String moduleID
 	 */
-	public String getModuleID();
+	public int getModuleID();
 	
 	/**
 	 * Return the type of this module defined by the enumeration ModuleType.
@@ -51,7 +51,7 @@ public interface ModuleInterface {
 	 * Return the associated unique storageID for this module.
 	 * @return
 	 */
-	public String getStorageID();
+	public int getStorageID();
 	
 	// End getters.
 	
@@ -62,7 +62,8 @@ public interface ModuleInterface {
 	 * @return CommandState cState
 	 * @throws Exception
 	 */
-	public CommandState callCommand(String command, Module module) throws CommandFailedException;
+	public CommandState callCommand(String command, int storageID) throws CommandFailedException;
+
 	// TODO: Intergrate new Exception.
 	
 	// End methods.

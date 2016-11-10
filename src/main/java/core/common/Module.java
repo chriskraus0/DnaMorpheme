@@ -17,8 +17,8 @@ public abstract class Module implements ModuleInterface {
 	
 	// Constants.
 	
-	private final String MODULE_ID;
-	private final String STORRAGE_ID;
+	private final int MODULE_ID;
+	private final int STORRAGE_ID;
 	private final ModuleType MODULE_TYPE;
 	
 	// End Constants.
@@ -28,9 +28,9 @@ public abstract class Module implements ModuleInterface {
 	
 	// Constructors.
 	
-	public Module (String moduleID, String storageID, ModuleType mType) {
+	public Module (int moduleID, int storageID, ModuleType mType) {
 		super();
-		this.MODULE_ID = moduleID;
+		this.MODULE_ID = this.hashCode();
 		this.STORRAGE_ID = storageID;
 		this.MODULE_TYPE = mType;
 		this.mState = ModuleState.STARTING;
@@ -58,7 +58,7 @@ public abstract class Module implements ModuleInterface {
 	}
 	
 	@Override
-	public String getModuleID() {
+	public int getModuleID() {
 		return this.MODULE_ID;
 	}
 	
@@ -68,13 +68,13 @@ public abstract class Module implements ModuleInterface {
 	}
 	
 	@Override
-	public String getStorageID() {
+	public int getStorageID() {
 		return this.STORRAGE_ID;
 	}
 	// End getters.
 	
 	@Override
-	public abstract CommandState callCommand(String command, Module storageID) throws CommandFailedException;
+	public abstract CommandState callCommand(String command, int storageID) throws CommandFailedException;
 	// End methods.
 
 }

@@ -12,13 +12,13 @@ import core.common.ModuleType;
 
 public class NucFreqJob extends Module {
 
-	public NucFreqJob(String moduleID, String storageID, ModuleType mType) {
+	public NucFreqJob(int moduleID, int storageID, ModuleType mType) {
 		super(moduleID, storageID, mType);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public CommandState callCommand(String command, Module storageID) throws CommandFailedException {
+	public CommandState callCommand(String command, int storageID) throws CommandFailedException {
 		// TODO Auto-generated method stub
 		return CommandState.SUCCESS;
 	}

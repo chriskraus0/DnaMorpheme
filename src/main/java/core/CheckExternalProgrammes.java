@@ -90,6 +90,7 @@ public class CheckExternalProgrammes {
 	public void readConfig() { 
 		
 		try {
+			
 			File configFile = new File (this.configurationPath);
 			
 			// Test for existing configuration file.

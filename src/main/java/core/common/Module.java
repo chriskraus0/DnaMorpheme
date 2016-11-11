@@ -30,7 +30,7 @@ public abstract class Module implements ModuleInterface {
 	
 	public Module (int moduleID, int storageID, ModuleType mType) {
 		super();
-		this.MODULE_ID = this.hashCode();
+		this.MODULE_ID = moduleID;
 		this.STORRAGE_ID = storageID;
 		this.MODULE_TYPE = mType;
 		this.mState = ModuleState.STARTING;

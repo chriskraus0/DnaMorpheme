@@ -1,12 +1,12 @@
 package modules;
 
-import core.common.CommandFailedException;
 import core.common.CommandState;
 
 //Imports.
 
 import core.common.Module;
 import core.common.ModuleType;
+import core.exceptions.CommandFailedException;
 
 //TODO: Just a bare bones module. This must be extended!
 public class QPMS9Job extends Module {

@@ -8,9 +8,22 @@ import java.util.Iterator;
 // Project specific imports.
 import core.CoreController;
 import core.ModuleBuilder;
-import core.common.CommandFailedException;
+import core.exceptions.CommandFailedException;
 import modules.CdHitJob;
 
+/**
+ * Test drive class to test core classes such as 
+ * core.Controller, core.ModuleBuilder, core.common.CommandFailedException, core.CheckExternalProgrammes.
+ * This test drive iterates over 3 independently created instances of the Module CdHitJob.
+ * @see core.Controller
+ * @see core.Controller#checkExternalProgrammes()
+ * @see core.ModuleBuilder
+ * @see core.ModuleBuilder#createNewCdHitJob()
+ * @see core.Module
+ * @see modules.CdHitJob
+ * @author christopher
+ *
+ */
 public class TestCoreControllerModulesExternalProgrammes {
 	
 	// Variables.
@@ -36,8 +49,10 @@ public class TestCoreControllerModulesExternalProgrammes {
 	
 	public void run() {
 
-	        
+	    // Create a new Singleton "CoreController"
 		CoreController.getInstance();
+		
+		// Check for the existing config file.
 		CoreController.checkExternalProgrammes("config/config.txt");
 		ModuleBuilder moduleBuilder = CoreController.generateModuleBuilder();
 		

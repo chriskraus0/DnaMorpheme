@@ -4,6 +4,8 @@ package core.common;
 
 import java.lang.Exception;
 
+import core.exceptions.CommandFailedException;
+
 /**
  * Interface defines critical abstract methods for each module.
  * @author christopher

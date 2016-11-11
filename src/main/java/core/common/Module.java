@@ -1,5 +1,7 @@
 package core.common;
 
+import core.exceptions.CommandFailedException;
+
 // Imports.
 
 /**

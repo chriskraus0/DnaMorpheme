@@ -7,7 +7,7 @@ import core.common.CommandState;
 // Project specific imports.
 import core.common.Module;
 import core.common.ModuleType;
-import core.common.CommandFailedException;
+import core.exceptions.CommandFailedException;
 
 // TODO: Just a bare bones module. This must be extended!
 public class CdHitJob extends Module {

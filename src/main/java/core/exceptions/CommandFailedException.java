@@ -1,4 +1,4 @@
-package core.common;
+package core.exceptions;
 
 // Imports.
 
@@ -6,7 +6,7 @@ package core.common;
 public class CommandFailedException extends Exception {
 	
 	/**
-	 * 
+	 * Serial version UID.
 	 */
 	private static final long serialVersionUID = 6288133003605640151L;
 

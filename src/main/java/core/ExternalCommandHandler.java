@@ -1,6 +1,5 @@
 package core;
 
-import core.common.CommandFailedException;
 import core.common.CommandState;
 import core.common.Module;
 
@@ -8,6 +7,7 @@ import core.common.Module;
 
 // Internal project imports.
 import core.common.ModuleType;
+import core.exceptions.CommandFailedException;
 
 //TODO: Just a bare bones module. This must be extended!
 

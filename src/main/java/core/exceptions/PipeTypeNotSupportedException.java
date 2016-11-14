@@ -7,7 +7,7 @@ package core.exceptions;
  * @author christopher
  *
  */
-public class NotSupportedException extends Exception {
+public class PipeTypeNotSupportedException extends Exception {
 	
 	/**
 	 * Serial version UID.
@@ -15,7 +15,7 @@ public class NotSupportedException extends Exception {
 	private static final long serialVersionUID = -4433268837772638246L;
 
 	// Constructors.
-	public NotSupportedException (String message) {
+	public PipeTypeNotSupportedException (String message) {
 		super(message);
 	}
 

@@ -8,7 +8,7 @@ package core.common;
 import java.util.Map;
 
 // Project specific imports.
-import core.exceptions.NotSupportedException;
+import core.exceptions.PipeTypeNotSupportedException;
 import core.exceptions.OccupiedException;
 import core.exceptions.NotFoundException;
 
@@ -31,16 +31,10 @@ public interface Port {
 	public int getPortID();
 	
 	/**
-	 * Returns the PortType of the specific port.
-	 * @return PortType pType
+	 * Get the supported PipeType.
+	 * @return PipeType pipeType
 	 */
-	public PortType getPortType();
-	
-	/**
-	 * Getter to get a map of all supported Pipes.
-	 * @return Map<String, Class<? extends Pipe>> pipeMap
-	 */
-	public Map<String, Class<? extends Pipe>> getSupportedPipeClass();
+	public PipeType getPipeType();
 	
 	// End getters.
 	
@@ -49,21 +43,23 @@ public interface Port {
 	// End setters.
 	
 	/**
-	 * Test to see whether pipeClass is suported by current Pipe.
-	 * @param pipeClass
+	 * Test whether a Pipe object is supported by the current Port.
+	 * @param Pipe pipe
 	 * @return boolean
+	 * @throws PipeTypeNotSupportedException 
 	 */
-	public boolean supportsPipeClass(Class<? extends Pipe> pipeClass);
+	public boolean supportsPipe(Pipe pipe) throws PipeTypeNotSupportedException;
+	
 	
 	/**
-	 * Add a pipe to connect to the first or the second port.
+	 * Set a pipe to connect to the first or the second port.
 	 * @param pipe
 	 * @param connectingPort
-	 * @throws NotSupportedException
+	 * @throws PipeTypeNotSupportedException
 	 * @throws OccupiedException
 	 */
-	public void addPipe(Pipe pipe, Port connectingPort) throws
-		NotSupportedException,  OccupiedException;
+	public void connectPorts(Pipe pipe, Port connectingPort) throws
+		PipeTypeNotSupportedException,  OccupiedException;
 	
 	/**
 	 * Remove the pipe connecting two ports.
@@ -81,6 +77,6 @@ public interface Port {
 	 * Test to see whether a port is connected.
 	 * @return boolean
 	 */
-	public boolean isConnected();
+	public PortState getPortState();
 	// End methods.
 }

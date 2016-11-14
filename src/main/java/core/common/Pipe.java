@@ -29,4 +29,10 @@ public interface Pipe {
 	 * @throws IOExcpetion
 	 */
 	public void pipeReset() throws IOException;
+	
+	/**
+	 * Returns the PipeType of a Pipe.
+	 * @return PipeType
+	 */
+	public PipeType getPipeType ();
 }

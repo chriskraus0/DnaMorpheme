@@ -6,6 +6,7 @@ import java.io.PipedReader;
 import java.io.PipedWriter;
 
 import core.common.Pipe;
+import core.common.PipeType;
 
 /**
  * This class sets up a char pipe for inter-module communication. 
@@ -15,9 +16,13 @@ import core.common.Pipe;
 
 public class CharPipe implements Pipe {
 
+	// Constants.
+	private final PipeType pipeType = PipeType.CHAR;
+	
 	// Variables.
 	private PipedWriter pipeOutput;
 	private PipedReader pipeInput;
+	
 	// End variables.
 	
 	// Constructors.
@@ -28,6 +33,11 @@ public class CharPipe implements Pipe {
 	// End constructors.
 	
 	// Methods.
+	
+	@Override
+	public PipeType getPipeType() {
+		return this.pipeType;
+	}
 	
 	/**
 	 * CharPipe reads data in form of buffered char array.

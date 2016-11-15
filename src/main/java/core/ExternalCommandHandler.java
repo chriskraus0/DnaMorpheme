@@ -13,8 +13,8 @@ import core.exceptions.CommandFailedException;
 
 public class ExternalCommandHandler extends Module {
 
-	public ExternalCommandHandler(int moduleID, int storageID, ModuleType mType) {
-		super(moduleID, storageID, mType);
+	public ExternalCommandHandler(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID) {
+		super(moduleID, storageID, mType, iPortID, oPortID);
 		// TODO Auto-generated constructor stub
 	}
 

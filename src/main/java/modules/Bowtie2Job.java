@@ -11,8 +11,8 @@ import core.exceptions.CommandFailedException;
 //TODO: Just a bare bones module. This must be extended!
 public class Bowtie2Job extends Module {
 
-	public Bowtie2Job(int moduleID, int storageID, ModuleType mType) {
-		super(moduleID, storageID, mType);
+	public Bowtie2Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID) {
+		super(moduleID, storageID, mType, iPortID, oPortID);
 		// TODO Auto-generated constructor stub
 	}
 

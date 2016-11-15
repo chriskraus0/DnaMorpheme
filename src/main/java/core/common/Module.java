@@ -4,6 +4,9 @@ import core.exceptions.CommandFailedException;
 
 // Imports.
 
+// Project specific imports
+import core.ModulePortLinker;
+
 /**
  * Abstract class defining the common methods among all modules.
  * @author christopher
@@ -11,6 +14,7 @@ import core.exceptions.CommandFailedException;
  */
 
 public abstract class Module implements ModuleInterface {
+	
 	// Enumerations.
 	
 	private ModuleState mState;
@@ -23,19 +27,25 @@ public abstract class Module implements ModuleInterface {
 	private final int STORRAGE_ID;
 	private final ModuleType MODULE_TYPE;
 	
+	private final int INPUT_PORT_ID;
+	private final int OUTPUT_PORT_ID;
+	
 	// End Constants.
 	
 	// Variables.
+	
 	// End Variables.
 	
 	// Constructors.
 	
-	public Module (int moduleID, int storageID, ModuleType mType) {
+	public Module (int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID) {
 		super();
 		this.MODULE_ID = moduleID;
 		this.STORRAGE_ID = storageID;
 		this.MODULE_TYPE = mType;
 		this.mState = ModuleState.STARTING;
+		this.INPUT_PORT_ID = iPortID;
+		this.OUTPUT_PORT_ID = oPortID;
 	}
 	
 	// End Constructors.
@@ -53,6 +63,14 @@ public abstract class Module implements ModuleInterface {
 	// End setters.
 	
 	// Getters.
+	
+	public Port getInputPort () {
+		return ModulePortLinker.getInputPort(this.INPUT_PORT_ID);
+	}
+	
+	public Port getOutputPort () {
+		return ModulePortLinker.getOutputPort(this.OUTPUT_PORT_ID);
+	}
 	
 	@Override
 	public ModuleState getModuleState() {

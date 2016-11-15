@@ -12,8 +12,8 @@ import core.exceptions.CommandFailedException;
 
 public class TomTomJob extends Module {
 
-	public TomTomJob(int moduleID, int storageID, ModuleType mType) {
-		super(moduleID, storageID, mType);
+	public TomTomJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID) {
+		super(moduleID, storageID, mType, iPortID, oPortID);
 		// TODO Auto-generated constructor stub
 	}
 

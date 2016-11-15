@@ -2,10 +2,6 @@ package core;
 
 // Imports.
 
-// Project specific imports.
-import modules.CdHitJob;
-
-
 // Java utility imports.
 import java.util.TreeMap;
 import java.util.Set;
@@ -17,6 +13,7 @@ import core.common.ModuleState;
 import core.common.ModuleType;
 
 import modules.CdHitJob;
+
 
 /**
  * The actual factory which creates new modules.
@@ -43,6 +40,9 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		super();
 		ModuleBuilder.moduleMap = new TreeMap<Integer, Module> ();
 		ModuleBuilder.moduleCount = 0;
+		
+		// Get a single instance for ModulePortLinker.
+		ModulePortLinker.getInstance();
 	}
 
 
@@ -77,8 +77,23 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return ModuleBuilder.moduleMap.get(moduleID);
 	}
 	
+	public int createNewInputReader() {
+		int moduleID = ModuleBuilder.generateNewModuleID();
+		int storageID = this.requestStorage();
+		ModuleType mType = ModuleType.INPUT_READER;
+		
+		Module newInputReader = this.createNewModule(moduleID, storageID, mType);
+		
+		// Add module with the "moduleID" and module to the new module TreeMap.
+		ModuleBuilder.moduleMap.put(newInputReader.getModuleID(), newInputReader);
+		
+		// TODO: implement "connectModuleObserver" method
+		//this.connectModuleObserver(ModuleBuilder.moduleMap.get(moduleID));
+		
+		return moduleID;
+	}
 	
-	public void createNewCdHitJob() {
+	public int createNewCdHitJob() {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.CDHIT_JOB;
@@ -90,18 +105,27 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		
 		// TODO: implement "connectModuleObserver" method
 		//this.connectModuleObserver(ModuleBuilder.moduleMap.get(moduleID));
+		
+		return moduleID;
 	}
 	
-	public void createNewQpms9Job() {
+	public int createNewQpms9Job() {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.QPMS9_JOB;
+		
+		Module newQpms9Job = this.createNewModule(moduleID, storageID, mType);
+		
+		// Add module with the "moduleID" and module to the new module TreeMap.
+		ModuleBuilder.moduleMap.put(newQpms9Job.getModuleID(), newQpms9Job);
 		
 		// Add module with the ID "moduleID" to the new module TreeMap. TODO: Is there a reason to use TreeMap instead of HashMap?
 		// TODO: Create QPMS9Job class.
 		//this.moduleMap.put(moduleID, new CdHitJob(moduleID, storageID, mType));
 		// TODO: implement "connectModuleObserver" method
 		//this.connectModuleObserver(this.moduleMap.get(moduleID);
+		
+		return moduleID;
 	}
 	
 	public void createNewBowtie2Job() {
@@ -195,7 +219,9 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		
 		switch (mType) {
 			case CDHIT_JOB:
-				newModule = new CdHitJob (moduleID, storageID, mType);
+				newModule = new CdHitJob (moduleID, storageID, mType, 
+						ModulePortLinker.requestNewInputPortID(moduleID), 
+						ModulePortLinker.requestNewOutputPortID(moduleID));
 				break;
 			case UNDEFINED:
 				break;

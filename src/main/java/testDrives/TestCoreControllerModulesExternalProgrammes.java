@@ -52,7 +52,7 @@ public class TestCoreControllerModulesExternalProgrammes {
 	    // Create a new Singleton "CoreController"
 		CoreController.getInstance();
 		
-		// Check for the existing config file.
+		// Check for the existing configuration file.
 		CoreController.checkExternalProgrammes("config/config.txt");
 		ModuleBuilder moduleBuilder = CoreController.generateModuleBuilder();
 		

@@ -2,6 +2,9 @@ package testDrives;
 
 import core.CoreController;
 import core.ModuleBuilder;
+import core.exceptions.OccupiedException;
+import core.exceptions.PipeTypeNotSupportedException;
+import core.exceptions.CommandFailedException;
 
 /**
  * Test drive class for testing of the inter-module communication via ports and pipes.
@@ -37,15 +40,58 @@ public class TestPortsPipesInterModuleComm {
 		// Create a new Singleton "CoreController"
 		CoreController.getInstance();
 		
-		// Check for the existing config file.
+		// Check for the existing configuration file.
 		CoreController.checkExternalProgrammes("config/config.txt");
 		ModuleBuilder moduleBuilder = CoreController.generateModuleBuilder();
 		
 		// Create 3 new modules. 
 		
-		// Create for each module a port. 
+		int inputModule = moduleBuilder.createNewInputReader();
+		int cdHitModule = moduleBuilder.createNewCdHitJob();
+		int qPMS9Module = moduleBuilder.createNewQpms9Job();
 		
-		// Connect both ports via pipes.
+		
+		// Connecting ports via pipes.
+		try {
+			moduleBuilder.getModule(inputModule).getOutputPort().connectPorts(
+				moduleBuilder.getModule(cdHitModule).getInputPort().getPipe(), 
+				moduleBuilder.getModule(cdHitModule).getInputPort());
+		} 
+		
+		catch (PipeTypeNotSupportedException pe) {
+			System.err.println(pe.getMessage());
+			pe.printStackTrace();
+		}
+		
+		catch (OccupiedException oe) {
+			System.err.println(oe.getMessage());
+			oe.printStackTrace();
+		}
+		
+		// Connecting ports via pipes.
+		try {
+			moduleBuilder.getModule(cdHitModule).getOutputPort().connectPorts(
+				moduleBuilder.getModule(qPMS9Module).getInputPort().getPipe(), 
+				moduleBuilder.getModule(qPMS9Module).getInputPort());
+		} 
+		
+		catch (PipeTypeNotSupportedException pe) {
+			System.err.println(pe.getMessage());
+			pe.printStackTrace();
+		}
+		
+		catch (OccupiedException oe) {
+			System.err.println(oe.getMessage());
+			oe.printStackTrace();
+		}
+		
+		// Read external file and send it to the next module.
+		try {
+			moduleBuilder.getModule(inputModule).callCommand("testFiles/inFile.txt", moduleBuilder.getModule(inputModule).getStorageID());
+		} catch (CommandFailedException ce) {
+			System.err.println(ce.getMessage());
+			ce.printStackTrace();
+		}
 		
 		// Sent in data which should be transformed.
 	}

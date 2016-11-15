@@ -46,8 +46,8 @@ public class CharPipe implements Pipe {
 	 * @param int length - length of the buffered char array
 	 * @throws IOException
 	 */
-	public void read(char[] data, int offset, int length) throws IOException {
-		this.pipeInput.read(data, offset, length);
+	public int read(char[] data, int offset, int length) throws IOException {
+		return this.pipeInput.read(data, offset, length);
 	}
 	
 	/**
@@ -74,14 +74,12 @@ public class CharPipe implements Pipe {
 	
 	@Override
 	public void readClose() throws IOException {
-		// TODO Auto-generated method stub
-		
+		this.pipeInput.close();
 	}
 
 	@Override
 	public void writeClose() throws IOException {
-		// TODO Auto-generated method stub
-		
+		this.pipeOutput.close();
 	}
 
 	@Override

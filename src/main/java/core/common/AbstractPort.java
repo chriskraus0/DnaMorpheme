@@ -2,9 +2,13 @@ package core.common;
 
 // Imports.
 
+// Java exceptions.
+import java.io.IOException;
+
 // Project specific exceptions.
 import core.exceptions.NotFoundException;
 import core.exceptions.OccupiedException;
+import core.CharPipe;
 
 // Imports.
 
@@ -16,10 +20,12 @@ import core.exceptions.OccupiedException;
 
 public abstract class AbstractPort implements Port {
 	
-	// Variables.
+	// Constants.
 	
-	private int moduleID;
-	private int portID;
+	private final int MODULE_ID;
+	private final int PORT_ID;
+	
+	// Variables.
 	
 	// Variable holding the status of the port.
 	private PortState portState;
@@ -33,25 +39,43 @@ public abstract class AbstractPort implements Port {
 	
 	public AbstractPort (int portID, int moduleID) {
 		super();
-		this.portID = portID;
-		this.moduleID = moduleID;
+		this.PORT_ID = portID;
+		this.MODULE_ID = moduleID;
 		this.portState = PortState.READY;
 	}
 	
 	public AbstractPort (int portID, int moduleID, Pipe pipe) {
 		super();
-		this.portID = portID;
-		this.moduleID = moduleID;
+		this.PORT_ID = portID;
+		this.MODULE_ID = moduleID;
 		this.pipe = pipe;
 		this.portState = PortState.READY;
 	}
 	
 	// Methods.
+	
+	// Setters.
+	
+	@Override 
+	public void setPortState (PortState pState) {
+		this.portState = pState;
+	}
+	
+	@Override
+	public void setPipe(Pipe pipe) {
+		this.pipe = pipe;
+	}
 
 	// Getters.
+	
+	@Override
+	public Pipe getPipe() {
+		return this.pipe;
+	}
+	
 	@Override
 	public int getModuleID () {
-		return this.moduleID;
+		return this.MODULE_ID;
 	}
 	
 	@Override 
@@ -66,15 +90,7 @@ public abstract class AbstractPort implements Port {
 	}
 	
 	// End getters.
-	
-	// Setters.
-	
-	public void setPipe (Pipe pipe) {
-		this.pipe = pipe;
-	}
-	
-	// End setters.
-	
+		
 	@Override
 	public boolean supportsPipe(Pipe pipe) throws PipeTypeNotSupportedException {
 		// TODO: Throw appropriate exception?		
@@ -129,27 +145,44 @@ public abstract class AbstractPort implements Port {
 			}
 			// TODO: Write PipeNotSupportedException which has a constructor that takes a port and
 			// a pipe as argument and automatically prints the above mentioned message.
+		
 			else {
-				// TODO: Continue here.
+				try {
+					// Reset pipe.
+					pipe.pipeReset();
+					
+					// Connect pipe to this port.
+					this.setPipe(pipe);
+					
+					// Change state of both ports.
+					connectingPort.setPortState(PortState.CONNECTED);
+					this.setPortState(PortState.CONNECTED);
+					
+				} catch (IOException ie) {
+					System.err.println(ie.getCause());
+					ie.printStackTrace();
+				}
 			}
 			
 		} 
 		
 	}
 	
-	@Override
-	public void removePipe(Pipe pipe) throws NotFoundException {
-		// TODO include remove sub here.
-	}
-	
-	@Override
-	public void reset() {
-		// TODO include reset sub here.
+	public void createNewPipe (PipeType pType) {
+		// TODO: Include exception if pipe already exists.
+		
+		if (pType.equals(this.getPipe().getPipeType())) {
+			try {
+				this.pipe = new CharPipe();
+			} catch (IOException ie) {
+				System.err.println(ie.getMessage());
+				ie.printStackTrace();
+			}
+		}
 	}
 	
 	@Override
 	public PortState getPortState() {
-		// TODO include is connected sub here.
 		return this.portState;
 	}
 	

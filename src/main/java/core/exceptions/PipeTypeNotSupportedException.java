@@ -2,6 +2,7 @@ package core.exceptions;
 
 // Imports.
 
+
 /**
  * This Exception guarantees that two pipes are compatible with one another.
  * @author christopher
@@ -18,5 +19,5 @@ public class PipeTypeNotSupportedException extends Exception {
 	public PipeTypeNotSupportedException (String message) {
 		super(message);
 	}
-
+	
 }

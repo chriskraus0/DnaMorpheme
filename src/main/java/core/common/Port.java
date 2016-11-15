@@ -16,7 +16,28 @@ public interface Port {
 	
 	// Methods.
 	
+	// Setters.
+	
+	/**
+	 * Set state of the port.
+	 * @param pState
+	 */
+	public void setPortState (PortState pState);
+	
+	/**
+	 * Set new pipe.
+	 * @param Pipe pipe
+	 */
+	public void setPipe(Pipe pipe);
+	// End setters.
+	
 	// Getters.
+	
+	/**
+	 * Return the connected pipe.
+	 * @return
+	 */
+	public Pipe getPipe ();
 	
 	/**
 	 * Returns the moduleID of the associated module.
@@ -35,6 +56,12 @@ public interface Port {
 	 * @return PipeType pipeType
 	 */
 	public PipeType getPipeType();
+	
+	/**
+	 * Test to see whether a port is connected.
+	 * @return boolean
+	 */
+	public PortState getPortState();
 	
 	// End getters.
 	
@@ -63,20 +90,15 @@ public interface Port {
 	
 	/**
 	 * Remove the pipe connecting two ports.
-	 * @param pipe
 	 * @throws NotFoundException
 	 */
-	public void removePipe(Pipe pipe) throws NotFoundException;
+	public void removePipe() throws NotFoundException;
 	
 	/**
 	 * Reset all pipes between two ports. 
 	 */
 	public void reset();
+
 	
-	/**
-	 * Test to see whether a port is connected.
-	 * @return boolean
-	 */
-	public PortState getPortState();
 	// End methods.
 }

@@ -4,6 +4,8 @@ import core.common.CommandState;
 
 // Imports.
 
+import java.io.IOException;
+
 // Project specific imports.
 import core.common.Module;
 import core.common.ModuleType;
@@ -37,7 +39,16 @@ public class CdHitJob extends Module {
 		String inputStuff;
 		
 		// Read first chars.
-		//((InputPort) this.getInputPort()).readFromCharPipe(data, offset, length);
+		int buffer = 1024;
+		char[] data;
+		
+		/*inputStuff = ((char) ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, buffer));
+		try {
+			
+		} catch (IOException ie) {
+			System.err.println(ie.getMessage());
+			ie.printStackTrace();
+		}*/
 		
 		
 		// If everything worked out return SUCCESS.

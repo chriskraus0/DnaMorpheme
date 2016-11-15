@@ -50,6 +50,10 @@ public class CharPipe implements Pipe {
 		return this.pipeInput.read(data, offset, length);
 	}
 	
+	public int read() throws IOException {
+		return this.pipeInput.read();
+	}
+	
 	/**
 	 * CharPipe writes whole strings.
 	 * @see java.io.Writer#write(String) Writer.write

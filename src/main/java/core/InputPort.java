@@ -30,7 +30,7 @@ public class InputPort extends AbstractPort {
 		super(portID, moduleID, pipe);
 	}
 
-	public int readFromCharPipe (char[] data, int offset, int length) throws PipeTypeNotSupportedException {
+	public int readFromCharPipe () throws PipeTypeNotSupportedException, IOException {
 		
 		if (!this.getPipeType().equals(PipeType.CHAR)) {
 			throw new PipeTypeNotSupportedException ("Pipe of type \""
@@ -40,15 +40,21 @@ public class InputPort extends AbstractPort {
 					+ "\".");
 		}
 		
-		try {
-			return ((CharPipe) this.getPipe()).read(data, offset, length);
-			
-		} catch (IOException ie) {
-			System.err.println(ie.getMessage());
-			ie.printStackTrace();
+		return ((CharPipe) this.getPipe()).read();
+		
+	}
+
+	public int readFromCharPipe (char[] data, int offset, int length) throws PipeTypeNotSupportedException, IOException {
+		
+		if (!this.getPipeType().equals(PipeType.CHAR)) {
+			throw new PipeTypeNotSupportedException ("Pipe of type \""
+					+ this.getPipeType()
+					+ "\" is not supported by port with ID \""
+					+ this.getPortID()
+					+ "\".");
 		}
 		
-		return -1;
+		return ((CharPipe) this.getPipe()).read(data, offset, length);
 		
 	}
 	

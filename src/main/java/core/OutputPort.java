@@ -32,8 +32,9 @@ public class OutputPort extends AbstractPort {
 		super(portID, moduleID, pipe);
 	}
 
-	public void writeToCharPipe (char[] data, int offset, int length) throws PipeTypeNotSupportedException {
+	public void writeToCharPipe (char[] data, int offset, int length) throws PipeTypeNotSupportedException, IOException {
 		
+		// Catch non-compatible pipes error.
 		if (!this.getPipeType().equals(PipeType.CHAR)) {
 			throw new PipeTypeNotSupportedException ("Pipe of type \""
 					+ this.getPipeType()
@@ -42,18 +43,15 @@ public class OutputPort extends AbstractPort {
 					+ "\".");
 		}
 		
-		try {
-			((CharPipe) this.getPipe()).write(data, offset, length);
-			
-		} catch (IOException ie) {
-			System.err.println(ie.getMessage());
-			ie.printStackTrace();
-		}
+		// Write the data[] via the CharPipe.
+		((CharPipe) this.getPipe()).write(data, offset, length);
+		
 		
 	}
 	
-	public void writeToCharPipe (String data) throws PipeTypeNotSupportedException {
+	public void writeToCharPipe (String data) throws PipeTypeNotSupportedException, IOException {
 		
+		// Catch non-compatible pipes error.
 		if (!this.getPipeType().equals(PipeType.CHAR)) {
 			throw new PipeTypeNotSupportedException ("Pipe of type \""
 					+ this.getPipeType()
@@ -62,14 +60,8 @@ public class OutputPort extends AbstractPort {
 					+ "\".");
 		}
 		
-		try {
-			((CharPipe) this.getPipe()).write(data);
-			
-		} catch (IOException ie) {
-			System.err.println(ie.getMessage());
-			ie.printStackTrace();
-		}
-		
+		// Write the String data via the CharPipe.
+		((CharPipe) this.getPipe()).write(data);
 	}
 	
 	// TODO read from byte pipe.

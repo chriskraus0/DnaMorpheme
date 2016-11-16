@@ -13,6 +13,7 @@ import core.common.ModuleState;
 import core.common.ModuleType;
 
 import modules.CdHitJob;
+import modules.QPMS9Job;
 
 
 /**
@@ -220,6 +221,16 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		switch (mType) {
 			case CDHIT_JOB:
 				newModule = new CdHitJob (moduleID, storageID, mType, 
+						ModulePortLinker.requestNewInputPortID(moduleID), 
+						ModulePortLinker.requestNewOutputPortID(moduleID));
+				break;
+			case INPUT_READER:
+				newModule = new InputReader (moduleID, storageID, mType, 
+						ModulePortLinker.requestNewInputPortID(moduleID), 
+						ModulePortLinker.requestNewOutputPortID(moduleID));
+				break;
+			case QPMS9_JOB:
+				newModule = new QPMS9Job (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
 						ModulePortLinker.requestNewOutputPortID(moduleID));
 				break;

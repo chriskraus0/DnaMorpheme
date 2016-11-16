@@ -10,9 +10,11 @@ import java.io.IOException;
 import core.common.Module;
 import core.common.ModuleType;
 import core.InputPort;
+import core.OutputPort;
 
 // Project specific exceptions.
 import core.exceptions.CommandFailedException;
+import core.exceptions.PipeTypeNotSupportedException;
 
 // TODO: Just a bare bones module. This must be extended!
 public class CdHitJob extends Module {
@@ -36,20 +38,53 @@ public class CdHitJob extends Module {
 		
 		// Checked exception. TODO: Add ExternalCommandHandler
 		
-		String inputStuff;
+		// Save input from pipe
+		String input = "";
 		
-		// Read first chars.
-		int buffer = 1024;
-		char[] data;
+		// Save number of read characters.
+		int charNumber = 0;
+	
+		// Prepare char buffer "data".
+		int bufferSize = 1024;
+		char[] data = new char[bufferSize];
 		
-		/*inputStuff = ((char) ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, buffer));
+		// Read from InputPort (via CharPipe).
 		try {
+			while (charNumber != -1) {
+				charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
+				input += data.toString();
+				
+				// If the number of read characters is smaller than the buffer limit 
+				// write the remaining characters in the String variable input.
+				if (charNumber < bufferSize) {
+					for (int i = 0; i < charNumber; i++)
+					input += data[i];
+				}
+			}
 			
+			
+		} catch (PipeTypeNotSupportedException pe) {
+			System.err.println(pe.getMessage());
+			pe.printStackTrace();
+		}
+		
+		catch (IOException ie) {
+			System.err.println(ie.getMessage());
+			ie.printStackTrace();
+		} 
+		
+		input += "Here is a new modified additional line";
+		
+		// Write to OutputPort (via CharPipe).
+		try {
+			((OutputPort) this.getOutputPort()).writeToCharPipe(input);
+		} catch (PipeTypeNotSupportedException pe) {
+			System.err.println(pe.getMessage());
+			pe.printStackTrace();
 		} catch (IOException ie) {
 			System.err.println(ie.getMessage());
 			ie.printStackTrace();
-		}*/
-		
+		} 
 		
 		// If everything worked out return SUCCESS.
 		return CommandState.SUCCESS;

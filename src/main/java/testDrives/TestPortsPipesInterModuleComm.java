@@ -5,6 +5,7 @@ import core.ModuleBuilder;
 import core.exceptions.OccupiedException;
 import core.exceptions.PipeTypeNotSupportedException;
 import core.exceptions.CommandFailedException;
+import core.exceptions.NotFoundException;
 
 /**
  * Test drive class for testing of the inter-module communication via ports and pipes.
@@ -53,9 +54,9 @@ public class TestPortsPipesInterModuleComm {
 		
 		// Connecting ports via pipes.
 		try {
-			moduleBuilder.getModule(inputModule).getOutputPort().connectPorts(
-				moduleBuilder.getModule(cdHitModule).getInputPort().getPipe(), 
-				moduleBuilder.getModule(cdHitModule).getInputPort());
+			ModuleBuilder.getModule(inputModule).getOutputPort().connectPorts(
+				ModuleBuilder.getModule(cdHitModule).getInputPort().getPipe(), 
+				ModuleBuilder.getModule(cdHitModule).getInputPort());
 		} 
 		
 		catch (PipeTypeNotSupportedException pe) {
@@ -70,9 +71,9 @@ public class TestPortsPipesInterModuleComm {
 		
 		// Connecting ports via pipes.
 		try {
-			moduleBuilder.getModule(cdHitModule).getOutputPort().connectPorts(
-				moduleBuilder.getModule(qPMS9Module).getInputPort().getPipe(), 
-				moduleBuilder.getModule(qPMS9Module).getInputPort());
+			ModuleBuilder.getModule(cdHitModule).getOutputPort().connectPorts(
+				ModuleBuilder.getModule(qPMS9Module).getInputPort().getPipe(), 
+				ModuleBuilder.getModule(qPMS9Module).getInputPort());
 		} 
 		
 		catch (PipeTypeNotSupportedException pe) {
@@ -87,10 +88,20 @@ public class TestPortsPipesInterModuleComm {
 		
 		// Read external file and send it to the next module.
 		try {
-			moduleBuilder.getModule(inputModule).callCommand("testFiles/inFile.txt", moduleBuilder.getModule(inputModule).getStorageID());
+			ModuleBuilder.getModule(inputModule).callCommand("testFiles/inFile.txt", ModuleBuilder.getModule(inputModule).getStorageID());
+			
+			// Clean up pipes.
+			ModuleBuilder.getModule(inputModule).getOutputPort().removePipe();
+			ModuleBuilder.getModule(cdHitModule).getInputPort().removePipe();
+			ModuleBuilder.getModule(cdHitModule).getOutputPort().removePipe();
+			ModuleBuilder.getModule(qPMS9Module).getInputPort().removePipe();
+			
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());
 			ce.printStackTrace();
+		} catch (NotFoundException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 		
 		// Sent in data which should be transformed.

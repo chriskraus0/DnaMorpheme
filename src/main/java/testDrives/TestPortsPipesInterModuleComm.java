@@ -2,6 +2,7 @@ package testDrives;
 
 import core.CoreController;
 import core.ModuleBuilder;
+import core.common.PipeType;
 import core.exceptions.OccupiedException;
 import core.exceptions.PipeTypeNotSupportedException;
 import core.exceptions.CommandFailedException;
@@ -51,6 +52,11 @@ public class TestPortsPipesInterModuleComm {
 		int cdHitModule = moduleBuilder.createNewCdHitJob();
 		int qPMS9Module = moduleBuilder.createNewQpms9Job();
 		
+		// Create pipes.
+		ModuleBuilder.getModule(inputModule).getOutputPort().createNewPipe(PipeType.CHAR);
+		ModuleBuilder.getModule(cdHitModule).getInputPort().createNewPipe(PipeType.CHAR);
+		ModuleBuilder.getModule(cdHitModule).getOutputPort().createNewPipe(PipeType.CHAR);
+		ModuleBuilder.getModule(qPMS9Module).getInputPort().createNewPipe(PipeType.CHAR);
 		
 		// Connecting ports via pipes.
 		try {
@@ -88,8 +94,9 @@ public class TestPortsPipesInterModuleComm {
 		
 		// Read external file and send it to the next module.
 		try {
-			ModuleBuilder.getModule(inputModule).callCommand("testFiles/inFile.txt", ModuleBuilder.getModule(inputModule).getStorageID());
-			
+			ModuleBuilder.getModule(inputModule).callCommand("testFiles/testFile1.txt", ModuleBuilder.getModule(inputModule).getStorageID());
+			ModuleBuilder.getModule(cdHitModule).callCommand("Test CdHitJob", ModuleBuilder.getModule(inputModule).getStorageID());
+			ModuleBuilder.getModule(qPMS9Module).callCommand("Test qPMS9Module", ModuleBuilder.getModule(inputModule).getStorageID());
 			// Clean up pipes.
 			ModuleBuilder.getModule(inputModule).getOutputPort().removePipe();
 			ModuleBuilder.getModule(cdHitModule).getInputPort().removePipe();

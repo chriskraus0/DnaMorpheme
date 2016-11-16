@@ -99,6 +99,12 @@ public interface Port {
 	 */
 	public void reset();
 
+	/**
+	 * Create a new PipeType specific pipe for this port.
+	 * @param PipeType pType
+	 */
+	void createNewPipe(PipeType pType);
+
 	
 	// End methods.
 }

@@ -168,17 +168,17 @@ public abstract class AbstractPort implements Port {
 		
 	}
 	
+	@Override
 	public void createNewPipe (PipeType pType) {
 		// TODO: Include exception if pipe already exists.
-		
-		if (pType.equals(this.getPipe().getPipeType())) {
-			try {
-				this.pipe = new CharPipe();
-			} catch (IOException ie) {
-				System.err.println(ie.getMessage());
-				ie.printStackTrace();
-			}
+			
+		try {
+			this.pipe = new CharPipe();
+		} catch (IOException ie) {
+			System.err.println(ie.getMessage());
+			ie.printStackTrace();
 		}
+		
 	}
 	
 	@Override

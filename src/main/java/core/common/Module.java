@@ -13,7 +13,7 @@ import core.ModulePortLinker;
  *
  */
 
-public abstract class Module implements ModuleInterface {
+public abstract class Module extends AbstractThreading implements ModuleInterface {
 	
 	// Enumerations.
 	
@@ -39,7 +39,7 @@ public abstract class Module implements ModuleInterface {
 	// Constructors.
 	
 	public Module (int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID) {
-		super();
+		super(moduleID, mType);
 		this.MODULE_ID = moduleID;
 		this.STORRAGE_ID = storageID;
 		this.MODULE_TYPE = mType;
@@ -92,6 +92,8 @@ public abstract class Module implements ModuleInterface {
 		return this.STORRAGE_ID;
 	}
 	// End getters.
+	
+	
 	
 	@Override
 	public abstract CommandState callCommand(String command, int storageID) throws CommandFailedException;

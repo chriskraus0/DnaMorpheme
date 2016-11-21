@@ -11,14 +11,32 @@ import core.exceptions.CommandFailedException;
 //TODO: Just a bare bones module. This must be extended!
 
 public class PMSconsensusJob extends Module {
+	
+	// Variables.
+	private String command;
 
-	public PMSconsensusJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID) {
+	// Constructors.
+	
+	public PMSconsensusJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
+		this.command = cmd;
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	// Methods.
+	
 	@Override
-	public CommandState callCommand(String command, int storageID) throws CommandFailedException {
+	public void run () {
+		try {
+			this.callCommand();
+		} catch (CommandFailedException ce) {
+			System.err.println(ce.getMessage());
+			ce.printStackTrace();
+		}
+	}
+	
+
+	public synchronized CommandState callCommand() throws CommandFailedException {
 		// TODO Auto-generated method stub
 		return CommandState.SUCCESS;
 	}

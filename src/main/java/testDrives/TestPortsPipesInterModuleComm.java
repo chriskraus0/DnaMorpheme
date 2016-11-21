@@ -47,10 +47,12 @@ public class TestPortsPipesInterModuleComm {
 		ModuleBuilder moduleBuilder = CoreController.generateModuleBuilder();
 		
 		// Create 3 new modules. 
-		
-		int inputModule = moduleBuilder.createNewInputReader();
-		int cdHitModule = moduleBuilder.createNewCdHitJob();
-		int qPMS9Module = moduleBuilder.createNewQpms9Job();
+
+		// TODO: Continue here!
+		int inputModule = moduleBuilder.createNewInputReader("testFiles/testFile1.txt");
+		int cdHitModule = moduleBuilder.createNewCdHitJob("Test CdHitJob");
+		int qPMS9Module = moduleBuilder.createNewQpms9Job("Test qPMS9Module");
+	
 		
 		// Create pipes.
 		ModuleBuilder.getModule(inputModule).getOutputPort().createNewPipe(PipeType.CHAR);
@@ -92,20 +94,23 @@ public class TestPortsPipesInterModuleComm {
 			oe.printStackTrace();
 		}
 		
-		// Read external file and send it to the next module.
+		// Run threads.
 		try {
-			ModuleBuilder.getModule(inputModule).callCommand("testFiles/testFile1.txt", ModuleBuilder.getModule(inputModule).getStorageID());
-			ModuleBuilder.getModule(cdHitModule).callCommand("Test CdHitJob", ModuleBuilder.getModule(inputModule).getStorageID());
-			ModuleBuilder.getModule(qPMS9Module).callCommand("Test qPMS9Module", ModuleBuilder.getModule(inputModule).getStorageID());
-			// Clean up pipes.
+			moduleBuilder.startJob(inputModule);
+			moduleBuilder.startJob(cdHitModule);
+			moduleBuilder.startJob(qPMS9Module);
+		} catch (InterruptedException ie) {
+			System.err.println(ie.getMessage());
+			ie.printStackTrace();
+		}
+		
+		// Clean up pipes.
+		try {
 			ModuleBuilder.getModule(inputModule).getOutputPort().removePipe();
 			ModuleBuilder.getModule(cdHitModule).getInputPort().removePipe();
 			ModuleBuilder.getModule(cdHitModule).getOutputPort().removePipe();
 			ModuleBuilder.getModule(qPMS9Module).getInputPort().removePipe();
 			
-		} catch (CommandFailedException ce) {
-			System.err.println(ce.getMessage());
-			ce.printStackTrace();
 		} catch (NotFoundException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();

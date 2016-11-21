@@ -57,9 +57,11 @@ public class TestCoreControllerModulesExternalProgrammes {
 		ModuleBuilder moduleBuilder = CoreController.generateModuleBuilder();
 		
 		// Create 3 new CD-HIT jobs.
-		moduleBuilder.createNewCdHitJob();
-		moduleBuilder.createNewCdHitJob();
-		moduleBuilder.createNewCdHitJob();
+	
+		moduleBuilder.createNewCdHitJob("TEST1");
+		moduleBuilder.createNewCdHitJob("TEST2");
+		moduleBuilder.createNewCdHitJob("TEST3");
+	
 		
 		// Get the moduleIDs.
 		Set<Integer> moduleIdSet = ModuleBuilder.getModuleIDs();
@@ -68,13 +70,13 @@ public class TestCoreControllerModulesExternalProgrammes {
 		while (it.hasNext()) {
 			CdHitJob thisModule = (CdHitJob) ModuleBuilder.getModule(it.next().intValue());
 			System.out.println("Module with ID \"" + thisModule.getModuleID() + "\"");
-			System.out.println("Call command:");
 			
-			// Call command.
+			// Run threads.
 			try {
-				thisModule.callCommand("TEST", thisModule.getStorageID());
-			} catch (CommandFailedException ce) {
-				
+				moduleBuilder.startJob(thisModule.getModuleID());
+			} catch (InterruptedException ie) {
+				System.err.println(ie.getMessage());
+				ie.printStackTrace();
 			}
 		}
 		

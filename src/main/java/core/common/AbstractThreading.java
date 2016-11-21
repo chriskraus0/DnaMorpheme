@@ -21,9 +21,10 @@ public class AbstractThreading implements ThreadingInterface{
 	@Override
 	public void run() {
 		
-		Thread newThread = new Thread (ModuleBuilder.getModule(this.MODULE_ID));
-		newThread.start();
-		// TODO Auto-generated method stub
+		// THIS IS NONESENSE!
+		//Thread newThread = new Thread (ModuleBuilder.getModule(this.MODULE_ID));
+		//newThread.start();
+		// TODO: Keep a potential DEAD-LOCK problem in mind!
 		
 	}
 

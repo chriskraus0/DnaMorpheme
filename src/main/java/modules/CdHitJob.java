@@ -20,21 +20,34 @@ import core.exceptions.PipeTypeNotSupportedException;
 public class CdHitJob extends Module {
 	// Variables.
 	
+	String command;
+	
 	// Constructors.
-	public CdHitJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID) {
+	public CdHitJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
-		
+		this.command = cmd;
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	// Methods.
+	
 	@Override
-	public CommandState callCommand(String command, int storageID) throws CommandFailedException {
+	public void run () {
+		try {
+			this.callCommand();
+		} catch (CommandFailedException ce) {
+			System.err.println(ce.getMessage());
+			ce.printStackTrace();
+		}
+	}
+	
+	public synchronized CommandState callCommand() throws CommandFailedException {
 		// TODO Auto-generated method stub
 		
 		// Test system output.
 		System.out.println("CdHitJob with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :");
-		System.out.println("Command " + command + " called");
-		System.out.println("Associated storageID " + storageID);
+		System.out.println("Command " + this.command + " called");
+		System.out.println("Associated storageID " + this.getStorageID());
 		
 		// Checked exception. TODO: Add ExternalCommandHandler
 		

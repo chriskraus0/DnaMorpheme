@@ -2,10 +2,6 @@ package core.common;
 
 // Imports.
 
-import java.lang.Exception;
-
-import core.exceptions.CommandFailedException;
-
 /**
  * Interface defines critical abstract methods for each module.
  * @author christopher
@@ -56,17 +52,6 @@ public interface ModuleInterface {
 	public int getStorageID();
 	
 	// End getters.
-	
-	/**
-	 * Calls an external command and returns the current state of the command.
-	 * @param String command
-	 * @param String storrageID
-	 * @return CommandState cState
-	 * @throws Exception
-	 */
-	public CommandState callCommand(String command, int storageID) throws CommandFailedException;
-
-	// TODO: Intergrate new Exception.
 	
 	// End methods.
 

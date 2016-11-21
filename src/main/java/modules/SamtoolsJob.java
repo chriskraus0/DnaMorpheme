@@ -1,24 +1,39 @@
 package modules;
 
-import core.common.CommandState;
+
 
 //Imports.
 
 import core.common.Module;
 import core.common.ModuleType;
+import core.common.CommandState;
 import core.exceptions.CommandFailedException;
 
 //TODO: Just a bare bones module. This must be extended!
 
 public class SamtoolsJob extends Module {
-
-	public SamtoolsJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID) {
+	
+	// Variables.
+	private String command;
+	
+	// Constructors.
+	public SamtoolsJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
-		// TODO Auto-generated constructor stub
+		this.command = cmd;
+	}
+	
+	// Methods.
+	@Override
+	public void run () {
+		try {
+			this.callCommand();
+		} catch (CommandFailedException ce) {
+			System.err.println(ce.getMessage());
+			ce.printStackTrace();
+		}
 	}
 
-	@Override
-	public CommandState callCommand(String command, int storageID) throws CommandFailedException {
+	public synchronized CommandState callCommand() throws CommandFailedException {
 		// TODO Auto-generated method stub
 		return CommandState.SUCCESS;
 	}

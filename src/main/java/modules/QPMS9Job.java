@@ -15,18 +15,33 @@ import core.exceptions.PipeTypeNotSupportedException;
 //TODO: Just a bare bones module. This must be extended!
 public class QPMS9Job extends Module {
 
-	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID) {
+	// Variables.
+	private String command;
+	
+	// Constructors.
+	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
-		// TODO Auto-generated constructor stub
+		this.command = cmd;
 	}
-
+	
+	// Methods.
+	
 	@Override
-	public CommandState callCommand(String command, int storageID) throws CommandFailedException {
+	public void run () {
+		try {
+			this.callCommand();
+		} catch (CommandFailedException ce) {
+			System.err.println(ce.getMessage());
+			ce.printStackTrace();
+		}
+	}
+	
+	public synchronized CommandState callCommand() throws CommandFailedException {
 		
 		// Test system output.
 		System.out.println("QPMS9 with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :");
-		System.out.println("Command " + command + " called");
-		System.out.println("Associated storageID " + storageID);
+		System.out.println("Command " + this.command + " called");
+		System.out.println("Associated storageID " + this.getStorageID());
 		
 		
 		// Save input from pipe

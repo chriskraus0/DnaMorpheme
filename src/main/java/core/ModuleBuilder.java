@@ -3,7 +3,9 @@ package core;
 // Imports.
 
 // Java utility imports.
+import java.util.Map;
 import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.Set;
 
 // Project specific imports.
@@ -30,7 +32,10 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	// Variables.
 	
 	// Keep an instance independent sorted map of all modules and IDs.
-	private static TreeMap <Integer, Module> moduleMap;
+	private static Map <Integer, Module> moduleMap;
+	
+	// Keep an instance independent map of all running threads.
+	private static Map <Integer, Thread> moduleThreadMap;
 	
 	// Keep count of all module objects created.
 	private static int moduleCount;
@@ -40,6 +45,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	public ModuleBuilder () {
 		super();
 		ModuleBuilder.moduleMap = new TreeMap<Integer, Module> ();
+		ModuleBuilder.moduleThreadMap = new HashMap<Integer, Thread>();
 		ModuleBuilder.moduleCount = 0;
 		
 		// Get a single instance for ModulePortLinker.
@@ -50,6 +56,27 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	// End constructors.
 	
 	// Methods.
+	
+	/**
+	 * Create a new thread for a module and save it.
+	 * @param Module module
+	 */
+	private void createNewThread (Module module) {
+		Thread newModuleThread = new Thread(module);
+		newModuleThread.setName(module.getModuleType().toString() + ":" + module.getModuleID());
+		ModuleBuilder.moduleThreadMap.put(module.getModuleID(), newModuleThread);
+		
+	}
+	
+	/**
+	 * Start the thread for the module with a specific moduleID. 
+	 * @param Module moduleID
+	 */
+	public void startJob (int moduleID) throws InterruptedException  {
+		ModuleBuilder.moduleThreadMap.get(moduleID).start();
+		Thread.sleep(100);
+	}
+	
 	/**
 	 * Return a newly generated moduleID for a new module.
 	 * @param Module module
@@ -78,12 +105,12 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return ModuleBuilder.moduleMap.get(moduleID);
 	}
 	
-	public int createNewInputReader() {
+	public int createNewInputReader(String command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.INPUT_READER;
 		
-		Module newInputReader = this.createNewModule(moduleID, storageID, mType);
+		Module newInputReader = this.createNewModule(moduleID, storageID, mType, command);
 		
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newInputReader.getModuleID(), newInputReader);
@@ -94,15 +121,18 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return moduleID;
 	}
 	
-	public int createNewCdHitJob() {
+	public int createNewCdHitJob(String command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.CDHIT_JOB;
 		
-		Module newCdHitJob = this.createNewModule(moduleID, storageID, mType);
+		Module newCdHitJob = this.createNewModule(moduleID, storageID, mType, command);
 		
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newCdHitJob.getModuleID(), newCdHitJob);
+		
+		// Create new thread for the new module.
+		this.createNewThread(newCdHitJob);
 		
 		// TODO: implement "connectModuleObserver" method
 		//this.connectModuleObserver(ModuleBuilder.moduleMap.get(moduleID));
@@ -110,12 +140,12 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return moduleID;
 	}
 	
-	public int createNewQpms9Job() {
+	public int createNewQpms9Job(String command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.QPMS9_JOB;
 		
-		Module newQpms9Job = this.createNewModule(moduleID, storageID, mType);
+		Module newQpms9Job = this.createNewModule(moduleID, storageID, mType, command);
 		
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newQpms9Job.getModuleID(), newQpms9Job);
@@ -214,7 +244,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 	
 	@Override
-	public Module createNewModule(int moduleID, int storageID, ModuleType mType) {
+	public Module createNewModule(int moduleID, int storageID, ModuleType mType, String command) {
 		
 		Module newModule = null;
 		
@@ -222,17 +252,20 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 			case CDHIT_JOB:
 				newModule = new CdHitJob (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
-						ModulePortLinker.requestNewOutputPortID(moduleID));
+						ModulePortLinker.requestNewOutputPortID(moduleID),
+						command);
 				break;
 			case INPUT_READER:
 				newModule = new InputReader (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
-						ModulePortLinker.requestNewOutputPortID(moduleID));
+						ModulePortLinker.requestNewOutputPortID(moduleID),
+						command);
 				break;
 			case QPMS9_JOB:
 				newModule = new QPMS9Job (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
-						ModulePortLinker.requestNewOutputPortID(moduleID));
+						ModulePortLinker.requestNewOutputPortID(moduleID),
+						command);
 				break;
 			case UNDEFINED:
 				break;

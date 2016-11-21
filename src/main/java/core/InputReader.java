@@ -18,16 +18,31 @@ import core.OutputPort;
 import core.exceptions.CommandFailedException;
 
 public class InputReader extends Module {
-
-	public InputReader(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID) {
+	
+	// Variables.
+	private String command;
+	
+	// Constructors.
+	public InputReader(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
+		this.command = cmd;
+	}
+	
+	// Methods.
+	@Override
+	public void run () {
+		try {
+			this.callCommand();
+		} catch (CommandFailedException ce) {
+			System.err.println(ce.getMessage());
+			ce.printStackTrace();
+		}
 	}
 
-	@Override
-	public CommandState callCommand(String command, int storageID) throws CommandFailedException {
+	public synchronized CommandState callCommand() throws CommandFailedException {
 		
 		try {
-			File inFile = new File (command);
+			File inFile = new File (this.command);
 			
 			FileReader fReader = new FileReader(inFile);
 			BufferedReader bReader = new BufferedReader(fReader);

@@ -41,30 +41,38 @@ public class InputReader extends Module {
 
 	public synchronized CommandState callCommand() throws CommandFailedException {
 		
+		CommandState cState = CommandState.SUCCESS;
+				
 		try {
+						
 			File inFile = new File (this.command);
 			
 			FileReader fReader = new FileReader(inFile);
 			BufferedReader bReader = new BufferedReader(fReader);
 			
-			((OutputPort) this.getOutputPort()).writeToCharPipe(bReader.readLine());
+			String data = "";
 			
-			String line;
-			
-			while ( (line = bReader.readLine()) != null) {
-				((OutputPort) this.getOutputPort()).writeToCharPipe(line);
+			while ( (data = (bReader.readLine())) != null) {
+								
+				((OutputPort) this.getOutputPort()).writeToCharPipe(data);
+				
 			}
 			
 			bReader.close();
 			
 		} catch (IOException ie) {
-			System.err.println(ie.getMessage());
+			System.err.println("IOException in " + this.getClass().toString() 
+					+ "#callCommand()" + ": " + ie.getMessage());
 			ie.printStackTrace();
+			cState = CommandState.FAIL;
 		} catch (Exception e) {
+			System.err.println("Exception in " + this.getClass().toString() 
+					+ "#callCommand()" + ": " + e.getMessage());
 			e.printStackTrace();
+			cState = CommandState.FAIL;
 		}
 		
-		return CommandState.SUCCESS;
+		return cState;
 	}
 
 }

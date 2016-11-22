@@ -58,22 +58,21 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	// Methods.
 	
 	/**
-	 * Create a new thread for a module and save it.
-	 * @param Module module
+	 * Create a new thread for a module and save it, start and put it to sleep (100 ms).
+	 * @param int moduleID
 	 */
-	private void createNewThread (Module module) {
-		Thread newModuleThread = new Thread(module);
-		newModuleThread.setName(module.getModuleType().toString() + ":" + module.getModuleID());
-		ModuleBuilder.moduleThreadMap.put(module.getModuleID(), newModuleThread);
+	public void startJob (int moduleID) throws InterruptedException {
+		Thread newModuleThread = new Thread(ModuleBuilder.getModule(moduleID));
 		
-	}
-	
-	/**
-	 * Start the thread for the module with a specific moduleID. 
-	 * @param Module moduleID
-	 */
-	public void startJob (int moduleID) throws InterruptedException  {
-		ModuleBuilder.moduleThreadMap.get(moduleID).start();
+		// Use thread specific names for debugging.
+		newModuleThread.setName(ModuleBuilder.getModule(moduleID).getModuleType().toString() 
+				+ ":" + ModuleBuilder.getModule(moduleID).getModuleID());
+		ModuleBuilder.moduleThreadMap.put(moduleID, newModuleThread);
+		
+		// Start new Thread.
+		newModuleThread.start();
+		
+		// Sleep for 100 milliseconds.
 		Thread.sleep(100);
 	}
 	
@@ -130,10 +129,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newCdHitJob.getModuleID(), newCdHitJob);
-		
-		// Create new thread for the new module.
-		this.createNewThread(newCdHitJob);
-		
+				
 		// TODO: implement "connectModuleObserver" method
 		//this.connectModuleObserver(ModuleBuilder.moduleMap.get(moduleID));
 		

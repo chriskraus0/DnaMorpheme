@@ -61,18 +61,24 @@ public class CdHitJob extends Module {
 		int bufferSize = 1024;
 		char[] data = new char[bufferSize];
 		
-		// Read from InputPort (via CharPipe).
+		// Read from InputPort (via CharPipe).		
 		try {
+
+			charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
+			
 			while (charNumber != -1) {
-				charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
-				input += data.toString();
-				
+											
 				// If the number of read characters is smaller than the buffer limit 
 				// write the remaining characters in the String variable input.
 				if (charNumber < bufferSize) {
 					for (int i = 0; i < charNumber; i++)
 					input += data[i];
+				} else {
+					input += new String(data);
 				}
+				
+				charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
+				
 			}
 			
 			

@@ -8,8 +8,10 @@ import java.io.IOException;
 
 // Project specific imports.
 import core.common.Module;
+import core.common.ModuleState;
 import core.common.ModuleType;
 import core.InputPort;
+import core.ModuleBuilder;
 import core.OutputPort;
 
 // Project specific exceptions.
@@ -34,7 +36,11 @@ public class CdHitJob extends Module {
 	@Override
 	public void run () {
 		try {
-			this.callCommand();
+			CommandState cState = this.callCommand();
+			if (cState.equals(CommandState.SUCCESS)) {
+				this.setModuleState(ModuleState.SUCCESS);
+				notify();
+			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());
 			ce.printStackTrace();
@@ -42,7 +48,7 @@ public class CdHitJob extends Module {
 	}
 	
 	public synchronized CommandState callCommand() throws CommandFailedException {
-		// TODO Auto-generated method stub
+		CommandState cState = CommandState.PROCESSING;
 		
 		// Test system output.
 		System.out.println("CdHitJob with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :");
@@ -68,6 +74,13 @@ public class CdHitJob extends Module {
 			
 			while (charNumber != -1) {
 											
+				// Check for interrupted threads.
+				
+				/*TODO:
+				 * if (Thread.interrupted()) {
+					throw new InterruptedException ("Thread interrupted");
+				}*/
+				
 				// If the number of read characters is smaller than the buffer limit 
 				// write the remaining characters in the String variable input.
 				if (charNumber < bufferSize) {
@@ -81,7 +94,6 @@ public class CdHitJob extends Module {
 				
 			}
 			
-			
 		} catch (PipeTypeNotSupportedException pe) {
 			System.err.println(pe.getMessage());
 			pe.printStackTrace();
@@ -92,11 +104,14 @@ public class CdHitJob extends Module {
 			ie.printStackTrace();
 		} 
 		
+			
 		input += "Here is a new modified additional line";
 		
 		// Write to OutputPort (via CharPipe).
 		try {
 			((OutputPort) this.getOutputPort()).writeToCharPipe(input);
+			
+			
 		} catch (PipeTypeNotSupportedException pe) {
 			System.err.println(pe.getMessage());
 			pe.printStackTrace();
@@ -106,7 +121,8 @@ public class CdHitJob extends Module {
 		} 
 		
 		// If everything worked out return SUCCESS.
-		return CommandState.SUCCESS;
+		cState = CommandState.SUCCESS;	
+		return cState;
 	}
 	
 

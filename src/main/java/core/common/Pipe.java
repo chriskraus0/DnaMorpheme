@@ -35,4 +35,5 @@ public interface Pipe {
 	 * @return PipeType
 	 */
 	public PipeType getPipeType ();
+	
 }

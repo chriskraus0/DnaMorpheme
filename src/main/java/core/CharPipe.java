@@ -97,5 +97,6 @@ public class CharPipe implements Pipe {
 		this.pipeInput = new PipedReader(this.pipeOutput);
 		
 	}
+	
 	// End methods.	
 }

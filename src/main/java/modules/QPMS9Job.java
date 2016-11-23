@@ -3,11 +3,13 @@ package modules;
 import java.io.IOException;
 
 import core.InputPort;
+import core.ModuleBuilder;
 import core.common.CommandState;
 
 //Imports.
 
 import core.common.Module;
+import core.common.ModuleState;
 import core.common.ModuleType;
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
@@ -29,7 +31,11 @@ public class QPMS9Job extends Module {
 	@Override
 	public void run () {
 		try {
-			this.callCommand();
+			CommandState cState = this.callCommand();
+			if (cState.equals(CommandState.SUCCESS)) {
+				this.setModuleState(ModuleState.SUCCESS);
+				notify();
+			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());
 			ce.printStackTrace();
@@ -37,6 +43,8 @@ public class QPMS9Job extends Module {
 	}
 	
 	public synchronized CommandState callCommand() throws CommandFailedException {
+		
+		CommandState cState = CommandState.PROCESSING;
 		
 		// Test system output.
 		System.out.println("QPMS9 with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :");
@@ -58,7 +66,7 @@ public class QPMS9Job extends Module {
 		try {
 			while (charNumber != -1) {
 				charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
-				input += data.toString();
+				input += new String(data);
 				
 				// If the number of read characters is smaller than the buffer limit 
 				// write the remaining characters in the String variable input.
@@ -67,7 +75,6 @@ public class QPMS9Job extends Module {
 					input += data[i];
 				}
 			}
-			
 			
 		} catch (PipeTypeNotSupportedException pe) {
 			System.err.println(pe.getMessage());
@@ -79,12 +86,15 @@ public class QPMS9Job extends Module {
 			ie.printStackTrace();
 		} 
 		
+		
 		System.out.println("Here is the output:");
 		System.out.println(input);
 		
 		// Checked exception. TODO: Add ExternalCommandHandler
-				
-		return CommandState.SUCCESS;
+		
+		cState = CommandState.SUCCESS;
+		
+		return cState;
 	}
 
 }

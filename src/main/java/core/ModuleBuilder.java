@@ -34,8 +34,8 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	// Keep an instance independent sorted map of all modules and IDs.
 	private static Map <Integer, Module> moduleMap;
 	
-	// Keep an instance independent map of all running threads.
-	private static Map <Integer, Thread> moduleThreadMap;
+	// Keep an map of all running connected modules.
+	private static Map <Integer, Object> modulesCallerMap;
 	
 	// Keep count of all module objects created.
 	private static int moduleCount;
@@ -45,7 +45,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	public ModuleBuilder () {
 		super();
 		ModuleBuilder.moduleMap = new TreeMap<Integer, Module> ();
-		ModuleBuilder.moduleThreadMap = new HashMap<Integer, Thread>();
+		ModuleBuilder.modulesCallerMap = new HashMap<Integer, Object>();
 		ModuleBuilder.moduleCount = 0;
 		
 		// Get a single instance for ModulePortLinker.
@@ -59,15 +59,17 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	
 	/**
 	 * Create a new thread for a module and save it, start and put it to sleep (100 ms).
+	 * Take the moduleID of this module and the connected module ID.
 	 * @param int moduleID
+	 * @param int connectedModuleID
 	 */
-	public void startJob (int moduleID) throws InterruptedException {
+	public void startJob (int moduleID, Object caller) throws InterruptedException {
 		Thread newModuleThread = new Thread(ModuleBuilder.getModule(moduleID));
 		
 		// Use thread specific names for debugging.
 		newModuleThread.setName(ModuleBuilder.getModule(moduleID).getModuleType().toString() 
 				+ ":" + ModuleBuilder.getModule(moduleID).getModuleID());
-		ModuleBuilder.moduleThreadMap.put(moduleID, newModuleThread);
+		ModuleBuilder.modulesCallerMap.put(moduleID, caller);
 		
 		// Start new Thread.
 		newModuleThread.start();
@@ -83,7 +85,6 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	 */
 	private static int generateNewModuleID () {
 		ModuleBuilder.moduleCount ++;
-		// TODO: Create unique hash-key generator;
 		return ModuleBuilder.moduleCount;
 	}
 	
@@ -93,6 +94,15 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	 */
 	public static Set<Integer> getModuleIDs() {
 		return ModuleBuilder.moduleMap.keySet();
+	}
+	
+	/**
+	 * Returns the moduleID of the module connected to this one.
+	 * @param int moduleID
+	 * @return int moduleID of connected module.
+	 */
+	public static Object getThreadCaller(int moduleID) {
+		return ModuleBuilder.modulesCallerMap.get(moduleID);
 	}
 	
 	/**

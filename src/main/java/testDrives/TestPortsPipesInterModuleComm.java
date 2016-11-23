@@ -2,6 +2,7 @@ package testDrives;
 
 import core.CoreController;
 import core.ModuleBuilder;
+import core.common.ModuleState;
 import core.common.PipeType;
 import core.exceptions.OccupiedException;
 import core.exceptions.PipeTypeNotSupportedException;
@@ -22,7 +23,7 @@ import core.exceptions.NotFoundException;
  * @see core.common.OutputPort
  * @author christopher
  */
-public class TestPortsPipesInterModuleComm {
+public class TestPortsPipesInterModuleComm implements Runnable {
 
 	// Variables.
 	
@@ -33,11 +34,16 @@ public class TestPortsPipesInterModuleComm {
 	// Methods.
 	public static void main (String[] args)  {
 		TestPortsPipesInterModuleComm thisTest = new TestPortsPipesInterModuleComm();
-		thisTest.run();
+		Thread thisThread = new Thread(thisTest);
+		thisThread.start();
 		
 	}
 	
 	public void run() {
+		this.go();
+	}
+	
+	public synchronized void go() {
 		
 		// Create a new Singleton "CoreController"
 		CoreController.getInstance();
@@ -96,9 +102,10 @@ public class TestPortsPipesInterModuleComm {
 		
 		// Run threads.
 		try {
-			moduleBuilder.startJob(inputModule);
-			moduleBuilder.startJob(cdHitModule);
-			moduleBuilder.startJob(qPMS9Module);
+			moduleBuilder.startJob(inputModule, this);
+			moduleBuilder.startJob(cdHitModule, this);
+			moduleBuilder.startJob(qPMS9Module, this);	
+			
 		} catch (InterruptedException ie) {
 			System.err.println(ie.getMessage());
 			ie.printStackTrace();
@@ -106,14 +113,22 @@ public class TestPortsPipesInterModuleComm {
 		
 		// Clean up pipes.
 		try {
+			wait();
 			ModuleBuilder.getModule(inputModule).getOutputPort().removePipe();
+			
+			wait();
 			ModuleBuilder.getModule(cdHitModule).getInputPort().removePipe();
+			
+			wait();
 			ModuleBuilder.getModule(cdHitModule).getOutputPort().removePipe();
 			ModuleBuilder.getModule(qPMS9Module).getInputPort().removePipe();
-			
+		
 		} catch (NotFoundException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
+		} catch (InterruptedException intE) {
+			// TODO Auto-generated catch block
+			intE.printStackTrace();
 		}
 		
 		// Sent in data which should be transformed.

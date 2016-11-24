@@ -35,6 +35,7 @@ public class TestPortsPipesInterModuleComm implements Runnable {
 	public static void main (String[] args)  {
 		TestPortsPipesInterModuleComm thisTest = new TestPortsPipesInterModuleComm();
 		Thread thisThread = new Thread(thisTest);
+		thisThread.setName("mainThread");
 		thisThread.start();
 		
 	}
@@ -43,7 +44,7 @@ public class TestPortsPipesInterModuleComm implements Runnable {
 		this.go();
 	}
 	
-	public synchronized void go() {
+	public void go() {
 		
 		// Create a new Singleton "CoreController"
 		CoreController.getInstance();
@@ -100,37 +101,64 @@ public class TestPortsPipesInterModuleComm implements Runnable {
 			oe.printStackTrace();
 		}
 		
-		// Run threads.
+		// Start first 2 threads.
 		try {
-			moduleBuilder.startJob(inputModule, this);
-			moduleBuilder.startJob(cdHitModule, this);
-			moduleBuilder.startJob(qPMS9Module, this);	
-			
-		} catch (InterruptedException ie) {
-			System.err.println(ie.getMessage());
-			ie.printStackTrace();
-		}
-		
-		// Clean up pipes.
-		try {
-			wait();
-			ModuleBuilder.getModule(inputModule).getOutputPort().removePipe();
-			
-			wait();
-			ModuleBuilder.getModule(cdHitModule).getInputPort().removePipe();
-			
-			wait();
-			ModuleBuilder.getModule(cdHitModule).getOutputPort().removePipe();
-			ModuleBuilder.getModule(qPMS9Module).getInputPort().removePipe();
-		
-		} catch (NotFoundException e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
+			moduleBuilder.startJob(inputModule);
+			moduleBuilder.startJob(cdHitModule);
 		} catch (InterruptedException intE) {
-			// TODO Auto-generated catch block
+			System.err.println(intE.getMessage());
 			intE.printStackTrace();
 		}
 		
-		// Sent in data which should be transformed.
+		
+		// Avoid Deadlock by allowing ownership of the pipe AFTER the other threads!
+		synchronized (ModuleBuilder.getModule(inputModule).getOutputPort().getPipe()) {
+			// Start first 2 threads. Wait to let threads finish first, then clean up pipes.
+			try {	
+				
+				// Wait for inputModule and cdHitModule to finish data transfer.
+				while (!ModuleBuilder.getModule(cdHitModule).getModuleState().equals(ModuleState.SUCCESS)) {
+					ModuleBuilder.getModule(inputModule).getOutputPort().getPipe().wait();
+				}
+				ModuleBuilder.getModule(inputModule).getOutputPort().removePipe();
+				ModuleBuilder.getModule(cdHitModule).getInputPort().removePipe();
+			} catch (NotFoundException e) {
+				System.err.println(e.getMessage());
+				e.printStackTrace();
+			} catch (InterruptedException intE) {
+				intE.printStackTrace();
+			}
+		}
+		
+		// Start the third thread.
+		try {
+			moduleBuilder.startJob(qPMS9Module);
+		} catch (InterruptedException intE) {
+			System.err.println(intE.getMessage());
+			intE.printStackTrace();
+		}
+		
+		// Avoid Deadlock by allowing ownership of the pipe AFTER the other threads!
+		synchronized (ModuleBuilder.getModule(cdHitModule).getOutputPort().getPipe()) {
+			// Start the third thread. Wait to let threads finish first, then clean up pipes.
+			try {
+				
+				// Wait for cdHitModule and qPMS9Module to finish first.
+				while (!ModuleBuilder.getModule(qPMS9Module).getModuleState().equals(ModuleState.SUCCESS)) {
+					ModuleBuilder.getModule(qPMS9Module).getInputPort().getPipe().wait();
+				}
+				
+				// Clean up the bridging pipe.
+				ModuleBuilder.getModule(cdHitModule).getOutputPort().removePipe();
+				ModuleBuilder.getModule(qPMS9Module).getInputPort().removePipe();
+			
+			} catch (NotFoundException e) {
+				System.err.println(e.getMessage());
+				e.printStackTrace();
+			} catch (InterruptedException intE) {
+				intE.printStackTrace();
+			}
+		}
+		
 	}
 }

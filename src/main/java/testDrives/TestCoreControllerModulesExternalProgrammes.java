@@ -73,7 +73,7 @@ public class TestCoreControllerModulesExternalProgrammes {
 			
 			// Run threads.
 			try {
-				moduleBuilder.startJob(thisModule.getModuleID(), -1);
+				moduleBuilder.startJob(thisModule.getModuleID());
 			} catch (InterruptedException ie) {
 				System.err.println(ie.getMessage());
 				ie.printStackTrace();

@@ -1,12 +1,16 @@
 package core;
 
 // Imports.
+
+// Java I/O imports.
 import java.io.IOException;
 import java.io.PipedReader;
 import java.io.PipedWriter;
 
+// Project specific imports.
 import core.common.Pipe;
 import core.common.PipeType;
+import core.common.PipeState;
 
 /**
  * This class sets up a char pipe for inter-module communication. 
@@ -22,22 +26,39 @@ public class CharPipe implements Pipe {
 	// Variables.
 	private PipedWriter pipeOutput;
 	private PipedReader pipeInput;
+	private PipeState pipeState;
 	
 	// End variables.
 	
 	// Constructors.
 	public CharPipe () throws IOException {
 		// Create a new PipedWriter and PipedReader pair.
+		this.pipeState = PipeState.STARTING;
 		this.pipeReset();
 	}
 	// End constructors.
 	
 	// Methods.
 	
+	// Getters.
 	@Override
 	public PipeType getPipeType() {
 		return this.pipeType;
 	}
+	
+	@Override 
+	public PipeState getPipeState() {
+		return this.pipeState;
+	}
+	
+	// End Getters.
+	
+	// Setters.
+	@Override 
+	public void setPipeState(PipeState pState) {
+		
+	}
+	// End setters.
 	
 	/**
 	 * CharPipe reads data in form of buffered char array.
@@ -88,6 +109,9 @@ public class CharPipe implements Pipe {
 
 	@Override
 	public void pipeReset() throws IOException {
+		
+		// State of this pipe changed after being connected to 2 ports.
+		this.pipeState = PipeState.PROCESSING;
 		
 		// Create new PipedWriter for this object.
 		this.pipeOutput = new PipedWriter();

@@ -35,7 +35,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	private static Map <Integer, Module> moduleMap;
 	
 	// Keep an map of all running connected modules.
-	private static Map <Integer, Object> modulesCallerMap;
+	private static Map <Integer, Thread> modulesThreadMap;
 	
 	// Keep count of all module objects created.
 	private static int moduleCount;
@@ -45,7 +45,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	public ModuleBuilder () {
 		super();
 		ModuleBuilder.moduleMap = new TreeMap<Integer, Module> ();
-		ModuleBuilder.modulesCallerMap = new HashMap<Integer, Object>();
+		ModuleBuilder.modulesThreadMap = new HashMap<Integer, Thread>();
 		ModuleBuilder.moduleCount = 0;
 		
 		// Get a single instance for ModulePortLinker.
@@ -63,13 +63,13 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	 * @param int moduleID
 	 * @param int connectedModuleID
 	 */
-	public void startJob (int moduleID, Object caller) throws InterruptedException {
+	public void startJob (int moduleID) throws InterruptedException {
 		Thread newModuleThread = new Thread(ModuleBuilder.getModule(moduleID));
 		
 		// Use thread specific names for debugging.
 		newModuleThread.setName(ModuleBuilder.getModule(moduleID).getModuleType().toString() 
 				+ ":" + ModuleBuilder.getModule(moduleID).getModuleID());
-		ModuleBuilder.modulesCallerMap.put(moduleID, caller);
+		ModuleBuilder.modulesThreadMap.put(moduleID, newModuleThread);
 		
 		// Start new Thread.
 		newModuleThread.start();
@@ -101,8 +101,8 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	 * @param int moduleID
 	 * @return int moduleID of connected module.
 	 */
-	public static Object getThreadCaller(int moduleID) {
-		return ModuleBuilder.modulesCallerMap.get(moduleID);
+	public static Thread getRunningThread(int moduleID) {
+		return ModuleBuilder.modulesThreadMap.get(moduleID);
 	}
 	
 	/**

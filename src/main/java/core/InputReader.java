@@ -12,6 +12,7 @@ import java.io.InputStream;
 
 // Project specific imports.
 import core.common.Module;
+import core.common.PipeState;
 import core.common.ModuleState;
 import core.common.ModuleType;
 import core.common.CommandState;
@@ -38,7 +39,6 @@ public class InputReader extends Module {
 			CommandState cState = this.callCommand();
 			if (cState.equals(CommandState.SUCCESS)) {
 				this.setModuleState(ModuleState.SUCCESS);
-				notify();
 			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());
@@ -48,8 +48,9 @@ public class InputReader extends Module {
 
 	public synchronized CommandState callCommand() throws CommandFailedException {
 		
-		CommandState cState = CommandState.SUCCESS;
-				
+		CommandState cState = CommandState.STARTING;
+		
+		
 		try {
 						
 			//File inFile = new File (this.command);
@@ -103,21 +104,33 @@ public class InputReader extends Module {
 			fileInputStream.close();
 			
 			//bReader.close();
-			
-		} catch (IOException ie) {
-			System.err.println("IOException in " + this.getClass().toString() 
-					+ "#callCommand()" + ": " + ie.getMessage());
-			ie.printStackTrace();
-			cState = CommandState.FAIL;
-		} catch (Exception e) {
-			System.err.println("Exception in " + this.getClass().toString() 
-					+ "#callCommand()" + ": " + e.getMessage());
-			e.printStackTrace();
-			cState = CommandState.FAIL;
+		
+			// This thread owns the pipe now.
+			synchronized(this.getOutputPort()) {	
+				// Wait until the reading thread is finished reading from the pipe.
+				while (!this.getOutputPort().getPipe().getPipeState().equals(PipeState.FINISHED)) {
+					this.getOutputPort().getPipe().wait();
+				}
+			}
+				
+			} catch (IOException ie) {
+				System.err.println("IOException in " + this.getClass().toString() 
+						+ "#callCommand()" + ": " + ie.getMessage());
+				ie.printStackTrace();
+				cState = CommandState.FAIL;
+			} catch (InterruptedException intE) {
+				System.err.println(intE.getMessage());
+				intE.printStackTrace();
+			} catch (Exception e) {
+				System.err.println("Exception in " + this.getClass().toString() 
+						+ "#callCommand()" + ": " + e.getMessage());
+				e.printStackTrace();
+				cState = CommandState.FAIL;
 		}
+			
 		
 		cState = CommandState.SUCCESS;
-		
+						
 		return cState;
 	}
 

@@ -10,6 +10,7 @@ import java.io.IOException;
 import core.common.Module;
 import core.common.ModuleState;
 import core.common.ModuleType;
+import core.common.PipeState;
 import core.InputPort;
 import core.ModuleBuilder;
 import core.OutputPort;
@@ -39,7 +40,6 @@ public class CdHitJob extends Module {
 			CommandState cState = this.callCommand();
 			if (cState.equals(CommandState.SUCCESS)) {
 				this.setModuleState(ModuleState.SUCCESS);
-				notify();
 			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());
@@ -48,7 +48,7 @@ public class CdHitJob extends Module {
 	}
 	
 	public synchronized CommandState callCommand() throws CommandFailedException {
-		CommandState cState = CommandState.PROCESSING;
+		CommandState cState = CommandState.STARTING;
 		
 		// Test system output.
 		System.out.println("CdHitJob with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :");
@@ -59,6 +59,11 @@ public class CdHitJob extends Module {
 		
 		// Save input from pipe
 		String input = "";
+		
+		
+		
+		// Start processing of the command.
+		cState = CommandState.PROCESSING;
 		
 		// Save number of read characters.
 		int charNumber = 0;
@@ -94,6 +99,9 @@ public class CdHitJob extends Module {
 				
 			}
 			
+			// Finished reading from the pipe. Let's change the state of the pipe.
+			this.getInputPort().getPipe().setPipeState(PipeState.FINISHED);
+			
 		} catch (PipeTypeNotSupportedException pe) {
 			System.err.println(pe.getMessage());
 			pe.printStackTrace();
@@ -107,21 +115,48 @@ public class CdHitJob extends Module {
 			
 		input += "Here is a new modified additional line";
 		
-		// Write to OutputPort (via CharPipe).
-		try {
-			((OutputPort) this.getOutputPort()).writeToCharPipe(input);
+		
+		// Synchronize the pipe.
+		synchronized (this.getInputPort()) {
+			// Notify all threads that this thread is done with the pipe and the pipe may be closed.
+			while (this.getInputPort().getPipe().getPipeState().equals(PipeState.FINISHED)) {
+				this.getInputPort().getPipe().notifyAll();
+			}
+		}
+		
+		// Synchronize the output pipe.
+		synchronized (this.getOutputPort().getPipe()) {
+			// Write to OutputPort (via CharPipe).
+			
+			try {
+				
+				// Write to the output pipe.
+				((OutputPort) this.getOutputPort()).writeToCharPipe(input);
+				
+				// Wait unit reading from the pipe is finished.
+				while (!this.getOutputPort().getPipe().getPipeState().equals(PipeState.FINISHED)) {
+					this.getOutputPort().getPipe().wait();
+				}
+				
+			} catch (PipeTypeNotSupportedException pe) {
+				System.err.println(pe.getMessage());
+				pe.printStackTrace();
+			} catch (IOException ie) {
+				System.err.println(ie.getMessage());
+				ie.printStackTrace();
+			} catch (InterruptedException intE) {
+				System.err.println(intE.getMessage());
+				intE.printStackTrace();
+			}
 			
 			
-		} catch (PipeTypeNotSupportedException pe) {
-			System.err.println(pe.getMessage());
-			pe.printStackTrace();
-		} catch (IOException ie) {
-			System.err.println(ie.getMessage());
-			ie.printStackTrace();
-		} 
+		
+		}
+		
 		
 		// If everything worked out return SUCCESS.
 		cState = CommandState.SUCCESS;	
+		
 		return cState;
 	}
 	

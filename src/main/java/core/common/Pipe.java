@@ -36,4 +36,18 @@ public interface Pipe {
 	 */
 	public PipeType getPipeType ();
 	
+	/**
+	 * Returns the state of this pipe.
+	 * @see core.common.PipeState
+	 * @return PipeState pState
+	 */
+	public PipeState getPipeState();
+	
+	/**
+	 * Sets the PipeState of the current pipe.
+	 * @param PipeState pState
+	 * @see core.common.PipeState
+	 */
+	public void setPipeState(PipeState pState);
+	
 }

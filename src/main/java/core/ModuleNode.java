@@ -3,14 +3,16 @@ package core;
 // Imports.
 
 // Java utility imports.
-import java.util.Map;
-import java.util.HashMap;
 
 // Project specific imports.
 import core.common.ModuleState;
 
+// Project specific exceptions.
+import core.exceptions.NeitherConsumerProducerException;
+
 /**
- * This class creates nodes for each interacting thread pair.
+ * This class creates nodes for each interacting thread pair. These nodes serve as queues 
+ * which are used for the "Consumer-Producer" pattern/problem underlying multi-threading.
  * @author christopher
  *
  */
@@ -19,61 +21,98 @@ public class ModuleNode {
 	// Variables.
 	
 	// Integer holding the module ID of the first module.
-	int module1ID;
+	private int producerID;
 	
 	// Variable holding the ModuleState of the first module.
-	ModuleState module1State;
+	private ModuleState producerState;
 	
 	// Integer holding the module ID of the second module.
-	int module2ID;
+	private int consumerID;
 	
 	// Variable holding the ModuleState of the second module.
-	ModuleState module2State;
+	private ModuleState consumerState;
 	
 	// Constructors.
 	public ModuleNode (int moduleID) {
-		this.module1ID = moduleID;
-		this.module1State = ModuleBuilder.getModule(moduleID).getModuleState();
+		this.producerID = moduleID;
+		this.producerState = ModuleBuilder.getModule(moduleID).getModuleState();
+		this.consumerID = -1;
+		this.producerState = ModuleState.UNDEFINED;
 	}
 	
 	public ModuleNode (int module1ID, int module2ID) {
-		this.module1ID = module1ID;
-		this.module1State = ModuleBuilder.getModule(module1ID).getModuleState();
-		this.module2ID = module2ID;
-		this.module2State = ModuleBuilder.getModule(module2ID).getModuleState();
+		this.producerID = module1ID;
+		this.producerState = ModuleBuilder.getModule(module1ID).getModuleState();
+		this.consumerID = module2ID;
+		this.consumerState = ModuleBuilder.getModule(module2ID).getModuleState();
 	}
 
 	// End constructors.
 	
 	// Methods.
 	
-	// Setters.
-	public void updateModuleState(int moduleID) throws Exception {
-		if (this.module1ID == moduleID) 
-			this.module1State = ModuleBuilder.getModule(moduleID).getModuleState();
+	/**
+	 * This method updates the state of the producer-consumer pair for the observer.
+	 * @throws NeitherConsumerProducerException
+	 * @see core.exceptions.NeitherConsumerProducerException
+	 */
+	public void updateModuleStates() throws NeitherConsumerProducerException {
 		
-		if (this.module2ID == moduleID) 
-			this.module2State = ModuleBuilder.getModule(moduleID).getModuleState();
+		if (this.consumerID == -1) 
+			throw new NeitherConsumerProducerException("Cannot update thread-queue for modules:" 
+					+ "Consumer not registered for producer with moduleID \""
+					+ this.producerID + "\".");
 		
-		if (this.module1ID != moduleID && this.module2ID != moduleID) 
-			throw new Exception("Cannot update node for module with ID:\""
-					+ moduleID + "\". No such module registered");
+		this.consumerState = ModuleBuilder.getModule(this.consumerID).getModuleState();	
+		
+		this.producerState = ModuleBuilder.getModule(this.producerID).getModuleState();
+					
 	}
+	
+	// Setters.
+	
 	// End setters.
 	
 	// Getters.
-	public ModuleState getModuleState(int moduleID) throws Exception {
-		if (this.module1ID == moduleID) 
-			return this.module1State;
+	/**
+	 * This method returns the state of one components of the consumer-producer pair (depending on its ID).
+	 * This method throws a NeitherConsumerProducerException.
+	 * @param int moduleID
+	 * @return ModuleState moduleState
+	 * @throws NeitherConsumerProducerException
+	 * @see core.exceptions.NeitherConsumerProducerException
+	 */
+	public ModuleState getModuleState(int moduleID) throws NeitherConsumerProducerException {
 		
-		if (this.module2ID == moduleID) 
-			return this.module2State;
+		// TODO: Create custom exception.
 		
-		if (this.module1ID != moduleID && this.module2ID != moduleID) 
-			throw new Exception("Cannot retrieve node for module with ID:\""
-				+ moduleID + "\". No such module registered");
+		if (this.producerID == moduleID) 
+			return this.producerState;
 		
-		return module1State;
+		if (this.consumerID == moduleID) 
+			return this.consumerState;
+		
+		if (this.producerID != moduleID && this.consumerID != moduleID) 
+			throw new NeitherConsumerProducerException("Cannot retrieve node for module with ID:\""
+				+ moduleID + "\". No such module registered for this thread-queue.");
+		
+		return ModuleState.UNDEFINED;
+	}
+	
+	public int getConsumerID() {
+		return this.consumerID;
+	}
+	
+	public ModuleState getCosumerState() {
+		return this.consumerState;
+	}
+	
+	public int getProducerID() {
+		return this.producerID;
+	}
+	
+	public ModuleState getProducerState() {
+		return this.producerState;
 	}
 	// End getters.
 	

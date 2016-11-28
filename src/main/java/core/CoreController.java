@@ -22,9 +22,10 @@ public class CoreController {
 		CheckExternalProgrammes chExProg = new CheckExternalProgrammes(path);
 		chExProg.readConfig();
 	}
-	
+		
 	public static ModuleBuilder generateModuleBuilder() {
-		ModuleBuilder moduleBuilder = new ModuleBuilder();
+		JobController jobController = new JobController();
+		ModuleBuilder moduleBuilder = new ModuleBuilder(jobController);
 		return moduleBuilder;
 	}
 

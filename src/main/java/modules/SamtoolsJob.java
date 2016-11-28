@@ -6,6 +6,7 @@ package modules;
 
 import core.common.Module;
 import core.common.ModuleType;
+import core.JobController;
 import core.common.CommandState;
 import core.exceptions.CommandFailedException;
 
@@ -17,8 +18,8 @@ public class SamtoolsJob extends Module {
 	private String command;
 	
 	// Constructors.
-	public SamtoolsJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
-		super(moduleID, storageID, mType, iPortID, oPortID);
+	public SamtoolsJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
+		super(moduleID, storageID, mType, iPortID, oPortID, jobController);
 		this.command = cmd;
 	}
 	

@@ -27,8 +27,8 @@ public class InputReader extends Module {
 	private String command;
 	
 	// Constructors.
-	public InputReader(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
-		super(moduleID, storageID, mType, iPortID, oPortID);
+	public InputReader(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
+		super(moduleID, storageID, mType, iPortID, oPortID, jobController);
 		this.command = cmd;
 	}
 	
@@ -105,11 +105,16 @@ public class InputReader extends Module {
 			
 			//bReader.close();
 		
+			// Indicate that output was written.
+			this.setModuleState(ModuleState.OUTPUT_DONE);
+			
+			this.getJobController().getModuleNode(this.getProducerModuleNodeName()).notifyModuleObserver();
+			
 			// This thread owns the pipe now.
-			synchronized(this.getOutputPort()) {	
-				// Wait until the reading thread is finished reading from the pipe.
-				while (!this.getOutputPort().getPipe().getPipeState().equals(PipeState.FINISHED)) {
-					this.getOutputPort().getPipe().wait();
+			synchronized(this.getJobController().getModuleNode(this.getProducerModuleNodeName())) {	
+				// Wait until the reading thread is finished reading.
+				while (this.getJobController().getModuleNode(this.getProducerModuleNodeName()).getCosumerState().equals(ModuleState.INPUT_DONE)) {
+					this.getJobController().getModuleNode(this.getProducerModuleNodeName()).wait();
 				}
 			}
 				

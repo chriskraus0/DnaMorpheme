@@ -1,5 +1,6 @@
 package modules;
 
+import core.JobController;
 import core.common.CommandState;
 
 //Imports.
@@ -16,8 +17,8 @@ public class SequenceLogoJob extends Module {
 	private String command;
 	
 	// Constructors.
-	public SequenceLogoJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
-		super(moduleID, storageID, mType, iPortID, oPortID);
+	public SequenceLogoJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
+		super(moduleID, storageID, mType, iPortID, oPortID, jobController);
 		this.command = cmd;
 		// TODO Auto-generated constructor stub
 	}

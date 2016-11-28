@@ -1,5 +1,6 @@
 package modules;
 
+import core.JobController;
 import core.common.CommandState;
 
 //Imports.
@@ -17,8 +18,8 @@ public class TomTomJob extends Module {
 	private String command;
 	
 	// Constructors.
-	public TomTomJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
-		super(moduleID, storageID, mType, iPortID, oPortID);
+	public TomTomJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
+		super(moduleID, storageID, mType, iPortID, oPortID, jobController);
 		this.command = cmd;
 	}
 	

@@ -2,12 +2,12 @@ package modules;
 
 import java.io.IOException;
 
-import core.InputPort;
-import core.ModuleBuilder;
-import core.common.CommandState;
+
 
 //Imports.
-
+import core.InputPort;
+import core.JobController;
+import core.common.CommandState;
 import core.common.Module;
 import core.common.ModuleState;
 import core.common.ModuleType;
@@ -22,8 +22,8 @@ public class QPMS9Job extends Module {
 	private String command;
 	
 	// Constructors.
-	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
-		super(moduleID, storageID, mType, iPortID, oPortID);
+	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
+		super(moduleID, storageID, mType, iPortID, oPortID, jobController);
 		this.command = cmd;
 	}
 	
@@ -56,7 +56,7 @@ public class QPMS9Job extends Module {
 		String input = "";
 		
 		// Synchronize the pipe.
-		synchronized (this.getInputPort().getPipe()) {
+		synchronized (this.getJobController().getModuleNode(this.getConsumerModuleNodeName())) {
 			// Save number of read characters.
 			int charNumber = 0;
 		
@@ -81,12 +81,15 @@ public class QPMS9Job extends Module {
 					charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
 				}
 				
-				// Notify that this thread is done with reading from pipe.
-				this.getInputPort().getPipe().setPipeState(PipeState.FINISHED);
+				// Signal done reading input.
+				this.setModuleState(ModuleState.INPUT_DONE);
+				this.getJobController().getModuleNode(this.getConsumerModuleNodeName()).notifyModuleObserver();
 				
-				while (this.getInputPort().getPipe().getPipeState().equals(PipeState.FINISHED)) {
-					this.getInputPort().getPipe().notifyAll();
+				while (this.getJobController().getModuleNode(this.getConsumerModuleNodeName()).getProducerState().equals(ModuleState.OUTPUT_DONE)) {
+					this.getJobController().getModuleNode(this.getConsumerModuleNodeName()).notifyAll();
 				}
+				
+				
 				
 			} catch (PipeTypeNotSupportedException pe) {
 				System.err.println(pe.getMessage());

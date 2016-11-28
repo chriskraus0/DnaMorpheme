@@ -6,6 +6,7 @@ import core.exceptions.CommandFailedException;
 
 // Project specific imports
 import core.ModulePortLinker;
+import core.JobController;
 
 /**
  * Abstract class defining the common methods among all modules.
@@ -34,11 +35,16 @@ public abstract class Module implements ModuleInterface, Runnable {
 	
 	// Variables.
 	
+	private String moduleConsumerNodeName;
+	private String moduleProducerNodeName;
+	
+	private JobController jobController;
+	
 	// End Variables.
 	
 	// Constructors.
 	
-	public Module (int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID) {
+	public Module (int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, JobController jobController) {
 		this.MODULE_ID = moduleID;
 		this.STORRAGE_ID = storageID;
 		this.MODULE_TYPE = mType;
@@ -58,10 +64,29 @@ public abstract class Module implements ModuleInterface, Runnable {
 		this.mState = mState;
 	}
 	
+	public void setProducerModuleNodeName (String moduleNodeName) {
+		this.moduleProducerNodeName = moduleNodeName;
+	}
 	
+	public void setConsumerModuleNodeName (String moduleNodeName) {
+		this.moduleConsumerNodeName = moduleNodeName;
+	}
 	// End setters.
 	
 	// Getters.
+	
+	public JobController getJobController() {
+		return this.jobController;
+	}
+	
+	public String getConsumerModuleNodeName () {
+		return this.moduleConsumerNodeName;
+	}
+	
+
+	public String getProducerModuleNodeName () {
+		return this.moduleProducerNodeName;
+	}
 	
 	public Port getInputPort () {
 		return ModulePortLinker.getInputPort(this.INPUT_PORT_ID);

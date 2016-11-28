@@ -25,11 +25,10 @@ import modules.QPMS9Job;
  */
 
 public class ModuleBuilder implements ModuleBuilderInterface {
-	// Enumeration.
-	
-	private ModuleState mState;
 	
 	// Variables.
+	
+	private JobController jobController;
 	
 	// Keep an instance independent sorted map of all modules and IDs.
 	private static Map <Integer, Module> moduleMap;
@@ -42,10 +41,10 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	
 	// Constructors.
 	
-	public ModuleBuilder () {
+	public ModuleBuilder (JobController jController) {
 		super();
+		this.jobController = jController;
 		ModuleBuilder.moduleMap = new TreeMap<Integer, Module> ();
-		ModuleBuilder.modulesThreadMap = new HashMap<Integer, Thread>();
 		ModuleBuilder.moduleCount = 0;
 		
 		// Get a single instance for ModulePortLinker.
@@ -63,19 +62,9 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	 * @param int moduleID
 	 * @param int connectedModuleID
 	 */
-	public void startJob (int moduleID) throws InterruptedException {
-		Thread newModuleThread = new Thread(ModuleBuilder.getModule(moduleID));
-		
-		// Use thread specific names for debugging.
-		newModuleThread.setName(ModuleBuilder.getModule(moduleID).getModuleType().toString() 
-				+ ":" + ModuleBuilder.getModule(moduleID).getModuleID());
-		ModuleBuilder.modulesThreadMap.put(moduleID, newModuleThread);
-		
-		// Start new Thread.
-		newModuleThread.start();
-		
-		// Sleep for 100 milliseconds.
-		Thread.sleep(100);
+	public void startJob (int producerID, int consumerID) {
+		String nodeName = this.jobController.addNewModuleNode(producerID, consumerID);
+		this.jobController.connect(nodeName);
 	}
 	
 	/**
@@ -259,19 +248,19 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 				newModule = new CdHitJob (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
 						ModulePortLinker.requestNewOutputPortID(moduleID),
-						command);
+						command, this.jobController);
 				break;
 			case INPUT_READER:
 				newModule = new InputReader (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
 						ModulePortLinker.requestNewOutputPortID(moduleID),
-						command);
+						command, this.jobController);
 				break;
 			case QPMS9_JOB:
 				newModule = new QPMS9Job (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
 						ModulePortLinker.requestNewOutputPortID(moduleID),
-						command);
+						command, this.jobController);
 				break;
 			case UNDEFINED:
 				break;

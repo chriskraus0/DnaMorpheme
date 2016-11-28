@@ -47,7 +47,7 @@ public class TestCoreControllerModulesExternalProgrammes {
 		thisJob.run();
 	}
 	
-	public void run() {
+	public void run() {/*
 
 	    // Create a new Singleton "CoreController"
 		CoreController.getInstance();
@@ -78,7 +78,7 @@ public class TestCoreControllerModulesExternalProgrammes {
 				System.err.println(ie.getMessage());
 				ie.printStackTrace();
 			}
-		}
+		}*/
 		
 	}
 }

@@ -18,8 +18,8 @@ public class ExternalCommandHandler extends Module {
 	private String command;
 
 	// Constructors.
-	public ExternalCommandHandler(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
-		super(moduleID, storageID, mType, iPortID, oPortID);
+	public ExternalCommandHandler(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
+		super(moduleID, storageID, mType, iPortID, oPortID, jobController);
 		this.command = cmd;
 	}
 

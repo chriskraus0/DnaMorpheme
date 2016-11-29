@@ -38,13 +38,11 @@ public abstract class Module implements ModuleInterface, Runnable {
 	private String moduleConsumerNodeName;
 	private String moduleProducerNodeName;
 	
-	private JobController jobController;
-	
 	// End Variables.
 	
 	// Constructors.
 	
-	public Module (int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, JobController jobController) {
+	public Module (int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID) {
 		this.MODULE_ID = moduleID;
 		this.STORRAGE_ID = storageID;
 		this.MODULE_TYPE = mType;
@@ -74,11 +72,7 @@ public abstract class Module implements ModuleInterface, Runnable {
 	// End setters.
 	
 	// Getters.
-	
-	public JobController getJobController() {
-		return this.jobController;
-	}
-	
+		
 	public String getConsumerModuleNodeName () {
 		return this.moduleConsumerNodeName;
 	}

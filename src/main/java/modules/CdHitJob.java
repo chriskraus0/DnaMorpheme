@@ -10,11 +10,10 @@ import java.io.IOException;
 import core.common.Module;
 import core.common.ModuleState;
 import core.common.ModuleType;
-import core.common.PipeState;
 import core.JobController;
 import core.InputPort;
-import core.ModuleBuilder;
 import core.OutputPort;
+import core.ModuleNode;
 
 // Project specific exceptions.
 import core.exceptions.CommandFailedException;
@@ -24,13 +23,14 @@ import core.exceptions.PipeTypeNotSupportedException;
 public class CdHitJob extends Module {
 	// Variables.
 	
-	String command;
+	private String command;
+	private JobController jobController;
 	
 	// Constructors.
 	public CdHitJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
-		super(moduleID, storageID, mType, iPortID, oPortID, jobController);
+		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
-		// TODO Auto-generated constructor stub
+		this.jobController = jobController;
 	}
 	
 	// Methods.
@@ -50,6 +50,8 @@ public class CdHitJob extends Module {
 	
 	public synchronized CommandState callCommand() throws CommandFailedException {
 		CommandState cState = CommandState.STARTING;
+		
+		ModuleNode consumerNode = this.jobController.getModuleNode(this.getConsumerModuleNodeName());
 		
 		// Test system output.
 		System.out.println("CdHitJob with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :");
@@ -75,29 +77,41 @@ public class CdHitJob extends Module {
 		
 		// Read from InputPort (via CharPipe).		
 		try {
-
-			charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
 			
-			while (charNumber != -1) {
-											
-				// Check for interrupted threads.
-				
-				/*TODO:
-				 * if (Thread.interrupted()) {
-					throw new InterruptedException ("Thread interrupted");
-				}*/
-				
-				// If the number of read characters is smaller than the buffer limit 
-				// write the remaining characters in the String variable input.
-				if (charNumber < bufferSize) {
-					for (int i = 0; i < charNumber; i++)
-					input += data[i];
-				} else {
-					input += new String(data);
-				}
-				
+			// Synchronize the pipe.
+			synchronized (consumerNode) {
 				charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
 				
+				while (charNumber != -1) {
+												
+					// Check for interrupted threads.
+					
+					/*TODO:
+					 * if (Thread.interrupted()) {
+						throw new InterruptedException ("Thread interrupted");
+					}*/
+					
+					// If the number of read characters is smaller than the buffer limit 
+					// write the remaining characters in the String variable input.
+					if (charNumber < bufferSize) {
+						for (int i = 0; i < charNumber; i++)
+						input += data[i];
+					} else {
+						input += new String(data);
+					}
+					
+					charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
+					
+				}
+
+				// Notify all threads that this thread is done reading.
+							
+				while (consumerNode.getProducerState().equals(ModuleState.OUTPUT_DONE)) {
+					this.jobController.getModuleNode(this.getConsumerModuleNodeName()).notifyAll();
+				}
+				
+				this.setModuleState(ModuleState.INPUT_DONE);
+				this.jobController.getModuleNode(this.getConsumerModuleNodeName()).notifyModuleObserver();
 			}
 						
 		} catch (PipeTypeNotSupportedException pe) {
@@ -113,26 +127,13 @@ public class CdHitJob extends Module {
 			
 		input += "Here is a new modified additional line";
 		
-		
-		// Synchronize the pipe.
-		synchronized (this.getJobController().getModuleNode(this.getConsumerModuleNodeName())) {
-		
-			// Notify all threads that this thread is done reading.
-						
-			while (this.getJobController().getModuleNode(this.getConsumerModuleNodeName()).getProducerState().equals(ModuleState.OUTPUT_DONE)) {
-				this.getJobController().getModuleNode(this.getConsumerModuleNodeName()).notifyAll();
-			}
 			
-			this.setModuleState(ModuleState.INPUT_DONE);
-			this.getJobController().getModuleNode(this.getConsumerModuleNodeName()).notifyModuleObserver();
-			
-		}
 		
 		// Notify the ModuleObserver.
-		this.getJobController().getModuleNode(this.getConsumerModuleNodeName()).notifyModuleObserver();
+		this.jobController.getModuleNode(this.getConsumerModuleNodeName()).notifyModuleObserver();
 		
 		// Synchronize the output pipe.
-		synchronized (this.getJobController().getModuleNode(this.getProducerModuleNodeName())) {
+		synchronized (this.jobController.getModuleNode(this.getProducerModuleNodeName())) {
 			// Write to OutputPort (via CharPipe).
 			
 			try {
@@ -141,11 +142,11 @@ public class CdHitJob extends Module {
 				((OutputPort) this.getOutputPort()).writeToCharPipe(input);
 				
 				this.setModuleState(ModuleState.OUTPUT_DONE);
-				this.getJobController().getModuleNode(this.getProducerModuleNodeName()).notifyModuleObserver();
+				this.jobController.getModuleNode(this.getProducerModuleNodeName()).notifyModuleObserver();
 				
 				// Wait unit reading from the pipe is finished.
-				while (this.getJobController().getModuleNode(this.getProducerModuleNodeName()).equals(ModuleState.INPUT_DONE)) {
-					this.getJobController().getModuleNode(this.getProducerModuleNodeName()).wait();
+				while (this.jobController.getModuleNode(this.getProducerModuleNodeName()).equals(ModuleState.INPUT_DONE)) {
+					this.jobController.getModuleNode(this.getProducerModuleNodeName()).wait();
 				}
 				
 			} catch (PipeTypeNotSupportedException pe) {

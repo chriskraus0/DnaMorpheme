@@ -15,13 +15,14 @@ public class PMSconsensusJob extends Module {
 	
 	// Variables.
 	private String command;
+	private JobController jobController;
 
 	// Constructors.
 	
 	public PMSconsensusJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
-		super(moduleID, storageID, mType, iPortID, oPortID, jobController);
+		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
-		// TODO Auto-generated constructor stub
+		this.jobController = jobController;
 	}
 	
 	// Methods.

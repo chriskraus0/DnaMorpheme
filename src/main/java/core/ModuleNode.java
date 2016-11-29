@@ -112,7 +112,7 @@ public class ModuleNode implements ModuleNodeInterface {
 		return this.consumerID;
 	}
 	
-	public ModuleState getCosumerState() {
+	public ModuleState getConsumerState() {
 		return this.consumerState;
 	}
 	

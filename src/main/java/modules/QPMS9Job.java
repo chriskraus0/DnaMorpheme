@@ -20,11 +20,13 @@ public class QPMS9Job extends Module {
 
 	// Variables.
 	private String command;
+	private JobController jobController;
 	
 	// Constructors.
 	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
-		super(moduleID, storageID, mType, iPortID, oPortID, jobController);
+		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
+		this.jobController = jobController;
 	}
 	
 	// Methods.
@@ -56,7 +58,7 @@ public class QPMS9Job extends Module {
 		String input = "";
 		
 		// Synchronize the pipe.
-		synchronized (this.getJobController().getModuleNode(this.getConsumerModuleNodeName())) {
+		synchronized (this.jobController.getModuleNode(this.getConsumerModuleNodeName())) {
 			// Save number of read characters.
 			int charNumber = 0;
 		
@@ -83,10 +85,10 @@ public class QPMS9Job extends Module {
 				
 				// Signal done reading input.
 				this.setModuleState(ModuleState.INPUT_DONE);
-				this.getJobController().getModuleNode(this.getConsumerModuleNodeName()).notifyModuleObserver();
+				this.jobController.getModuleNode(this.getConsumerModuleNodeName()).notifyModuleObserver();
 				
-				while (this.getJobController().getModuleNode(this.getConsumerModuleNodeName()).getProducerState().equals(ModuleState.OUTPUT_DONE)) {
-					this.getJobController().getModuleNode(this.getConsumerModuleNodeName()).notifyAll();
+				while (this.jobController.getModuleNode(this.getConsumerModuleNodeName()).getProducerState().equals(ModuleState.OUTPUT_DONE)) {
+					this.jobController.getModuleNode(this.getConsumerModuleNodeName()).notifyAll();
 				}
 				
 				

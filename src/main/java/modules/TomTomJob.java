@@ -16,11 +16,13 @@ public class TomTomJob extends Module {
 	// Variables.
 	
 	private String command;
+	private JobController jobController;
 	
 	// Constructors.
 	public TomTomJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
-		super(moduleID, storageID, mType, iPortID, oPortID, jobController);
+		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
+		this.jobController = jobController;
 	}
 	
 	// Methods.

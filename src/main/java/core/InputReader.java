@@ -54,8 +54,7 @@ public class InputReader extends Module {
 		CommandState cState = CommandState.STARTING;
 						
 		try {
-			// This thread owns the pipe now.
-			synchronized(this.moduleNode) {
+			
 						
 				//File inFile = new File (this.command);
 				
@@ -113,27 +112,32 @@ public class InputReader extends Module {
 				this.setModuleState(ModuleState.OUTPUT_DONE);
 				
 				this.moduleNode.notifyModuleObserver();
-				
-				// Wait until the reading thread is finished reading.
-				while (!this.moduleNode.getConsumerState().equals(ModuleState.INPUT_DONE)) {
-					this.moduleNode.wait();
-				}
-			}
+			
 		} catch (IOException ie) {
 			System.err.println("IOException in " + this.getClass().toString() 
 					+ "#callCommand()" + ": " + ie.getMessage());
 			ie.printStackTrace();
 			cState = CommandState.FAIL;
-		} catch (InterruptedException intE) {
-			System.err.println(intE.getMessage());
-			intE.printStackTrace();
 		} catch (Exception e) {
 			System.err.println("Exception in " + this.getClass().toString() 
 					+ "#callCommand()" + ": " + e.getMessage());
 			e.printStackTrace();
 			cState = CommandState.FAIL;
 		}
-			
+		
+		try {
+			// This thread owns the pipe now.
+			synchronized(this.moduleNode) {
+				// Wait until the reading thread is finished reading.
+				while (!this.moduleNode.getConsumerState().equals(ModuleState.INPUT_DONE)) {
+					this.moduleNode.wait();
+				}
+			}
+		}  catch (InterruptedException intE) {
+			System.err.println(intE.getMessage());
+			intE.printStackTrace();
+		} 
+		
 		cState = CommandState.SUCCESS;
 						
 		return cState;

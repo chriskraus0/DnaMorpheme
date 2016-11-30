@@ -81,8 +81,6 @@ public class CdHitJob extends Module {
 		// Read from InputPort (via CharPipe).		
 		try {
 			
-			// Synchronize the pipe.
-			synchronized (this.moduleNode) {
 				charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
 				
 				while (charNumber != -1) {
@@ -107,15 +105,8 @@ public class CdHitJob extends Module {
 					
 				}
 
-				// Notify all threads that this thread is done reading.
-							
-				while (this.moduleNode.getProducerState().equals(ModuleState.OUTPUT_DONE)) {
-					this.moduleNode.notifyAll();
-				}
-				
-				this.setModuleState(ModuleState.INPUT_DONE);
-				this.moduleNode.notifyModuleObserver();
-			}
+
+		
 						
 		} catch (PipeTypeNotSupportedException pe) {
 			System.err.println(pe.getMessage());
@@ -126,6 +117,18 @@ public class CdHitJob extends Module {
 			System.err.println(ie.getMessage());
 			ie.printStackTrace();
 		} 
+		
+		// Synchronize the pipe.
+		synchronized (this.moduleNode) {
+			// Notify all threads that this thread is done reading.
+						
+			while (this.moduleNode.getProducerState().equals(ModuleState.OUTPUT_DONE)) {
+				this.moduleNode.notifyAll();
+			}
+			
+			this.setModuleState(ModuleState.INPUT_DONE);
+			this.moduleNode.notifyModuleObserver();
+		}
 		
 			
 		input += "Here is a new modified additional line";

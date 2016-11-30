@@ -5,18 +5,21 @@ package core;
 // Java utility imports.
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.HashMap;
 import java.util.Set;
 
 // Project specific imports.
 import core.common.Module;
 import core.common.ModuleBuilderInterface;
-import core.common.ModuleState;
 import core.common.ModuleType;
 
+// Module imports.
 import modules.CdHitJob;
 import modules.QPMS9Job;
 
+// Test module imports.
+import testModules.InputTest;
+import testModules.TestTransferModule;
+import testModules.TestOutput;
 
 /**
  * The actual factory which creates new modules.
@@ -249,6 +252,45 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		//this.connectModuleObserver(this.moduleMap.get(moduleID);
 	}
 	
+	public int createInputTestJob(String command) {
+		int moduleID = ModuleBuilder.generateNewModuleID();
+		int storageID = this.requestStorage();
+		ModuleType mType = ModuleType.INPUT_TEST;
+		
+		Module newInputTest = this.createNewModule(moduleID, storageID, mType, command);
+		
+		// Add module with the "moduleID" and module to the new module TreeMap.
+		ModuleBuilder.moduleMap.put(newInputTest.getModuleID(), newInputTest);
+				
+		return moduleID;
+	}
+	
+	public int createTestTransferJob(String command) {
+		int moduleID = ModuleBuilder.generateNewModuleID();
+		int storageID = this.requestStorage();
+		ModuleType mType = ModuleType.TEST_TRANSFER;
+		
+		Module newTestransfer = this.createNewModule(moduleID, storageID, mType, command);
+		
+		// Add module with the "moduleID" and module to the new module TreeMap.
+		ModuleBuilder.moduleMap.put(newTestransfer.getModuleID(), newTestransfer);
+				
+		return moduleID;
+	}
+	
+	public int createTesOoutputJob(String command) {
+		int moduleID = ModuleBuilder.generateNewModuleID();
+		int storageID = this.requestStorage();
+		ModuleType mType = ModuleType.TEST_OUTPUT;
+		
+		Module newTestoutput = this.createNewModule(moduleID, storageID, mType, command);
+		
+		// Add module with the "moduleID" and module to the new module TreeMap.
+		ModuleBuilder.moduleMap.put(newTestoutput.getModuleID(), newTestoutput);
+				
+		return moduleID;
+	}
+	
 	@Override
 	public Module createNewModule(int moduleID, int storageID, ModuleType mType, String command) {
 		
@@ -273,6 +315,23 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 						ModulePortLinker.requestNewOutputPortID(moduleID),
 						command);
 				break;
+			case INPUT_TEST:
+				newModule = new InputTest (moduleID, storageID, mType,
+						ModulePortLinker.requestNewInputPortID(moduleID),
+						ModulePortLinker.requestNewOutputPortID(moduleID),
+						command);
+				break;
+			case TEST_TRANSFER:
+				newModule = new TestTransferModule (moduleID, storageID, mType,
+						ModulePortLinker.requestNewInputPortID(moduleID),
+						ModulePortLinker.requestNewOutputPortID(moduleID),
+						command);
+				break;
+			case TEST_OUTPUT:
+				newModule = new TestOutput (moduleID, storageID, mType,
+						ModulePortLinker.requestNewInputPortID(moduleID),
+						ModulePortLinker.requestNewOutputPortID(moduleID),
+						command);
 			case UNDEFINED:
 				break;
 			default:

@@ -1,4 +1,4 @@
-package modules;
+package testModules;
 
 import core.common.CommandState;
 
@@ -19,7 +19,7 @@ import core.ModuleNode;
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
 
-public class CdHitJob extends Module {
+public class TestTransferModule extends Module {
 	// Variables.
 	
 	private String command;
@@ -29,7 +29,7 @@ public class CdHitJob extends Module {
 	private String input;
 	
 	// Constructors.
-	public CdHitJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
+	public TestTransferModule(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
 	}
@@ -60,8 +60,11 @@ public class CdHitJob extends Module {
 		this.moduleNode = this.getSuperModuleNode();
 		
 		CommandState cState = CommandState.STARTING;
-					
-		// Checked exception. TODO: Add ExternalCommandHandler
+			
+		// Test system output.
+		System.out.println("CdHitJob with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :");
+		System.out.println("Command " + this.command + " called");
+		System.out.println("Associated storageID " + this.getStorageID());
 		
 		// Save input from pipe
 		this.input = "";
@@ -84,11 +87,9 @@ public class CdHitJob extends Module {
 				while (charNumber != -1) {
 												
 					// Check for interrupted threads.
-					
-					if (Thread.interrupted()) {
+					 if (Thread.interrupted()) {
 						this.getInputPort().getPipe().readClose();
-						this.getOutputPort().getPipe().writeClose();
-						throw new InterruptedException ("Thread interrupted");
+						throw new InterruptedException ("Thread interrupted");	
 					}
 					
 					// If the number of read characters is smaller than the buffer limit 
@@ -107,7 +108,9 @@ public class CdHitJob extends Module {
 				this.getInputPort().getPipe().readClose();
 		
 						
-		} catch (PipeTypeNotSupportedException pe) {
+		} 
+	
+		catch (PipeTypeNotSupportedException pe) {
 			System.err.println(pe.getMessage());
 			pe.printStackTrace();
 		}
@@ -115,17 +118,18 @@ public class CdHitJob extends Module {
 		catch (IOException ie) {
 			System.err.println(ie.getMessage());
 			ie.printStackTrace();
-		} 
-		
-		catch (InterruptedException intE) {
-			System.err.println("ERROR: " + intE.getMessage());
+		} catch (InterruptedException intE) {
+			System.err.println(intE.getMessage());
 			intE.printStackTrace();
 		}
 	
 		this.setModuleState(ModuleState.INPUT_DONE);
 		this.moduleNode.notifyModuleObserver();
-		
-		String output = this.input;
+	
+		// Modify the input.
+		String output = "NEW LINE!!!\n";
+		output += new String(this.input);
+		output += "NEW LINE2!!!\n";
 		// Write to OutputPort (via CharPipe).
 		
 		try {
@@ -153,6 +157,4 @@ public class CdHitJob extends Module {
 		
 		return cState;
 	}
-	
-
 }

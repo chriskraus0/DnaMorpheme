@@ -1,4 +1,5 @@
-package core;
+package testModules;
+
 
 // Imports.
 
@@ -13,18 +14,20 @@ import core.common.ModuleState;
 import core.common.ModuleType;
 import core.common.CommandState;
 import core.OutputPort;
+import core.ModuleNode;
+import core.CharPipe;
 
 // Project specific exceptions.
 import core.exceptions.CommandFailedException;
 
-public class InputReader extends Module {
+public class InputTest extends Module {
 	
 	// Variables.
 	private String command;
 	private ModuleNode moduleNode;
 	
 	// Constructors.
-	public InputReader(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
+	public InputTest(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd; 
 	}
@@ -51,13 +54,13 @@ public class InputReader extends Module {
 		CommandState cState = CommandState.STARTING;
 						
 		try {
-				// Instantiate a new input stream.
+
 				InputStream fileInputStream = new FileInputStream (this.command);
 				
 				// Define input buffer
 				int bufferSize = 1024;
 				byte[] buffer = new byte[bufferSize];
-				
+								
 				// Read file data into buffer and write to output stream.
 				
 				// If the read information already reaches the end after first chunk,
@@ -69,7 +72,6 @@ public class InputReader extends Module {
 					// Look for interrupted threads
 					if (Thread.interrupted()) {
 						fileInputStream.close();
-						this.getOutputPort().getPipe().writeClose();
 						throw new InterruptedException(
 								"Thread has been interrupted.");
 					}
@@ -85,6 +87,8 @@ public class InputReader extends Module {
 							
 				// close relevant I/O instances
 				fileInputStream.close();
+				
+				//bReader.close();
 				
 				// Close the pipe after writing.
 				((CharPipe) this.getOutputPort().getPipe()).writeClose();
@@ -110,5 +114,4 @@ public class InputReader extends Module {
 						
 		return cState;
 	}
-
 }

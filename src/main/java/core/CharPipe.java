@@ -71,6 +71,11 @@ public class CharPipe implements Pipe {
 		return this.pipeInput.read(data, offset, length);
 	}
 	
+	/**
+	 * Reads single character.
+	 * @return Char Integer of character. 
+	 * @throws IOException
+	 */
 	public int read() throws IOException {
 		return this.pipeInput.read();
 	}

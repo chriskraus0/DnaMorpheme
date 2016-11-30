@@ -43,19 +43,19 @@ public class TestPortsPipesInterModuleComm {
 		
 		// Create 3 new modules. 
 
-		int inputModule = moduleBuilder.createNewInputReader("testFiles/testFile1.txt");
-		int cdHitModule = moduleBuilder.createNewCdHitJob("Test CdHitJob");
-		int qPMS9Module = moduleBuilder.createNewQpms9Job("Test qPMS9Module");
+		int testInputModule = moduleBuilder.createInputTestJob("testFiles/testFile1.txt");
+		int testTransferModule = moduleBuilder.createTestTransferJob("Test Transfer");
+		int testOputputModule = moduleBuilder.createTesOoutputJob("Test Output");
 	
 		
 		// Prepare moduleNodes.
-		String inputCdHitNodeName = moduleBuilder.prepareJobs(inputModule,cdHitModule);
-		String cdHitQpmsNodeName = moduleBuilder.prepareJobs(cdHitModule,qPMS9Module);
+		String testInputTransferNodeName = moduleBuilder.prepareJobs(testInputModule,testTransferModule);
+		String testTransferOutputNodeName = moduleBuilder.prepareJobs(testTransferModule,testOputputModule);
 		
 		
 		// Start new threads for "inputCdHitNodeName".
 		try {
-			moduleBuilder.startJobs(inputCdHitNodeName);
+			moduleBuilder.startJobs(testInputTransferNodeName);
 		} catch (InterruptedException intE) {
 			System.err.println(intE.getMessage());
 			intE.printStackTrace();
@@ -63,7 +63,7 @@ public class TestPortsPipesInterModuleComm {
 		
 		// Start new threads for "cdHitQpmsNodeName".
 		try {
-			moduleBuilder.startJobs(cdHitQpmsNodeName);
+			moduleBuilder.startJobs(testTransferOutputNodeName);
 		} catch (InterruptedException intE) {
 			System.err.println(intE.getMessage());
 			intE.printStackTrace();

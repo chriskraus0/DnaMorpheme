@@ -40,6 +40,7 @@ public class InputReader extends Module {
 			CommandState cState = this.callCommand();
 			if (cState.equals(CommandState.SUCCESS)) {
 				this.setModuleState(ModuleState.SUCCESS);
+				this.moduleNode.notifyModuleObserver();
 			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());
@@ -54,7 +55,7 @@ public class InputReader extends Module {
 		CommandState cState = CommandState.STARTING;
 						
 		try {
-			
+
 						
 				//File inFile = new File (this.command);
 				
@@ -100,6 +101,9 @@ public class InputReader extends Module {
 					String data = new String(buffer);
 	
 					((OutputPort) this.getOutputPort()).writeToCharPipe(data);
+					
+					// Re-set buffer to avoid set bytes from last iteration.
+					buffer = new byte[bufferSize];
 					readBytes = fileInputStream.read(buffer);
 				}
 							
@@ -107,7 +111,10 @@ public class InputReader extends Module {
 				fileInputStream.close();
 				
 				//bReader.close();
-			
+				
+				// Close the pipe after writing.
+				((CharPipe) this.getOutputPort().getPipe()).writeClose();
+				
 				// Indicate that output was written.
 				this.setModuleState(ModuleState.OUTPUT_DONE);
 				
@@ -124,19 +131,6 @@ public class InputReader extends Module {
 			e.printStackTrace();
 			cState = CommandState.FAIL;
 		}
-		
-		try {
-			// This thread owns the pipe now.
-			synchronized(this.moduleNode) {
-				// Wait until the reading thread is finished reading.
-				while (!this.moduleNode.getConsumerState().equals(ModuleState.INPUT_DONE)) {
-					this.moduleNode.wait();
-				}
-			}
-		}  catch (InterruptedException intE) {
-			System.err.println(intE.getMessage());
-			intE.printStackTrace();
-		} 
 		
 		cState = CommandState.SUCCESS;
 						

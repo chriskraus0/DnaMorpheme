@@ -49,9 +49,11 @@ public abstract class Module implements ModuleInterface, Runnable {
 		this.MODULE_ID = moduleID;
 		this.STORRAGE_ID = storageID;
 		this.MODULE_TYPE = mType;
-		this.mState = ModuleState.STARTING;
 		this.INPUT_PORT_ID = iPortID;
 		this.OUTPUT_PORT_ID = oPortID;
+
+		// Signal that this module is set up and ready for work. 
+		this.mState = ModuleState.READY;
 	}
 	
 	// End Constructors.

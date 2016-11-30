@@ -2,8 +2,7 @@ package modules;
 
 import java.io.IOException;
 
-
-
+import core.CharPipe;
 //Imports.
 import core.InputPort;
 import core.JobController;
@@ -37,6 +36,7 @@ public class QPMS9Job extends Module {
 			CommandState cState = this.callCommand();
 			if (cState.equals(CommandState.SUCCESS)) {
 				this.setModuleState(ModuleState.SUCCESS);
+				this.moduleNode.notifyModuleObserver();
 			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());
@@ -58,62 +58,60 @@ public class QPMS9Job extends Module {
 		
 		// Save input from pipe
 		String input = "";
+	
+		// Save number of read characters.
+		int charNumber = 0;
+	
+		// Prepare char buffer "data".
+		int bufferSize = 1024;
+		char[] data = new char[bufferSize];
 		
-		// Synchronize the pipe.
-		synchronized (this.moduleNode) {
-			// Save number of read characters.
-			int charNumber = 0;
-		
-			// Prepare char buffer "data".
-			int bufferSize = 1024;
-			char[] data = new char[bufferSize];
-			
-			// Read from InputPort (via CharPipe).
-			try {
+		// Read from InputPort (via CharPipe).
+		try {
+			charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
+			while (charNumber != -1) {
+									
+				// If the number of read characters is smaller than the buffer limit 
+				// write the remaining characters in the String variable input.
+				if (charNumber < bufferSize) {
+					for (int i = 0; i < charNumber; i++)
+					input += data[i];
+				} else {
+					input += new String(data);
+				}
+				
 				charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
-				while (charNumber != -1) {
-										
-					// If the number of read characters is smaller than the buffer limit 
-					// write the remaining characters in the String variable input.
-					if (charNumber < bufferSize) {
-						for (int i = 0; i < charNumber; i++)
-						input += data[i];
-					} else {
-						input += new String(data);
-					}
-					
-					charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
-				}
-				
-				// Signal done reading input.
-				this.setModuleState(ModuleState.INPUT_DONE);
-				this.moduleNode.notifyModuleObserver();
-				
-				while (this.moduleNode.getProducerState().equals(ModuleState.OUTPUT_DONE)) {
-					this.moduleNode.notifyAll();
-				}
-				
-				
-				
-			} catch (PipeTypeNotSupportedException pe) {
-				System.err.println(pe.getMessage());
-				pe.printStackTrace();
 			}
 			
-			catch (IOException ie) {
-				System.err.println(ie.getMessage());
-				ie.printStackTrace();
-			} 			
+			// Close input pipe.
+			((CharPipe) this.getInputPort().getPipe()).readClose();
 			
-			System.out.println("Here is the output:");
-			System.out.println(input);
-			
-			// Checked exception. TODO: Add ExternalCommandHandler
-			
-			cState = CommandState.SUCCESS;
+			// Signal done reading input.
+			this.setModuleState(ModuleState.INPUT_DONE);
+			this.moduleNode.notifyModuleObserver();
 			
 			
+			
+			
+		} catch (PipeTypeNotSupportedException pe) {
+			System.err.println(pe.getMessage());
+			pe.printStackTrace();
 		}
+		
+		catch (IOException ie) {
+			System.err.println(ie.getMessage());
+			ie.printStackTrace();
+		} 			
+		
+		System.out.println("Here is the output:");
+		System.out.println(input);
+		
+		// Checked exception. TODO: Add ExternalCommandHandler
+		
+		cState = CommandState.SUCCESS;
+		
+			
+		
 		
 		return cState;
 	}

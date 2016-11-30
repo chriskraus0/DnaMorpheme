@@ -30,14 +30,17 @@ public class JobController {
 	
 	// Variables.
 	
-	// HashMap save all moduleNodes.
-	// TODO: What to use? Faster HashMap or sorted TreeMap?
+	// HashMap to save all moduleNodes.
 	Map <String, ModuleNode> moduleNodeMap;
+	
+	// HashMap to save all threads.
+	Map <Integer, Thread> threadMap;
 	
 	// Constructors.
 	public JobController () {
 		this.moduleObserver = new ModuleObserver();
 		this.moduleNodeMap = new HashMap <String, ModuleNode>();
+		this.threadMap = new HashMap<Integer, Thread>();
 		
 	}
 	
@@ -98,7 +101,7 @@ public class JobController {
 				this.moduleNodeMap.get(moduleNodeName).getConsumerID()
 				).setSuperModuleNode(this.moduleNodeMap.get(moduleNodeName));
 		
-		// Start new threads for producer and consumer of the node.
+		// Start new threads for producer and consumer for the node.
 		try {
 			this.startJob(moduleNodeName);
 		} catch (InterruptedException intE) {
@@ -113,42 +116,71 @@ public class JobController {
 	 * @param String moduleNodeName
 	 */
 	private void startJob(String moduleNodeName) throws InterruptedException {
-						
-			// Start new thread for the Producer.
-			Thread newProducerThread = new Thread(ModuleBuilder.getModule(
+			
+			// Check whether producer already has a thread.
+		
+			if (ModuleBuilder.getModule(
 					this.moduleNodeMap.get(moduleNodeName).getProducerID()
-					));
+					).getModuleState().equals(ModuleState.READY)) {
+				
+						
+				// Start new thread for the Producer.
+				Thread newProducerThread = new Thread(ModuleBuilder.getModule(
+						this.moduleNodeMap.get(moduleNodeName).getProducerID()
+						));
+				
+				// Change module state to "STARTING".
+				ModuleBuilder.getModule(
+						this.moduleNodeMap.get(moduleNodeName).getProducerID()
+						).setModuleState(ModuleState.STARTING);
+				
+				// Register new thread.
+				this.threadMap.put(this.moduleNodeMap.get(moduleNodeName).getProducerID(), newProducerThread);
+				
+				// Use specific name for the Producer.
+				newProducerThread.setName("Node " + moduleNodeName + " "
+						+ ModuleBuilder.getModule(
+								this.moduleNodeMap.get(moduleNodeName).getProducerID()
+							).getModuleType().toString() 
+						+ ":ProducerThread:" + this.moduleNodeMap.get(moduleNodeName).getProducerID());
+				
+				// Start new Thread.
+				newProducerThread.start();
+				
+				// Sleep for 100 milliseconds.
+				Thread.sleep(100);
+			}
 			
-			// Use specific name for the Producer.
-			newProducerThread.setName("Node " + moduleNodeName + " "
-					+ ModuleBuilder.getModule(
-							this.moduleNodeMap.get(moduleNodeName).getProducerID()
-						).getModuleType().toString() 
-					+ ":ProducerThread:" + this.moduleNodeMap.get(moduleNodeName).getProducerID());
-			
-			// Start new Thread.
-			newProducerThread.start();
-			
-			// Sleep for 100 milliseconds.
-			Thread.sleep(100);
-			
-			// Start new thread for the Producer.
-			Thread newConsumerThread = new Thread(ModuleBuilder.getModule(
+			// Check whether consumer already has a thread.
+		
+			if (ModuleBuilder.getModule(
 					this.moduleNodeMap.get(moduleNodeName).getConsumerID()
-					));
-			
-			// Use specific name for the Producer.
-			newConsumerThread.setName("Node " + moduleNodeName + " "
-					+ ModuleBuilder.getModule(
-							this.moduleNodeMap.get(moduleNodeName).getConsumerID()
-						).getModuleType().toString() 
-					+ ":ConsumerThread:" + this.moduleNodeMap.get(moduleNodeName).getProducerID());
-			
-			// Start new Thread.
-			newConsumerThread.start();
-			
-			// Sleep for 100 milliseconds.
-			Thread.sleep(100);
+					).getModuleState().equals(ModuleState.READY)) {
+					
+				
+				// Start new thread for the Producer.
+				Thread newConsumerThread = new Thread(ModuleBuilder.getModule(
+						this.moduleNodeMap.get(moduleNodeName).getConsumerID()
+						));
+				
+				// Change module state to "STARTING".
+				ModuleBuilder.getModule(
+						this.moduleNodeMap.get(moduleNodeName).getConsumerID()
+						).setModuleState(ModuleState.STARTING);
+				
+				// Use specific name for the Producer.
+				newConsumerThread.setName("Node " + moduleNodeName + " "
+						+ ModuleBuilder.getModule(
+								this.moduleNodeMap.get(moduleNodeName).getConsumerID()
+							).getModuleType().toString() 
+						+ ":ConsumerThread:" + this.moduleNodeMap.get(moduleNodeName).getProducerID());
+				
+				// Start new Thread.
+				newConsumerThread.start();
+				
+				// Sleep for 100 milliseconds.
+				Thread.sleep(100);
+			}
 		
 	}
 	

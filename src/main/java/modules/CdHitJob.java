@@ -45,6 +45,7 @@ public class CdHitJob extends Module {
 			CommandState cState = this.callCommand();
 			if (cState.equals(CommandState.SUCCESS)) {
 				this.setModuleState(ModuleState.SUCCESS);
+				this.moduleNode.notifyModuleObserver();
 			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());
@@ -105,7 +106,7 @@ public class CdHitJob extends Module {
 					
 				}
 
-
+				this.getInputPort().getPipe().readClose();
 		
 						
 		} catch (PipeTypeNotSupportedException pe) {
@@ -117,58 +118,34 @@ public class CdHitJob extends Module {
 			System.err.println(ie.getMessage());
 			ie.printStackTrace();
 		} 
-		
-		// Synchronize the pipe.
-		synchronized (this.moduleNode) {
-			// Notify all threads that this thread is done reading.
-						
-			while (this.moduleNode.getProducerState().equals(ModuleState.OUTPUT_DONE)) {
-				this.moduleNode.notifyAll();
-			}
-			
-			this.setModuleState(ModuleState.INPUT_DONE);
-			this.moduleNode.notifyModuleObserver();
-		}
-		
+	
+		this.setModuleState(ModuleState.INPUT_DONE);
+		this.moduleNode.notifyModuleObserver();
+	
 			
 		input += "Here is a new modified additional line";
-		
 			
+		// Write to OutputPort (via CharPipe).
 		
-		// Notify the ModuleObserver.
-		this.getSuperModuleNode().notifyModuleObserver();
-		
-		// Synchronize the output pipe.
-		synchronized (this.moduleNode) {
-			// Write to OutputPort (via CharPipe).
+		try {
 			
-			try {
-				
-				// Write to the output pipe.
-				((OutputPort) this.getOutputPort()).writeToCharPipe(input);
-				
-				this.setModuleState(ModuleState.OUTPUT_DONE);
-				this.getSuperModuleNode().notifyModuleObserver();
-				
-				// Wait unit reading from the pipe is finished.
-				while (!this.moduleNode.getConsumerState().equals(ModuleState.INPUT_DONE)) {
-					this.moduleNode.wait();
-				}
-				
-			} catch (PipeTypeNotSupportedException pe) {
-				System.err.println(pe.getMessage());
-				pe.printStackTrace();
-			} catch (IOException ie) {
-				System.err.println(ie.getMessage());
-				ie.printStackTrace();
-			} catch (InterruptedException intE) {
-				System.err.println(intE.getMessage());
-				intE.printStackTrace();
-			}
+			// Write to the output pipe.
+			((OutputPort) this.getOutputPort()).writeToCharPipe(input);
+			
+			this.getOutputPort().getPipe().writeClose();
+			
+			this.setModuleState(ModuleState.OUTPUT_DONE);
+			this.getSuperModuleNode().notifyModuleObserver();
 			
 			
-		
-		}
+		} catch (PipeTypeNotSupportedException pe) {
+			System.err.println(pe.getMessage());
+			pe.printStackTrace();
+		} catch (IOException ie) {
+			System.err.println(ie.getMessage());
+			ie.printStackTrace();
+		} 
+			
 				
 		// If everything worked out return SUCCESS.
 		cState = CommandState.SUCCESS;	

@@ -122,15 +122,15 @@ public class CdHitJob extends Module {
 		this.setModuleState(ModuleState.INPUT_DONE);
 		this.moduleNode.notifyModuleObserver();
 	
-			
-		input += "Here is a new modified additional line";
-			
+		// Modify the input.
+		String output = input + "NEW LINE!!!\n";
+		
 		// Write to OutputPort (via CharPipe).
 		
 		try {
 			
 			// Write to the output pipe.
-			((OutputPort) this.getOutputPort()).writeToCharPipe(input);
+			((OutputPort) this.getOutputPort()).writeToCharPipe(output);
 			
 			this.getOutputPort().getPipe().writeClose();
 			

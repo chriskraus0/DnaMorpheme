@@ -48,11 +48,26 @@ public class TestPortsPipesInterModuleComm {
 		int qPMS9Module = moduleBuilder.createNewQpms9Job("Test qPMS9Module");
 	
 		
-		// Start jobs.
-		moduleBuilder.startJob(inputModule,cdHitModule);
-		moduleBuilder.startJob(cdHitModule,qPMS9Module);
-	
+		// Prepare moduleNodes.
+		String inputCdHitNodeName = moduleBuilder.prepareJobs(inputModule,cdHitModule);
+		String cdHitQpmsNodeName = moduleBuilder.prepareJobs(cdHitModule,qPMS9Module);
 		
+		
+		// Start new threads for "inputCdHitNodeName".
+		try {
+			moduleBuilder.startJobs(inputCdHitNodeName);
+		} catch (InterruptedException intE) {
+			System.err.println(intE.getMessage());
+			intE.printStackTrace();
+		}
+		
+		// Start new threads for "cdHitQpmsNodeName".
+		try {
+			moduleBuilder.startJobs(cdHitQpmsNodeName);
+		} catch (InterruptedException intE) {
+			System.err.println(intE.getMessage());
+			intE.printStackTrace();
+		}
 		
 	}
 }

@@ -61,10 +61,21 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	 * Take the moduleID of this module and the connected module ID.
 	 * @param int moduleID
 	 * @param int connectedModuleID
+	 * @return TODO
 	 */
-	public void startJob (int producerID, int consumerID) {
+	public String prepareJobs (int producerID, int consumerID) {
 		String nodeName = this.jobController.addNewModuleNode(producerID, consumerID);
 		this.jobController.connect(nodeName);
+		return nodeName;
+	}
+	
+	/**
+	 * Method to start one thread per module.
+	 * @param moduleNodeName
+	 * @throws InterruptedException
+	 */
+	public void startJobs (String moduleNodeName) throws InterruptedException {
+		this.jobController.startJob(moduleNodeName);
 	}
 	
 	/**

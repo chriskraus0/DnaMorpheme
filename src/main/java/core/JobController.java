@@ -101,21 +101,13 @@ public class JobController {
 				this.moduleNodeMap.get(moduleNodeName).getConsumerID()
 				).setSuperModuleNode(this.moduleNodeMap.get(moduleNodeName));
 		
-		// Start new threads for producer and consumer for the node.
-		try {
-			this.startJob(moduleNodeName);
-		} catch (InterruptedException intE) {
-			System.err.println(intE.getMessage());
-			intE.printStackTrace();
-		}
-		
 	}
 	
 	/**
 	 * Create a new thread for the Producer and for the Consumer.
 	 * @param String moduleNodeName
 	 */
-	private void startJob(String moduleNodeName) throws InterruptedException {
+	public void startJob(String moduleNodeName) throws InterruptedException {
 			
 			// Check whether producer already has a thread.
 		

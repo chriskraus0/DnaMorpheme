@@ -75,6 +75,7 @@ public class JobController {
 	
 	public void connect(String moduleNodeName) {
 		
+		// Create ports and connect them by a new pipe.
 		try {
 			this.moduleNodeMap.get(moduleNodeName).connect();
 		} catch (PipeTypeNotSupportedException pe) {
@@ -84,6 +85,18 @@ public class JobController {
 			System.err.println(oe.getMessage());
 			oe.printStackTrace();
 		}
+		
+		// Give each producer and consumer the moduleNode.
+		
+		// Set up producer.
+		ModuleBuilder.getModule(
+				this.moduleNodeMap.get(moduleNodeName).getProducerID()
+				).setSuperModuleNode(this.moduleNodeMap.get(moduleNodeName));
+		
+		// Set up consumer.
+		ModuleBuilder.getModule(
+				this.moduleNodeMap.get(moduleNodeName).getConsumerID()
+				).setSuperModuleNode(this.moduleNodeMap.get(moduleNodeName));
 		
 		// Start new threads for producer and consumer of the node.
 		try {
@@ -100,7 +113,7 @@ public class JobController {
 	 * @param String moduleNodeName
 	 */
 	private void startJob(String moduleNodeName) throws InterruptedException {
-		
+						
 			// Start new thread for the Producer.
 			Thread newProducerThread = new Thread(ModuleBuilder.getModule(
 					this.moduleNodeMap.get(moduleNodeName).getProducerID()

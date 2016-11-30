@@ -7,6 +7,7 @@ import core.exceptions.CommandFailedException;
 // Project specific imports
 import core.ModulePortLinker;
 import core.JobController;
+import core.ModuleNode;
 
 /**
  * Abstract class defining the common methods among all modules.
@@ -38,6 +39,8 @@ public abstract class Module implements ModuleInterface, Runnable {
 	private String moduleConsumerNodeName;
 	private String moduleProducerNodeName;
 	
+	private ModuleNode moduleNode;
+	
 	// End Variables.
 	
 	// Constructors.
@@ -56,6 +59,9 @@ public abstract class Module implements ModuleInterface, Runnable {
 	// Methods.
 	
 	// Setters.
+	public void setSuperModuleNode (ModuleNode mNode) {
+		this.moduleNode = mNode;
+	}
 	
 	@Override
 	public void setModuleState(ModuleState mState) {
@@ -71,8 +77,13 @@ public abstract class Module implements ModuleInterface, Runnable {
 	}
 	// End setters.
 	
+
 	// Getters.
-		
+	
+	public ModuleNode getSuperModuleNode () {
+		return this.moduleNode;
+	}
+	
 	public String getConsumerModuleNodeName () {
 		return this.moduleConsumerNodeName;
 	}

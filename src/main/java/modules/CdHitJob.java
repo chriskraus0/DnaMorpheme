@@ -10,7 +10,7 @@ import java.io.IOException;
 import core.common.Module;
 import core.common.ModuleState;
 import core.common.ModuleType;
-import core.JobController;
+
 import core.InputPort;
 import core.OutputPort;
 import core.ModuleNode;
@@ -19,21 +19,25 @@ import core.ModuleNode;
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
 
-// TODO: Just a bare bones module. This must be extended!
 public class CdHitJob extends Module {
 	// Variables.
 	
 	private String command;
-	private JobController jobController;
+	
+	private ModuleNode moduleNode;
 	
 	// Constructors.
-	public CdHitJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
+	public CdHitJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
-		this.jobController = jobController;
 	}
 	
 	// Methods.
+	
+	// Setters.
+		
+	// End setters.
+	
 	
 	@Override
 	public void run () {
@@ -49,10 +53,11 @@ public class CdHitJob extends Module {
 	}
 	
 	public synchronized CommandState callCommand() throws CommandFailedException {
+		
+		this.moduleNode = this.getSuperModuleNode();
+		
 		CommandState cState = CommandState.STARTING;
-		
-		ModuleNode consumerNode = this.jobController.getModuleNode(this.getConsumerModuleNodeName());
-		
+			
 		// Test system output.
 		System.out.println("CdHitJob with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :");
 		System.out.println("Command " + this.command + " called");
@@ -62,9 +67,7 @@ public class CdHitJob extends Module {
 		
 		// Save input from pipe
 		String input = "";
-		
-		
-		
+				
 		// Start processing of the command.
 		cState = CommandState.PROCESSING;
 		
@@ -79,7 +82,7 @@ public class CdHitJob extends Module {
 		try {
 			
 			// Synchronize the pipe.
-			synchronized (consumerNode) {
+			synchronized (this.moduleNode) {
 				charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
 				
 				while (charNumber != -1) {
@@ -106,12 +109,12 @@ public class CdHitJob extends Module {
 
 				// Notify all threads that this thread is done reading.
 							
-				while (consumerNode.getProducerState().equals(ModuleState.OUTPUT_DONE)) {
-					this.jobController.getModuleNode(this.getConsumerModuleNodeName()).notifyAll();
+				while (this.moduleNode.getProducerState().equals(ModuleState.OUTPUT_DONE)) {
+					this.moduleNode.notifyAll();
 				}
 				
 				this.setModuleState(ModuleState.INPUT_DONE);
-				this.jobController.getModuleNode(this.getConsumerModuleNodeName()).notifyModuleObserver();
+				this.moduleNode.notifyModuleObserver();
 			}
 						
 		} catch (PipeTypeNotSupportedException pe) {
@@ -130,10 +133,10 @@ public class CdHitJob extends Module {
 			
 		
 		// Notify the ModuleObserver.
-		this.jobController.getModuleNode(this.getConsumerModuleNodeName()).notifyModuleObserver();
+		this.getSuperModuleNode().notifyModuleObserver();
 		
 		// Synchronize the output pipe.
-		synchronized (this.jobController.getModuleNode(this.getProducerModuleNodeName())) {
+		synchronized (this.moduleNode) {
 			// Write to OutputPort (via CharPipe).
 			
 			try {
@@ -142,11 +145,11 @@ public class CdHitJob extends Module {
 				((OutputPort) this.getOutputPort()).writeToCharPipe(input);
 				
 				this.setModuleState(ModuleState.OUTPUT_DONE);
-				this.jobController.getModuleNode(this.getProducerModuleNodeName()).notifyModuleObserver();
+				this.getSuperModuleNode().notifyModuleObserver();
 				
 				// Wait unit reading from the pipe is finished.
-				while (this.jobController.getModuleNode(this.getProducerModuleNodeName()).equals(ModuleState.INPUT_DONE)) {
-					this.jobController.getModuleNode(this.getProducerModuleNodeName()).wait();
+				while (!this.moduleNode.getConsumerState().equals(ModuleState.INPUT_DONE)) {
+					this.moduleNode.wait();
 				}
 				
 			} catch (PipeTypeNotSupportedException pe) {
@@ -163,8 +166,7 @@ public class CdHitJob extends Module {
 			
 		
 		}
-		
-		
+				
 		// If everything worked out return SUCCESS.
 		cState = CommandState.SUCCESS;	
 		

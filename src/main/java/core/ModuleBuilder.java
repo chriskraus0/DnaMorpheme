@@ -248,19 +248,19 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 				newModule = new CdHitJob (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
 						ModulePortLinker.requestNewOutputPortID(moduleID),
-						command, this.jobController);
+						command);
 				break;
 			case INPUT_READER:
 				newModule = new InputReader (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
 						ModulePortLinker.requestNewOutputPortID(moduleID),
-						command, this.jobController);
+						command);
 				break;
 			case QPMS9_JOB:
 				newModule = new QPMS9Job (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
 						ModulePortLinker.requestNewOutputPortID(moduleID),
-						command, this.jobController);
+						command);
 				break;
 			case UNDEFINED:
 				break;

@@ -25,13 +25,12 @@ public class InputReader extends Module {
 	
 	// Variables.
 	private String command;
-	private JobController jobController;
+	private ModuleNode moduleNode;
 	
 	// Constructors.
-	public InputReader(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
+	public InputReader(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
-		this.command = cmd;
-		this.jobController = jobController; 
+		this.command = cmd; 
 	}
 	
 	// Methods.
@@ -50,13 +49,13 @@ public class InputReader extends Module {
 
 	public synchronized CommandState callCommand() throws CommandFailedException {
 		
-		CommandState cState = CommandState.STARTING;
+		this.moduleNode = this.getSuperModuleNode();
 		
-		ModuleNode producerNode = this.jobController.getModuleNode(this.getProducerModuleNodeName());
+		CommandState cState = CommandState.STARTING;
 						
 		try {
 			// This thread owns the pipe now.
-			synchronized(producerNode) {
+			synchronized(this.moduleNode) {
 						
 				//File inFile = new File (this.command);
 				
@@ -113,11 +112,11 @@ public class InputReader extends Module {
 				// Indicate that output was written.
 				this.setModuleState(ModuleState.OUTPUT_DONE);
 				
-				producerNode.notifyModuleObserver();
+				this.moduleNode.notifyModuleObserver();
 				
 				// Wait until the reading thread is finished reading.
-				while (!producerNode.getConsumerState().equals(ModuleState.INPUT_DONE)) {
-					producerNode.wait();
+				while (!this.moduleNode.getConsumerState().equals(ModuleState.INPUT_DONE)) {
+					this.moduleNode.wait();
 				}
 			}
 		} catch (IOException ie) {

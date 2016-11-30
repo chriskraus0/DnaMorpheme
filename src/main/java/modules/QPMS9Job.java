@@ -9,6 +9,7 @@ import core.InputPort;
 import core.JobController;
 import core.common.CommandState;
 import core.common.Module;
+import core.ModuleNode;
 import core.common.ModuleState;
 import core.common.ModuleType;
 import core.common.PipeState;
@@ -20,13 +21,12 @@ public class QPMS9Job extends Module {
 
 	// Variables.
 	private String command;
-	private JobController jobController;
+	private ModuleNode moduleNode;
 	
 	// Constructors.
-	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
+	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
-		this.jobController = jobController;
 	}
 	
 	// Methods.
@@ -48,6 +48,8 @@ public class QPMS9Job extends Module {
 		
 		CommandState cState = CommandState.STARTING;
 		
+		this.moduleNode = this.getSuperModuleNode();
+		
 		// Test system output.
 		System.out.println("QPMS9 with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :");
 		System.out.println("Command " + this.command + " called");
@@ -58,7 +60,7 @@ public class QPMS9Job extends Module {
 		String input = "";
 		
 		// Synchronize the pipe.
-		synchronized (this.jobController.getModuleNode(this.getConsumerModuleNodeName())) {
+		synchronized (this.moduleNode) {
 			// Save number of read characters.
 			int charNumber = 0;
 		
@@ -85,10 +87,10 @@ public class QPMS9Job extends Module {
 				
 				// Signal done reading input.
 				this.setModuleState(ModuleState.INPUT_DONE);
-				this.jobController.getModuleNode(this.getConsumerModuleNodeName()).notifyModuleObserver();
+				this.moduleNode.notifyModuleObserver();
 				
-				while (this.jobController.getModuleNode(this.getConsumerModuleNodeName()).getProducerState().equals(ModuleState.OUTPUT_DONE)) {
-					this.jobController.getModuleNode(this.getConsumerModuleNodeName()).notifyAll();
+				while (this.moduleNode.getProducerState().equals(ModuleState.OUTPUT_DONE)) {
+					this.moduleNode.notifyAll();
 				}
 				
 				

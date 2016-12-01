@@ -2,6 +2,7 @@ package core;
 
 import core.common.CommandState;
 import core.common.Module;
+import core.common.ModuleState;
 
 //Imports
 
@@ -28,7 +29,9 @@ public class ExternalCommandHandler extends Module {
 	@Override
 	public void run () {
 		try {
-			this.callCommand();
+			CommandState cState = this.callCommand();
+			if (cState.equals(CommandState.SUCCESS))
+				this.setModuleState(ModuleState.SUCCESS);
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());
 			ce.printStackTrace();
@@ -36,7 +39,8 @@ public class ExternalCommandHandler extends Module {
 	}
 	
 	public synchronized CommandState callCommand() throws CommandFailedException {
-		// TODO Auto-generated method stub
+		
+		CommandState cState = CommandState.STARTING;
 		
 		// TODO resolve this:
 		/*switch (storageID.getModuleType()) {

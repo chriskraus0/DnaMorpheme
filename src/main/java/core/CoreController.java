@@ -18,8 +18,8 @@ public class CoreController {
 		return coreController;
 	}
 	
-	public static void checkExternalProgrammes(String path) {
-		CheckExternalProgrammes chExProg = new CheckExternalProgrammes(path);
+	public static void checkExternalProgrammes() {
+		CheckExternalProgrammes chExProg = new CheckExternalProgrammes("config/config.txt");
 		chExProg.readConfig();
 	}
 	

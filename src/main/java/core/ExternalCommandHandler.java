@@ -16,13 +16,11 @@ public class ExternalCommandHandler extends Module {
 	// Variables.
 	
 	private String command;
-	private JobController jobController;
 
 	// Constructors.
-	public ExternalCommandHandler(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd, JobController jobController) {
+	public ExternalCommandHandler(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
-		this.jobController = jobController;
 	}
 
 	// Methods.

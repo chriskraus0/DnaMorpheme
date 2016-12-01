@@ -278,7 +278,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return moduleID;
 	}
 	
-	public int createTesOoutputJob(String command) {
+	public int createTestoutputJob(String command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.TEST_OUTPUT;

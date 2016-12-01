@@ -38,14 +38,14 @@ public class TestPortsPipesInterModuleComm {
 		CoreController.getInstance();
 		
 		// Check for the existing configuration file.
-		CoreController.checkExternalProgrammes("config/config.txt");
+		CoreController.checkExternalProgrammes();
 		ModuleBuilder moduleBuilder = CoreController.generateModuleBuilder();
 		
 		// Create 3 new modules. 
 
 		int testInputModule = moduleBuilder.createInputTestJob("testFiles/testFile1.txt");
 		int testTransferModule = moduleBuilder.createTestTransferJob("Test Transfer");
-		int testOputputModule = moduleBuilder.createTesOoutputJob("Test Output");
+		int testOputputModule = moduleBuilder.createTestoutputJob("Test Output");
 	
 		
 		// Prepare moduleNodes.

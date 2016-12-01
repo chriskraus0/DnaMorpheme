@@ -25,6 +25,6 @@ public interface ExternalProgram {
 	 * Get verion of the program.
 	 * @return String version.
 	 */
-	public String getVerions();
+	public String getVersion();
 	
 }

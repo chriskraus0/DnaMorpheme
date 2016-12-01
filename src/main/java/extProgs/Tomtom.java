@@ -56,7 +56,7 @@ public class Tomtom implements ExternalProgram {
 	}
 
 	@Override
-	public String getVerions() {
+	public String getVersion() {
 		return this.VERSION;
 	}
 }

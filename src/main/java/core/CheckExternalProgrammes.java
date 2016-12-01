@@ -39,6 +39,14 @@ public class CheckExternalProgrammes {
 	
 	// Methods.
 	
+	// Getters.
+	
+	public Map <ExtProgType, ExternalProgram> getExternalProgrammes() {
+		return this.extProgMap;
+	}
+	// End getters.
+	
+	
 	/**
 	 * Reads configuration file and keeps track of paths for required programs.
 	 * @param String cPath

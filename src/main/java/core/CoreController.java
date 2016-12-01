@@ -18,9 +18,17 @@ public class CoreController {
 		return coreController;
 	}
 	
-	public static void checkExternalProgrammes() {
+	public static ExternalProgramHandler checkExternalProgrammes() {
 		CheckExternalProgrammes chExProg = new CheckExternalProgrammes("config/config.txt");
 		chExProg.readConfig();
+		ExternalProgramHandler externalProgramHandler = generateExternalProgramHandler();
+		ExternalProgramHandler.setExternalProgMap(chExProg.getExternalProgrammes());
+		return externalProgramHandler;
+		
+	}
+	
+	private static ExternalProgramHandler generateExternalProgramHandler () {
+		return ExternalProgramHandler.getInstance();
 	}
 	
 	public static ModuleBuilder generateModuleBuilder() {

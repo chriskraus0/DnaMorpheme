@@ -52,7 +52,7 @@ public class Qpms9 implements ExternalProgram {
 	}
 
 	@Override
-	public String getVerions() {
+	public String getVersion() {
 		return this.VERSION;
 	}
 

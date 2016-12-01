@@ -182,9 +182,9 @@ public abstract class AbstractPort implements Port {
 		try {
 			
 			// Decide which type of pipe to create (CHAR or BYTE).
-			if (this.getPipe().getPipeType().equals(PipeType.CHAR))
+			if (pType.equals(PipeType.CHAR))
 					this.pipe = new CharPipe();
-			else if (this.getPipe().getPipeType().equals(PipeType.BYTE))
+			else if (pType.equals(PipeType.BYTE))
 					this.pipe = new BytePipe();
 			
 		} catch (IOException ie) {

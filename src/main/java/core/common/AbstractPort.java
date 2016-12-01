@@ -5,18 +5,14 @@ package core.common;
 // Java exceptions.
 import java.io.IOException;
 
-// Project specific exceptions.
-import core.exceptions.NotFoundException;
-import core.exceptions.OccupiedException;
+//Project specific imports.
 import core.CharPipe;
+import core.BytePipe;
 
-// Imports.
-
-// Java utility imports.
-
-// Project specific imports.
-import core.exceptions.PipeTypeNotSupportedException;
+//Project specific exceptions.
 import core.exceptions.OccupiedException;
+import core.exceptions.PipeTypeNotSupportedException;
+
 
 public abstract class AbstractPort implements Port {
 	
@@ -80,7 +76,7 @@ public abstract class AbstractPort implements Port {
 	
 	@Override 
 	public int getPortID() {
-		return this.getPortID();
+		return this.PORT_ID;
 	}
 	
 
@@ -92,8 +88,7 @@ public abstract class AbstractPort implements Port {
 	// End getters.
 		
 	@Override
-	public boolean supportsPipe(Pipe pipe) throws PipeTypeNotSupportedException {
-		// TODO: Throw appropriate exception?		
+	public boolean supportsPipe(Pipe pipe) throws PipeTypeNotSupportedException {	
 		if (pipe.getPipeType().equals(this.pipe.getPipeType())) {
 			return true;
 		} else {
@@ -115,19 +110,12 @@ public abstract class AbstractPort implements Port {
 			throw new OccupiedException("Error: Port with portID \"" 
 					+ connectingPort.getPortID() + "\" is occupied");
 		} 
-		
-		// TODO: Rewrite OccupiedException that its constructor takes an port as 
-				// argument and automatically prints the above mentioned message. Also include 
-				// this.port as cause for an exception!
-		
+				
 		// Check whether connectingPort is already connected
 		else if (connectingPort.getPortState().equals(PortState.CONNECTED)) {
 			throw new OccupiedException("Error: Port with portID \""
 					+ connectingPort.getPortID() + "\" is already connected to another port");
 		} 
-		// TODO: Write AlreadyConnectedException which has a constructor that takes an port as 
-				// argument and automatically prints the above mentioned message. Also include 
-				// this.port as cause for an exception!
 		
 		else if (connectingPort.getPortState().equals(PortState.READY)) {
 			
@@ -143,8 +131,6 @@ public abstract class AbstractPort implements Port {
 						+ "\" is of the type \""
 						+ this.pipe.getPipeType().toString());
 			}
-			// TODO: Write PipeNotSupportedException which has a constructor that takes a port and
-			// a pipe as argument and automatically prints the above mentioned message.
 		
 			else {
 				try {
@@ -169,11 +155,38 @@ public abstract class AbstractPort implements Port {
 	}
 	
 	@Override
-	public void createNewPipe (PipeType pType) {
-		// TODO: Include exception if pipe already exists.
+	public void createNewPipe (PipeType pType) throws OccupiedException {
+		
+		// Get information of the PortType.
+		PortType portType = this.getPortType();
+		
+		// Throw a new OccupiedExceptinon if either the port is "CONNECTED" to another port 
+		// or "OCCUPIED" with data transfer (in both cases pipes are already established).
+		if (this.getPortState().equals(PortState.CONNECTED)) {
+			if (portType.equals(PortType.INPUT)) {
+			throw new OccupiedException("The input port with the ID \""
+					+ this.getPortID() + "\" is currently connected with an output port."
+					);
+			} else if (portType.equals(PortType.OUTPUT)) {
+					throw new OccupiedException("The output port with the ID \""
+							+ this.getPortID() + "\" is currently connected with an input port."
+							);
+			}
 			
+		} else if (this.getPortState().equals(PortState.OCCUPIED)) {
+			throw new OccupiedException("The input port with the ID \""
+					+ this.getPortID() + "\" is currently transfering data.");
+		}
+		
+		// Create new Pipe.
 		try {
-			this.pipe = new CharPipe();
+			
+			// Decide which type of pipe to create (CHAR or BYTE).
+			if (this.getPipe().getPipeType().equals(PipeType.CHAR))
+					this.pipe = new CharPipe();
+			else if (this.getPipe().getPipeType().equals(PipeType.BYTE))
+					this.pipe = new BytePipe();
+			
 		} catch (IOException ie) {
 			System.err.println(ie.getMessage());
 			ie.printStackTrace();
@@ -185,6 +198,7 @@ public abstract class AbstractPort implements Port {
 	public PortState getPortState() {
 		return this.portState;
 	}
+	
 	
 		
 	// End methods.

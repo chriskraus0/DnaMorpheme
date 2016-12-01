@@ -64,7 +64,48 @@ public class OutputPort extends AbstractPort {
 		((CharPipe) this.getPipe()).write(data);
 	}
 	
-	// TODO read from byte pipe.
+	public void writeToBytePipe (byte[] data, int offset, int length) throws PipeTypeNotSupportedException, IOException {
+		
+		// Catch non-compatible pipes error.
+		if (!this.getPipeType().equals(PipeType.BYTE)) {
+			throw new PipeTypeNotSupportedException ("Pipe of type \""
+					+ this.getPipeType()
+					+ "\" is not supported by port with ID \""
+					+ this.getPortID()
+					+ "\".");
+		}
+		
+		// Write the data[] via the CharPipe.
+		((BytePipe) this.getPipe()).write(data, offset, length);
+		
+		
+	}
+	
+	public void writeToBytePipe (String data) throws PipeTypeNotSupportedException, IOException {
+		
+		// Catch non-compatible pipes error.
+		if (!this.getPipeType().equals(PipeType.BYTE)) {
+			throw new PipeTypeNotSupportedException ("Pipe of type \""
+					+ this.getPipeType()
+					+ "\" is not supported by port with ID \""
+					+ this.getPortID()
+					+ "\".");
+		}
+		
+		// Write the String data via the CharPipe.
+		((CharPipe) this.getPipe()).write(data);
+	}
+	
+	// Overridden methods.
+	
+	// Getters.
+	
+	@Override
+	public PortType getPortType() {
+		return this.portType;
+	}
+	
+	// End getters.
 	
 	@Override
 	public void removePipe() throws NotFoundException {
@@ -79,8 +120,13 @@ public class OutputPort extends AbstractPort {
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-		
+		try {
+			this.getPipe().writeClose();
+			this.getPipe().pipeReset();
+		} catch (IOException ie) {
+			System.err.println("ERROR: " + ie.getMessage());
+			ie.printStackTrace();
+		}
 	}
 
 }

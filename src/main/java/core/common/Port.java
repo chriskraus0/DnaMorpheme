@@ -5,7 +5,6 @@ package core.common;
 // Java I/O imports.
 
 // Java utility imports.
-import java.util.Map;
 
 // Project specific imports.
 import core.exceptions.PipeTypeNotSupportedException;
@@ -47,9 +46,15 @@ public interface Port {
 	
 	/**
 	 * Returns the portID of the specific port.
-	 * @return
+	 * @return int portID
 	 */
 	public int getPortID();
+	
+	/**
+	 * Returns the PortType of the port (either INPUT or OUTPUT).
+	 * @return PortType portType
+	 */
+	public PortType getPortType();
 	
 	/**
 	 * Get the supported PipeType.
@@ -102,8 +107,10 @@ public interface Port {
 	/**
 	 * Create a new PipeType specific pipe for this port.
 	 * @param PipeType pType
+	 * @throws OccupiedException
+	 * @see core.exceptions.OccupiedException
 	 */
-	void createNewPipe(PipeType pType);
+	void createNewPipe(PipeType pType) throws OccupiedException;
 
 	
 	// End methods.

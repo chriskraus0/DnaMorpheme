@@ -21,6 +21,9 @@ public class Bowtie2 implements ExternalProgram {
 
 	// Variables.
 	
+	// Tested version for bowtie2.
+	private String seenVersion;
+	
 	// Constructors.
 	
 	/**
@@ -34,12 +37,18 @@ public class Bowtie2 implements ExternalProgram {
 		this.EXECUTABLE = exe;
 		this.EXT_PPROG_TYPE = ExtProgType.BOWTIE2;
 		this.VERSION = version;
+		this.seenVersion="";
 	}
 	
 	// Methods.
 	
 	// Setters.
+	@Override
+	public void setSeenVersion(String version) {
+		this.seenVersion = version;
 		
+	}
+	
 	// Getters.
 	@Override
 	public ExtProgType getProgType() {
@@ -59,6 +68,11 @@ public class Bowtie2 implements ExternalProgram {
 	@Override
 	public String getVersion() {
 		return this.VERSION;
+	}
+
+	@Override
+	public String getSeenVersion() {
+		return this.seenVersion;
 	}
 	
 }

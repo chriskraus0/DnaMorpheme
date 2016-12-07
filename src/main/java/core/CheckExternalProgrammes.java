@@ -14,6 +14,8 @@ import java.io.FileNotFoundException;
 // Java utility imports.
 import java.util.Map;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 // Project-specific imports.
 import extProgs.ExtProgType;
@@ -26,6 +28,7 @@ import extProgs.Tomtom;
 
 // Project-specific exceptions.
 import core.exceptions.SystemNotSupportedException;
+import core.exceptions.VersionNoCompatibleException;
 
 public class CheckExternalProgrammes {
 		
@@ -51,7 +54,12 @@ public class CheckExternalProgrammes {
 	}
 	// End getters.
 	
-	public void testExtProgs() throws SystemNotSupportedException {
+	/**
+	 * Test the required external programs for compatibility with this program.
+	 * @throws SystemNotSupportedException
+	 * @throws VersionNoCompatibleException
+	 */
+	public void testExtProgs() throws SystemNotSupportedException, VersionNoCompatibleException {
 		
 		// Test the type of operating system.
 		String osName = System.getProperty("os.name").toLowerCase();
@@ -60,10 +68,88 @@ public class CheckExternalProgrammes {
 		if (!osName.equals("linux"))
 			throw new SystemNotSupportedException("The system \"" + osName + "\" is not supported by this programme");
 		
+		// Test Samtools.
 		try {
 			boolean samtoolsState = this.testSamtools();
 			if (samtoolsState) {
-				System.out.println("LOG: Installed samtools version .. ok");
+				System.out.println("LOG: Installed samtools version \"" 
+						+ this.extProgMap.get(ExtProgType.SAMTOOLS).getSeenVersion()
+						+ "\" is compatible with this program.");
+			} else {
+				throw new VersionNoCompatibleException("ERROR: The current version of Samtools \""
+						+ this.extProgMap.get(ExtProgType.SAMTOOLS).getSeenVersion() 
+						+ "\" is not compatible with this program.");
+			}
+		} catch (IOException ie) {
+			System.err.println("ERROR: " +ie.getMessage());
+			ie.printStackTrace();
+		}
+		
+		// Test Bowtie2.
+		try {
+			boolean bowtie2State = this.testBowtie2();
+			if (bowtie2State) {
+				System.out.println("LOG: Installed bowtie2 version \"" 
+						+ this.extProgMap.get(ExtProgType.BOWTIE2).getSeenVersion()
+						+ "\" is compatible with this program.");
+			} else {
+				throw new VersionNoCompatibleException("ERROR: The current version of bowtie2 \""
+						+ this.extProgMap.get(ExtProgType.BOWTIE2).getSeenVersion() 
+						+ "\" is not compatible with this program.");
+			}
+		} catch (IOException ie) {
+			System.err.println("ERROR: " +ie.getMessage());
+			ie.printStackTrace();
+		}
+		
+		// Test Cdhit.
+		
+		try {
+			boolean cdhitState = this.testCdhit();
+			if (cdhitState) {
+				System.out.println("LOG: Installed cdhit version \"" 
+						+ this.extProgMap.get(ExtProgType.CDHIT).getSeenVersion()
+						+ "\" is compatible with this program.");
+			} else {
+				throw new VersionNoCompatibleException("ERROR: The current version of cdhit \""
+						+ this.extProgMap.get(ExtProgType.CDHIT).getSeenVersion() 
+						+ "\" is not compatible with this program.");
+			}
+		} catch (IOException ie) {
+			System.err.println("ERROR: " +ie.getMessage());
+			ie.printStackTrace();
+		}
+		
+		// Test Qpms9.
+		// Currently qpms9 cannot be tested! No such option included in the current version of qpms9!
+		/*try {
+			boolean qpms9State = this.testQpms9();
+			if (qpms9State) {
+				System.out.println("LOG: Installed cdhit version \"" 
+						+ this.extProgMap.get(ExtProgType.QPMS9).getSeenVersion()
+						+ "\" is compatible with this program.");
+			} else {
+				throw new VersionNoCompatibleException("ERROR: The current version of cdhit \""
+						+ this.extProgMap.get(ExtProgType.QPMS9).getSeenVersion() 
+						+ "\" is not compatible with this program.");
+			}
+		} catch (IOException ie) {
+			System.err.println("ERROR: " +ie.getMessage());
+			ie.printStackTrace();
+		}*/
+		
+		// Test Tomtom.
+		
+		try {
+			boolean cdhitState = this.testTomtom();
+			if (cdhitState) {
+				System.out.println("LOG: Installed tomtom version \"" 
+						+ this.extProgMap.get(ExtProgType.TOMTOM).getSeenVersion()
+						+ "\" is compatible with this program.");
+			} else {
+				throw new VersionNoCompatibleException("ERROR: The current version of tomtom \""
+						+ this.extProgMap.get(ExtProgType.TOMTOM).getSeenVersion() 
+						+ "\" is not compatible with this program.");
 			}
 		} catch (IOException ie) {
 			System.err.println("ERROR: " +ie.getMessage());
@@ -71,30 +157,267 @@ public class CheckExternalProgrammes {
 		}
 	}
 	
-	private boolean testSamtools() throws IOException {
-		String samExe = this.extProgMap.get(ExtProgType.SAMTOOLS).getExecutable();
-		String samPath = this.extProgMap.get(ExtProgType.SAMTOOLS).getPath();
-		String command = samPath + "/" + samExe + " --version"; 
+	/**
+	 * Test the current version of tomtom and check whether it is compatible
+	 * with the one provided by the configuration file.
+	 * @return boolean samtoolsState
+	 * @throws IOException
+	 */
+	private boolean testTomtom() throws IOException {
+		boolean correctVersion = false;
 		
-		// System.out.println("Linux command: " + command);
+		String exe = this.extProgMap.get(ExtProgType.TOMTOM).getExecutable();
+		String path = this.extProgMap.get(ExtProgType.TOMTOM).getPath();
+		String[] command = new String[2];
+		command[0]=path + "/" + exe;
+		command[1]="--version"; 
 		
-		String[] output;
+		// Define pattern for the expected qpms9 version.
+		Pattern bowtie2Exp = Pattern.compile(this.extProgMap.get(ExtProgType.TOMTOM).getVersion());
 		
+		// Define pattern for bowtie2 version.
+		Pattern bowtie2Pat = Pattern.compile("\\A(\\S.+)");
+		
+		// Define local variable line to save read lines.
 	    String line;
+	    
+	    // Start an external process with the pre-defined command array.
 	    Process process = Runtime.getRuntime().exec(command);
+	    
+	    // Read the STDIN from the unix process.
 	    Reader r = new InputStreamReader(process.getInputStream());
+	    
+	    // Read line by line using the BufferedReader.
 	    BufferedReader in = new BufferedReader(r);
 	    while((line = in.readLine()) != null) {
-	    	System.out.println(line);
-	    	if (line.matches("\\Asamtools .+)")) {
-	    		String[] version = line.split(" ");
+	    	
+	    	// Check each line whether we find the line with the version.
+	    	Matcher samtoolsMatcher = bowtie2Pat.matcher(line);
+	    	
+	    	// If the current version was found then check whether the expected and the observed
+	    	// version are compatible. Return true if this is the case.
+	    	if (samtoolsMatcher.find()) {
+	    		this.extProgMap.get(ExtProgType.TOMTOM).setSeenVersion(samtoolsMatcher.group(1));
+	    		Matcher equalPat = bowtie2Exp.matcher(this.extProgMap.get(ExtProgType.TOMTOM).getSeenVersion());
+	    		if (equalPat.find()) {
+	    			correctVersion = true;
+	    		}
 	    	}
 	    }
 	    in.close();
 	    
-	 //   if( output[1])
+	    return correctVersion;
+	}
+	
+	/* Currently qpms9 cannot be tested! No such option included in the current version of qpms9!
+	/**
+	 * Test the current version of qpms9 and check whether it is compatible
+	 * with the one provided by the configuration file.
+	 * @return boolean samtoolsState
+	 * @throws IOException
+	 /
+	private boolean testQpms9() throws IOException {
+		boolean correctVersion = false;
+		
+		String exe = this.extProgMap.get(ExtProgType.QPMS9).getExecutable();
+		String path = this.extProgMap.get(ExtProgType.QPMS9).getPath();
+		String[] command = new String[2];
+		command[0]=path + "/" + exe;
+		command[1]="--version"; 
+		
+		// Define pattern for the expected qpms9 version.
+		Pattern bowtie2Exp = Pattern.compile(this.extProgMap.get(ExtProgType.QPMS9).getVersion());
+		
+		// Define pattern for bowtie2 version.
+		Pattern bowtie2Pat = Pattern.compile("\\A/usr/bin/bowtie2-align-s version (.+)");
+		
+		// Define local variable line to save read lines.
+	    String line;
 	    
-	    return true;
+	    // Start an external process with the pre-defined command array.
+	    Process process = Runtime.getRuntime().exec(command);
+	    
+	    // Read the STDIN from the unix process.
+	    Reader r = new InputStreamReader(process.getInputStream());
+	    
+	    // Read line by line using the BufferedReader.
+	    BufferedReader in = new BufferedReader(r);
+	    while((line = in.readLine()) != null) {
+	    	
+	    	// Check each line whether we find the line with the version.
+	    	Matcher samtoolsMatcher = bowtie2Pat.matcher(line);
+	    	
+	    	// If the current version was found then check whether the expected and the observed
+	    	// version are compatible. Return true if this is the case.
+	    	if (samtoolsMatcher.find()) {
+	    		this.extProgMap.get(ExtProgType.QPMS9).setSeenVersion(samtoolsMatcher.group(1));
+	    		Matcher equalPat = bowtie2Exp.matcher(this.extProgMap.get(ExtProgType.QPMS9).getSeenVersion());
+	    		if (equalPat.find()) {
+	    			correctVersion = true;
+	    		}
+	    	}
+	    }
+	    in.close();
+	    
+	    return correctVersion;
+	}
+	*/
+	
+	/**
+	 * Test the current version of cdhit and check whether it is compatible
+	 * with the one provided by the configuration file.
+	 * @return boolean samtoolsState
+	 * @throws IOException
+	 */
+	private boolean testCdhit() throws IOException {
+		boolean correctVersion = false;
+		
+		String exe = this.extProgMap.get(ExtProgType.CDHIT).getExecutable();
+		String path = this.extProgMap.get(ExtProgType.CDHIT).getPath();
+		String[] command = new String[2];
+		command[0]=path + "/" + exe;
+		command[1]="2>&1"; 
+		
+		// Define pattern for the expected cdhit version.
+		Pattern bowtie2Exp = Pattern.compile(this.extProgMap.get(ExtProgType.CDHIT).getVersion());
+		
+		// Define pattern for bowtie2 version.
+		Pattern bowtie2Pat = Pattern.compile("\\A\\t\\t====== CD-HIT version (\\S+)");
+		
+		// Define local variable line to save read lines.
+	    String line;
+	    
+	    // Start an external process with the pre-defined command array.
+	    Process process = Runtime.getRuntime().exec(command);
+	    
+	    // Read the STDIN from the unix process.
+	    Reader r = new InputStreamReader(process.getInputStream());
+	    
+	    // Read line by line using the BufferedReader.
+	    BufferedReader in = new BufferedReader(r);
+	    while((line = in.readLine()) != null) {
+	    	
+	    	// Check each line whether we find the line with the version.
+	    	Matcher samtoolsMatcher = bowtie2Pat.matcher(line);
+	    	
+	    	// If the current version was found then check whether the expected and the observed
+	    	// version are compatible. Return true if this is the case.
+	    	if (samtoolsMatcher.find()) {
+	    		this.extProgMap.get(ExtProgType.CDHIT).setSeenVersion(samtoolsMatcher.group(1));
+	    		Matcher equalPat = bowtie2Exp.matcher(this.extProgMap.get(ExtProgType.CDHIT).getSeenVersion());
+	    		if (equalPat.find()) {
+	    			correctVersion = true;
+	    			break;
+	    		}
+	    	}
+	    }
+	    in.close();
+	    
+	    return correctVersion;
+	}
+	
+	/**
+	 * Test the current version of bowtie2 and check whether it is compatible
+	 * with the one provided by the configuration file.
+	 * @return boolean samtoolsState
+	 * @throws IOException
+	 */
+	private boolean testBowtie2() throws IOException {
+		boolean correctVersion = false;
+		
+		String exe = this.extProgMap.get(ExtProgType.BOWTIE2).getExecutable();
+		String path = this.extProgMap.get(ExtProgType.BOWTIE2).getPath();
+		String[] command = new String[2];
+		command[0]=path + "/" + exe;
+		command[1]="--version"; 
+		
+		// Define pattern for the expected bowtie2 version.
+		Pattern bowtie2Exp = Pattern.compile(this.extProgMap.get(ExtProgType.BOWTIE2).getVersion());
+		
+		// Define pattern for bowtie2 version.
+		Pattern bowtie2Pat = Pattern.compile("\\A/usr/bin/bowtie2-align-s version (\\S+)");
+		
+		// Define local variable line to save read lines.
+	    String line;
+	    
+	    // Start an external process with the pre-defined command array.
+	    Process process = Runtime.getRuntime().exec(command);
+	    
+	    // Read the STDIN from the unix process.
+	    Reader r = new InputStreamReader(process.getInputStream());
+	    
+	    // Read line by line using the BufferedReader.
+	    BufferedReader in = new BufferedReader(r);
+	    while((line = in.readLine()) != null) {
+	    	
+	    	// Check each line whether we find the line with the version.
+	    	Matcher samtoolsMatcher = bowtie2Pat.matcher(line);
+	    	
+	    	// If the current version was found then check whether the expected and the observed
+	    	// version are compatible. Return true if this is the case.
+	    	if (samtoolsMatcher.find()) {
+	    		this.extProgMap.get(ExtProgType.BOWTIE2).setSeenVersion(samtoolsMatcher.group(1));
+	    		Matcher equalPat = bowtie2Exp.matcher(this.extProgMap.get(ExtProgType.BOWTIE2).getSeenVersion());
+	    		if (equalPat.find()) {
+	    			correctVersion = true;
+	    		}
+	    	}
+	    }
+	    in.close();
+	    
+	    return correctVersion;
+	}
+	
+	/**
+	 * Test the current version of samtools and check whether it is compatible
+	 * with the one provided by the configuration file.
+	 * @return boolean samtoolsState
+	 * @throws IOException
+	 */
+	private boolean testSamtools() throws IOException {
+		boolean correctVersion = false;
+		
+		String samExe = this.extProgMap.get(ExtProgType.SAMTOOLS).getExecutable();
+		String samPath = this.extProgMap.get(ExtProgType.SAMTOOLS).getPath();
+		String[] command = new String[2];
+		command[0]=samPath + "/" + samExe;
+		command[1]="--version"; 
+		
+		// Define pattern for the expected samtool version.
+		Pattern samtoolsExp = Pattern.compile(this.extProgMap.get(ExtProgType.SAMTOOLS).getVersion());
+		
+		// Define pattern for samtools version.
+		Pattern samtoolsPat = Pattern.compile("\\Asamtools (\\S+)");
+		
+		// Define local variable line to save read lines.
+	    String line;
+	    
+	    // Start an external process with the pre-defined command array.
+	    Process process = Runtime.getRuntime().exec(command);
+	    
+	    // Read the STDIN from the unix process.
+	    Reader r = new InputStreamReader(process.getInputStream());
+	    
+	    // Read line by line using the BufferedReader.
+	    BufferedReader in = new BufferedReader(r);
+	    while((line = in.readLine()) != null) {
+	    	
+	    	// Check each line whether we find the line with the version.
+	    	Matcher samtoolsMatcher = samtoolsPat.matcher(line);
+	    	
+	    	// If the current version was found then check whether the expected and the observed
+	    	// version are compatible. Return true if this is the case.
+	    	if (samtoolsMatcher.find()) {
+	    		this.extProgMap.get(ExtProgType.SAMTOOLS).setSeenVersion(samtoolsMatcher.group(1));
+	    		Matcher equalPat = samtoolsExp.matcher(this.extProgMap.get(ExtProgType.SAMTOOLS).getSeenVersion());
+	    		if (equalPat.find()) {
+	    			correctVersion = true;
+	    		}
+	    	}
+	    }
+	    in.close();
+	    
+	    return correctVersion;
 	}
 	
 	/**

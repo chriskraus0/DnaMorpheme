@@ -21,6 +21,9 @@ public class Cdhit implements ExternalProgram {
 
 	// Variables.
 	
+	// Tested version.
+	private String seenVersion;
+	
 	// Constructors.
 	/**
 	 * Constructor takes 3 constants.
@@ -33,12 +36,19 @@ public class Cdhit implements ExternalProgram {
 		this.EXECUTABLE = exe;
 		this.EXT_PPROG_TYPE = ExtProgType.CDHIT;
 		this.VERSION = version;
+		this.seenVersion="";
 	}
 	
 	// Methods.
 	
 	// Setters.
+	
+	@Override
+	public void setSeenVersion(String version) {
+		this.seenVersion = version;
 		
+	}
+	
 	// Getters.
 	
 	@Override
@@ -59,6 +69,12 @@ public class Cdhit implements ExternalProgram {
 	@Override
 	public String getVersion() {
 		return this.VERSION;
+	}
+
+
+	@Override
+	public String getSeenVersion() {
+		return this.seenVersion;
 	}
 
 }

@@ -1,6 +1,7 @@
 package core;
 
 import core.exceptions.SystemNotSupportedException;
+import core.exceptions.VersionNoCompatibleException;
 
 /**
  * Singleton which creates all major core components.
@@ -28,7 +29,11 @@ public class CoreController {
 		} catch (SystemNotSupportedException se) {
 			System.err.println(se.getMessage());
 			se.printStackTrace();
+		} catch (VersionNoCompatibleException ve) {
+			System.err.println(ve.getMessage());
+			ve.printStackTrace();
 		}
+		
 		ExternalProgramHandler externalProgramHandler = generateExternalProgramHandler();
 		ExternalProgramHandler.setExternalProgMap(chExProg.getExternalProgrammes());
 		return externalProgramHandler;

@@ -21,6 +21,9 @@ public class Qpms9 implements ExternalProgram {
 
 	// Variables.
 	
+	// Tested version.
+	private String seenVersion;
+	
 	// Constructors.
 	
 	public Qpms9 ( String path, String exe, String version) {
@@ -28,11 +31,18 @@ public class Qpms9 implements ExternalProgram {
 		this.EXECUTABLE = exe;
 		this.EXT_PPROG_TYPE = ExtProgType.QPMS9;
 		this.VERSION = version;
+		this.seenVersion ="";
 	}
 	
 	// Methods.
 	
 	// Setters.
+
+	@Override
+	public void setSeenVersion(String version) {
+		this.seenVersion = version;
+		
+	}
 		
 	// Getters.
 		
@@ -54,6 +64,11 @@ public class Qpms9 implements ExternalProgram {
 	@Override
 	public String getVersion() {
 		return this.VERSION;
+	}
+
+	@Override
+	public String getSeenVersion() {
+		return this.seenVersion;
 	}
 
 }

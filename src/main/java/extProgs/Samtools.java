@@ -21,6 +21,9 @@ public class Samtools implements ExternalProgram {
 
 	// Variables.
 	
+	// Tested version for samtools.
+	private String seenVersion;
+	
 	// Constructors.
 	
 	/**
@@ -34,13 +37,25 @@ public class Samtools implements ExternalProgram {
 		this.EXECUTABLE = exe;
 		this.EXT_PPROG_TYPE = ExtProgType.SAMTOOLS;
 		this.VERSION = version;
+		this.seenVersion="";
 	}
 	
 	// Methods.
 	
 	// Setters.
-		
+	@Override
+	public void setSeenVersion(String version) {
+		this.seenVersion = version;
+	}
+	
+	// End setters.
+	
 	// Getters.
+	@Override	
+	public String getSeenVersion() {
+		return this.seenVersion;
+	}
+	
 	@Override
 	public ExtProgType getProgType() {
 		return this.EXT_PPROG_TYPE;

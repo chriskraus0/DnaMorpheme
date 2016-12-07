@@ -4,6 +4,8 @@ package core;
 
 // Java I/O imports.
 import java.io.File;
+import java.io.Reader;
+import java.io.InputStreamReader;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,6 +23,9 @@ import extProgs.Bowtie2;
 import extProgs.Cdhit;
 import extProgs.Qpms9;
 import extProgs.Tomtom;
+
+// Project-specific exceptions.
+import core.exceptions.SystemNotSupportedException;
 
 public class CheckExternalProgrammes {
 		
@@ -46,6 +51,51 @@ public class CheckExternalProgrammes {
 	}
 	// End getters.
 	
+	public void testExtProgs() throws SystemNotSupportedException {
+		
+		// Test the type of operating system.
+		String osName = System.getProperty("os.name").toLowerCase();
+		
+		// System.out.println("System name: " + osName);
+		if (!osName.equals("linux"))
+			throw new SystemNotSupportedException("The system \"" + osName + "\" is not supported by this programme");
+		
+		try {
+			boolean samtoolsState = this.testSamtools();
+			if (samtoolsState) {
+				System.out.println("LOG: Installed samtools version .. ok");
+			}
+		} catch (IOException ie) {
+			System.err.println("ERROR: " +ie.getMessage());
+			ie.printStackTrace();
+		}
+	}
+	
+	private boolean testSamtools() throws IOException {
+		String samExe = this.extProgMap.get(ExtProgType.SAMTOOLS).getExecutable();
+		String samPath = this.extProgMap.get(ExtProgType.SAMTOOLS).getPath();
+		String command = samPath + "/" + samExe + " --version"; 
+		
+		// System.out.println("Linux command: " + command);
+		
+		String[] output;
+		
+	    String line;
+	    Process process = Runtime.getRuntime().exec(command);
+	    Reader r = new InputStreamReader(process.getInputStream());
+	    BufferedReader in = new BufferedReader(r);
+	    while((line = in.readLine()) != null) {
+	    	System.out.println(line);
+	    	if (line.matches("\\Asamtools .+)")) {
+	    		String[] version = line.split(" ");
+	    	}
+	    }
+	    in.close();
+	    
+	 //   if( output[1])
+	    
+	    return true;
+	}
 	
 	/**
 	 * Reads configuration file and keeps track of paths for required programs.

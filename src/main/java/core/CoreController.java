@@ -1,5 +1,7 @@
 package core;
 
+import core.exceptions.SystemNotSupportedException;
+
 /**
  * Singleton which creates all major core components.
  * @author christopher
@@ -21,6 +23,12 @@ public class CoreController {
 	public static ExternalProgramHandler checkExternalProgrammes() {
 		CheckExternalProgrammes chExProg = new CheckExternalProgrammes("config/config.txt");
 		chExProg.readConfig();
+		try {
+			chExProg.testExtProgs();
+		} catch (SystemNotSupportedException se) {
+			System.err.println(se.getMessage());
+			se.printStackTrace();
+		}
 		ExternalProgramHandler externalProgramHandler = generateExternalProgramHandler();
 		ExternalProgramHandler.setExternalProgMap(chExProg.getExternalProgrammes());
 		return externalProgramHandler;

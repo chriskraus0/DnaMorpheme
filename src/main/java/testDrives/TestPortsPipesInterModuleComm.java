@@ -42,10 +42,18 @@ public class TestPortsPipesInterModuleComm {
 		ModuleBuilder moduleBuilder = CoreController.generateModuleBuilder();
 		
 		// Create 3 new modules. 
-
-		int testInputModule = moduleBuilder.createInputTestJob("testFiles/testFile1.txt");
-		int testTransferModule = moduleBuilder.createTestTransferJob("Test Transfer");
-		int testOputputModule = moduleBuilder.createTestoutputJob("Test Output");
+		
+		String[] inputTestJobCommand = new String[1];
+		inputTestJobCommand[0] = "testFiles/testFile1.txt";
+		int testInputModule = moduleBuilder.createInputTestJob(inputTestJobCommand);
+		
+		String[] testTransferModuleCommand = new String[1];
+		testTransferModuleCommand[0] = "Test Transfer";
+		int testTransferModule = moduleBuilder.createTestTransferJob(testTransferModuleCommand);
+		
+		String[] testOputputCommand = new String[1];
+		testOputputCommand[0] = "Test Output";
+		int testOputputModule = moduleBuilder.createTestoutputJob(testOputputCommand);
 	
 		
 		// Prepare moduleNodes.

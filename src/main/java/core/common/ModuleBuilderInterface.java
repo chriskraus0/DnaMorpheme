@@ -22,7 +22,7 @@ public interface ModuleBuilderInterface {
 	 * @see enum ModuleType
 	 * @return Module
 	 */
-	public Module createNewModule(int moduleID, int storageID, ModuleType mType, String command);
+	public Module createNewModule(int moduleID, int storageID, ModuleType mType, String[] command);
 	
 	/**
 	 * Create new InputPort for given module.

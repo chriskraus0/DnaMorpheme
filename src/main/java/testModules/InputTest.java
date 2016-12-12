@@ -23,11 +23,11 @@ import core.exceptions.CommandFailedException;
 public class InputTest extends Module {
 	
 	// Variables.
-	private String command;
+	private String[] command;
 	private ModuleNode moduleNode;
 	
 	// Constructors.
-	public InputTest(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
+	public InputTest(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd; 
 	}
@@ -55,7 +55,7 @@ public class InputTest extends Module {
 						
 		try {
 
-				InputStream fileInputStream = new FileInputStream (this.command);
+				InputStream fileInputStream = new FileInputStream (this.command[0]);
 				
 				// Define input buffer
 				int bufferSize = 1024;

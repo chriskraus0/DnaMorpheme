@@ -19,11 +19,11 @@ import core.exceptions.PipeTypeNotSupportedException;
 public class QPMS9Job extends Module {
 
 	// Variables.
-	private String command;
+	private String[] command;
 	private ModuleNode moduleNode;
 	
 	// Constructors.
-	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
+	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
 	}

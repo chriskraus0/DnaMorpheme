@@ -117,7 +117,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return ModuleBuilder.moduleMap.get(moduleID);
 	}
 	
-	public int createNewInputReader(String command) {
+	public int createNewInputReader(String[] command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.INPUT_READER;
@@ -133,7 +133,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return moduleID;
 	}
 	
-	public int createNewCdHitJob(String command) {
+	public int createNewCdHitJob(String[] command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.CDHIT_JOB;
@@ -149,7 +149,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return moduleID;
 	}
 	
-	public int createNewQpms9Job(String command) {
+	public int createNewQpms9Job(String[] command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.QPMS9_JOB;
@@ -252,7 +252,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		//this.connectModuleObserver(this.moduleMap.get(moduleID);
 	}
 	
-	public int createInputTestJob(String command) {
+	public int createInputTestJob(String[] command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.INPUT_TEST;
@@ -265,7 +265,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return moduleID;
 	}
 	
-	public int createTestTransferJob(String command) {
+	public int createTestTransferJob(String[] command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.TEST_TRANSFER;
@@ -278,7 +278,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return moduleID;
 	}
 	
-	public int createTestoutputJob(String command) {
+	public int createTestoutputJob(String[] command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.TEST_OUTPUT;
@@ -292,7 +292,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 	
 	@Override
-	public Module createNewModule(int moduleID, int storageID, ModuleType mType, String command) {
+	public Module createNewModule(int moduleID, int storageID, ModuleType mType, String[] command) {
 		
 		Module newModule = null;
 		

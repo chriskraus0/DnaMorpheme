@@ -20,11 +20,11 @@ import core.exceptions.CommandFailedException;
 public class InputReader extends Module {
 	
 	// Variables.
-	private String command;
+	private String[] command;
 	private ModuleNode moduleNode;
 	
 	// Constructors.
-	public InputReader(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
+	public InputReader(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd; 
 	}
@@ -52,7 +52,7 @@ public class InputReader extends Module {
 						
 		try {
 				// Instantiate a new input stream.
-				InputStream fileInputStream = new FileInputStream (this.command);
+				InputStream fileInputStream = new FileInputStream (this.command[0]);
 				
 				// Define input buffer
 				int bufferSize = 1024;

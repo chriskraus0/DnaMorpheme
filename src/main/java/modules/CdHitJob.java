@@ -22,14 +22,14 @@ import core.exceptions.PipeTypeNotSupportedException;
 public class CdHitJob extends Module {
 	// Variables.
 	
-	private String command;
+	private String[] command;
 	
 	private ModuleNode moduleNode;
 	
 	private String input;
 	
 	// Constructors.
-	public CdHitJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
+	public CdHitJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
 	}
@@ -39,7 +39,6 @@ public class CdHitJob extends Module {
 	// Setters.
 		
 	// End setters.
-	
 	
 	@Override
 	public void run () {
@@ -54,7 +53,12 @@ public class CdHitJob extends Module {
 			ce.printStackTrace();
 		}
 	}
-	
+		
+	/**
+	 * Calls an external command and processes data.
+	 * @return CommandState commandState
+	 * @throws CommandFailedException
+	 */
 	public synchronized CommandState callCommand() throws CommandFailedException {
 		
 		this.moduleNode = this.getSuperModuleNode();

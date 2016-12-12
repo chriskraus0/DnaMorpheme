@@ -62,7 +62,7 @@ public class CheckExternalProgrammes {
 	public void testExtProgs() throws SystemNotSupportedException, VersionNoCompatibleException {
 		
 		// Test the type of operating system.
-		String osName = System.getProperty("os.name").toLowerCase();
+		String osName = PhysicalConstants.getOsName();
 		
 		// System.out.println("System name: " + osName);
 		if (!osName.equals("linux"))
@@ -164,7 +164,7 @@ public class CheckExternalProgrammes {
 	 * @throws IOException
 	 */
 	private boolean testTomtom() throws IOException {
-		boolean correctVersion = false;
+		boolean isCompatible = false;
 		
 		String exe = this.extProgMap.get(ExtProgType.TOMTOM).getExecutable();
 		String path = this.extProgMap.get(ExtProgType.TOMTOM).getPath();
@@ -200,13 +200,13 @@ public class CheckExternalProgrammes {
 	    		this.extProgMap.get(ExtProgType.TOMTOM).setSeenVersion(samtoolsMatcher.group(1));
 	    		Matcher equalPat = bowtie2Exp.matcher(this.extProgMap.get(ExtProgType.TOMTOM).getSeenVersion());
 	    		if (equalPat.find()) {
-	    			correctVersion = true;
+	    			isCompatible = true;
 	    		}
 	    	}
 	    }
 	    in.close();
 	    
-	    return correctVersion;
+	    return isCompatible;
 	}
 	
 	/* Currently qpms9 cannot be tested! No such option included in the current version of qpms9!
@@ -270,7 +270,7 @@ public class CheckExternalProgrammes {
 	 * @throws IOException
 	 */
 	private boolean testCdhit() throws IOException {
-		boolean correctVersion = false;
+		boolean isCompatible = false;
 		
 		String exe = this.extProgMap.get(ExtProgType.CDHIT).getExecutable();
 		String path = this.extProgMap.get(ExtProgType.CDHIT).getPath();
@@ -306,14 +306,14 @@ public class CheckExternalProgrammes {
 	    		this.extProgMap.get(ExtProgType.CDHIT).setSeenVersion(samtoolsMatcher.group(1));
 	    		Matcher equalPat = bowtie2Exp.matcher(this.extProgMap.get(ExtProgType.CDHIT).getSeenVersion());
 	    		if (equalPat.find()) {
-	    			correctVersion = true;
+	    			isCompatible = true;
 	    			break;
 	    		}
 	    	}
 	    }
 	    in.close();
 	    
-	    return correctVersion;
+	    return isCompatible;
 	}
 	
 	/**
@@ -323,7 +323,7 @@ public class CheckExternalProgrammes {
 	 * @throws IOException
 	 */
 	private boolean testBowtie2() throws IOException {
-		boolean correctVersion = false;
+		boolean isCompatible = false;
 		
 		String exe = this.extProgMap.get(ExtProgType.BOWTIE2).getExecutable();
 		String path = this.extProgMap.get(ExtProgType.BOWTIE2).getPath();
@@ -359,13 +359,13 @@ public class CheckExternalProgrammes {
 	    		this.extProgMap.get(ExtProgType.BOWTIE2).setSeenVersion(samtoolsMatcher.group(1));
 	    		Matcher equalPat = bowtie2Exp.matcher(this.extProgMap.get(ExtProgType.BOWTIE2).getSeenVersion());
 	    		if (equalPat.find()) {
-	    			correctVersion = true;
+	    			isCompatible = true;
 	    		}
 	    	}
 	    }
 	    in.close();
 	    
-	    return correctVersion;
+	    return isCompatible;
 	}
 	
 	/**
@@ -375,7 +375,7 @@ public class CheckExternalProgrammes {
 	 * @throws IOException
 	 */
 	private boolean testSamtools() throws IOException {
-		boolean correctVersion = false;
+		boolean isCompatible = false;
 		
 		String samExe = this.extProgMap.get(ExtProgType.SAMTOOLS).getExecutable();
 		String samPath = this.extProgMap.get(ExtProgType.SAMTOOLS).getPath();
@@ -411,13 +411,13 @@ public class CheckExternalProgrammes {
 	    		this.extProgMap.get(ExtProgType.SAMTOOLS).setSeenVersion(samtoolsMatcher.group(1));
 	    		Matcher equalPat = samtoolsExp.matcher(this.extProgMap.get(ExtProgType.SAMTOOLS).getSeenVersion());
 	    		if (equalPat.find()) {
-	    			correctVersion = true;
+	    			isCompatible = true;
 	    		}
 	    	}
 	    }
 	    in.close();
 	    
-	    return correctVersion;
+	    return isCompatible;
 	}
 	
 	/**

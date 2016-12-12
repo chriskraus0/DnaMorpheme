@@ -16,11 +16,11 @@ import core.exceptions.PipeTypeNotSupportedException;
 public class TestOutput extends Module {
 
 	// Variables.
-	private String command;
+	private String[] command;
 	private ModuleNode moduleNode;
 	
 	// Constructors.
-	public TestOutput(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
+	public TestOutput(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
 	}

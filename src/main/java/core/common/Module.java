@@ -61,6 +61,11 @@ public abstract class Module implements ModuleInterface, Runnable {
 	// Methods.
 	
 	// Setters.
+	
+	/**
+	 * Sets a ModuleNode for the concrete inherited module of the type ModuleType. 
+	 * @param ModuleNode mNode
+	 */
 	public void setSuperModuleNode (ModuleNode mNode) {
 		this.moduleNode = mNode;
 	}
@@ -70,10 +75,22 @@ public abstract class Module implements ModuleInterface, Runnable {
 		this.mState = mState;
 	}
 	
+	/**
+	 * Sets the producer (sending) specific ModuleNodeName.
+	 * The moduleNodeName is a String composed of the moduleIDs of the sending
+	 * (Producer) and receiving (Consumer) module.
+	 * @param String moduleNodeName
+	 */
 	public void setProducerModuleNodeName (String moduleNodeName) {
 		this.moduleProducerNodeName = moduleNodeName;
 	}
 	
+	/**
+	 * Sets the consumer (receiving) specific ModuleNodeName.
+	 * The moduleNodeName is a String composed of the moduleIDs of the sending
+	 * (Producer) and receiving (Consumer) module.
+	 * @param String moduleNodeName
+	 */
 	public void setConsumerModuleNodeName (String moduleNodeName) {
 		this.moduleConsumerNodeName = moduleNodeName;
 	}
@@ -82,23 +99,43 @@ public abstract class Module implements ModuleInterface, Runnable {
 
 	// Getters.
 	
+	/**
+	 * Getter for the shared ModuleNode.
+	 * @return ModuleNode
+	 */
 	public ModuleNode getSuperModuleNode () {
 		return this.moduleNode;
 	}
 	
+	/**
+	 * Getter for the consumer ModuleNodeName.
+	 * @return String ModuleNodeName
+	 */
 	public String getConsumerModuleNodeName () {
 		return this.moduleConsumerNodeName;
 	}
 	
-
+	/**
+	 * Getter for the producer ModuleNodeName.
+	 * @return String ModuleNodeName
+	 */
 	public String getProducerModuleNodeName () {
 		return this.moduleProducerNodeName;
 	}
 	
+	/**
+	 * Getter for the InputPort.
+	 * @return Port InputPort
+	 */
 	public Port getInputPort () {
 		return ModulePortLinker.getInputPort(this.INPUT_PORT_ID);
 	}
 	
+
+	/**
+	 * Getter for the OutPutPort.
+	 * @return Port OutputPort
+	 */
 	public Port getOutputPort () {
 		return ModulePortLinker.getOutputPort(this.OUTPUT_PORT_ID);
 	}
@@ -124,9 +161,6 @@ public abstract class Module implements ModuleInterface, Runnable {
 	}
 	// End getters.
 	
-		
-	/*@Override
-	public abstract CommandState callCommand(String command, int storageID) throws CommandFailedException;*/
 	// End methods.
 
 }

@@ -28,7 +28,7 @@ import extProgs.Tomtom;
 
 // Project-specific exceptions.
 import core.exceptions.SystemNotSupportedException;
-import core.exceptions.VersionNoCompatibleException;
+import core.exceptions.VersionNotCompatibleException;
 
 public class CheckExternalProgrammes {
 		
@@ -57,9 +57,9 @@ public class CheckExternalProgrammes {
 	/**
 	 * Test the required external programs for compatibility with this program.
 	 * @throws SystemNotSupportedException
-	 * @throws VersionNoCompatibleException
+	 * @throws VersionNotCompatibleException
 	 */
-	public void testExtProgs() throws SystemNotSupportedException, VersionNoCompatibleException {
+	public void testExtProgs() throws SystemNotSupportedException, VersionNotCompatibleException {
 		
 		// Test the type of operating system.
 		String osName = PhysicalConstants.getOsName();
@@ -76,7 +76,7 @@ public class CheckExternalProgrammes {
 						+ this.extProgMap.get(ExtProgType.SAMTOOLS).getSeenVersion()
 						+ "\" is compatible with this program.");
 			} else {
-				throw new VersionNoCompatibleException("ERROR: The current version of Samtools \""
+				throw new VersionNotCompatibleException("ERROR: The current version of Samtools \""
 						+ this.extProgMap.get(ExtProgType.SAMTOOLS).getSeenVersion() 
 						+ "\" is not compatible with this program.");
 			}
@@ -93,7 +93,7 @@ public class CheckExternalProgrammes {
 						+ this.extProgMap.get(ExtProgType.BOWTIE2).getSeenVersion()
 						+ "\" is compatible with this program.");
 			} else {
-				throw new VersionNoCompatibleException("ERROR: The current version of bowtie2 \""
+				throw new VersionNotCompatibleException("ERROR: The current version of bowtie2 \""
 						+ this.extProgMap.get(ExtProgType.BOWTIE2).getSeenVersion() 
 						+ "\" is not compatible with this program.");
 			}
@@ -111,7 +111,7 @@ public class CheckExternalProgrammes {
 						+ this.extProgMap.get(ExtProgType.CDHIT).getSeenVersion()
 						+ "\" is compatible with this program.");
 			} else {
-				throw new VersionNoCompatibleException("ERROR: The current version of cdhit \""
+				throw new VersionNotCompatibleException("ERROR: The current version of cdhit \""
 						+ this.extProgMap.get(ExtProgType.CDHIT).getSeenVersion() 
 						+ "\" is not compatible with this program.");
 			}
@@ -147,7 +147,7 @@ public class CheckExternalProgrammes {
 						+ this.extProgMap.get(ExtProgType.TOMTOM).getSeenVersion()
 						+ "\" is compatible with this program.");
 			} else {
-				throw new VersionNoCompatibleException("ERROR: The current version of tomtom \""
+				throw new VersionNotCompatibleException("ERROR: The current version of tomtom \""
 						+ this.extProgMap.get(ExtProgType.TOMTOM).getSeenVersion() 
 						+ "\" is not compatible with this program.");
 			}

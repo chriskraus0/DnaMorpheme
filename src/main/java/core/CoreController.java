@@ -1,7 +1,7 @@
 package core;
 
 import core.exceptions.SystemNotSupportedException;
-import core.exceptions.VersionNoCompatibleException;
+import core.exceptions.VersionNotCompatibleException;
 
 /**
  * Singleton which creates all major core components.
@@ -44,7 +44,7 @@ public class CoreController {
 		} catch (SystemNotSupportedException se) {
 			System.err.println(se.getMessage());
 			se.printStackTrace();
-		} catch (VersionNoCompatibleException ve) {
+		} catch (VersionNotCompatibleException ve) {
 			System.err.println(ve.getMessage());
 			ve.printStackTrace();
 		}

@@ -1,7 +1,7 @@
 package testDrives;
 
 import core.CoreController;
-import core.ExternalProgramHandler;
+import core.ListExternalPrograms;
 
 /**
  * Test-Drive class to test an real external command.
@@ -32,7 +32,7 @@ public class TestFirstExternalCommand {
 			CoreController.getInstance();
 			
 			// Check for the existing configuration file.
-			ExternalProgramHandler externalProgramHandler = CoreController.checkExternalProgrammes();
+			ListExternalPrograms externalProgramHandler = CoreController.checkExternalProgrammes();
 			
 			//
 		}

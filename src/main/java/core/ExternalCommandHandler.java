@@ -16,10 +16,10 @@ public class ExternalCommandHandler extends Module {
 	
 	// Variables.
 	
-	private String command;
+	private String[] command;
 
 	// Constructors.
-	public ExternalCommandHandler(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String cmd) {
+	public ExternalCommandHandler(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
 	}

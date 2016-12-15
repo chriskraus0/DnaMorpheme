@@ -14,32 +14,32 @@ import extProgs.ExternalProgram;
  * @author christopher
  *
  */
-public class ExternalProgramHandler {
+public class ListExternalPrograms {
 
 	// Variables.
 	
 	// Singular "object".
-	private static ExternalProgramHandler externalProgramHandler = new ExternalProgramHandler();
+	private static ListExternalPrograms listExternalPrograms = new ListExternalPrograms();
 	
 	// HashMap to save external programs.
 	private static Map <ExtProgType, ExternalProgram> extProgMap;
 		
 	// Constructors.
 	
-	public ExternalProgramHandler () {}
+	private ListExternalPrograms () {}
 	
 	// Methods.
 	
 	// Setters.
 	
 	public static void setExternalProgMap (Map <ExtProgType, ExternalProgram> extMap) {
-		ExternalProgramHandler.extProgMap = extMap;
+		ListExternalPrograms.extProgMap = extMap;
 	}
 	
 	// Getters.
 	
-	public static ExternalProgramHandler getInstance () {
-		return externalProgramHandler;
+	public static ListExternalPrograms getInstance () {
+		return listExternalPrograms;
 	}
 	
 	/**

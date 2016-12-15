@@ -5,7 +5,7 @@ import java.net.URL;
 
 // Project specific imports.
 import core.CoreController;
-import core.ExternalProgramHandler;
+import core.ListExternalPrograms;
 import extProgs.ExternalProgram;
 import extProgs.ExtProgType;
 
@@ -52,33 +52,33 @@ public class TestCoreControllerExternalProgrammes {
 		CoreController.getInstance();
 		
 		// Check for the existing configuration file.
-		ExternalProgramHandler externalProgramHandler = CoreController.checkExternalProgrammes();
+		ListExternalPrograms externalProgramHandler = CoreController.checkExternalProgrammes();
 		
 		System.out.println("Entries in the config file:");
 		System.out.println(ExtProgType.SAMTOOLS.toString() + "\n"
-				+ "Path: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.SAMTOOLS).getPath() + "\n"
-				+ "Executable: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.SAMTOOLS).getExecutable() + "\n"
-				+ "Version: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.SAMTOOLS).getVersion());
+				+ "Path: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.SAMTOOLS).getPath() + "\n"
+				+ "Executable: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.SAMTOOLS).getExecutable() + "\n"
+				+ "Version: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.SAMTOOLS).getVersion());
 		
 		System.out.println(ExtProgType.BOWTIE2.toString() + "\n"
-				+ "Path: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.BOWTIE2).getPath() + "\n"
-				+ "Executable: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.BOWTIE2).getExecutable() + "\n"
-				+ "Version: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.BOWTIE2).getVersion());
+				+ "Path: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.BOWTIE2).getPath() + "\n"
+				+ "Executable: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.BOWTIE2).getExecutable() + "\n"
+				+ "Version: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.BOWTIE2).getVersion());
 		
 		System.out.println(ExtProgType.CDHIT.toString() + "\n"
-				+ "Path: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.CDHIT).getPath() + "\n"
-				+ "Executable: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.CDHIT).getExecutable() + "\n"
-				+ "Version: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.CDHIT).getVersion());
+				+ "Path: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.CDHIT).getPath() + "\n"
+				+ "Executable: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.CDHIT).getExecutable() + "\n"
+				+ "Version: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.CDHIT).getVersion());
 		
 		System.out.println(ExtProgType.QPMS9.toString() + "\n"
-				+ "Path: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.QPMS9).getPath() + "\n"
-				+ "Executable: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.QPMS9).getExecutable() + "\n"
-				+ "Version: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.QPMS9).getVersion());
+				+ "Path: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.QPMS9).getPath() + "\n"
+				+ "Executable: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.QPMS9).getExecutable() + "\n"
+				+ "Version: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.QPMS9).getVersion());
 			
 		System.out.println(ExtProgType.TOMTOM.toString() + "\n"
-				+ "Path: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.TOMTOM).getPath() + "\n"
-				+ "Executable: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.TOMTOM).getExecutable() + "\n"
-				+ "Version: " + ExternalProgramHandler.getExternalProgrammes(ExtProgType.TOMTOM).getVersion());
+				+ "Path: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.TOMTOM).getPath() + "\n"
+				+ "Executable: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.TOMTOM).getExecutable() + "\n"
+				+ "Version: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.TOMTOM).getVersion());
 			
 	}
 }

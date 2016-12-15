@@ -9,7 +9,7 @@ package core.common;
 // Project specific imports.
 import core.exceptions.PipeTypeNotSupportedException;
 import core.exceptions.OccupiedException;
-import core.exceptions.NotFoundException;
+import core.exceptions.PipeNotFoundException;
 
 public interface Port {
 	
@@ -95,9 +95,9 @@ public interface Port {
 	
 	/**
 	 * Remove the pipe connecting two ports.
-	 * @throws NotFoundException
+	 * @throws PipeNotFoundException
 	 */
-	public void removePipe() throws NotFoundException;
+	public void removePipe() throws PipeNotFoundException;
 	
 	/**
 	 * Reset all pipes between two ports. 

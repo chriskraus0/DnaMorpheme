@@ -56,8 +56,9 @@ public class CharPipe implements Pipe {
 	// Setters.
 	@Override 
 	public void setPipeState(PipeState pState) {
-		
+		this.pipeState = pState;
 	}
+	
 	// End setters.
 	
 	/**

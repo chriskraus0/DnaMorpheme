@@ -31,13 +31,13 @@ public class CoreController {
 	 * tests the ExternalProgramHandler.
 	 * @return ExternalProgramHandler externalProgramHandler (Singleton)
 	 */
-	public static ExternalProgramHandler checkExternalProgrammes() {
+	public static ListExternalPrograms checkExternalProgrammes() {
 		
 		// Retrieve all physical constants.
 		retrievePhysicalConstants();
 		
 		// Check the external programs.
-		CheckExternalProgrammes chExProg = new CheckExternalProgrammes("config/config.txt");
+		CheckExternalPrograms chExProg = new CheckExternalPrograms("config/config.txt");
 		chExProg.readConfig();
 		try {
 			chExProg.testExtProgs();
@@ -50,8 +50,8 @@ public class CoreController {
 		}
 		
 		// Generate ExternalProgramHandler 		
-		ExternalProgramHandler externalProgramHandler = generateExternalProgramHandler();
-		ExternalProgramHandler.setExternalProgMap(chExProg.getExternalProgrammes());
+		ListExternalPrograms externalProgramHandler = generateExternalProgramHandler();
+		ListExternalPrograms.setExternalProgMap(chExProg.getExternalProgrammes());
 		return externalProgramHandler;
 		
 	}
@@ -60,8 +60,8 @@ public class CoreController {
 	 * Generate GenerateExternalProgramHandler ("Singleton" design pattern).
 	 * @return GenerateExernalProgramHandler externalProgramHandler
 	 */
-	private static ExternalProgramHandler generateExternalProgramHandler () {
-		return ExternalProgramHandler.getInstance();
+	private static ListExternalPrograms generateExternalProgramHandler () {
+		return ListExternalPrograms.getInstance();
 	}
 	
 	/**

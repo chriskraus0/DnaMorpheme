@@ -12,7 +12,7 @@ import core.common.PipeType;
 // Project specific exceptions.
 import core.exceptions.OccupiedException;
 import core.exceptions.PipeTypeNotSupportedException;
-import core.exceptions.NotFoundException;
+import core.exceptions.PipeNotFoundException;
 
 /**
  * Singleton which links all input and output ports of all available classes.
@@ -33,7 +33,7 @@ public class ModulePortLinker {
 	private static ModulePortLinker modulePortLinker = new ModulePortLinker();
 	
 	// Constructors.
-	public ModulePortLinker () {}
+	private ModulePortLinker () {}
 	
 	// Create instance.
 	public static ModulePortLinker getInstance () {
@@ -70,7 +70,7 @@ public class ModulePortLinker {
 	public static void removeInputPort (int inPortID) {
 		try {
 			inputPorts.get(inPortID).removePipe();
-		} catch (NotFoundException ne) {
+		} catch (PipeNotFoundException ne) {
 			System.err.println(ne.getMessage());
 			ne.printStackTrace();
 		}
@@ -80,7 +80,7 @@ public class ModulePortLinker {
 	public static void removeOutputPort (int outPortID) {
 		try {
 			outputPorts.get(outPortID).removePipe();
-		} catch (NotFoundException ne) {
+		} catch (PipeNotFoundException ne) {
 			System.err.println(ne.getMessage());
 			ne.printStackTrace();
 		}

@@ -12,7 +12,7 @@ import core.common.PortType;
 import core.common.AbstractPort;
 
 // Project specific exceptions.
-import core.exceptions.NotFoundException;
+import core.exceptions.PipeNotFoundException;
 import core.exceptions.PipeTypeNotSupportedException;
 
 public class OutputPort extends AbstractPort {
@@ -108,7 +108,7 @@ public class OutputPort extends AbstractPort {
 	// End getters.
 	
 	@Override
-	public void removePipe() throws NotFoundException {
+	public void removePipe() throws PipeNotFoundException {
 		try {
 			this.getPipe().readClose();
 			this.getPipe().writeClose();

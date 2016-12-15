@@ -1,12 +1,12 @@
 package core.exceptions;
 
 /**
- * Pipe associated exception. Honestly, I currently do not know why will need this one.
+ * Pipe associated exception. Thrown exception in case of a missing pipe (closed before associated port).
  * TODO
  * @author christopher
  *
  */
-public class NotFoundException extends Exception {
+public class PipeNotFoundException extends Exception {
 	
 	/**
 	 * Serial version UID.
@@ -14,7 +14,7 @@ public class NotFoundException extends Exception {
 	private static final long serialVersionUID = 8567554062081440863L;
 
 	// Constructors.
-	public NotFoundException (String message) {
+	public PipeNotFoundException (String message) {
 		super(message);
 	}
 

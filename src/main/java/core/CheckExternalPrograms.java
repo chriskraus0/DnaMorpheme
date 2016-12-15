@@ -30,7 +30,7 @@ import extProgs.Tomtom;
 import core.exceptions.SystemNotSupportedException;
 import core.exceptions.VersionNotCompatibleException;
 
-public class CheckExternalProgrammes {
+public class CheckExternalPrograms {
 		
 	// Variables.
 	private String configurationPath;
@@ -40,7 +40,7 @@ public class CheckExternalProgrammes {
 	
 	// Constructors.
 	
-	public CheckExternalProgrammes(String configPath) {
+	public CheckExternalPrograms(String configPath) {
 		this.configurationPath = configPath;
 		this.extProgMap = new HashMap <ExtProgType, ExternalProgram>();
 	}

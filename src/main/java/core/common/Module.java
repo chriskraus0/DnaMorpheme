@@ -1,12 +1,9 @@
 package core.common;
 
-import core.exceptions.CommandFailedException;
-
 // Imports.
 
 // Project specific imports
 import core.ModulePortLinker;
-import core.JobController;
 import core.ModuleNode;
 
 /**

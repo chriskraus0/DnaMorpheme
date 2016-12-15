@@ -34,7 +34,7 @@ public interface Pipe {
 	 * Returns the PipeType of a Pipe.
 	 * @return PipeType
 	 */
-	public PipeType getPipeType ();
+	public PipeType getPipeType();
 	
 	/**
 	 * Returns the state of this pipe.

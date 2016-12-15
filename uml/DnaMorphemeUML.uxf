@@ -84,72 +84,58 @@ connect Observer
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1708</x>
-      <y>824</y>
-      <w>160</w>
-      <h>208</h>
+      <x>1680</x>
+      <y>1064</y>
+      <w>168</w>
+      <h>276</h>
     </coordinates>
     <panel_attributes>bg=red
 *ModuleBuilder*
-Package::core.common
-{Factory}
+Package::core
+{Abstract Factory}
 --
 // Variables
-MODULESTATE mState
-TreeMap &lt;moduleID, Module&gt;
+JobController jobController
+static TreeMap moduleMap &lt;moduleID, Module&gt;
+static TreeMap modulesThreadMap &lt;moduleID, Thread&gt;
+static int moduleCount
 --
 // Methods
-ModuleBuilder()
-String generateNewModuleID()
+ModuleBuilder(JobController jController)
+String prepareJobs (int producerID, int consumerID)
+startJobs(String moduleNodeName)
+private static int generateNewModuleID()
+static Set&lt;Integer&gt; getModuleIDs()
+static Thread getRunningThread(int moduleID)
+static Module getModule(int moduleID)
 
-createNewCdHitJob()
-createNewQpms9Job()
-createNewBowtie2Job()
-createNewSamtoolsJob()
-createNewTomtomJob()
-createNewSequenceLogoJob()
-createNewPmsConsensusJob()
-createNewNucFreqJob()
+int createNewInputReader(String[] command)
+int createNewCdHitJob(String[] command)
+int createNewQpms9Job(String[] command)
+int createNewBowtie2Job(String[] command)
+int createNewSamtoolsJob(String[] command)
+int createNewTomtomJob(String[] command)
+int createNewSequenceLogoJob(String[] command)
+int createNewPmsConsensusJob(String[] command)
+int createNewNucFreqJob(String[] command)
 createNewExternalCommandHandler()
+int createNewInputTestJob(String[] command)
+int createTestTransferJob(String[] command)
+int createTestoutputJob(String[] command)
 
 *@Override*
-String generateNewModuleID()
+Module createNewModule(moduleID,
+storageID, ModuleType mType, String[] command)
+
 createNewInputPort()
 createNewOutputPort()
-linkOutput2Input()
-linkInput2Output()
-createNewModule()
-TreeMap &lt;String moduleID, Module&gt; getModules()
+int requestStorrage()
+destroyModule(int moduleID)
 --
 Responsibilities:
 generate I/O ports
 retrieve module status
 create and destroy module objects</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>2168</x>
-      <y>1020</y>
-      <w>104</w>
-      <h>56</h>
-    </coordinates>
-    <panel_attributes>	ExternalCommandHandler
-//Package::FatClass
-//{Factory}
---
-// Variables
-
---
-// Methods
-callExternalCommand()
---
-Responsibilities:
-call external storrage
-call extrnal command
-observe external command state
-</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -319,13 +305,13 @@ and status</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3344</x>
+      <x>2976</x>
       <y>356</y>
-      <w>64</w>
-      <h>140</h>
+      <w>432</w>
+      <h>1004</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;330.0;100.0;330.0;100.0;10.0;140.0;10.0</additional_attributes>
+    <additional_attributes>10.0;2490.0;750.0;2490.0;750.0;330.0;1020.0;330.0;1020.0;10.0;1060.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -455,13 +441,13 @@ and status</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2268</x>
+      <x>2136</x>
       <y>460</y>
-      <w>1136</w>
-      <h>572</h>
+      <w>1268</w>
+      <h>532</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;1410.0;2750.0;790.0;2750.0;10.0;2820.0;10.0</additional_attributes>
+    <additional_attributes>10.0;1310.0;2370.0;1310.0;3080.0;790.0;3080.0;10.0;3150.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -500,15 +486,15 @@ and status</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3268</x>
-      <y>472</y>
+      <x>2900</x>
+      <y>1336</y>
       <w>80</w>
       <h>104</h>
     </coordinates>
     <panel_attributes>bg=blue
 // Package::CorePackage
 // ClassName
-JobController
+*JobController*
 //{Some Properties}
 --
 // Variables
@@ -534,13 +520,13 @@ handling job states
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3284</x>
+      <x>2976</x>
       <y>248</y>
-      <w>32</w>
-      <h>232</h>
+      <w>340</w>
+      <h>1136</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>60.0;10.0;10.0;10.0;10.0;560.0</additional_attributes>
+    <additional_attributes>830.0;10.0;780.0;10.0;780.0;2820.0;10.0;2820.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -556,8 +542,8 @@ handling job states
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1264</x>
-      <y>1376</y>
+      <x>1536</x>
+      <y>1352</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -700,68 +686,69 @@ tomtom/Jaspar</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2268</x>
-      <y>896</y>
-      <w>932</w>
-      <h>672</h>
+      <x>2136</x>
+      <y>1004</y>
+      <w>1064</w>
+      <h>564</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>2310.0;1660.0;2270.0;1660.0;2270.0;10.0;10.0;350.0</additional_attributes>
+    <additional_attributes>2640.0;1390.0;2600.0;1390.0;2600.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2268</x>
-      <y>896</y>
-      <w>932</w>
-      <h>712</h>
+      <x>2136</x>
+      <y>1008</y>
+      <w>1064</w>
+      <h>600</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>2310.0;1760.0;2270.0;1760.0;2270.0;10.0;10.0;350.0</additional_attributes>
+    <additional_attributes>2640.0;1480.0;2600.0;1480.0;2600.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2268</x>
-      <y>896</y>
-      <w>932</w>
-      <h>756</h>
+      <x>2136</x>
+      <y>1012</y>
+      <w>1064</w>
+      <h>640</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>2310.0;1870.0;2270.0;1870.0;2270.0;10.0;10.0;350.0</additional_attributes>
+    <additional_attributes>2640.0;1580.0;2600.0;1580.0;2600.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2268</x>
-      <y>896</y>
-      <w>932</w>
-      <h>796</h>
+      <x>2136</x>
+      <y>1016</y>
+      <w>1064</w>
+      <h>676</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>2310.0;1970.0;2270.0;1970.0;2270.0;10.0;10.0;350.0</additional_attributes>
+    <additional_attributes>2640.0;1670.0;2600.0;1670.0;2600.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2268</x>
-      <y>896</y>
-      <w>932</w>
-      <h>840</h>
+      <x>2136</x>
+      <y>1020</y>
+      <w>1064</w>
+      <h>716</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>2310.0;2080.0;2270.0;2080.0;2270.0;10.0;10.0;350.0</additional_attributes>
+    <additional_attributes>2640.0;1770.0;2600.0;1770.0;2600.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1832</x>
-      <y>1028</y>
-      <w>1516</w>
-      <h>856</h>
+      <x>1844</x>
+      <y>1300</y>
+      <w>1504</w>
+      <h>584</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;2960.0;690.0;2960.0;2120.0;3770.0;2120.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-
+layer=4</panel_attributes>
+    <additional_attributes>10.0;10.0;2930.0;10.0;2930.0;1440.0;3740.0;1440.0</additional_attributes>
   </element>
   <element>
     <id>UMLSpecialState</id>
@@ -1018,13 +1005,13 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3332</x>
-      <y>572</y>
-      <w>24</w>
-      <h>948</h>
+      <x>2964</x>
+      <y>1436</y>
+      <w>392</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;1350.0;40.0;1350.0;40.0;2350.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;960.0;60.0;960.0;190.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
@@ -1190,44 +1177,25 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3336</x>
+      <x>2976</x>
       <y>308</y>
-      <w>52</w>
-      <h>172</h>
+      <w>412</w>
+      <h>1040</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>110.0;10.0;110.0;280.0;10.0;280.0;10.0;410.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>1632</x>
-      <y>492</y>
-      <w>120</w>
-      <h>64</h>
-    </coordinates>
-    <panel_attributes>*/ModuleBuilderInterface/*
---
-Module createNewModule()
-createNewInputPort(String moduleID)
-createNewOutputPort(String moduleID)
-destroyModule(String moduleID)
-String requestStorageID()
---
-//Operation1
-layer=2</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes>1010.0;10.0;1010.0;280.0;910.0;280.0;910.0;2580.0;10.0;2580.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3216</x>
+      <x>2976</x>
       <y>96</y>
-      <w>64</w>
-      <h>384</h>
+      <w>304</w>
+      <h>1280</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>140.0;940.0;140.0;610.0;10.0;610.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+layer=4</panel_attributes>
+    <additional_attributes>10.0;3180.0;740.0;3180.0;740.0;610.0;610.0;610.0;610.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1268,13 +1236,13 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3188</x>
+      <x>2968</x>
       <y>232</y>
-      <w>88</w>
-      <h>276</h>
+      <w>240</w>
+      <h>1112</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;30.0;10.0;30.0;670.0;200.0;670.0</additional_attributes>
+    <additional_attributes>560.0;10.0;580.0;10.0;580.0;2600.0;10.0;2600.0;10.0;2760.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
@@ -1307,8 +1275,8 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>3272</x>
-      <y>456</y>
+      <x>2908</x>
+      <y>1320</y>
       <w>64</w>
       <h>16</h>
     </coordinates>
@@ -1337,8 +1305,8 @@ layer=1</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1648</x>
-      <y>480</y>
+      <x>1576</x>
+      <y>492</y>
       <w>96</w>
       <h>16</h>
     </coordinates>
@@ -1382,8 +1350,8 @@ layer=1</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>2212</x>
-      <y>996</y>
+      <x>2000</x>
+      <y>948</y>
       <w>64</w>
       <h>16</h>
     </coordinates>
@@ -1397,20 +1365,17 @@ layer=1</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>1976</x>
-      <y>496</y>
-      <w>216</w>
-      <h>76</h>
+      <x>2220</x>
+      <y>504</y>
+      <w>208</w>
+      <h>56</h>
     </coordinates>
-    <panel_attributes>/*ModuleInterface*/
+    <panel_attributes>/*ModuleNodeInterface*/
 --
-setModuleState(ModuleState mState)
-ModuleState getModuleState()
-String getModuleID()
-ModuleType getModuleType()
-String getStorageID()
-CommandState callCommand(String command, String storrageID) throws 
-	CommandFailedException
+registerModuleObserver(ModuleObserverInterface)
+removeFromModuleObserver()
+notifyModuleObserver()
+connect () throws PipeTypeNotSupportedException, OccupiedException
 --
 layer=2</panel_attributes>
     <additional_attributes/>
@@ -1418,13 +1383,13 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1780</x>
+      <x>1768</x>
       <y>368</y>
-      <w>1508</w>
-      <h>136</h>
+      <w>1332</w>
+      <h>976</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;320.0;3010.0;10.0;3750.0;10.0;3750.0;260.0</additional_attributes>
+    <additional_attributes>10.0;350.0;10.0;10.0;3310.0;10.0;3310.0;2280.0;3030.0;2280.0;3030.0;2420.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1554,33 +1519,37 @@ layer=2</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>1752</x>
-      <y>492</y>
+      <x>1740</x>
+      <y>504</y>
       <w>56</w>
-      <h>68</h>
+      <h>88</h>
     </coordinates>
     <panel_attributes>/*MODULESTATE*/
 {Enumeration}
 --
+READY
 SUCCESS
 FAIL
 PROCESSING
 STARTING
+INPUT_DONE
+OUTPUT_DONE
 UNDEFINED
 --
-layer=3</panel_attributes>
+layer=2</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1696</x>
-      <y>552</y>
-      <w>44</w>
-      <h>280</h>
+      <x>1620</x>
+      <y>508</y>
+      <w>92</w>
+      <h>564</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;90.0;680.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;.
+layer=3</panel_attributes>
+    <additional_attributes>10.0;10.0;210.0;10.0;210.0;1390.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1608,28 +1577,37 @@ layer=3</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1136</x>
-      <y>820</y>
+      <y>844</y>
       <w>124</w>
-      <h>120</h>
+      <h>176</h>
     </coordinates>
     <panel_attributes>*CharPipe*
 Package::core.common
 {IOException, PipedReader, PipedWriter}
 --
+// Constants
+final PipeType pipeType
 // Variables
 PipeWriter pipeOutput
 PipeReader pipeInput
+PipeState pipeState
 --
 // Methods
-CharPipe()
+CharPipe() throws IOException
 read(char[] data, int offset, int length)
-write(String data)
+throws IOException
+
+read () throws IOException
+write(String data) throws IOException
 write(char[] data, int offset, int length)
+throws IOException
 
 *@Override*
 readClosed()
 writeClosed()
 pipeReset()
+PipeType getPipeType()
+PipeState getPipeState()
 --
 Responsibilities:
 read from char buffer
@@ -1890,123 +1868,123 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2420</x>
+      <x>2080</x>
       <y>560</y>
-      <w>984</w>
-      <h>228</h>
+      <w>1324</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;550.0;2400.0;210.0;2400.0;10.0;2440.0;10.0</additional_attributes>
+    <additional_attributes>10.0;420.0;3250.0;210.0;3250.0;10.0;3290.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2420</x>
+      <x>2080</x>
       <y>476</y>
-      <w>984</w>
-      <h>312</h>
+      <w>1324</w>
+      <h>260</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;760.0;2400.0;420.0;2400.0;10.0;2440.0;10.0</additional_attributes>
+    <additional_attributes>10.0;630.0;3250.0;420.0;3250.0;10.0;3290.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2420</x>
+      <x>2080</x>
       <y>640</y>
-      <w>984</w>
-      <h>148</h>
+      <w>1324</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;350.0;2400.0;10.0;2400.0;250.0;2440.0;250.0</additional_attributes>
+    <additional_attributes>10.0;220.0;3250.0;10.0;3250.0;250.0;3290.0;250.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2420</x>
+      <x>2080</x>
       <y>640</y>
-      <w>984</w>
+      <w>1324</w>
       <h>196</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;350.0;2400.0;10.0;2400.0;470.0;2440.0;470.0</additional_attributes>
+    <additional_attributes>10.0;220.0;3250.0;10.0;3250.0;470.0;3290.0;470.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2420</x>
+      <x>2080</x>
       <y>640</y>
-      <w>984</w>
+      <w>1324</w>
       <h>288</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;350.0;2400.0;10.0;2400.0;700.0;2440.0;700.0</additional_attributes>
+    <additional_attributes>10.0;220.0;3250.0;10.0;3250.0;700.0;3290.0;700.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2420</x>
+      <x>2080</x>
       <y>640</y>
-      <w>984</w>
+      <w>1324</w>
       <h>372</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;350.0;2400.0;10.0;2400.0;910.0;2440.0;910.0</additional_attributes>
+    <additional_attributes>10.0;220.0;3250.0;10.0;3250.0;910.0;3290.0;910.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2420</x>
+      <x>2080</x>
       <y>640</y>
-      <w>984</w>
+      <w>1324</w>
       <h>460</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;350.0;2400.0;10.0;2400.0;1130.0;2440.0;1130.0</additional_attributes>
+    <additional_attributes>10.0;220.0;3250.0;10.0;3250.0;1130.0;3290.0;1130.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2268</x>
+      <x>2136</x>
       <y>544</y>
-      <w>1136</w>
-      <h>488</h>
+      <w>1268</w>
+      <h>448</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;1200.0;2750.0;580.0;2750.0;10.0;2820.0;10.0</additional_attributes>
+    <additional_attributes>10.0;1100.0;2370.0;1100.0;3080.0;580.0;3080.0;10.0;3150.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2268</x>
+      <x>2136</x>
       <y>652</y>
-      <w>1136</w>
-      <h>380</h>
+      <w>1268</w>
+      <h>340</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;930.0;2750.0;310.0;2750.0;10.0;2820.0;10.0</additional_attributes>
+    <additional_attributes>10.0;830.0;2370.0;830.0;3080.0;310.0;3080.0;10.0;3150.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2268</x>
+      <x>2136</x>
       <y>728</y>
-      <w>1136</w>
-      <h>304</h>
+      <w>1268</w>
+      <h>264</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;740.0;2750.0;120.0;2750.0;10.0;2820.0;10.0</additional_attributes>
+    <additional_attributes>10.0;640.0;2370.0;640.0;3080.0;120.0;3080.0;10.0;3150.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2268</x>
+      <x>2136</x>
       <y>772</y>
-      <w>1136</w>
-      <h>260</h>
+      <w>1268</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;630.0;2750.0;10.0;2750.0;120.0;2820.0;120.0</additional_attributes>
+    <additional_attributes>10.0;530.0;2370.0;530.0;3080.0;10.0;3080.0;120.0;3150.0;120.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -2597,16 +2575,19 @@ Save database results for one query</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>1236</x>
-      <y>492</y>
-      <w>48</w>
-      <h>52</h>
+      <x>1232</x>
+      <y>660</y>
+      <w>96</w>
+      <h>68</h>
     </coordinates>
     <panel_attributes>*/Pipe/*
 --
 readClosed()
 writeClosed()
 pipeReset()
+PipeType getPipeType()
+PipeState getPipeState()
+setPipeState(PipeState pState)
 --
 //Operation1
 layer=2</panel_attributes>
@@ -2615,31 +2596,32 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1212</x>
-      <y>536</y>
+      <x>1184</x>
+      <y>648</y>
       <w>48</w>
-      <h>292</h>
+      <h>204</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>100.0;10.0;10.0;710.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;.
+layer=3</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;50.0;100.0;490.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>1028</y>
-      <w>776</w>
-      <h>468</h>
+      <x>1132</x>
+      <y>1252</y>
+      <w>784</w>
+      <h>244</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;360.0;10.0;1150.0;1920.0;1150.0;1620.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;590.0;1940.0;590.0;1570.0;220.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
       <x>880</x>
       <y>428</y>
-      <w>2052</w>
+      <w>2184</w>
       <h>1048</h>
     </coordinates>
     <panel_attributes>fontsize=60
@@ -2667,90 +2649,96 @@ layer=0</panel_attributes>
     <coordinates>
       <x>888</x>
       <y>456</y>
-      <w>2020</w>
+      <w>1556</w>
       <h>380</h>
     </coordinates>
     <panel_attributes>fontsize=40
-core.common
+*core.common*
 fg=black</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1072</x>
-      <y>1000</y>
-      <w>136</w>
-      <h>172</h>
+      <x>1064</x>
+      <y>1068</y>
+      <w>164</w>
+      <h>188</h>
     </coordinates>
     <panel_attributes>*InputPort*
-Package::core.common
-{IOException, PipedReader, PipedWriter}
+Package::core
+{extends AbstractPort,
+PipeNotFoundException, IOException
+PipeTypeNotSupportedException}
 --
 // Variables
-Pipe pipe
-Port connectedPort
+final PortType portType
 --
 // Methods
-InputPort(String name, Module parent)
-Pipe getPipe()
-Port getConnectedPort()
-PipedInputStream getInputStream() throws 
-	NotSupportedException
-PipedReader get InputReader() throws
-	NotSupportedException
-read(byte[] buffer, int offset, int length)
-read(char[] buffer, int offset, int length)
+InputPort(int portID, in moduleID)
+InputPort(int portID, in moduleID, Pipe pipe)
+int readFromCharPipe() throws 
+PipeTypeNotSupportedException, IOException
+
+int readFromCharPipe(char[] buffer, int offset, int length)
+thorws PipeTypeNotSupportedException, IOException
+
+int readFromBytePipe() throws
+PipeTypeNotSupportedException, IOException
+
+int readFromBytePipe(byte[] buffer, int offset, int length)
+throws PipeTypeNotSupportedException, IOException
 
 *@Override*
-addPipe(Pipe pipe, Port connectedPort) throws
-	NotSupportedException, OccupiedException
-removePipe(Pipe pipe) throws 
-	NotSupportedException
-reset() throws IOException
-boolean isConnected()
+PortType getPortType()
+removePipe() throws PipeNotFoundException
+reset()
 --
 Responsibilities:
-</panel_attributes>
+Regulates the data transfer from the
+pipe (or sink) to the consumer.</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>908</x>
-      <y>1000</y>
-      <w>160</w>
-      <h>172</h>
+      <x>884</x>
+      <y>1068</y>
+      <w>172</w>
+      <h>188</h>
     </coordinates>
     <panel_attributes>*OutputPort*
-Package::core.common
-//{properties}
+Package::core
+{extends AbstractPort,
+PipeNotFoundException, IOException
+PipeTypeNotSupportedException}
 --
 // Variables
-Map&lt;Class&lt;? extends Pipe&gt;, List&lt;Pipe&gt;&gt; pipes
-Map&lt;Pipe, Port&gt; connectedPorts
+final PortType portType
 --
 // Methods
-PutputPort(String name, Module parent)
-Map&lt;Class&lt;? extends Pipe&gt;, List&lt;Pipe&gt;&gt; getPipes()
-List&lt;Pipe&gt; getPipes(Class&lt;? extends Pipe&gt; pipeClass)
-Port getConnectedPort(Pipe pipe)
-outputToAllBytePipes(char[] data, int offset, int length)
-outputToAllBytePipes(byte[] data, int offset, int length)
-outputToAllBytePipes(byte[] data)
-outputToAllBytePipes(String data)
-close()
+OutputPort(int portID, int moduleID)
+OutputPort(int portID, int moduleID, Pipe pipe)
+writeToCharPipe(char[] data, int offset, int length)
+throws PipeTypeNotSupportedException, IOException
+
+writeToCharPipe(String data) throws
+PipeTypeNotSupportedException, IOException
+
+writeToBytePipe(byte[] data, int offset, int length) throws
+PipeTypeNotSupportedException, IOException
+
+writeToBytePipe(String data) throws
+PipeTypeNotSupportedException, IOException
 
 *@Override*
-addSupportedPipe(Class&lt;? extends Pipe&gt; pipeClass)
-addPipe() throws 
-	NotSupportedException, OccupiedException
-removePipe(Pipe pipe) throws
-	NotFoundException
-reset () throws IOException
-boolean isConnecterd()
+PortType getPortType()
+removePipe() throws PipeNotFoundException
+reset()
 --
 Responsibilities:
+Regulates the data transfer from the
+producer to the pipe (and the sink).
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -2799,22 +2787,23 @@ encapsulates common attributes of OutputPort and InputPort</panel_attributes>
       <x>1020</x>
       <y>492</y>
       <w>188</w>
-      <h>100</h>
+      <h>116</h>
     </coordinates>
     <panel_attributes>*/Port/*
 --
+setPortState(PortState pState)
+setPipe(Pipe pipe)
+Pipe getPipe()
 int getModuleID()
-//setPortID(String name)
 int getPortID()
-supportsPipe(Pipe pipe)
-supportsPipeClass(Class&lt;? extends Pipe&gt; pipeClass)
-Map&lt;String, Class&lt;? extends Pipe&gt;&gt; getSupportedPipeClasses()
-addPipe(Pipe pipe, Port connectingPort) throws
-	NotSupportedException, OccupiedException
+PortType getPortType()
+PortState getPortState()
+supportsPipe(Pipe pipe) throws PipeTypeNotSupportedException
+connectPorts(Pipe pipe, Port connecting Port) throws 
+PipeTypeNotSupportedException, OccupiedException
 removePipe(Pipe pipe) throws NotFoundException
 reset()
-getParent()
-boolean isConnected()
+createNewPipe(PipeType pType) throws OccupiedException
 --
 //Operation1
 layer=2</panel_attributes>
@@ -2823,73 +2812,87 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>976</x>
-      <y>584</y>
-      <w>112</w>
-      <h>92</h>
+      <x>1004</x>
+      <y>500</y>
+      <w>116</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
-layer=+1</panel_attributes>
-    <additional_attributes>260.0;10.0;10.0;210.0</additional_attributes>
+layer=3
+</panel_attributes>
+    <additional_attributes>270.0;10.0;10.0;30.0;10.0;420.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>952</x>
       <y>824</y>
-      <w>40</w>
-      <h>184</h>
+      <w>12</w>
+      <h>252</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;80.0;440.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;.
+layer=4</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;610.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1076</x>
+      <x>1040</x>
       <y>824</y>
-      <w>60</w>
-      <h>184</h>
+      <w>72</w>
+      <h>252</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;130.0;440.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;.
+layer=4</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;420.0;160.0;420.0;160.0;610.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>992</x>
-      <y>1028</y>
-      <w>924</w>
-      <h>468</h>
+      <x>980</x>
+      <y>1252</y>
+      <w>936</w>
+      <h>244</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;360.0;10.0;1150.0;2290.0;1150.0;1990.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;590.0;2320.0;590.0;1950.0;220.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1268</x>
-      <y>820</y>
+      <y>844</y>
       <w>124</w>
-      <h>120</h>
+      <h>176</h>
     </coordinates>
     <panel_attributes>*BytePipe*
 Package::core.common
 {IOException, PipedReader, PipedWriter}
 --
-// Variables
-PipeWriter pipeOutput
-PipeReader pipeInput
+// Constants.
+final PipeType pipeType
+// Variables.
+PipedOutputStream pipeOutput
+PipedInputStream pipeInput
+PipeState pipeState
 --
 // Methods
-BytePipe()
+BytePipe() throws IOException
 read(byte[] data, int offset, int length)
+throws IOException
+read() throws IOException
+
+write (byte data) throws IOException
 write(byte[] data, int offset, int length)
+throws IOException
 
 *@Override*
 readClosed()
 writeClosed()
 pipeReset()
+setPipeState(PipeState pState)
+PipeType getPipeType()
+PipeState getPipeState()
 --
 Responsibilities:
 read from byte buffer
@@ -2899,19 +2902,20 @@ write to byte buffer</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1268</x>
-      <y>536</y>
-      <w>56</w>
-      <h>292</h>
+      <x>1280</x>
+      <y>664</y>
+      <w>64</w>
+      <h>188</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;120.0;710.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;.
+layer=3</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0;140.0;450.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>944</x>
-      <y>484</y>
+      <x>1160</x>
+      <y>644</y>
       <w>48</w>
       <h>56</h>
     </coordinates>
@@ -2928,36 +2932,44 @@ layer=3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1244</x>
-      <y>1152</y>
-      <w>140</w>
-      <h>84</h>
+      <x>1192</x>
+      <y>1332</y>
+      <w>160</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>bg=red
 *ModulePortLinker*
 //Package::FatClass
-{Singularity; static}
+{Singleton; static}
 --
 // Variables
-MODULESTATE mState
-TreeMap &lt;moduleName, charPipe&gt; charPipes
-TreeMap &lt;moduleName, bytePipe&gt; bytePipes
-
+static int inputPortIDs;
+static TreeMap&lt;Integer, InputPort&gt; inputPorts
+static int outputPortIDs;
+static TreeMap&lt;Integer, OutputPort&gt; outputPorts
+private static ModulePortLinker modulePortLinker
 --
 // Methods
-linkOutput2Input()
-linkInput2Output()
+private ModulePortLinker()
+static ModulePortLinker getInstance()
+static int requestNewInputPortID(int moduleID)
+static int requestNewOutputPortID(int moduleID)
+static InputPort getInputPort(int inPortID)
+static OutputPort getOutputPort(int outPortID)
+static removeInputPort(int inPortID)
+static removeOutputPort(int outPortID)
+static linkPorts(int outPortID, int inPortID, PipeType pType)
 --
 Responsibilities:
-link the I/O ports of 2 modules, 
-or 1-to-many modules</panel_attributes>
+link the I/O ports of 2 modules to form 
+connected pairs</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1280</x>
-      <y>1136</y>
+      <x>1240</x>
+      <y>1316</y>
       <w>68</w>
       <h>16</h>
     </coordinates>
@@ -2971,15 +2983,16 @@ layer=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2256</x>
-      <y>660</y>
+      <x>1916</x>
+      <y>608</y>
       <w>168</w>
-      <h>212</h>
+      <h>216</h>
     </coordinates>
     <panel_attributes>*/Module/*
 bg=red
 Package::core
-{Abstract Class}
+{Abstract Class, implements Runnable,
+ModuleInterface}
 --
 // Constants.
 private final String MODULE_ID
@@ -3013,75 +3026,74 @@ ModuleType getModuleType()
 int getStorageID()
 --
 Responsibilities
-Template for a module</panel_attributes>
+Template for a concrete module implementation</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1796</x>
-      <y>552</y>
-      <w>536</w>
-      <h>116</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;1320.0;270.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1788</x>
-      <y>552</y>
-      <w>28</w>
-      <h>280</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;680.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1864</x>
-      <y>868</y>
-      <w>436</w>
-      <h>124</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>1070.0;10.0;880.0;290.0;10.0;290.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>2120</x>
-      <y>564</y>
-      <w>268</w>
-      <h>104</h>
+      <x>1768</x>
+      <y>476</y>
+      <w>188</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
-layer=2</panel_attributes>
-    <additional_attributes>10.0;10.0;650.0;240.0</additional_attributes>
+layer=4</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0;450.0;10.0;450.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1720</x>
+      <y>508</y>
+      <w>52</w>
+      <h>564</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+layer=3</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;10.0;10.0;1390.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1820</x>
+      <y>612</y>
+      <w>104</w>
+      <h>460</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>240.0;10.0;10.0;10.0;10.0;1130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1956</x>
+      <y>504</y>
+      <w>88</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+layer=4</panel_attributes>
+    <additional_attributes>200.0;10.0;10.0;10.0;10.0;260.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>2200</x>
-      <y>480</y>
-      <w>72</w>
-      <h>100</h>
+      <x>1804</x>
+      <y>504</y>
+      <w>120</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>/*MODULETYPE*/
 {Enumeration}
 --
-CDHIT_JOB
-QPMS9_JOB
-BOWTIE2_JOB
-SAMTOOLS_JOB
-TOMTOM_JOB
-SEQ_LOGO_JOB
-PMS_CONSENSUS_JOB
-NUCFREQ_JOB
-EXTERNAL_COMMAND
-UNDEFINED
+CDHIT_JOB, QPMS9_JOB, BOWTIE2_JOB,
+TOMTOM_JOB, SEQ_LOGO_JOB, 
+PMS_CONSENSUS_JOB, NUCFREQ_JOB, 
+EXTERNAL_COMMAND, 
+SAMTOOLS_JOB, INPUT_READER, 
+INPUT_TEST, TEST_TRANSFER, 
+TEST_OUTPUT, UNDEFINED 
 --
 layer=3</panel_attributes>
     <additional_attributes/>
@@ -3089,18 +3101,19 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2236</x>
-      <y>572</y>
-      <w>164</w>
-      <h>96</h>
+      <x>1856</x>
+      <y>508</y>
+      <w>80</w>
+      <h>108</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;390.0;220.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;.
+layer=4</panel_attributes>
+    <additional_attributes>10.0;10.0;180.0;10.0;180.0;250.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>1868</x>
+      <x>2136</x>
       <y>492</y>
       <w>64</w>
       <h>68</h>
@@ -3120,52 +3133,60 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1916</x>
-      <y>548</y>
-      <w>428</w>
+      <x>2072</x>
+      <y>496</y>
+      <w>108</w>
       <h>120</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;1050.0;280.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;.
+layer=4</panel_attributes>
+    <additional_attributes>250.0;10.0;110.0;10.0;110.0;220.0;10.0;220.0;10.0;280.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1248</x>
-      <y>1000</y>
-      <w>148</w>
-      <h>84</h>
+      <x>1236</x>
+      <y>1064</y>
+      <w>156</w>
+      <h>160</h>
     </coordinates>
-    <panel_attributes>*CheckExternalProgrammes*
+    <panel_attributes>*CheckExternalPrograms*
 bg=red
-Package::core.common
+Package::core
 //{}
 --
 // Variables
-final String SAMTOOLS
-final String CDHIT
-final String QPMS9
-final String BOWTIE2
-final String TOMTOM
-
 String configurationPath
-String configEntries
+Map &lt;ExtProgType, ExternalProgram&gt; extProgMap
 --
 // Methods
-CheckExternalProgrammes(String configPath)
+CheckExternalPrograms(String configPath)
+
+Map &lt;ExtProgType, ExternalProgram&gt; 
+getExternalProgrammes()
+
+testExtProgs() throws SystemNotSupportedException,
+VersionNotCompatibleException
+
+boolean testTomtom() throws IOException
+boolean testCdhit() throws IOException
+boolean testBowtie2() throws IOException
+boolean testSamtools() throws IOException
+
 readConfig(String cPath)
-
-
+ExtProgType identifyExtProgType (String input)
 --
 Responsibilities:
-check whether external programmes are available</panel_attributes>
+Check whether external programs are available 
+and versions are compatible.
+Check if the OS is compatible.</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2264</x>
-      <y>1156</y>
+      <x>1888</x>
+      <y>1160</y>
       <w>124</w>
       <h>68</h>
     </coordinates>
@@ -3186,10 +3207,10 @@ unchecked exception for failed commands</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>2388</x>
-      <y>1104</y>
+      <x>1024</x>
+      <y>456</y>
       <w>68</w>
-      <h>28</h>
+      <h>24</h>
     </coordinates>
     <panel_attributes>*done*
 fontsize=50
@@ -3200,36 +3221,36 @@ layer=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1452</x>
-      <y>836</y>
-      <w>160</w>
-      <h>172</h>
+      <x>1424</x>
+      <y>1032</y>
+      <w>212</w>
+      <h>92</h>
     </coordinates>
     <panel_attributes>bg=red
 *CoreController*
-Package::core.common
+Package::core
 {Singleton}
 --
 // Variables
-
+static CoreController coreController
 --
 // Methods
 private CoreController()
-getInstance()
-checkExternalProgrammes()
-generateModuleBuilder()
-
-
+static CoreController getInstance()
+static ExternalProgramHandler checkExternalPrograms()
+private static ExternalProgramHandler generateExternalProgramHandler()
+static retrievePhysicalConstants()
+static ModuleBuilder generateModuleBuilder()
 --
 Responsibilities:
-builds core objects</panel_attributes>
+builds ModuleBuilder and checkExternalPrograms</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1500</x>
-      <y>816</y>
+      <x>1504</x>
+      <y>1016</y>
       <w>68</w>
       <h>16</h>
     </coordinates>
@@ -3259,8 +3280,8 @@ fg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1400</x>
-      <y>1568</y>
+      <x>1364</x>
+      <y>1552</y>
       <w>168</w>
       <h>108</h>
     </coordinates>
@@ -3289,13 +3310,14 @@ module.CdHitJob</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1828</x>
-      <y>576</y>
-      <w>400</w>
-      <h>256</h>
+      <x>1796</x>
+      <y>508</y>
+      <w>72</w>
+      <h>564</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>980.0;10.0;10.0;620.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;.
+layer=4</panel_attributes>
+    <additional_attributes>160.0;10.0;10.0;10.0;10.0;1390.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
@@ -3314,57 +3336,47 @@ layer=0</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1492</x>
-      <y>1004</y>
-      <w>20</w>
-      <h>572</h>
+      <x>1520</x>
+      <y>1120</y>
+      <w>32</w>
+      <h>440</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;30.0;1410.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+layer=4</panel_attributes>
+    <additional_attributes>60.0;10.0;60.0;490.0;10.0;490.0;10.0;1080.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1608</x>
-      <y>884</y>
-      <w>108</w>
+      <x>1632</x>
+      <y>1072</y>
+      <w>56</w>
       <h>12</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>250.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>120.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1392</x>
-      <y>1028</y>
-      <w>384</w>
+      <x>1076</x>
+      <y>648</y>
+      <w>112</w>
       <h>28</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;50.0;940.0;50.0;940.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>968</x>
-      <y>532</y>
-      <w>16</w>
-      <h>144</h>
-    </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;20.0;340.0</additional_attributes>
+    <additional_attributes>260.0;10.0;10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>2252</x>
-      <y>1108</y>
-      <w>656</w>
-      <h>352</h>
+      <x>1864</x>
+      <y>1112</y>
+      <w>1160</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>fontsize=40
-core.exceptions
+*core.exceptions*
 fg=black
 layer=0</panel_attributes>
     <additional_attributes/>
@@ -3372,17 +3384,17 @@ layer=0</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>1116</x>
-      <y>600</y>
+      <x>1352</x>
+      <y>644</y>
       <w>48</w>
       <h>56</h>
     </coordinates>
-    <panel_attributes>*/PORTSTATUS/*
+    <panel_attributes>*/PIPESTATE/*
 {Enumeration}
 --
-READY
-OCCUPIED
-CONNECTED
+STARTING
+PROCESSING
+FINISHED
 --
 layer=3</panel_attributes>
     <additional_attributes/>
@@ -3390,20 +3402,20 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>992</x>
-      <y>640</y>
-      <w>152</w>
-      <h>36</h>
+      <x>1072</x>
+      <y>500</y>
+      <w>200</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=+1</panel_attributes>
-    <additional_attributes>360.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>480.0;10.0;390.0;50.0;390.0;310.0;10.0;310.0;10.0;420.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>928</x>
-      <y>592</y>
+      <x>940</x>
+      <y>492</y>
       <w>48</w>
       <h>52</h>
     </coordinates>
@@ -3419,140 +3431,70 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>948</x>
-      <y>632</y>
-      <w>20</w>
-      <h>44</h>
+      <x>908</x>
+      <y>496</y>
+      <w>60</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;30.0;90.0</additional_attributes>
+    <additional_attributes>130.0;10.0;10.0;10.0;10.0;430.0</additional_attributes>
   </element>
   <element>
-    <id>UMLInterface</id>
+    <id>UMLClass</id>
     <coordinates>
-      <x>2344</x>
+      <x>2484</x>
       <y>480</y>
-      <w>72</w>
-      <h>44</h>
-    </coordinates>
-    <panel_attributes>/*ThreadingInterface*/
-{extends Runnable}
---
-synchronized run()
---
-layer=2</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>2496</x>
-      <y>544</y>
-      <w>264</w>
-      <h>116</h>
-    </coordinates>
-    <panel_attributes>*/AbstractThreading/*
-bg=red
-Package::core
-{Abstract Class}
---
-// Variables
-ModuleState mState
-final String MODULE_ID
-final String STORRAGE_ID
-final String MODULE_TYPE
-JOBSTATUS jobState
---
-// Methods
-AbstractThreading()
-
-*@Override*
-run()
---
-Responsibilities:
-Template for thread control</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>2412</x>
-      <y>516</y>
       <w>208</w>
-      <h>36</h>
+      <h>240</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;500.0;70.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>2368</x>
-      <y>516</y>
-      <w>32</w>
-      <h>152</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;360.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>2504</x>
-      <y>820</y>
-      <w>264</w>
-      <h>116</h>
-    </coordinates>
-    <panel_attributes>*/ModuleNode/*
+    <panel_attributes>*ModuleNode*
 bg=red
 Package::core
-{Abstract Class}
+{implements ModuleNodeInterface;
+consumer-producer pattern}
 --
 // Variables
-ModuleState mState
-final String MODULE_ID
-final String STORRAGE_ID
-final String MODULE_TYPE
-JOBSTATUS jobState
+ModuleObserverInterface moduleObserver
+String moduleNodeName
+int producerID
+ModuleState producerState
+int consumerID
+ModuleState consumerState
 --
 // Methods
-AbstractThreading()
+ModuleNode(int moduleID, 
+ModuleObserverInterface moduleObserver)
+
+ModuleNode(int producer, int consumer, 
+ModuleObserver moduleObserver)
+
+String getModuleNodeName()
+ModuleState getModuleState(int moduleID)
+throws NeitherConsumerProducerException
+
+int getConsumerID()
+ModuleState getConsumerState()
+int getProducerID()
+ModuleState getProducerState()
 
 *@Override*
-run()
+connect() throws PipeTypeNotSupportedException,
+OccupiedException
+
+registerModuleObserver(ModuleObserverInterface moduleObserver)
+removeFromModuleObserver()
+notifyModuleObserver()
 --
 Responsibilities:
-Node representing the individual 
-thread(s) per module</panel_attributes>
+Node representing producer consumer 
+pairs per module</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>2420</x>
-      <y>628</y>
-      <w>84</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;230.0;190.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>2596</x>
-      <y>656</y>
-      <w>36</w>
-      <h>168</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;70.0;400.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2440</x>
-      <y>1156</y>
+      <x>2036</x>
+      <y>1160</y>
       <w>156</w>
       <h>68</h>
     </coordinates>
@@ -3575,8 +3517,8 @@ roducer and consumer do not form a pair.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2652</x>
-      <y>1156</y>
+      <x>2212</x>
+      <y>1160</y>
       <w>156</w>
       <h>68</h>
     </coordinates>
@@ -3591,16 +3533,15 @@ Package::core.exceptions
 NotFoundException(String message)
 --
 Responsibilities:
-unchecked exception not found data.
-*Responsiblities currently unknown;*
-*may be obsolete.*</panel_attributes>
+Unchecked exception not found Pipe.
+Thrown exception in case of a missing pipe.</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2648</x>
-      <y>1264</y>
+      <x>2720</x>
+      <y>1160</y>
       <w>120</w>
       <h>68</h>
     </coordinates>
@@ -3621,8 +3562,8 @@ Uncheck exception for occupied pipes.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2264</x>
-      <y>1268</y>
+      <x>2388</x>
+      <y>1160</y>
       <w>148</w>
       <h>68</h>
     </coordinates>
@@ -3645,8 +3586,8 @@ Unchecked exception for unsupported OS.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2264</x>
-      <y>1384</y>
+      <x>2852</x>
+      <y>1160</y>
       <w>148</w>
       <h>68</h>
     </coordinates>
@@ -3667,8 +3608,8 @@ Unchecked exception for incompatible pipes.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2440</x>
-      <y>1264</y>
+      <x>2556</x>
+      <y>1160</y>
       <w>148</w>
       <h>68</h>
     </coordinates>
@@ -3686,5 +3627,471 @@ Responsibilities:
 Unchecked exception for not supported 
 versions of external programs.</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>1980</x>
+      <y>496</y>
+      <w>116</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>/*ModuleInterface*/
+--
+setModuleState(ModuleState mState)
+ModuleState getModuleState()
+int getModuleID()
+ModuleType getModuleType()
+int getStorageID()
+--
+layer=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2324</x>
+      <y>484</y>
+      <w>168</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0;400.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>2260</x>
+      <y>748</y>
+      <w>148</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>/*ModuleObserverInterface*/
+--
+update(int producerID, ModuleState producerState, 
+int consumerID, ModuleState consumerState)
+--
+layer=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>1540</x>
+      <y>500</y>
+      <w>160</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>*/ModuleBuilderInterface/*
+--
+Module createNewModule(int moduleID, 
+int storageID, ModuleType mType, String[] command)
+
+createNewInputPort(String moduleID)
+createNewOutputPort(String moduleID)
+int requestStorage()
+destroyModule(String moduleID)
+--
+//Operation1
+layer=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>1244</x>
+      <y>496</y>
+      <w>48</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>*/PORTSTATE/*
+{Enumeration}
+--
+READY
+OCCUPIED
+CONNECTED
+--
+layer=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1116</x>
+      <y>496</y>
+      <w>156</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+layer=3</panel_attributes>
+    <additional_attributes>370.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>964</x>
+      <y>492</y>
+      <w>152</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+layer=4
+</panel_attributes>
+    <additional_attributes>10.0;20.0;360.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>2016</x>
+      <y>1112</y>
+      <w>68</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>*done*
+fontsize=50
+bg=black
+layer=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1280</x>
+      <y>648</y>
+      <w>100</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+layer=3</panel_attributes>
+    <additional_attributes>230.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1184</x>
+      <y>648</y>
+      <w>100</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+layer=4
+</panel_attributes>
+    <additional_attributes>10.0;10.0;230.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1332</x>
+      <y>648</y>
+      <w>48</w>
+      <h>204</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+layer=3</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;50.0;10.0;490.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1220</x>
+      <y>664</y>
+      <w>64</w>
+      <h>188</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+layer=3</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;10.0;10.0;450.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1232</x>
+      <y>648</y>
+      <w>148</w>
+      <h>204</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+layer=3</panel_attributes>
+    <additional_attributes>350.0;10.0;280.0;50.0;280.0;260.0;10.0;260.0;10.0;490.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1184</x>
+      <y>648</y>
+      <w>152</w>
+      <h>204</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+layer=3</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;60.0;80.0;280.0;360.0;280.0;360.0;490.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1388</x>
+      <y>1072</y>
+      <w>44</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+layer=4</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1916</x>
+      <y>964</y>
+      <w>224</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>bg=red
+*ExternalCommandHandler*
+Package::core
+{extends Module}
+--
+// Variables
+String[] command
+--
+// Methods
+ExternalCommandHandler(int moduleID, int stroageID, ModuleType mType,
+int iPortID, int oPortID, String[] cmd)
+CommandState callCommand() throws CommandFailedException
+
+*@Override*
+run()
+--
+Responsibilities:
+Parse commands for external programs.
+Run external programs.
+Observe state of external programs.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1924</x>
+      <y>820</y>
+      <w>12</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+layer=4</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2000</x>
+      <y>1060</y>
+      <w>56</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;250.0;120.0;130.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>2208</x>
+      <y>1364</y>
+      <w>68</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>fg=red
+fontsize=20
+*SINGLETON*
+style=wordwrap
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2124</x>
+      <y>1380</y>
+      <w>220</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>bg=red
+*ListExternalPrograms*
+Package::core
+{Singleton}
+--
+// Variables
+static ListExternalPrograms listExternalPrograms
+--
+// Methods
+private ListExternalPrograms()
+static ListExternalPrograms getInstance()
+static setExternalProgMap (Map &lt;ExtProgType, ExternalProgram&gt; extMap)
+--
+Responsibilities:
+Handling of information about external programs.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1780</x>
+      <y>1336</y>
+      <w>1128</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+layer=4</panel_attributes>
+    <additional_attributes>2800.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>2540</x>
+      <y>456</y>
+      <w>108</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>fg=red
+fontsize=20
+*PRODUCER CONSUMER*
+*VIEW*
+style=wordwrap
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2488</x>
+      <y>752</y>
+      <w>156</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>*ModuleObserver*
+bg=red
+Package::core
+{Observer pattern}
+--
+// Variables
+
+--
+// Methods
+ModuleObserver()
+update(int producerID, ModuleState producerState,
+int consumerID, ModuleState consumerState)
+--
+Responsibilities:
+Observes all modules to which this observer
+is registered. Displays logging information
+about the states of the jobs/modules.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>2544</x>
+      <y>740</y>
+      <w>64</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>fg=red
+fontsize=20
+*OBSERVER*
+style=wordwrap
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2332</x>
+      <y>752</y>
+      <w>168</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+layer=4</panel_attributes>
+    <additional_attributes>10.0;10.0;400.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1140</x>
+      <y>1252</y>
+      <w>60</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;230.0;130.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>996</x>
+      <y>1252</y>
+      <w>204</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;240.0;490.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1416</x>
+      <y>1168</y>
+      <w>116</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>bg=red
+*PhysicalConstants*
+{Singleton; static}
+--
+// Variables
+PhysicalConstants physicalConstants
+String osName
+int coreNum
+long freeRamSize
+--
+// Methods
+private PhysicalConstants()
+static PhysicalConstants getInstance()
+static testOS()
+static testCPUcores()
+static testFreeRAM()
+static String getOsName()
+static int getCpuCoreNum()
+static long getFreeMem()
+--
+Responsibilities:
+Test key-parameters of the OS and PC.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>1448</x>
+      <y>1156</y>
+      <w>68</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>fg=red
+fontsize=20
+*SINGLETON*
+style=wordwrap
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1388</x>
+      <y>1176</y>
+      <w>36</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+layer=4</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

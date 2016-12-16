@@ -4,7 +4,7 @@ public class Bowtie2 implements ExternalProgram {
 	
 	// Constants.
 	
-	private final ExtProgType EXT_PPROG_TYPE; 
+	private final ExtProgType EXT_PROG_TYPE; 
 	
 	
 	// Path to executable.
@@ -35,7 +35,7 @@ public class Bowtie2 implements ExternalProgram {
 	public Bowtie2 ( String path, String exe, String version) {
 		this.PATH = path;
 		this.EXECUTABLE = exe;
-		this.EXT_PPROG_TYPE = ExtProgType.BOWTIE2;
+		this.EXT_PROG_TYPE = ExtProgType.BOWTIE2;
 		this.VERSION = version;
 		this.seenVersion="";
 	}
@@ -52,7 +52,7 @@ public class Bowtie2 implements ExternalProgram {
 	// Getters.
 	@Override
 	public ExtProgType getProgType() {
-		return this.EXT_PPROG_TYPE;
+		return this.EXT_PROG_TYPE;
 	}
 	
 	@Override

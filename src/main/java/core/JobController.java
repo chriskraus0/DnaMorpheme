@@ -31,10 +31,10 @@ public class JobController {
 	// Variables.
 	
 	// HashMap to save all moduleNodes.
-	Map <String, ModuleNode> moduleNodeMap;
+	private Map <String, ModuleNode> moduleNodeMap;
 	
 	// HashMap to save all threads.
-	Map <Integer, Thread> threadMap;
+	private Map <Integer, Thread> threadMap;
 	
 	// Constructors.
 	public JobController () {

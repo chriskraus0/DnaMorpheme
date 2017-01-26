@@ -2091,7 +2091,7 @@ layer=2</panel_attributes>
       <w>110</w>
       <h>105</h>
     </coordinates>
-    <panel_attributes>/STORAGETYPE/
+    <panel_attributes>*/STORAGETYPE/*
 {Enumeration}
 --
 FASTASEQUENCE
@@ -3120,6 +3120,7 @@ boolean testTomtom() throws IOException
 boolean testCdhit() throws IOException
 boolean testBowtie2() throws IOException
 boolean testSamtools() throws IOException
+boolean testWorkpath() throws IOException
 
 readConfig(String cPath)
 ExtProgType identifyExtProgType (String input)
@@ -4163,7 +4164,7 @@ external program.</panel_attributes>
       <x>2175</x>
       <y>1975</y>
       <w>60</w>
-      <h>95</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>*/ExtProgType/*
 {Enumeration}
@@ -4173,6 +4174,7 @@ CDHIT
 QPMS9
 BOWTIE2
 TOMTOM
+WORKPATH
 UNDEFINED</panel_attributes>
     <additional_attributes/>
   </element>

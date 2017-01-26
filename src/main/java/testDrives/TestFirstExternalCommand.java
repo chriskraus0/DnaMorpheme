@@ -34,7 +34,9 @@ public class TestFirstExternalCommand {
 			// Check for the existing configuration file.
 			ListExternalPrograms externalProgramHandler = CoreController.checkExternalProgrammes();
 			
-			//
+			// Create a storage in the provided working directory path.
+			
+			
 		}
 
 }

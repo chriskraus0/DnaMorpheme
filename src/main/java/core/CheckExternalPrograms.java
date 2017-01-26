@@ -25,6 +25,7 @@ import extProgs.Bowtie2;
 import extProgs.Cdhit;
 import extProgs.Qpms9;
 import extProgs.Tomtom;
+import extProgs.Workpath;
 
 // Project-specific exceptions.
 import core.exceptions.SystemNotSupportedException;
@@ -150,6 +151,22 @@ public class CheckExternalPrograms {
 				throw new VersionNotCompatibleException("ERROR: The current version of tomtom \""
 						+ this.extProgMap.get(ExtProgType.TOMTOM).getSeenVersion() 
 						+ "\" is not compatible with this program.");
+			}
+		} catch (IOException ie) {
+			System.err.println("ERROR: " +ie.getMessage());
+			ie.printStackTrace();
+		}
+		
+		try {
+			boolean workpathState = this.testWorkpath();
+			if (workpathState) {
+				System.out.println("LOG: Working directory \"" 
+						+ this.extProgMap.get(ExtProgType.WORKPATH).getPath()
+						+ "\" is accessible.");
+			} else {
+				throw new VersionNotCompatibleException("ERROR: The working directory \""
+						+ this.extProgMap.get(ExtProgType.WORKPATH).getPath() 
+						+ "\" is not reachable.");
 			}
 		} catch (IOException ie) {
 			System.err.println("ERROR: " +ie.getMessage());
@@ -421,6 +438,60 @@ public class CheckExternalPrograms {
 	}
 	
 	/**
+	 * Test the configured path to the working directory for this program.
+	 * @return boolean workpathAvailable
+	 * @throws IOException
+	 */
+	private boolean testWorkpath() throws IOException {
+		boolean isCompatible = false;
+		
+		String workPath = this.extProgMap.get(ExtProgType.WORKPATH).getPath();
+		String[] command = new String[18];
+		
+		// Test for the existing folder and whether it is accessible via the bash builtin "test".
+		command[0] = "if";
+		command[1] = "test";
+		command[2] = "-d";
+		command[3] = workPath;
+		command[4] = "&&";
+		command[5] = "test";
+		command[6] = "-x";
+		command[7] = workPath;
+		command[8] = ";";
+		command[9] = "then";
+		command[10] = "echo";
+		command[11] = "\"TRUE\"";
+		command[12] = ";";
+		command[13] = "else";
+		command[14] = "echo";
+		command[15] = "\"FALSE\"";
+		command[16] = ";";
+		command[17] = "fi";
+		
+		// Define local variable line to save read lines.
+	    String line;
+	    
+	    // Start an external process with the pre-defined command array.
+	    Process process = Runtime.getRuntime().exec(command);
+	    
+	    // Read the STDIN from the unix process.
+	    Reader r = new InputStreamReader(process.getInputStream());
+	    
+	    // Read line by line using the BufferedReader.
+	    BufferedReader in = new BufferedReader(r);
+	    while((line = in.readLine()) != null) {
+	    	
+	    	// If the folder exists, is a folder and is accessible set isCompatible to true. 
+	    	if (line.equals("TRUE")) {
+	    			isCompatible = true;
+	    	}
+	    }
+	    in.close();
+	    
+	    return isCompatible;
+	}
+	
+	/**
 	 * Reads configuration file and keeps track of paths for required programs.
 	 * @param String cPath
 	 */
@@ -479,6 +550,11 @@ public class CheckExternalPrograms {
 						ExternalProgram newTomtom = new Tomtom (
 								configEntry[1], configEntry[2], configEntry[3]);
 						this.extProgMap.put(ExtProgType.TOMTOM, newTomtom);
+						break;
+					case WORKPATH:
+						ExternalProgram newWorkpath = new Workpath (
+								configEntry[1], configEntry[2], configEntry[3]);
+						this.extProgMap.put(ExtProgType.WORKPATH, newWorkpath);
 						break;
 					case UNDEFINED:
 						System.out.println("WARN: Entry \"" + line + "\" unknown");

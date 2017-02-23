@@ -79,6 +79,9 @@ public class TestCoreControllerExternalProgrammes {
 				+ "Path: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.TOMTOM).getPath() + "\n"
 				+ "Executable: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.TOMTOM).getExecutable() + "\n"
 				+ "Version: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.TOMTOM).getVersion());
+		
+		System.out.println(ExtProgType.WORKPATH.toString() + "\n"
+				+ "Path: " + ListExternalPrograms.getExternalProgrammes(ExtProgType.WORKPATH).getPath() + "\n");
 			
 	}
 }

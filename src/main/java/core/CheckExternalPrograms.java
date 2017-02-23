@@ -10,6 +10,9 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 // Java utility imports.
 import java.util.Map;
@@ -446,47 +449,12 @@ public class CheckExternalPrograms {
 		boolean isCompatible = false;
 		
 		String workPath = this.extProgMap.get(ExtProgType.WORKPATH).getPath();
-		String[] command = new String[18];
 		
-		// Test for the existing folder and whether it is accessible via the bash builtin "test".
-		command[0] = "if";
-		command[1] = "test";
-		command[2] = "-d";
-		command[3] = workPath;
-		command[4] = "&&";
-		command[5] = "test";
-		command[6] = "-x";
-		command[7] = workPath;
-		command[8] = ";";
-		command[9] = "then";
-		command[10] = "echo";
-		command[11] = "\"TRUE\"";
-		command[12] = ";";
-		command[13] = "else";
-		command[14] = "echo";
-		command[15] = "\"FALSE\"";
-		command[16] = ";";
-		command[17] = "fi";
+		Path wPath = Paths.get(workPath);
 		
-		// Define local variable line to save read lines.
-	    String line;
-	    
-	    // Start an external process with the pre-defined command array.
-	    Process process = Runtime.getRuntime().exec(command);
-	    
-	    // Read the STDIN from the unix process.
-	    Reader r = new InputStreamReader(process.getInputStream());
-	    
-	    // Read line by line using the BufferedReader.
-	    BufferedReader in = new BufferedReader(r);
-	    while((line = in.readLine()) != null) {
-	    	
-	    	// If the folder exists, is a folder and is accessible set isCompatible to true. 
-	    	if (line.equals("TRUE")) {
-	    			isCompatible = true;
-	    	}
-	    }
-	    in.close();
+		if (Files.exists(wPath)) {
+			isCompatible = true;
+		}
 	    
 	    return isCompatible;
 	}
@@ -605,6 +573,8 @@ public class CheckExternalPrograms {
 			return ExtProgType.QPMS9;
 		else if (input.equals(ExtProgType.TOMTOM.toString()))
 			return ExtProgType.TOMTOM;
+		else if (input.equals(ExtProgType.WORKPATH.toString()))
+			return ExtProgType.WORKPATH;
 		
 		// If it is nothing from above return "UNDEFINED".
 		return ExtProgType.UNDEFINED;

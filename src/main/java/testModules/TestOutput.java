@@ -19,6 +19,8 @@ public class TestOutput extends Module {
 	private String[] command;
 	private ModuleNode moduleNode;
 	
+	private String finalOutput;
+	
 	// Constructors.
 	public TestOutput(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
@@ -114,9 +116,15 @@ public class TestOutput extends Module {
 		System.out.println("Here is the output:");
 		System.out.println(input);
 		
+		this.finalOutput = input;
+		
 		cState = CommandState.SUCCESS;
 				
 		return cState;
+	}
+	
+	public String returnFinalOutput() {
+		return this.finalOutput;
 	}
 
 }

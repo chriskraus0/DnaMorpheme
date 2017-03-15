@@ -22,7 +22,7 @@ import testModules.TestTransferModule;
 import testModules.TestOutput;
 
 /**
- * The actual factory which creates new modules.
+ * ModuleBuilder: The actual factory which creates new modules.
  * @author christopher
  *
  */
@@ -64,7 +64,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	 * Take the moduleID of this module and the connected module ID.
 	 * @param int moduleID
 	 * @param int connectedModuleID
-	 * @return TODO
+	 * @return String nodeName
 	 */
 	public String prepareJobs (int producerID, int consumerID) {
 		String nodeName = this.jobController.addNewModuleNode(producerID, consumerID);
@@ -127,7 +127,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newInputReader.getModuleID(), newInputReader);
 		
-		// TODO: implement "connectModuleObserver" method
+		// TODO: implement "connectModuleObserver" method.
 		//this.connectModuleObserver(ModuleBuilder.moduleMap.get(moduleID));
 		
 		return moduleID;

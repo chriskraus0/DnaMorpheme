@@ -1,17 +1,36 @@
 package testModules;
 
-import java.io.IOException;
+import java.util.logging.Level;
 
-import core.CharPipe;
 //Imports.
+
+// Java utility imports.
+import java.util.logging.Logger;
+
+// Project-specific I/O imports.
+import core.CharPipe;
 import core.InputPort;
+
+// Project-specific imports.
 import core.common.CommandState;
 import core.common.Module;
 import core.ModuleNode;
 import core.common.ModuleState;
 import core.common.ModuleType;
+
+//Java exceptions.
+import java.io.IOException;
+
+// Project-specific exceptions.
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
+
+/**
+ * Test module which shows the data which it received from a source
+ * via an import port and a char pipe.
+ * @author christopher
+ *
+ */
 
 public class TestOutput extends Module {
 
@@ -21,10 +40,16 @@ public class TestOutput extends Module {
 	
 	private String finalOutput;
 	
+	// Logger.
+	private Logger logger;
+	
 	// Constructors.
 	public TestOutput(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
+		
+		// Call the Logger factory to get a new logger.
+		this.logger = Logger.getLogger(this.getClass().getName());
 	}
 	
 	// Methods.
@@ -38,7 +63,7 @@ public class TestOutput extends Module {
 				this.moduleNode.notifyModuleObserver();
 			}
 		} catch (CommandFailedException ce) {
-			System.err.println(ce.getMessage());
+			this.logger.log(Level.SEVERE, ce.getMessage());
 			ce.printStackTrace();
 		}
 	}
@@ -49,10 +74,17 @@ public class TestOutput extends Module {
 		
 		this.moduleNode = this.getSuperModuleNode();
 		
+		// Variable which holds the command string.
+		String cmdString = "";
+		
+		for (String i : this.command) 
+			cmdString += i;
+		
 		// Test system output.
-		System.out.println("QPMS9 with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :");
-		System.out.println("Command " + this.command + " called");
-		System.out.println("Associated storageID " + this.getStorageID());
+		this.logger.log(Level.INFO, "QPMS9 with moduleID \"" + this.getModuleID() + "\" and storageID \"" 
+				+ this.getStorageID() + "\" :\n"
+				+ "Command \"" + cmdString + "\" called.\n"
+				+ "Associated storageID " + this.getStorageID());
 		
 		
 		// Save input from pipe
@@ -99,22 +131,22 @@ public class TestOutput extends Module {
 			
 			
 		} catch (PipeTypeNotSupportedException pe) {
-			System.err.println(pe.getMessage());
+			this.logger.log(Level.SEVERE, pe.getMessage());
 			pe.printStackTrace();
 		}
 		
 		catch (IOException ie) {
-			System.err.println(ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		} 			
 		
 		catch (InterruptedException intE) {
-			System.err.println("Error: " + intE.getMessage());
+			this.logger.log(Level.SEVERE, intE.getMessage());
 			intE.printStackTrace();
 		}
 		
-		System.out.println("Here is the output:");
-		System.out.println(input);
+		this.logger.log(Level.INFO, "Here is the output:");
+		this.logger.log(Level.INFO, input);
 		
 		this.finalOutput = input;
 		

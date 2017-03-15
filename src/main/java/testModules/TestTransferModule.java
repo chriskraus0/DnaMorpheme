@@ -1,12 +1,13 @@
 package testModules;
 
-import core.common.CommandState;
-
 // Imports.
 
-import java.io.IOException;
+// Java utility imports.
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 // Project specific imports.
+import core.common.CommandState;
 import core.common.Module;
 import core.common.ModuleState;
 import core.common.ModuleType;
@@ -15,10 +16,21 @@ import core.InputPort;
 import core.OutputPort;
 import core.ModuleNode;
 
+// Java exceptions.
+import java.io.IOException;
+
 // Project specific exceptions.
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
 
+/**
+ * Test module which transfers data from a source to a sink via 
+ * a input and output port and two pipes. This module also 
+ * manipulates the data to proof that output is different than 
+ * the input.
+ * @author christopher
+ *
+ */
 public class TestTransferModule extends Module {
 	// Variables.
 	
@@ -28,10 +40,16 @@ public class TestTransferModule extends Module {
 	
 	private String input;
 	
+	// Logger.
+	private Logger logger;
+	
 	// Constructors.
 	public TestTransferModule(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
+		
+		// Call Logger factory to get a new logger.
+		this.logger = Logger.getLogger(TestTransferModule.class.getName());
 	}
 	
 	// Methods.
@@ -39,8 +57,7 @@ public class TestTransferModule extends Module {
 	// Setters.
 		
 	// End setters.
-	
-	
+		
 	@Override
 	public void run () {
 		try {
@@ -50,7 +67,7 @@ public class TestTransferModule extends Module {
 				this.moduleNode.notifyModuleObserver();
 			}
 		} catch (CommandFailedException ce) {
-			System.err.println(ce.getMessage());
+			this.logger.log(Level.SEVERE, ce.getMessage());
 			ce.printStackTrace();
 		}
 	}
@@ -60,11 +77,18 @@ public class TestTransferModule extends Module {
 		this.moduleNode = this.getSuperModuleNode();
 		
 		CommandState cState = CommandState.STARTING;
-			
+		
+		// Save the command string.
+		String cmdString = "";
+		
+		for (String i : this.command) 
+			cmdString += i;
+		
 		// Test system output.
-		System.out.println("CdHitJob with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :");
-		System.out.println("Command " + this.command + " called");
-		System.out.println("Associated storageID " + this.getStorageID());
+		this.logger.log(Level.INFO, "CdHitJob with moduleID \"" + this.getModuleID() + "\" and storageID \"" 
+				+ this.getStorageID() + "\" :\n" 
+				+ "Command \"" + cmdString + "\" called.\n"
+				+ "Associated storageID " + this.getStorageID());
 		
 		// Save input from pipe
 		this.input = "";
@@ -111,15 +135,15 @@ public class TestTransferModule extends Module {
 		} 
 	
 		catch (PipeTypeNotSupportedException pe) {
-			System.err.println(pe.getMessage());
+			this.logger.log(Level.SEVERE, pe.getMessage());
 			pe.printStackTrace();
 		}
 		
 		catch (IOException ie) {
-			System.err.println(ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		} catch (InterruptedException intE) {
-			System.err.println(intE.getMessage());
+			this.logger.log(Level.SEVERE, intE.getMessage());
 			intE.printStackTrace();
 		}
 	
@@ -144,10 +168,10 @@ public class TestTransferModule extends Module {
 			
 			
 		} catch (PipeTypeNotSupportedException pe) {
-			System.err.println(pe.getMessage());
+			this.logger.log(Level.SEVERE, pe.getMessage());
 			pe.printStackTrace();
 		} catch (IOException ie) {
-			System.err.println(ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		} 
 			

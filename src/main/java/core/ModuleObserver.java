@@ -3,6 +3,8 @@ package core;
 // Imports.
 
 // Java utility imports.
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 // Project specific imports.
 import core.common.ModuleState;
@@ -16,13 +18,19 @@ import core.common.ModuleObserverInterface;
  *
  */
 public class ModuleObserver implements ModuleObserverInterface {
-	// TODO: Incorporate this class for the Producer-Consumer pattern or the Model-View-Controller pattern
+	// TODO: Incorporate this class for the Producer-Consumer pattern or the Model-View-Controller pattern.
 	// (here known as ModuleObserver.java, ModuleNode.java and JobState.java)
 	
 	// Variables.
+	
+	// Logger.
+	private Logger logger;
 		
 	// Constructors.
 	public ModuleObserver () {
+		
+		// Call Logger factory to create new logger.
+		this.logger = Logger.getLogger(this.getClass().getName());
 
 	}
 	
@@ -39,9 +47,9 @@ public class ModuleObserver implements ModuleObserverInterface {
 	// Overridden methods.
 	@Override
 	public void update(int producerID, ModuleState producerState, int consumerID, ModuleState consumerState) {
-		System.out.println("LOG: ModuleNodes with IDs: \"" + producerID + "\" \"" + consumerID + "\"");
-		System.out.println("LOG: Producer with ID \"" + producerID + "\" has state: \"" + producerState.toString() + "\"");
-		System.out.println("LOG: Consumer with ID \"" + consumerID + "\" has state: \"" + consumerState.toString() + "\"");
+		this.logger.log(Level.INFO, "ModuleNodes with IDs: \"" + producerID + "\" \"" + consumerID + "\"");
+		this.logger.log(Level.INFO, "Producer with ID \"" + producerID + "\" has state: \"" + producerState.toString() + "\"");
+		this.logger.log(Level.INFO, "Consumer with ID \"" + consumerID + "\" has state: \"" + consumerState.toString() + "\"");
 		
 	}
 	

@@ -1,6 +1,11 @@
 package core;
 
+import java.util.logging.Level;
+
 // Imports.
+
+// Java utility imports.
+import java.util.logging.Logger;
 
 // Java I/O imports.
 import java.io.FileInputStream;
@@ -23,10 +28,13 @@ public class InputReader extends Module {
 	private String[] command;
 	private ModuleNode moduleNode;
 	
+	private Logger logger;
+	
 	// Constructors.
 	public InputReader(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd; 
+		this.logger = Logger.getLogger(InputReader.class.getName());
 	}
 	
 	// Methods.
@@ -39,7 +47,7 @@ public class InputReader extends Module {
 				this.moduleNode.notifyModuleObserver();
 			}
 		} catch (CommandFailedException ce) {
-			System.err.println(ce.getMessage());
+			this.logger.log(Level.SEVERE, ce.getMessage());
 			ce.printStackTrace();
 		}
 	}
@@ -95,13 +103,11 @@ public class InputReader extends Module {
 				this.moduleNode.notifyModuleObserver();
 			
 		} catch (IOException ie) {
-			System.err.println("IOException in " + this.getClass().toString() 
-					+ "#callCommand()" + ": " + ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 			cState = CommandState.FAIL;
 		} catch (Exception e) {
-			System.err.println("Exception in " + this.getClass().toString() 
-					+ "#callCommand()" + ": " + e.getMessage());
+			this.logger.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
 			cState = CommandState.FAIL;
 		}

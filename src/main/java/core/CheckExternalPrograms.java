@@ -19,6 +19,8 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // Project-specific imports.
 import extProgs.ExtProgType;
@@ -39,6 +41,9 @@ public class CheckExternalPrograms {
 	// Variables.
 	private String configurationPath;
 	
+	// Logger.
+	private Logger logger;
+	
 	// HashMap to save external programs.
 	private Map <ExtProgType, ExternalProgram> extProgMap;
 	
@@ -47,6 +52,9 @@ public class CheckExternalPrograms {
 	public CheckExternalPrograms(String configPath) {
 		this.configurationPath = configPath;
 		this.extProgMap = new HashMap <ExtProgType, ExternalProgram>();
+		
+		// Call the logging factory to generate a new logger.
+		this.logger = Logger.getLogger(CheckExternalPrograms.class.getName());
 	}
 	
 	// Methods.
@@ -68,7 +76,7 @@ public class CheckExternalPrograms {
 		// Test the type of operating system.
 		String osName = PhysicalConstants.getOsName();
 		
-		// System.out.println("System name: " + osName);
+		// this.logger.log(Level.INFO, "System name: " + osName);
 		if (!osName.equals("linux"))
 			throw new SystemNotSupportedException("The system \"" + osName + "\" is not supported by this programme");
 		
@@ -76,7 +84,7 @@ public class CheckExternalPrograms {
 		try {
 			boolean samtoolsState = this.testSamtools();
 			if (samtoolsState) {
-				System.out.println("LOG: Installed samtools version \"" 
+				this.logger.log(Level.INFO, "Installed samtools version \""
 						+ this.extProgMap.get(ExtProgType.SAMTOOLS).getSeenVersion()
 						+ "\" is compatible with this program.");
 			} else {
@@ -93,7 +101,7 @@ public class CheckExternalPrograms {
 		try {
 			boolean bowtie2State = this.testBowtie2();
 			if (bowtie2State) {
-				System.out.println("LOG: Installed bowtie2 version \"" 
+				this.logger.log(Level.INFO, "Installed bowtie2 version \"" 
 						+ this.extProgMap.get(ExtProgType.BOWTIE2).getSeenVersion()
 						+ "\" is compatible with this program.");
 			} else {
@@ -111,7 +119,7 @@ public class CheckExternalPrograms {
 		try {
 			boolean cdhitState = this.testCdhit();
 			if (cdhitState) {
-				System.out.println("LOG: Installed cdhit version \"" 
+				this.logger.log(Level.INFO, "Installed cdhit version \"" 
 						+ this.extProgMap.get(ExtProgType.CDHIT).getSeenVersion()
 						+ "\" is compatible with this program.");
 			} else {
@@ -129,7 +137,7 @@ public class CheckExternalPrograms {
 		/*try {
 			boolean qpms9State = this.testQpms9();
 			if (qpms9State) {
-				System.out.println("LOG: Installed cdhit version \"" 
+				this.logger.log(Level.INFO, "Installed cdhit version \"" 
 						+ this.extProgMap.get(ExtProgType.QPMS9).getSeenVersion()
 						+ "\" is compatible with this program.");
 			} else {
@@ -147,7 +155,7 @@ public class CheckExternalPrograms {
 		try {
 			boolean cdhitState = this.testTomtom();
 			if (cdhitState) {
-				System.out.println("LOG: Installed tomtom version \"" 
+				this.logger.log(Level.INFO, "Installed tomtom version \"" 
 						+ this.extProgMap.get(ExtProgType.TOMTOM).getSeenVersion()
 						+ "\" is compatible with this program.");
 			} else {
@@ -163,7 +171,7 @@ public class CheckExternalPrograms {
 		try {
 			boolean workpathState = this.testWorkpath();
 			if (workpathState) {
-				System.out.println("LOG: Working directory \"" 
+				this.logger.log(Level.INFO, "Working directory \"" 
 						+ this.extProgMap.get(ExtProgType.WORKPATH).getPath()
 						+ "\" is accessible.");
 			} else {
@@ -525,10 +533,10 @@ public class CheckExternalPrograms {
 						this.extProgMap.put(ExtProgType.WORKPATH, newWorkpath);
 						break;
 					case UNDEFINED:
-						System.out.println("WARN: Entry \"" + line + "\" unknown");
+						this.logger.log(Level.WARNING, "Entry \"" + line + "\" unknown");
 						break;
 					default:
-						System.out.println("WARN: \"" + programType + "\" unknown.");
+						this.logger.log(Level.WARNING, "\"" + programType + "\" unknown.");
 						break;
 				}
 			} 

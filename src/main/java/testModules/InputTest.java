@@ -1,7 +1,10 @@
 package testModules;
 
-
 // Imports.
+
+// Java utility imports.
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 // Java I/O imports.
 import java.io.FileInputStream;
@@ -20,16 +23,29 @@ import core.CharPipe;
 // Project specific exceptions.
 import core.exceptions.CommandFailedException;
 
+/**
+ * Test module which retrieves data from a test file and transfers it 
+ * to a sink via a output port and a char pipe.
+ * @author christopher
+ *
+ */
+
 public class InputTest extends Module {
 	
 	// Variables.
 	private String[] command;
 	private ModuleNode moduleNode;
 	
+	// Logger.
+	private Logger logger;
+	
 	// Constructors.
 	public InputTest(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd; 
+		
+		// Call the Logger factory to get a new logger.
+		this.logger = Logger.getLogger(InputTest.class.getName());
 	}
 	
 	// Methods.
@@ -42,7 +58,7 @@ public class InputTest extends Module {
 				this.moduleNode.notifyModuleObserver();
 			}
 		} catch (CommandFailedException ce) {
-			System.err.println(ce.getMessage());
+			this.logger.log(Level.SEVERE, ce.getMessage());
 			ce.printStackTrace();
 		}
 	}
@@ -99,13 +115,11 @@ public class InputTest extends Module {
 				this.moduleNode.notifyModuleObserver();
 			
 		} catch (IOException ie) {
-			System.err.println("IOException in " + this.getClass().toString() 
-					+ "#callCommand()" + ": " + ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 			cState = CommandState.FAIL;
 		} catch (Exception e) {
-			System.err.println("Exception in " + this.getClass().toString() 
-					+ "#callCommand()" + ": " + e.getMessage());
+			this.logger.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
 			cState = CommandState.FAIL;
 		}

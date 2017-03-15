@@ -2,6 +2,10 @@ package testDrives;
 
 // Imports.
 
+// Java utility imports.
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 // JUnit imports.
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -11,19 +15,31 @@ import core.CoreController;
 import core.ListExternalPrograms;
 import extProgs.ExtProgType;
 
+/**
+ * External command test to see whether all external programs are present
+ * in the correct version and work properly.
+ * @author christopher
+ *
+ */
+
 public class FirstExternalCommandTest {
 	// Variables.
-	private ListExternalPrograms externalProgramHandler;
 	
-
+	// Logger.
+	private Logger logger;
+	
 	// Constructors.
+	
+	public FirstExternalCommandTest () {
+		this.logger = Logger.getLogger(FirstExternalCommandTest.class.getName());
+	}
 	
 	// JUnit Test.
 	@Test
 	public void testExtJob () {
 		
 	    // Determine the location of the working directory after starting the application.
-	    System.out.println("Working Directory = " +
+	    this.logger.log(Level.INFO, "Working Directory = " +
 	              System.getProperty("user.dir"));
 	    TestFirstExternalCommand thisJob = new TestFirstExternalCommand();
 		
@@ -51,7 +67,7 @@ public class FirstExternalCommandTest {
 		CoreController.getInstance();
 		
 		// Check for the existing configuration file.
-		this.externalProgramHandler = CoreController.checkExternalProgrammes();
+		CoreController.checkExternalProgrammes();
 		
 		// Create a storage in the provided working directory path.
 		

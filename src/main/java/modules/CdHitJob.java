@@ -1,15 +1,18 @@
 package modules;
 
-import core.common.CommandState;
-
 // Imports.
 
+// Java exception imports.
 import java.io.IOException;
+import java.util.logging.Level;
+// Java utility imports.
+import java.util.logging.Logger;
 
 // Project specific imports.
 import core.common.Module;
 import core.common.ModuleState;
 import core.common.ModuleType;
+import core.common.CommandState;
 
 import core.InputPort;
 import core.OutputPort;
@@ -19,8 +22,11 @@ import core.ModuleNode;
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
 
+
 public class CdHitJob extends Module {
 	// Variables.
+	
+	private Logger logger;
 	
 	private String[] command;
 	
@@ -32,6 +38,7 @@ public class CdHitJob extends Module {
 	public CdHitJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
+		this.logger = Logger.getLogger(CdHitJob.class.getName());
 	}
 	
 	// Methods.
@@ -49,7 +56,7 @@ public class CdHitJob extends Module {
 				this.moduleNode.notifyModuleObserver();
 			}
 		} catch (CommandFailedException ce) {
-			System.err.println(ce.getMessage());
+			this.logger.log(Level.SEVERE, ce.getMessage());
 			ce.printStackTrace();
 		}
 	}
@@ -112,17 +119,17 @@ public class CdHitJob extends Module {
 		
 						
 		} catch (PipeTypeNotSupportedException pe) {
-			System.err.println(pe.getMessage());
+			this.logger.log(Level.SEVERE, pe.getMessage());
 			pe.printStackTrace();
 		}
 		
 		catch (IOException ie) {
-			System.err.println(ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		} 
 		
 		catch (InterruptedException intE) {
-			System.err.println("ERROR: " + intE.getMessage());
+			this.logger.log(Level.SEVERE, intE.getMessage());
 			intE.printStackTrace();
 		}
 	
@@ -144,10 +151,10 @@ public class CdHitJob extends Module {
 			
 			
 		} catch (PipeTypeNotSupportedException pe) {
-			System.err.println(pe.getMessage());
+			this.logger.log(Level.SEVERE, pe.getMessage());
 			pe.printStackTrace();
 		} catch (IOException ie) {
-			System.err.println(ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		} 
 			

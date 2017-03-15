@@ -2,8 +2,14 @@ package modules;
 
 import java.io.IOException;
 
+// Imports.
+
+// Java utility imports.
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
+// Project-specific imports.
 import core.CharPipe;
-//Imports.
 import core.InputPort;
 import core.JobController;
 import core.common.CommandState;
@@ -22,10 +28,15 @@ public class QPMS9Job extends Module {
 	private String[] command;
 	private ModuleNode moduleNode;
 	
+	// Logger.
+	private Logger logger;
+	
 	// Constructors.
 	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
+		// Initialize the logger.
+		this.logger = Logger.getLogger(QPMS9Job.class.getName());
 	}
 	
 	// Methods.
@@ -39,7 +50,7 @@ public class QPMS9Job extends Module {
 				this.moduleNode.notifyModuleObserver();
 			}
 		} catch (CommandFailedException ce) {
-			System.err.println(ce.getMessage());
+			this.logger.log(Level.SEVERE, ce.getMessage());
 			ce.printStackTrace();
 		}
 	}
@@ -50,10 +61,16 @@ public class QPMS9Job extends Module {
 		
 		this.moduleNode = this.getSuperModuleNode();
 		
+		// Variable holding the command string.
+		String cmdString ="";
+		
+		for (String i : this.command) 
+			cmdString += i;
+		
 		// Test system output.
-		System.out.println("QPMS9 with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :");
-		System.out.println("Command " + this.command + " called");
-		System.out.println("Associated storageID " + this.getStorageID());
+		this.logger.log(Level.INFO, "QPMS9 with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :\n"
+				+ "Command " + cmdString + " called"
+				+ "Associated storageID " + this.getStorageID());
 		
 		
 		// Save input from pipe
@@ -94,24 +111,21 @@ public class QPMS9Job extends Module {
 			
 			
 		} catch (PipeTypeNotSupportedException pe) {
-			System.err.println(pe.getMessage());
+			this.logger.log(Level.SEVERE, pe.getMessage());
 			pe.printStackTrace();
 		}
 		
 		catch (IOException ie) {
-			System.err.println(ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		} 			
 		
-		System.out.println("Here is the output:");
-		System.out.println(input);
+		this.logger.log(Level.INFO, "Here is the output:");
+		this.logger.log(Level.INFO, input);
 		
 		// Checked exception. TODO: Add ExternalCommandHandler
 		
 		cState = CommandState.SUCCESS;
-		
-			
-		
 		
 		return cState;
 	}

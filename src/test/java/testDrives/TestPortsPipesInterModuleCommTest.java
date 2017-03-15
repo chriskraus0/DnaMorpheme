@@ -1,17 +1,20 @@
 package testDrives;
 
 
-//Imports.
+// Imports.
 
-//Import junit test classes.
+// Java utility imports.
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
+// Import junit test classes.
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+// Import project-specific classes.
 import core.CoreController;
 import core.ModuleBuilder;
 import testModules.TestOutput;
-
-//Import project-specific classes.
 
 /**
  * Test drive class for testing of the inter-module communication via ports and pipes.
@@ -32,13 +35,19 @@ public class TestPortsPipesInterModuleCommTest {
 	
 	// Variables.
 	
+	private Logger logger;
+	
 	// Test variables.
 	private String output;
 	private String testVar;
 	
 	// Constructors.
 	
-	public TestPortsPipesInterModuleCommTest () {}
+	public TestPortsPipesInterModuleCommTest () {
+		
+		// Initialize the logger.
+		this.logger = Logger.getLogger(TestPortsPipesInterModuleCommTest.class.getName());
+	}
 	
 	// Test the transferred and modified text for correctness.
 	@Test
@@ -120,7 +129,7 @@ public class TestPortsPipesInterModuleCommTest {
 		try {
 			moduleBuilder.startJobs(testInputTransferNodeName);
 		} catch (InterruptedException intE) {
-			System.err.println(intE.getMessage());
+			this.logger.log(Level.SEVERE, intE.getMessage());
 			intE.printStackTrace();
 		}
 		
@@ -129,7 +138,7 @@ public class TestPortsPipesInterModuleCommTest {
 			moduleBuilder.startJobs(testTransferOutputNodeName);
 			this.output = ((TestOutput) ModuleBuilder.getModule(testOputputModule)).returnFinalOutput();
 		} catch (InterruptedException intE) {
-			System.err.println(intE.getMessage());
+			this.logger.log(Level.SEVERE, intE.getMessage());
 			intE.printStackTrace();
 		}
 		

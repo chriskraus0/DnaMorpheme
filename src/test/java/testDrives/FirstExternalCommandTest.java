@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 // JUnit imports.
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import junit.framework.TestCase;
 
 // Project-specific imports.
 import core.CoreController;
@@ -22,7 +22,7 @@ import extProgs.ExtProgType;
  *
  */
 
-public class FirstExternalCommandTest {
+public class FirstExternalCommandTest extends TestCase {
 	// Variables.
 	
 	// Logger.
@@ -41,10 +41,10 @@ public class FirstExternalCommandTest {
 	    // Determine the location of the working directory after starting the application.
 	    this.logger.log(Level.INFO, "Working Directory = " +
 	              System.getProperty("user.dir"));
-	    TestFirstExternalCommand thisJob = new TestFirstExternalCommand();
+	    FirstExternalCommandTest thisJob = new FirstExternalCommandTest();
 		
 		// Run the core components.
-		thisJob.run();
+		thisJob.start();
 		
 		// Assert the external programs.
 		// SAMTOOLS.
@@ -61,7 +61,7 @@ public class FirstExternalCommandTest {
 		
 	}
 	
-	public void run() {
+	public void start() {
 
 	    // Create a new Singleton "CoreController"
 		CoreController.getInstance();

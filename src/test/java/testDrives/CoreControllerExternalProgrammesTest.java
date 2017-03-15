@@ -11,7 +11,7 @@ import java.util.logging.Level;
 
 // JUnit testing imports.
 import org.junit.Test;
-import static org.junit.Assert.assertNotNull;
+import junit.framework.TestCase;
 
 //Project specific imports.
 import core.CoreController;
@@ -32,7 +32,7 @@ import extProgs.ExtProgType;
 *
 */
 
-public class CoreControllerExternalProgrammesTest {
+public class CoreControllerExternalProgrammesTest extends TestCase {
 	
 	// Variables.
 	
@@ -60,10 +60,10 @@ public class CoreControllerExternalProgrammesTest {
 	    CoreControllerExternalProgrammesTest thisJob = new CoreControllerExternalProgrammesTest();
 		
 		// Run the core components.
-		thisJob.run();
+		thisJob.start();
 	}
 	
-	public void run() {
+	public void start() {
 
 	    // Create a new Singleton "CoreController"
 		CoreController.getInstance();

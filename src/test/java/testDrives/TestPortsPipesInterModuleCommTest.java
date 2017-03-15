@@ -7,9 +7,9 @@ package testDrives;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-// Import junit test classes.
-import static org.junit.Assert.assertEquals;
+// Import JUnit test classes.
 import org.junit.Test;
+import junit.framework.TestCase;
 
 // Import project-specific classes.
 import core.CoreController;
@@ -31,7 +31,7 @@ import testModules.TestOutput;
  * @author christopher
  */
 
-public class TestPortsPipesInterModuleCommTest {
+public class TestPortsPipesInterModuleCommTest extends TestCase {
 	
 	// Variables.
 	

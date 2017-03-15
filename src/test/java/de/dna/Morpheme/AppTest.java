@@ -1,5 +1,13 @@
 package de.dna.Morpheme;
 
+// Imports.
+
+// Project-specific imports.
+import testDrives.CoreControllerExternalProgrammesTest;
+import testDrives.FirstExternalCommandTest;
+import testDrives.TestPortsPipesInterModuleCommTest;
+
+// JUnit imports.
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -25,7 +33,16 @@ public class AppTest
      */
     public static Test suite()
     {
-        return new TestSuite( AppTest.class );
+    	TestSuite suite = new TestSuite (AppTest.class);
+    	
+        /*return new TestSuite( 
+        		AppTest.class, 
+        		CoreControllerExternalProgrammesTest.class, 
+        		FirstExternalCommandTest.class, 
+        		TestPortsPipesInterModuleCommTest.class );
+        */
+    	
+    	return suite;
     }
 
     /**

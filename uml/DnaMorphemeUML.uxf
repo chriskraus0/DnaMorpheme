@@ -3214,11 +3214,12 @@ layer=1</panel_attributes>
     <id>UMLPackage</id>
     <coordinates>
       <x>1735</x>
-      <y>2835</y>
-      <w>720</w>
-      <h>180</h>
+      <y>2795</y>
+      <w>855</w>
+      <h>340</h>
     </coordinates>
-    <panel_attributes>testDrives
+    <panel_attributes>JUnit tests
+src/test/java
 fontsize=48
 --
 
@@ -4550,26 +4551,29 @@ layer=4</panel_attributes>
     <coordinates>
       <x>2215</x>
       <y>2870</y>
-      <w>210</w>
-      <h>110</h>
+      <w>155</w>
+      <h>135</h>
     </coordinates>
-    <panel_attributes>*TestPortsPipesInterModuleComm*
+    <panel_attributes>*TestPortsPipesInterModuleCommTest*
 Package::testDrives
-{public static main}
+{JUnit Assertion}
 --
 // Variables
 
 --
 // Methods
-public static main (String[] @args)
+@Test
+public void testTransferredStrings()
 public void go()
 --
 Responsibilities:
 Create new jobs for 3 testing modules.
 Inter-connect the modules and send 
-data acros pipes towards each module
+data across pipes towards each module
 and let them process them as command
-chain.</panel_attributes>
+chain.
+Files:
+testFiles/testFile1.txt</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -4583,20 +4587,6 @@ chain.</panel_attributes>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;2190.0;670.0;2190.0;670.0;2940.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>1955</x>
-      <y>2830</y>
-      <w>85</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>*done*
-fontsize=50
-bg=black
-layer=2</panel_attributes>
-    <additional_attributes/>
   </element>
   <element>
     <id>UMLInterface</id>
@@ -4665,5 +4655,40 @@ display updates.
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>90.0;10.0;10.0;10.0;10.0;710.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2410</x>
+      <y>2870</y>
+      <w>170</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>*TestPortsPipesInterModuleCommRunner*
+Package::testDrives
+{public static main}
+--
+// Variables
+
+--
+// Methods
+public static main (String[] @args)
+public void go()
+--
+Responsibilities:
+Run the JUnit test for the module 
+"TestPortsPipesInterModuleCommTest"</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2365</x>
+      <y>2890</y>
+      <w>55</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
   </element>
 </diagram>

@@ -45,20 +45,30 @@ public class InternalStorageFactory implements InternalStorageFactoryInterface {
 
 	@Override
 	public int createNewCdhitStorage() {
-		// TODO Auto-generated method stub
-		return 0;
+		storageCount ++;
+		// TODO create CdHitClusterStorage and CdHitCluster classes. 
+		return storageCount;
 	}
 
 	@Override
 	public int createNewQpms9Storage() {
-		// TODO Auto-generated method stub
-		return 0;
+		storageCount ++;
+		// TODO create QPMS9candidateStorage class. 
+		return storageCount;
 	}
 
 	@Override
-	public int createNewSamtoolsStorage() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int createNewSamTableStorage() {
+		storageCount ++;
+		// TODO create SamTableStorage and SamTable classes. 
+		return storageCount;
+	}
+	
+	@Override
+	public int createNewBamTableStorage() {
+		storageCount ++;
+		// TODO create BamTableStorage and BamTable classes. 
+		return storageCount;
 	}
 
 	@Override
@@ -75,14 +85,65 @@ public class InternalStorageFactory implements InternalStorageFactoryInterface {
 
 	@Override
 	public int createNewPMSconsensusStorage() {
-		// TODO Auto-generated method stub
-		return 0;
+		storageCount ++;
+		// TODO create ConsensusMotifStorage and ProbabilityMatrix classes. 
+		return storageCount;
 	}
 
 	@Override
 	public int createNewSequenceLogoStorage() {
-		// TODO Auto-generated method stub
-		return 0;
+		storageCount ++;
+		// TODO create LogoStorage and SeqLogo classes. 
+		return storageCount;
+	}
+	
+	@Override
+	public int createNewFastaSeqStorage () {
+		storageCount ++;
+		// TODO create SequenceStorage and FastaFile classes. 
+		return storageCount;
+	}
+	
+	public int requestNewStorage (StorageType sType) {
+		
+		int newStorageID;
+		
+		// Request specific storage.
+		switch (sType) {
+		case FASTASEQUENCE:
+			newStorageID = this.createNewFastaSeqStorage();
+			break;
+		case SEQLOGO:
+			newStorageID = this.createNewSequenceLogoStorage();
+			break;
+		case CDHITCLUSTER:
+			newStorageID = this.createNewCdhitStorage();
+			break;
+		case SAMTABLE:
+			newStorageID = this.createNewSamTableStorage();
+			break;
+		case BAMTABLE:
+			newStorageID = this.createNewBamTableStorage();
+			break;
+		case QPMS9CANDIDATES:
+			newStorageID = this.createNewQpms9Storage();
+			break;
+		case CONSENSUSMOTIFS:
+			newStorageID = this.createNewPMSconsensusStorage();
+			break;
+		case VERIFIEDDATABASEMOTIFS:
+			newStorageID = this.createNewFastaSeqStorage();
+			break;
+		case UNDEFINED:
+			newStorageID = -1;
+			break;
+		default:
+			newStorageID = -1;
+			break;
+		}
+		
+		return newStorageID;
+		
 	}
 	
 	// Methods.

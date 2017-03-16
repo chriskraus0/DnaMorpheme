@@ -27,10 +27,16 @@ public interface InternalStorageFactoryInterface {
 	public int createNewQpms9Storage();
 	
 	/**
-	 * Creates a new samtools storage object with a constant ID.
+	 * Creates a new SAM table storage object with a constant ID.
 	 * @return int storageID
 	 */
-	public int createNewSamtoolsStorage();
+	public int createNewSamTableStorage();
+	
+	/**
+	 * Creates a new BAM table object with a constant ID.
+	 * @return int storageID
+	 */
+	public int createNewBamTableStorage();
 	
 	/**
 	 * Creates a new tomtom storage object with a constant ID.
@@ -57,4 +63,10 @@ public interface InternalStorageFactoryInterface {
 	 * @return int storageID
 	 */
 	public int createNewSequenceLogoStorage();
+	
+	/**
+	 * Creates a new fasta sequence storage object with a constant ID.
+	 * @return int storageID
+	 */
+	public int createNewFastaSeqStorage ();
 }

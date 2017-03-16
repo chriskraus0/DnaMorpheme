@@ -85,9 +85,6 @@ public class TestPortsPipesInterModuleCommTest extends TestCase {
 		testOputputCommand[0] = "Test Output";
 		int testOputputModule = moduleBuilder.createTestoutputJob(testOputputCommand);
 		
-	
-	
-		
 		// Prepare moduleNodes.
 		String testInputTransferNodeName = moduleBuilder.prepareJobs(testInputModule,testTransferModule);
 		String testTransferOutputNodeName = moduleBuilder.prepareJobs(testTransferModule,testOputputModule);

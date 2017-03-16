@@ -13,6 +13,7 @@ import org.junit.Test;
 // Project-specific imports.
 import core.CoreController;
 import core.ListExternalPrograms;
+import core.ModuleBuilder;
 
 /**
  * This TestCase class creates and external module handler. Receives data from an external file
@@ -41,6 +42,9 @@ public class ReadFileAndStoreTmpDataTest extends TestCase {
 	@Test
 	public void runTest () {
 		this.start();
+		
+		// TODO: Temporary test assertion until further parts of the test drive are ready.
+		assertTrue( true );
 	}
 	
 	private void start () {
@@ -51,6 +55,22 @@ public class ReadFileAndStoreTmpDataTest extends TestCase {
 		// Instantiate an external program handler.
 		ListExternalPrograms extProgramHandler = CoreController.checkExternalProgrammes();
 		
+		// Create the module builder (a factory for modules).
+		ModuleBuilder moduleBuilder = CoreController.generateModuleBuilder();
+		
+		// Create new read input command.
+		String[] inputTestJobCommand = new String[1];
+		inputTestJobCommand[0] = "testFiles/testFile1.txt";
+		int inputModule = moduleBuilder.createInputTestJob(inputTestJobCommand);
+		
+		// Create storage controller.
+		//TODO: Create StorageController class.
+		
+		// Create internal storage factory.
+		
+		
+		// Create new output save module.
+		String[] internalStorageCommand;
 		
 	}
 	

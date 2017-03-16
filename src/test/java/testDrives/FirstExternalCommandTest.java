@@ -35,6 +35,11 @@ public class FirstExternalCommandTest extends TestCase {
 	}
 	
 	// JUnit Test.
+	
+	/**
+	 * JUnit test method. Assertion of retrieved results from start().
+	 * @return void
+	 */
 	@Test
 	public void testExtJob () {
 		
@@ -61,7 +66,11 @@ public class FirstExternalCommandTest extends TestCase {
 		
 	}
 	
-	public void start() {
+	/**
+	 * Private method to create a CoreController and to check on external programs.
+	 * @return void
+	 */
+	private void start() {
 
 	    // Create a new Singleton "CoreController"
 		CoreController.getInstance();

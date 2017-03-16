@@ -10,8 +10,8 @@ import extProgs.ExtProgType;
 import extProgs.ExternalProgram;
 
 /**
- * Singular class to handle information about external programs.
- * @author christopher
+ * Singleton class to handle information about external programs.
+ * @author christopher kraus
  *
  */
 public class ListExternalPrograms {
@@ -26,18 +26,29 @@ public class ListExternalPrograms {
 		
 	// Constructors.
 	
+	/**
+	 * Empty Singleton constructor.
+	 */
 	private ListExternalPrograms () {}
 	
 	// Methods.
 	
 	// Setters.
 	
+	/**
+	 * Setter to instantiate the list of external programs.
+	 * @param extMap
+	 */
 	public static void setExternalProgMap (Map <ExtProgType, ExternalProgram> extMap) {
 		ListExternalPrograms.extProgMap = extMap;
 	}
 	
 	// Getters.
 	
+	/**
+	 * Method to instantiate a singular instance of this Singleton class.
+	 * @return ListExternalPrograms listExternalPrograms
+	 */
 	public static ListExternalPrograms getInstance () {
 		return listExternalPrograms;
 	}

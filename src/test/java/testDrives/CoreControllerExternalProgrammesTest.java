@@ -63,7 +63,7 @@ public class CoreControllerExternalProgrammesTest extends TestCase {
 		thisJob.start();
 	}
 	
-	public void start() {
+	private void start() {
 
 	    // Create a new Singleton "CoreController"
 		CoreController.getInstance();

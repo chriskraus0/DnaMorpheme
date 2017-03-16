@@ -1,0 +1,2 @@
+This folder holds temporary data used during working sessions.
+CAUTION: Data will be deleted after finished run time.

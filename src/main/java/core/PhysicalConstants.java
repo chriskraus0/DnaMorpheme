@@ -22,6 +22,9 @@ public class PhysicalConstants {
 	// Size of the free memory in the Java Virtual Machine (JVM).
 	private static long freeRamSize;
 	
+	// OS specific new line symbol.
+	private static String newLine = System.lineSeparator();
+	
 	// Constructors.
 	
 	/**
@@ -84,6 +87,14 @@ public class PhysicalConstants {
 	 */
 	public static long getFreeMem() {
 		return freeRamSize;
+	}
+	
+	/**
+	 * Get the OS specific new line symbol.
+	 * @return
+	 */
+	public static String getNewLine () {
+		return newLine;
 	}
 
 }

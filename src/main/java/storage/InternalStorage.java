@@ -5,7 +5,7 @@ package storage;
 // Import project-specific exceptions.
 import core.exceptions.ObserverNotRegisteredException;
 
-public abstract class InternalStorage implements InternalStorageInterface {
+public abstract class InternalStorage implements InternalStorageInterface, Runnable {
 	
 	// Constants.
 	private final int STORAGE_ID;

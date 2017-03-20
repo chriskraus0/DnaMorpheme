@@ -1,5 +1,8 @@
 package core;
 
+// Imports.
+
+// Project-specific imports.
 import core.exceptions.SystemNotSupportedException;
 import core.exceptions.VersionNotCompatibleException;
 

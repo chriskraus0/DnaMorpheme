@@ -30,17 +30,23 @@ public class InternalStorageFactory implements InternalStorageFactoryInterface {
 	// Keep track of newly occurring storages to define unique storageIDs.
 	private static int storageCount;
 	
+	// StorageObserver.
+	private StorageObserver sObserver;
+	
 	// Constructors.
-	public InternalStorageFactory() {
+	public InternalStorageFactory(StorageObserver sObserver) {
 		storageMap = new HashMap <Integer, InternalStorage>();
 		storageThreadMap = new HashMap <Integer, Thread>();
 		storageCount = 0;
+		this.sObserver = sObserver;
 	}
 
 	@Override
 	public int createNewBowtie2Storage() {
+		storageCount ++;
+		
 		// TODO Auto-generated method stub
-		return 0;
+		return storageCount;
 	}
 
 	@Override
@@ -93,7 +99,7 @@ public class InternalStorageFactory implements InternalStorageFactoryInterface {
 	@Override
 	public int createNewSequenceLogoStorage() {
 		storageCount ++;
-		// TODO create LogoStorage and SeqLogo classes. 
+		storageMap.put(storageCount, new SequenceStorage(storageCount, this.sObserver));
 		return storageCount;
 	}
 	

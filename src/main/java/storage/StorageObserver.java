@@ -21,7 +21,7 @@ public class StorageObserver implements StorageObserverInterface {
 	// Logger.
 	private Logger logger;
 	
-	StorageObserver () {
+	public StorageObserver () {
 		
 		// Call Logger to get a new instance.
 		this.logger = Logger.getLogger(this.getClass().getName());

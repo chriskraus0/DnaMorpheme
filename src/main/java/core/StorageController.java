@@ -12,6 +12,7 @@ import java.util.HashMap;
 import storage.InternalStorageFactory;
 import storage.StorageState;
 import storage.StorageType;
+import storage.StorageObserver;
 
 public class StorageController {
 	
@@ -29,18 +30,25 @@ public class StorageController {
 	// Logger.
 	private Logger logger;
 	
+	// Storage Observer.
+	private StorageObserver sObserver;
+	
 	// Constructors.
 	
 	public StorageController () {
+
+		// Create new StorageObserver.
+		this.sObserver = new StorageObserver();
 		
 		// Initialize the InternalStorageFactory.
-		this.sFactory = new InternalStorageFactory ();
+		this.sFactory = new InternalStorageFactory (sObserver);
 		
 		// Initialize the storageState map.
 		storageState = new HashMap <Integer, StorageState> ();
 		
 		// Call Logger to get a new instance.
 		this.logger = Logger.getLogger(this.getClass().getName());
+		
 	}
 	
 	// Methods.
@@ -50,8 +58,6 @@ public class StorageController {
 	// End setters.
 	
 	// Getters.
-	
-		
 	
 	/**
 	 * Getter for the state of a specific storage with a specific storageID.
@@ -66,6 +72,8 @@ public class StorageController {
 	
 	public void requestInternalStorage(StorageType sType) {
 		
+		// Select the specific storage.
+		this.sFactory.requestNewStorage(sType);
 	}
 	
 	

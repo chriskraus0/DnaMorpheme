@@ -7,9 +7,21 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+// Project-specific imports.
+import core.PhysicalConstants;
 
 // Import project-specific exceptions.
 import core.exceptions.ObserverNotRegisteredException;
+import storage.exceptions.TruncatedFastaHeadException;
+
+/**
+ * InternalStorage implementation to store fasta data.
+ * @author Christopher Kraus
+ *
+ */
 
 public class SequenceStorage extends InternalStorage {
 
@@ -39,6 +51,15 @@ public class SequenceStorage extends InternalStorage {
 		this.logger = Logger.getLogger(this.getClass().getName());
 	}
 	
+	// Methods.
+	
+	public void run () {
+		// TODO: Call synchronized method for new Thread Stack.
+	}
+	
+	/**
+	 * Method to notify the storage observer.
+	 */
 	public void notifyObserver() {
 		try {
 			super.notifyStorageObserver(this.STORAGE_TYPE);
@@ -48,6 +69,9 @@ public class SequenceStorage extends InternalStorage {
 		}
 	}
 	
+	/**
+	 * Method to disconnect the storage observer.
+	 */
 	public void disconnectObserver () {
 		try {
 			super.disconnectStorageObserver();
@@ -57,15 +81,116 @@ public class SequenceStorage extends InternalStorage {
 		}
 	}
 	
-	public void parseFasta () {
-		// TODO: Allow inter-module connection to parse in-comming fasta data.
+	/**
+	 * Method to parse fasta data and store it.
+	 * @param fasta
+	 */
+	public void parseSingleFasta (String fasta) {
+		
+		// Split fasta header from sequence and save as ArrayList.
+		ArrayList<String> fastaArrayList = new ArrayList <String> ();
+		
+		for (String i : fasta.split(PhysicalConstants.getNewLine()))
+			fastaArrayList.add(i);
+		
+		// Get the fasta header.
+		String fastaHeader = fastaArrayList.get(0);
+		
+		// Remove header from fastaArrayList.
+		fastaArrayList.remove(0);
+				
+		// Create new FastaFile object.
+		FastaFile fastaFile = new FastaFile (fastaHeader, fastaArrayList);
+		
+		// Save the new FastaFile object in the fastaMap.
+		this.fastaMap.put(fastaHeader, fastaFile);
 	}
 	
-	public String getFastaSeqs() {
-		// TODO: retrieve saved fasta data.
-		return "";
+	/**
+	 * Method to parse fasta data and store it.
+	 * @param fasta
+	 */
+	public void parseMultipleFasta (String fasta) throws TruncatedFastaHeadException {
+		
+		// Save all headers and sequences in a HashMap.
+		Map <String, ArrayList<String>> fastaMap = new HashMap <String, ArrayList<String>> ();
+				
+		// Iterate over all lines. Save the last header.
+		
+		String lastHeader = "";
+		
+		for (String i : fasta.split(PhysicalConstants.getNewLine())) {
+			
+			// Check for matching headers.
+			
+			// If the first character is a ">" then it is a header line.
+			if ( ">".equals(i.charAt(0)) ) {
+				fastaMap.put(i, new ArrayList<String> ());
+				lastHeader = i;
+			} 
+			
+			// If there is an entry for the lastHeader and the current sequence
+			// is not a header then add the sequence entry to the ArrayList of 
+			// the current entry of the the HashMap fastaMap.
+			else if ( !(">".equals(i.charAt(0))) && (!lastHeader.isEmpty()) ) {
+				fastaMap.get(lastHeader).add(i);
+			} 
+			
+			// If there is no entry in the HashMap fastaMap there must be an 
+			// error. Probably the head of the fasta file was truncated. Throw
+			// a new exception.
+			else if (lastHeader.isEmpty()) {
+				throw new TruncatedFastaHeadException(
+						"Could not detect fasta header. "
+						+ "Fasta header probably truncated");
+			}	
+			
+		}
+					
+		// Create new FastaFile objects and store them.
+		
+		Iterator <String> fastaIt = fastaMap.keySet().iterator();
+		
+		// Create new FastaFile objects for each fasta sequence and save the entries
+		// in the HashMap "fastaMap".
+		while (fastaIt.hasNext())
+			this.fastaMap.put(
+					fastaIt.next(), 
+					new FastaFile (fastaIt.next(), fastaMap.get(fastaIt.next()))
+					);	
 	}
 	
+	
+	// Getters.
+	/**
+	 * Getter which returns and ArrayList of all fasta sequences.
+	 * @return ArrayList<String> fastaSequences
+	 */
+	public ArrayList<String> getFastaSeqs() {
+		
+		// Save headers and sequences in an ArrayList.
+		ArrayList<String> fastaSeqs = new ArrayList<String>(); 
+		
+		// Iterate over the keys of the HashMap fastaMap.
+		Iterator <String> it = this.fastaMap.keySet().iterator();
+		
+		while (it.hasNext()) {
+			fastaSeqs.add(this.fastaMap.get(it.next()).getWholeFastaSeq());
+		}
+		
+		return fastaSeqs;
+	}
+	
+	/**
+	 * Getter which returns one specific fasta sequence.
+	 * @param String header
+	 * @return String fastaSequence
+	 */
+	public String getFastaSeq(String header) {
+		return this.fastaMap.get(header).getWholeFastaSeq();
+	}
+	
+	// End Getters.
 	
 	@Override
 	public void destroyStorage() {

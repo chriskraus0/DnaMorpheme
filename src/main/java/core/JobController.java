@@ -20,7 +20,7 @@ import core.exceptions.PipeTypeNotSupportedException;
  * thread-thread pairs are finished and what is the status of each job.
  * This class acts as a controller in the MVC (Model-View-Controller) pattern.
  * @see Model-View-Controller pattern.
- * @author christopher
+ * @author Christopher Kraus
  *
  */
 public class JobController {

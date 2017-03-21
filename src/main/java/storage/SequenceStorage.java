@@ -10,11 +10,19 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+// Java I/O imports.
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.File;
+
+// Java exceptions.
+import java.io.IOException;
+
 // Project-specific imports.
 import core.PhysicalConstants;
 
 // Import project-specific exceptions.
-import core.exceptions.ObserverNotRegisteredException;
+//import core.exceptions.ObserverNotRegisteredException;
 import storage.exceptions.TruncatedFastaHeadException;
 
 /**
@@ -136,9 +144,9 @@ public class SequenceStorage {
 		for (String i : fasta.split(PhysicalConstants.getNewLine())) {
 			
 			// Check for matching headers.
-			
+						
 			// If the first character is a ">" then it is a header line.
-			if ( ">".equals(i.charAt(0)) ) {
+			if ( '>' == i.charAt(0) ) {
 				fastaMap.put(i, new ArrayList<String> ());
 				lastHeader = i;
 			} 
@@ -146,7 +154,7 @@ public class SequenceStorage {
 			// If there is an entry for the lastHeader and the current sequence
 			// is not a header then add the sequence entry to the ArrayList of 
 			// the current entry of the the HashMap fastaMap.
-			else if ( !(">".equals(i.charAt(0))) && (!lastHeader.isEmpty()) ) {
+			else if ( !('>' == i.charAt(0)) && (!lastHeader.isEmpty()) ) {
 				fastaMap.get(lastHeader).add(i);
 			} 
 			
@@ -156,7 +164,7 @@ public class SequenceStorage {
 			else if (lastHeader.isEmpty()) {
 				throw new TruncatedFastaHeadException(
 						"Could not detect fasta header. "
-						+ "Fasta header probably truncated");
+						+ "Fasta header probably truncated.");
 			}	
 			
 		}
@@ -167,13 +175,38 @@ public class SequenceStorage {
 		
 		// Create new FastaFile objects for each fasta sequence and save the entries
 		// in the HashMap "fastaMap".
-		while (fastaIt.hasNext())
+		while (fastaIt.hasNext()) {
+			String currKey = fastaIt.next();
 			this.fastaMap.put(
-					fastaIt.next(), 
-					new FastaFile (fastaIt.next(), fastaMap.get(fastaIt.next()))
-					);	
+					currKey, 
+					new FastaFile (currKey, fastaMap.get(currKey))
+					);
+		}
 	}
 	
+	/**
+	 * This method stores the fasta sequences in the provided file.
+	 * @param File file
+	 * @throws IOException
+	 */
+	public void storeOnSystem(File file) throws IOException {
+		
+		// Prepare FileWriter and BufferedWriter.
+		FileWriter fw = new FileWriter(file);
+		BufferedWriter bw = new BufferedWriter(fw);
+		
+		// Iterate through fastaMap and write then to file.
+		Iterator <String> fastIt = this.fastaMap.keySet().iterator();
+		
+		while (fastIt.hasNext()) {
+			String currKey = fastIt.next();
+			bw.write(this.fastaMap.get(currKey).getWholeFastaSeq());
+		}
+		
+		// Close writers.
+		bw.close();
+		fw.close();
+	}
 	
 	// Getters.
 	/**

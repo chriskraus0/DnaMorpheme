@@ -4,9 +4,15 @@ package modules;
 
 // Java exception imports.
 import java.io.IOException;
-import java.util.logging.Level;
+import java.io.InputStreamReader;
+import java.io.Reader;
 // Java utility imports.
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.logging.Level;
+import java.io.BufferedReader;
+// Java I/O imports.
+import java.io.File;
 
 // Project specific imports.
 import core.common.Module;
@@ -16,6 +22,7 @@ import core.common.CommandState;
 
 import core.InputPort;
 import core.OutputPort;
+import core.PhysicalConstants;
 import core.ModuleNode;
 
 import storage.SequenceStorage;
@@ -23,6 +30,7 @@ import storage.SequenceStorage;
 // Project specific exceptions.
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
+import extProgs.ExtProgType;
 import storage.exceptions.TruncatedFastaHeadException;
 
 /**
@@ -51,7 +59,13 @@ public class CdHitJob extends Module {
 	
 	// Output to save a specified location.
 	private String output;
-
+	
+	// Path for the fasta file.
+	private String fastaPath;
+	
+	// Path for the cluster files.
+	private String clusterPath;
+	
 	// SequenceStorage object for storing fasta data.
 	private SequenceStorage fastaStorage;
 	
@@ -61,6 +75,8 @@ public class CdHitJob extends Module {
 		this.command = cmd;
 		this.logger = Logger.getLogger(CdHitJob.class.getName());
 		this.fastaStorage = new SequenceStorage();
+		this.fastaPath = fastaPath;
+		this.clusterPath = clusterPath;
 	}
 	
 	// Methods.
@@ -168,9 +184,32 @@ public class CdHitJob extends Module {
 				
 		// TODO: Integrate external command.
 		
+		String line="";
+		String cdHitOutput="";
+		
+		try {
+			// Start an external process with the pre-defined command array.
+		    Process process = Runtime.getRuntime().exec(this.command);
+		    
+		    // Read the STDIN from the unix process.
+		    Reader r = new InputStreamReader(process.getInputStream());
+		    
+		    // Read line by line using the BufferedReader.
+		    BufferedReader in = new BufferedReader(r);
+		    while((line = in.readLine()) != null) {
+		    	cdHitOutput += line + PhysicalConstants.getNewLine();
+		    }
+		    in.close();
+		} catch (IOException ie) {
+			this.logger.log(Level.SEVERE, ie.getMessage());
+			ie.printStackTrace();
+		}
+		
+		// Print the cd-hit output.
+    	this.logger.log(Level.INFO, cdHitOutput);
 		
 		
-		
+		/*
 		// Write to OutputPort (via CharPipe).
 		try {
 			
@@ -190,7 +229,7 @@ public class CdHitJob extends Module {
 			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		} 
-			
+		*/	
 				
 		// If everything worked out return SUCCESS.
 		cState = CommandState.SUCCESS;	

@@ -18,35 +18,53 @@ import core.InputPort;
 import core.OutputPort;
 import core.ModuleNode;
 
+import storage.SequenceStorage;
+
 // Project specific exceptions.
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
+import storage.exceptions.TruncatedFastaHeadException;
 
-
+/**
+ * This module starts a job on a new thread. It contacts the external program "cd-hit".
+ * cd-hit clusters multiple fasta sequences for a defined alignment identity value.
+ * The results are saved separately in either a user specified folder or in the "tmpData" folder
+ * by default.  
+ * @author Christopher Kraus
+ *
+ */
 public class CdHitJob extends Module {
+	
 	// Variables.
 	
+	// Logger.
 	private Logger logger;
 	
+	// External command for cd-hit software.
 	private String[] command;
 	
+	// Module node of the current job.
 	private ModuleNode moduleNode;
-	
+
+	// Input retrieved from input port.
 	private String input;
+	
+	// Output to save a specified location.
+	private String output;
+
+	// SequenceStorage object for storing fasta data.
+	private SequenceStorage fastaStorage;
 	
 	// Constructors.
 	public CdHitJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
 		this.logger = Logger.getLogger(CdHitJob.class.getName());
+		this.fastaStorage = new SequenceStorage();
 	}
 	
 	// Methods.
-	
-	// Setters.
 		
-	// End setters.
-	
 	@Override
 	public void run () {
 		try {
@@ -102,8 +120,9 @@ public class CdHitJob extends Module {
 						throw new InterruptedException ("Thread interrupted");
 					}
 					
-					// If the number of read characters is smaller than the buffer limit 
-					// write the remaining characters in the String variable input.
+					// If the number of read characters is greater than the buffer limit 
+					// write the remaining characters from the data[] char array 
+					// as new String into the variable "input".
 					if (charNumber < bufferSize) {
 						for (int i = 0; i < charNumber; i++)
 						this.input += data[i];
@@ -136,13 +155,27 @@ public class CdHitJob extends Module {
 		this.setModuleState(ModuleState.INPUT_DONE);
 		this.moduleNode.notifyModuleObserver();
 		
-		String output = this.input;
-		// Write to OutputPort (via CharPipe).
+		// Store fasta input in SequenceStorage.class.
+		try {
+			this.fastaStorage.parseMultipleFasta(this.input);
+		} catch (TruncatedFastaHeadException te) {
+			this.logger.log(Level.SEVERE, te.getMessage());
+			te.printStackTrace();
+		} catch (Exception e) {
+			this.logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
+		}
+				
+		// TODO: Integrate external command.
 		
+		
+		
+		
+		// Write to OutputPort (via CharPipe).
 		try {
 			
 			// Write to the output pipe.
-			((OutputPort) this.getOutputPort()).writeToCharPipe(output);
+			((OutputPort) this.getOutputPort()).writeToCharPipe(this.output);
 			
 			this.getOutputPort().getPipe().writeClose();
 			

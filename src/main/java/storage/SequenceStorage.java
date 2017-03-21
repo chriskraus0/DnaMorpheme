@@ -18,12 +18,13 @@ import core.exceptions.ObserverNotRegisteredException;
 import storage.exceptions.TruncatedFastaHeadException;
 
 /**
+ * 
  * InternalStorage implementation to store fasta data.
  * @author Christopher Kraus
  *
  */
 
-public class SequenceStorage extends InternalStorage {
+public class SequenceStorage {
 
 	// Constants.
 	private final StorageType STORAGE_TYPE;
@@ -35,14 +36,29 @@ public class SequenceStorage extends InternalStorage {
 	private Logger logger;
 	
 	// Constructors.
+	
+	public SequenceStorage () {
+		
+		// Define the type of storage.
+		this.STORAGE_TYPE = StorageType.FASTASEQUENCE;
+				
+		// Create HashMap holding all saved fasta files in this storage.
+		this.fastaMap = new HashMap <String, FastaFile> ();
+		
+		// Call Logger to get new logger.
+		this.logger = Logger.getLogger(this.getClass().getName());
+	}
+	
 	public SequenceStorage (int storageID, StorageObserver sObserver) {
-		super(storageID);
+		// Support for the super constructor is currently @deprecated.
+		// super(storageID);
 		
 		// Define the type of storage.
 		this.STORAGE_TYPE = StorageType.FASTASEQUENCE;
 		
 		// Register Observer.
-		super.registerStorageObserver(sObserver);
+		// This support is currently @deprecated.
+		// super.registerStorageObserver(sObserver);
 		
 		// Create HashMap holding all saved fasta files in this storage.
 		this.fastaMap = new HashMap <String, FastaFile> ();
@@ -52,34 +68,32 @@ public class SequenceStorage extends InternalStorage {
 	}
 	
 	// Methods.
-	
-	public void run () {
-		// TODO: Call synchronized method for new Thread Stack.
-	}
-	
+		
 	/**
+	 * @deprecated
 	 * Method to notify the storage observer.
 	 */
-	public void notifyObserver() {
+	/*public void notifyObserver() {
 		try {
 			super.notifyStorageObserver(this.STORAGE_TYPE);
 		} catch (ObserverNotRegisteredException oe) {
 			this.logger.log(Level.SEVERE, oe.getMessage());
 			oe.printStackTrace();
 		}
-	}
+	}*/
 	
 	/**
+	 * @deprecated
 	 * Method to disconnect the storage observer.
 	 */
-	public void disconnectObserver () {
+	/*public void disconnectObserver () {
 		try {
 			super.disconnectStorageObserver();
 		} catch (ObserverNotRegisteredException oe) {
 			this.logger.log(Level.SEVERE, oe.getMessage());
 			oe.printStackTrace();
 		}
-	}
+	}*/
 	
 	/**
 	 * Method to parse fasta data and store it.
@@ -192,8 +206,9 @@ public class SequenceStorage extends InternalStorage {
 	
 	// End Getters.
 	
+	/* Currently @deprecated.
 	@Override
 	public void destroyStorage() {
 		this.fastaMap = null;
-	}
+	}*/
 }

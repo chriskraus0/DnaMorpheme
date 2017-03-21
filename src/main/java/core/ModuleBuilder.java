@@ -83,7 +83,6 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	
 	/**
 	 * Return a newly generated moduleID for a new module.
-	 * @param Module module
 	 * @return String moduleID
 	 */
 	private static int generateNewModuleID () {
@@ -100,9 +99,9 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 	
 	/**
-	 * Returns the moduleID of the module connected to this one.
+	 * Returns the Thread of the module connected to this one.
 	 * @param int moduleID
-	 * @return int moduleID of connected module.
+	 * @return Thread of connected module.
 	 */
 	public static Thread getRunningThread(int moduleID) {
 		return ModuleBuilder.modulesThreadMap.get(moduleID);

@@ -9,6 +9,10 @@ import java.util.HashMap;
 // Project-specific imports.
 
 /**
+ * @deprecated
+ * Momentarily this class poses too much overhead to be integrated.
+ * 
+ * 
  * Abstract factory creating new individual storage compartments 
  * for different modules.
  * @author christopher
@@ -25,6 +29,7 @@ public class InternalStorageFactory implements InternalStorageFactoryInterface {
 	
 	// HashMap holding all the storageIDs as keys and the references for threads which deal with
 	// each storage separately.
+	@Deprecated
 	private static Map <Integer, Thread> storageThreadMap;
 	
 	// Keep track of newly occurring storages to define unique storageIDs.
@@ -99,7 +104,7 @@ public class InternalStorageFactory implements InternalStorageFactoryInterface {
 	@Override
 	public int createNewSequenceLogoStorage() {
 		storageCount ++;
-		storageMap.put(storageCount, new SequenceStorage(storageCount, this.sObserver));
+		//TODO: storageMap.put(storageCount, new SequenceStorage(storageCount, this.sObserver));
 		return storageCount;
 	}
 	
@@ -151,6 +156,7 @@ public class InternalStorageFactory implements InternalStorageFactoryInterface {
 		return newStorageID;
 		
 	}
+
 	
 	// Methods.
 }

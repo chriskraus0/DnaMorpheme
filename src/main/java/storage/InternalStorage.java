@@ -5,7 +5,19 @@ package storage;
 // Import project-specific exceptions.
 import core.exceptions.ObserverNotRegisteredException;
 
-public abstract class InternalStorage implements InternalStorageInterface, Runnable {
+/**
+ * @deprecated
+ * Due to the unnecessary overhead at this point this implementation 
+ * is currently not required. All underlying storage modules will be
+ * de-coupled.
+ * 
+ * 
+ * Abstract class which provides the backbone for all storage modules
+ * which will run on independent threads.
+ * @author Christopher Kraus
+ *
+ */
+public abstract class InternalStorage implements InternalStorageInterface {
 	
 	// Constants.
 	private final int STORAGE_ID;

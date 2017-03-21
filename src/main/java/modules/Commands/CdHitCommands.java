@@ -1,5 +1,5 @@
 package modules.Commands;
 
 public enum CdHitCommands {
-	T,i,o
+	T,c,i,o
 }

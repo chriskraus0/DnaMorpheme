@@ -26,11 +26,11 @@ import core.PhysicalConstants;
 import core.ModuleNode;
 
 import storage.SequenceStorage;
-
 // Project specific exceptions.
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
 import extProgs.ExtProgType;
+import modules.commands.CdHitCommands;
 import storage.exceptions.TruncatedFastaHeadException;
 
 /**

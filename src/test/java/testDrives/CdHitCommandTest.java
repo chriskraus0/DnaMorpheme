@@ -9,11 +9,10 @@ import java.util.logging.Level;
 // JUnit imports.
 import org.junit.Test;
 import junit.framework.TestCase;
-
+import modules.commands.CdHitCommands;
 //Project-specific imports.
 import core.CoreController;
 import core.ModuleBuilder;
-import modules.Commands.CdHitCommands;
 
 public class CdHitCommandTest extends TestCase {
 		

@@ -134,21 +134,22 @@ public class CheckExternalPrograms {
 		
 		// Test Qpms9.
 		// Currently qpms9 cannot be tested! No such option included in the current version of qpms9!
-		/*try {
+		// TODO: This need to be changed at some point.
+		try {
 			boolean qpms9State = this.testQpms9();
 			if (qpms9State) {
 				this.logger.log(Level.INFO, "Installed cdhit version \"" 
 						+ this.extProgMap.get(ExtProgType.QPMS9).getSeenVersion()
 						+ "\" is compatible with this program.");
 			} else {
-				throw new VersionNoCompatibleException("ERROR: The current version of cdhit \""
+				throw new VersionNotCompatibleException("ERROR: The current version of qpms9 \""
 						+ this.extProgMap.get(ExtProgType.QPMS9).getSeenVersion() 
 						+ "\" is not compatible with this program.");
 			}
 		} catch (IOException ie) {
 			System.err.println("ERROR: " +ie.getMessage());
 			ie.printStackTrace();
-		}*/
+		}
 		
 		// Test Tomtom.
 		
@@ -234,21 +235,28 @@ public class CheckExternalPrograms {
 	    }
 	    in.close();
 	    
+	    // Save the verified data about tomtom in Singleton class VerifiedExternalPrograms.
+	    VerifiedExternalPrograms.setParam(ExtProgType.TOMTOM, 
+	    		exe, path, 
+	    		this.extProgMap.get(ExtProgType.TOMTOM).getSeenVersion());
+	    
 	    return isCompatible;
 	}
 	
-	/* Currently qpms9 cannot be tested! No such option included in the current version of qpms9!
+	
 	/**
 	 * Test the current version of qpms9 and check whether it is compatible
 	 * with the one provided by the configuration file.
 	 * @return boolean samtoolsState
 	 * @throws IOException
-	 /
+	 */
 	private boolean testQpms9() throws IOException {
 		boolean correctVersion = false;
 		
 		String exe = this.extProgMap.get(ExtProgType.QPMS9).getExecutable();
 		String path = this.extProgMap.get(ExtProgType.QPMS9).getPath();
+		// Currently qpms9 cannot properly be tested! No such option included in the current version of qpms9!
+		/*
 		String[] command = new String[2];
 		command[0]=path + "/" + exe;
 		command[1]="--version"; 
@@ -286,10 +294,20 @@ public class CheckExternalPrograms {
 	    	}
 	    }
 	    in.close();
+	    */
+		
+		// Save the verified data about QPMS9 in Singleton class VerifiedExternalPrograms.
+	    VerifiedExternalPrograms.setParam(ExtProgType.QPMS9, 
+	    		exe, path, 
+	    		this.extProgMap.get(ExtProgType.QPMS9).getVersion());
+	 	
+	    // Switch artificially to true.
+	    // TODO: Change this at some point.
+	    correctVersion = true;
 	    
 	    return correctVersion;
 	}
-	*/
+	
 	
 	/**
 	 * Test the current version of cdhit and check whether it is compatible
@@ -340,6 +358,11 @@ public class CheckExternalPrograms {
 	    	}
 	    }
 	    in.close();
+	    
+	    // Save the verified data about cdhit in Singleton class VerifiedExternalPrograms.
+	    VerifiedExternalPrograms.setParam(ExtProgType.CDHIT, 
+	    		exe, path, 
+	    		this.extProgMap.get(ExtProgType.CDHIT).getSeenVersion());
 	    
 	    return isCompatible;
 	}
@@ -393,6 +416,11 @@ public class CheckExternalPrograms {
 	    }
 	    in.close();
 	    
+	    // Save the verified data about bowtie2 in Singleton class VerifiedExternalPrograms.
+	    VerifiedExternalPrograms.setParam(ExtProgType.BOWTIE2, 
+	    		exe, path, 
+	    		this.extProgMap.get(ExtProgType.BOWTIE2).getSeenVersion());
+	    
 	    return isCompatible;
 	}
 	
@@ -445,6 +473,11 @@ public class CheckExternalPrograms {
 	    }
 	    in.close();
 	    
+	    // Save the verified data about Samtools in Singleton class VerifiedExternalPrograms.
+	    VerifiedExternalPrograms.setParam(ExtProgType.SAMTOOLS, 
+	    		samExe, samPath, 
+	    		this.extProgMap.get(ExtProgType.SAMTOOLS).getSeenVersion());
+	    
 	    return isCompatible;
 	}
 	
@@ -463,6 +496,9 @@ public class CheckExternalPrograms {
 		if (Files.exists(wPath)) {
 			isCompatible = true;
 		}
+		
+		// Save the verified data about the working directory in Singleton class VerifiedExternalPrograms.
+	    VerifiedExternalPrograms.setParam(ExtProgType.WORKPATH, "", "", workPath);
 	    
 	    return isCompatible;
 	}

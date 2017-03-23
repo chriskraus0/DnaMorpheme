@@ -1,7 +1,15 @@
 package testDrives;
 
+// Imports.
+
+// Java utility imports.
+import java.util.HashMap;
+
+// Project-specific imports.
 import core.CoreController;
 import core.ModuleBuilder;
+
+import modules.commands.Commands;
 
 /**
  * Test drive class for testing of the inter-module communication via ports and pipes.
@@ -43,16 +51,16 @@ public class TestPortsPipesInterModuleComm {
 		
 		// Create 3 new modules. 
 		
-		String[] inputTestJobCommand = new String[1];
-		inputTestJobCommand[0] = "testFiles/testFile1.txt";
+		HashMap<Commands, String> inputTestJobCommand = new HashMap<Commands, String>();
+		inputTestJobCommand.put(Commands.path, "testFiles/testFile1.txt");
 		int testInputModule = moduleBuilder.createInputTestJob(inputTestJobCommand);
 		
-		String[] testTransferModuleCommand = new String[1];
-		testTransferModuleCommand[0] = "Test Transfer";
+		HashMap<Commands, String> testTransferModuleCommand = new HashMap<Commands, String>();
+		testTransferModuleCommand.put(Commands.path, "Test Transfer");
 		int testTransferModule = moduleBuilder.createTestTransferJob(testTransferModuleCommand);
 		
-		String[] testOputputCommand = new String[1];
-		testOputputCommand[0] = "Test Output";
+		HashMap<Commands, String> testOputputCommand = new HashMap<Commands, String>();
+		testOputputCommand.put(Commands.path, "Test Output");
 		int testOputputModule = moduleBuilder.createTestoutputJob(testOputputCommand);
 	
 		

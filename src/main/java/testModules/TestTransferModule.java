@@ -5,6 +5,8 @@ package testModules;
 // Java utility imports.
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.Map;
+import java.util.HashMap;
 
 // Project specific imports.
 import core.common.CommandState;
@@ -15,6 +17,8 @@ import core.common.ModuleType;
 import core.InputPort;
 import core.OutputPort;
 import core.ModuleNode;
+
+import modules.commands.Commands;
 
 // Java exceptions.
 import java.io.IOException;
@@ -34,7 +38,8 @@ import core.exceptions.PipeTypeNotSupportedException;
 public class TestTransferModule extends Module {
 	// Variables.
 	
-	private String[] command;
+	// Variable holding the command.
+	private Map<Commands, String> command;
 	
 	private ModuleNode moduleNode;
 	
@@ -44,7 +49,7 @@ public class TestTransferModule extends Module {
 	private Logger logger;
 	
 	// Constructors.
-	public TestTransferModule(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
+	public TestTransferModule(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
 		
@@ -78,10 +83,13 @@ public class TestTransferModule extends Module {
 		
 		CommandState cState = CommandState.STARTING;
 		
+		// Parse the command.
+		String[] newCommand = parseCommand();
+		
 		// Save the command string.
 		String cmdString = "";
 		
-		for (String i : this.command) 
+		for (String i : newCommand) 
 			cmdString += i;
 		
 		// Test system output.
@@ -180,5 +188,13 @@ public class TestTransferModule extends Module {
 		cState = CommandState.SUCCESS;	
 		
 		return cState;
+	}
+	
+	private String[] parseCommand() {
+		String[] currCommand = new String[1];
+		
+		currCommand[0] = this.command.get(Commands.path);
+		
+		return currCommand;
 	}
 }

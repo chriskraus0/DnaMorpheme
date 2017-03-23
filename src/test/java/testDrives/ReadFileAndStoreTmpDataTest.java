@@ -5,6 +5,7 @@ package testDrives;
 // Java utility imports.
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.HashMap;
 
 // JUnit imports.
 import junit.framework.TestCase;
@@ -14,6 +15,7 @@ import org.junit.Test;
 import core.CoreController;
 import core.ListExternalPrograms;
 import core.ModuleBuilder;
+import modules.commands.Commands;
 
 /**
  * This TestCase class creates and external module handler. Receives data from an external file
@@ -59,8 +61,8 @@ public class ReadFileAndStoreTmpDataTest extends TestCase {
 		ModuleBuilder moduleBuilder = CoreController.generateModuleBuilder();
 		
 		// Create new read input command.
-		String[] inputTestJobCommand = new String[1];
-		inputTestJobCommand[0] = "testFiles/testFile1.txt";
+		HashMap<Commands, String> inputTestJobCommand = new HashMap<Commands, String>();
+		inputTestJobCommand.put(Commands.path, "testFiles/testFile1.txt");
 		int inputModule = moduleBuilder.createInputTestJob(inputTestJobCommand);
 		
 		// Create storage controller.

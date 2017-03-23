@@ -1,5 +1,7 @@
 package core;
 
+import java.io.File;
+
 /**
  * This Singleton class saves all necessary physical and OS-based information.
  * @author christopher
@@ -24,6 +26,9 @@ public class PhysicalConstants {
 	
 	// OS specific new line symbol.
 	private static String newLine = System.lineSeparator();
+	
+	// OS specific path separator.
+	private static String pathSeparator = File.separator;
 	
 	// Constructors.
 	
@@ -91,10 +96,18 @@ public class PhysicalConstants {
 	
 	/**
 	 * Get the OS specific new line symbol.
-	 * @return
+	 * @return String newLine
 	 */
 	public static String getNewLine () {
 		return newLine;
+	}
+	
+	/**
+	 * Get the OS specific path separator string.
+	 * @return String pathSeparator
+	 */
+	public static String getPathSeparator() {
+		return pathSeparator;
 	}
 
 }

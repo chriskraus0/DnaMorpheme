@@ -5,6 +5,8 @@ package testModules;
 // Java utility imports.
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.Map;
+import java.util.HashMap;
 
 // Java I/O imports.
 import java.io.FileInputStream;
@@ -16,9 +18,12 @@ import core.common.Module;
 import core.common.ModuleState;
 import core.common.ModuleType;
 import core.common.CommandState;
+
 import core.OutputPort;
 import core.ModuleNode;
 import core.CharPipe;
+
+import modules.commands.Commands;
 
 // Project specific exceptions.
 import core.exceptions.CommandFailedException;
@@ -33,14 +38,16 @@ import core.exceptions.CommandFailedException;
 public class InputTest extends Module {
 	
 	// Variables.
-	private String[] command;
+	
+	// Variable holding the path to a specific file.
+	private Map<Commands, String> command;
 	private ModuleNode moduleNode;
 	
 	// Logger.
 	private Logger logger;
 	
 	// Constructors.
-	public InputTest(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
+	public InputTest(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd; 
 		
@@ -69,9 +76,12 @@ public class InputTest extends Module {
 		
 		CommandState cState = CommandState.STARTING;
 						
+		// Parse the command.
+		String[] newCommand = parseCommand();
+		
 		try {
 
-				InputStream fileInputStream = new FileInputStream (this.command[0]);
+				InputStream fileInputStream = new FileInputStream (newCommand[0]);
 				
 				// Define input buffer
 				int bufferSize = 1024;
@@ -127,5 +137,13 @@ public class InputTest extends Module {
 		cState = CommandState.SUCCESS;
 						
 		return cState;
+	}
+	
+	private String[] parseCommand() {
+		String[] currCommand = new String[1];
+		
+		currCommand[0] = this.command.get(Commands.path);
+		
+		return currCommand;
 	}
 }

@@ -1,10 +1,14 @@
 package core.common;
 
+import java.util.HashMap;
+
+import modules.commands.Commands;
+
 /**
  * This interface defines the core of the abstract factory (design pattern) "ModuleBuilder".
  * It includes a set of core classes which define how to build modules, communication and states.
  * Responsibilites: I/O port generation and inter-connection, module generation, state generation. 
- * @author christopher
+ * @author Christopher Kraus
  *
  */
 
@@ -22,7 +26,7 @@ public interface ModuleBuilderInterface {
 	 * @see enum ModuleType
 	 * @return Module
 	 */
-	public Module createNewModule(int moduleID, int storageID, ModuleType mType, String[] command);
+	public Module createNewModule(int moduleID, int storageID, ModuleType mType, HashMap<Commands, String> command);
 	
 	/**
 	 * Create new InputPort for given module.

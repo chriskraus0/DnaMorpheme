@@ -6,13 +6,16 @@ package modules;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+
 // Java utility imports.
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
 import java.util.logging.Level;
-import java.io.BufferedReader;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+
 // Java I/O imports.
-import java.io.File;
+import java.io.BufferedReader;
 
 // Project specific imports.
 import core.common.Module;
@@ -20,17 +23,18 @@ import core.common.ModuleState;
 import core.common.ModuleType;
 import core.common.CommandState;
 
+import core.VerifiedExternalPrograms;
 import core.InputPort;
 import core.OutputPort;
 import core.PhysicalConstants;
 import core.ModuleNode;
 
 import storage.SequenceStorage;
+import modules.commands.Commands;
+
 // Project specific exceptions.
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
-import extProgs.ExtProgType;
-import modules.commands.CdHitCommands;
 import storage.exceptions.TruncatedFastaHeadException;
 
 /**
@@ -48,8 +52,8 @@ public class CdHitJob extends Module {
 	// Logger.
 	private Logger logger;
 	
-	// External command for cd-hit software.
-	private String[] command;
+	// External commands for cdhit software.
+	private Map<Commands, String> command;
 	
 	// Module node of the current job.
 	private ModuleNode moduleNode;
@@ -59,24 +63,16 @@ public class CdHitJob extends Module {
 	
 	// Output to save a specified location.
 	private String output;
-	
-	// Path for the fasta file.
-	private String fastaPath;
-	
-	// Path for the cluster files.
-	private String clusterPath;
-	
+		
 	// SequenceStorage object for storing fasta data.
 	private SequenceStorage fastaStorage;
 	
 	// Constructors.
-	public CdHitJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
+	public CdHitJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
 		this.logger = Logger.getLogger(CdHitJob.class.getName());
 		this.fastaStorage = new SequenceStorage();
-		this.fastaPath = fastaPath;
-		this.clusterPath = clusterPath;
 	}
 	
 	// Methods.
@@ -182,6 +178,11 @@ public class CdHitJob extends Module {
 			e.printStackTrace();
 		}
 				
+		
+		// Parse the cdhit command.
+		
+		String [] newCommands = this.parseCommand();
+		
 		// TODO: Integrate external command.
 		
 		String line="";
@@ -189,7 +190,7 @@ public class CdHitJob extends Module {
 		
 		try {
 			// Start an external process with the pre-defined command array.
-		    Process process = Runtime.getRuntime().exec(this.command);
+		    Process process = Runtime.getRuntime().exec(newCommands);
 		    
 		    // Read the STDIN from the unix process.
 		    Reader r = new InputStreamReader(process.getInputStream());
@@ -235,6 +236,40 @@ public class CdHitJob extends Module {
 		cState = CommandState.SUCCESS;	
 		
 		return cState;
+	}
+	
+	/**
+	 * This private method parses the incoming commands to a String[] array.
+	 * @return String[] commands
+	 */
+	private String[] parseCommand () {
+		ArrayList<String> newCommand = new ArrayList<String>();
+		
+		// Add the absolute path and the executable to the command.
+		newCommand.add(VerifiedExternalPrograms.getCdhitPath());
+		newCommand.add(VerifiedExternalPrograms.getCdhitExe());
+		
+		// Parse the option T (number of threads/cores).
+		newCommand.add("-" + Commands.T.toString());
+		newCommand.add(this.command.get(Commands.T));
+		
+		// Parse the option i (location of the input fasta file).
+		newCommand.add("-" + Commands.i.toString());
+		newCommand.add(this.command.get(Commands.i));
+		
+		// Parse the option o (location of the output fasta file).
+		newCommand.add("-" + Commands.o.toString());
+		newCommand.add(this.command.get(Commands.o));
+		
+		// Convert to an String[] array.
+		// TODO: Isn't there a better solution?
+		
+		String[] finishedCommand = new String[newCommand.size()];
+		
+		for (int i = 0; i < newCommand.size(); i ++)
+			finishedCommand[i] = newCommand.get(i);
+		
+		return (String[]) finishedCommand;
 	}
 	
 

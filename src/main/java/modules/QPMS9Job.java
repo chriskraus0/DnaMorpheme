@@ -6,33 +6,38 @@ import java.io.IOException;
 
 // Java utility imports.
 import java.util.logging.Logger;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.logging.Level;
 
 // Project-specific imports.
 import core.CharPipe;
 import core.InputPort;
-import core.JobController;
+
 import core.common.CommandState;
 import core.common.Module;
 import core.ModuleNode;
 import core.common.ModuleState;
 import core.common.ModuleType;
-import core.common.PipeState;
+
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
+import modules.commands.Commands;
 
 //TODO: Just a bare bones module. This must be extended!
 public class QPMS9Job extends Module {
 
 	// Variables.
-	private String[] command;
 	private ModuleNode moduleNode;
+	
+	// External commands for cdhit software.
+	private Map<Commands, String> command;
 	
 	// Logger.
 	private Logger logger;
 	
 	// Constructors.
-	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
+	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
 		// Initialize the logger.
@@ -62,17 +67,8 @@ public class QPMS9Job extends Module {
 		this.moduleNode = this.getSuperModuleNode();
 		
 		// Variable holding the command string.
-		String cmdString ="";
-		
-		for (String i : this.command) 
-			cmdString += i;
-		
-		// Test system output.
-		this.logger.log(Level.INFO, "QPMS9 with moduleID \"" + this.getModuleID() + "\" and storageID \"" + this.getStorageID() + "\" :\n"
-				+ "Command " + cmdString + " called"
-				+ "Associated storageID " + this.getStorageID());
-		
-		
+		String newCommand [] = this.parseCommand();
+						
 		// Save input from pipe
 		String input = "";
 	
@@ -128,6 +124,14 @@ public class QPMS9Job extends Module {
 		cState = CommandState.SUCCESS;
 		
 		return cState;
+	}
+	
+	private String[] parseCommand() {
+		// TODO: Add more options here.
+		String[] currCommand = new String[1];
+		currCommand[0] = this.command.get(Commands.path);
+		
+		return currCommand;
 	}
 
 }

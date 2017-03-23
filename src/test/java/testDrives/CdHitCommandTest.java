@@ -4,12 +4,13 @@ package testDrives;
 
 // Java utility imports.
 import java.util.logging.Logger;
+import java.util.HashMap;
 import java.util.logging.Level;
 
 // JUnit imports.
 import org.junit.Test;
 import junit.framework.TestCase;
-import modules.commands.CdHitCommands;
+import modules.commands.Commands;
 //Project-specific imports.
 import core.CoreController;
 import core.ModuleBuilder;
@@ -56,19 +57,15 @@ public class CdHitCommandTest extends TestCase {
 		ModuleBuilder moduleBuilder = CoreController.generateModuleBuilder();
 		
 		// Create new InputReader module.
-		String[] inputReaderCommand = new String[1];
-		inputReaderCommand[0] = "testFiles/testFile.fasta";
+		HashMap<Commands, String> inputReaderCommand = new HashMap<Commands, String>();
+		inputReaderCommand.put(Commands.path, "testFiles/testFile.fasta");
 		int inputReaderID = moduleBuilder.createNewInputReader(inputReaderCommand);
 		
 		// Create new CdHitJob module.
-		String[] cdHitJobCommand = new String[7];
-		cdHitJobCommand[0] = "cdhit";
-		cdHitJobCommand[1] = "-" + CdHitCommands.T.toString();
-		cdHitJobCommand[2] = "1";
-		cdHitJobCommand[3] = "-" + CdHitCommands.i.toString();
-		cdHitJobCommand[4] = "testFiles/testFile.fasta";
-		cdHitJobCommand[5] = "-" + CdHitCommands.o.toString();
-		cdHitJobCommand[6] = "tmpData/test.out";
+		HashMap<Commands, String> cdHitJobCommand = new HashMap<Commands, String>();
+		cdHitJobCommand.put(Commands.T, "1");
+		cdHitJobCommand.put(Commands.i, "testFiles/testFile.fasta");
+		cdHitJobCommand.put(Commands.o, "tmpData/test.out");
 		
 		int cdHitJobID = moduleBuilder.createNewCdHitJob(cdHitJobCommand);
 		

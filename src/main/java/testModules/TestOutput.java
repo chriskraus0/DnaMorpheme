@@ -1,11 +1,12 @@
 package testModules;
 
-import java.util.logging.Level;
-
 //Imports.
 
 // Java utility imports.
 import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.Map;
+import java.util.HashMap;
 
 // Project-specific I/O imports.
 import core.CharPipe;
@@ -17,6 +18,8 @@ import core.common.Module;
 import core.ModuleNode;
 import core.common.ModuleState;
 import core.common.ModuleType;
+
+import modules.commands.Commands;
 
 //Java exceptions.
 import java.io.IOException;
@@ -35,7 +38,9 @@ import core.exceptions.PipeTypeNotSupportedException;
 public class TestOutput extends Module {
 
 	// Variables.
-	private String[] command;
+	
+	private Map<Commands, String> command;
+	
 	private ModuleNode moduleNode;
 	
 	private String finalOutput;
@@ -44,7 +49,7 @@ public class TestOutput extends Module {
 	private Logger logger;
 	
 	// Constructors.
-	public TestOutput(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
+	public TestOutput(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
 		
@@ -74,10 +79,13 @@ public class TestOutput extends Module {
 		
 		this.moduleNode = this.getSuperModuleNode();
 		
+		// Parse commands.
+		String[] newCommand = parseCommand();
+		
 		// Variable which holds the command string.
 		String cmdString = "";
 		
-		for (String i : this.command) 
+		for (String i : newCommand) 
 			cmdString += i;
 		
 		// Test system output.
@@ -157,6 +165,14 @@ public class TestOutput extends Module {
 	
 	public String returnFinalOutput() {
 		return this.finalOutput;
+	}
+	
+	private String[] parseCommand () {
+		String[] currCommand = new String[1];
+		
+		currCommand[0] = this.command.get(Commands.path);
+		
+		return currCommand;
 	}
 
 }

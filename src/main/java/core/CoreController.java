@@ -36,6 +36,9 @@ public class CoreController {
 	 */
 	public static ListExternalPrograms checkExternalProgrammes() {
 		
+		// Create a resource for external programs.
+		VerifiedExternalPrograms.getInstance();
+		
 		// Retrieve all physical constants.
 		retrievePhysicalConstants();
 		

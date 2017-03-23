@@ -1,11 +1,12 @@
 package core;
 
-import java.util.logging.Level;
-
 // Imports.
 
 // Java utility imports.
 import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.Map;
+import java.util.HashMap;
 
 // Java I/O imports.
 import java.io.FileInputStream;
@@ -21,17 +22,21 @@ import core.OutputPort;
 
 // Project specific exceptions.
 import core.exceptions.CommandFailedException;
+import modules.commands.Commands;
 
 public class InputReader extends Module {
 	
 	// Variables.
-	private String[] command;
+	
 	private ModuleNode moduleNode;
 	
 	private Logger logger;
+
+	// External commands for input reader.
+	private Map<Commands, String> command;
 	
 	// Constructors.
-	public InputReader(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, String[] cmd) {
+	public InputReader(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd; 
 		this.logger = Logger.getLogger(InputReader.class.getName());
@@ -58,9 +63,13 @@ public class InputReader extends Module {
 		
 		CommandState cState = CommandState.STARTING;
 						
+		
+		// Parse the command.
+		String[] newCommand = this.parseCommand();
+		
 		try {
 				// Instantiate a new input stream.
-				InputStream fileInputStream = new FileInputStream (this.command[0]);
+				InputStream fileInputStream = new FileInputStream (newCommand[0]);
 				
 				// Define input buffer
 				int bufferSize = 1024;
@@ -115,6 +124,15 @@ public class InputReader extends Module {
 		cState = CommandState.SUCCESS;
 						
 		return cState;
+	}
+	
+	private String[] parseCommand () {
+		String[] newCommand = new String[1];
+		
+		// Save the absolute path of the input file.
+		newCommand[0] = this.command.get(Commands.path);
+			
+		return newCommand;
 	}
 
 }

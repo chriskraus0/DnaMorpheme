@@ -832,11 +832,11 @@ Abbort/Warning</panel_attributes>
     <coordinates>
       <x>4555</x>
       <y>530</y>
-      <w>80</w>
+      <w>110</w>
       <h>2580</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;320.0;140.0;320.0;140.0;5140.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;320.0;200.0;320.0;200.0;5070.0;140.0;5070.0;140.0;5140.0</additional_attributes>
   </element>
   <element>
     <id>Text</id>
@@ -2580,13 +2580,13 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1455</x>
+      <x>1550</x>
       <y>1705</y>
-      <w>795</w>
-      <h>305</h>
+      <w>700</w>
+      <h>350</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;590.0;1570.0;590.0;1570.0;220.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;680.0;1380.0;680.0;1380.0;220.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
@@ -2824,10 +2824,10 @@ layer=4</panel_attributes>
       <x>1265</x>
       <y>1705</y>
       <w>995</w>
-      <h>315</h>
+      <h>360</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;610.0;1970.0;610.0;1970.0;220.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;700.0;1970.0;700.0;1970.0;220.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -2904,7 +2904,7 @@ layer=3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1530</x>
+      <x>1310</x>
       <y>1805</y>
       <w>200</w>
       <h>170</h>
@@ -2940,7 +2940,7 @@ connected pairs</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1590</x>
+      <x>1375</x>
       <y>1785</y>
       <w>85</w>
       <h>20</h>
@@ -3120,7 +3120,7 @@ layer=4</panel_attributes>
       <x>1585</x>
       <y>1470</y>
       <w>195</w>
-      <h>200</h>
+      <h>205</h>
     </coordinates>
     <panel_attributes>*CheckExternalPrograms*
 bg=red
@@ -3944,22 +3944,22 @@ layer=4</panel_attributes>
     <coordinates>
       <x>1465</x>
       <y>1705</y>
-      <w>75</w>
-      <h>125</h>
+      <w>15</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;230.0;130.0;230.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;200.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>1285</x>
       <y>1705</y>
-      <w>255</w>
+      <w>35</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;240.0;490.0;240.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;240.0;50.0;240.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -3967,7 +3967,7 @@ layer=4</panel_attributes>
       <x>1810</x>
       <y>1600</y>
       <w>145</w>
-      <h>165</h>
+      <h>175</h>
     </coordinates>
     <panel_attributes>bg=red
 *PhysicalConstants*
@@ -3979,6 +3979,7 @@ String osName
 int coreNum
 long freeRamSize
 String newLine
+String pathSeparator
 --
 // Methods
 private PhysicalConstants()
@@ -3990,6 +3991,7 @@ static String getOsName()
 static int getCpuCoreNum()
 static long getFreeMem()
 static String getNewLine()
+static String getPathSeparator()
 --
 Responsibilities:
 Test key-parameters of the OS and PC.</panel_attributes>
@@ -4028,7 +4030,7 @@ layer=4</panel_attributes>
       <x>1135</x>
       <y>675</y>
       <w>2745</w>
-      <h>1320</h>
+      <h>1375</h>
     </coordinates>
     <panel_attributes>fontsize=60
 *core*
@@ -4318,56 +4320,56 @@ layer=4</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1900</x>
-      <y>1760</y>
+      <y>1770</y>
       <w>330</w>
-      <h>755</h>
+      <h>745</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>640.0;1310.0;640.0;1490.0;10.0;1490.0;10.0;10.0</additional_attributes>
+    <additional_attributes>640.0;1290.0;640.0;1470.0;10.0;1470.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>1910</x>
-      <y>1760</y>
+      <y>1770</y>
       <w>540</w>
-      <h>765</h>
+      <h>755</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>1060.0;1310.0;1060.0;1510.0;10.0;1510.0;10.0;10.0</additional_attributes>
+    <additional_attributes>1060.0;1290.0;1060.0;1490.0;10.0;1490.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>1920</x>
-      <y>1760</y>
+      <y>1770</y>
       <w>740</w>
-      <h>775</h>
+      <h>765</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>1460.0;1310.0;1460.0;1530.0;10.0;1530.0;10.0;10.0</additional_attributes>
+    <additional_attributes>1460.0;1290.0;1460.0;1510.0;10.0;1510.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>1930</x>
-      <y>1760</y>
+      <y>1770</y>
       <w>920</w>
-      <h>785</h>
+      <h>775</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>1820.0;1310.0;1820.0;1550.0;10.0;1550.0;10.0;10.0</additional_attributes>
+    <additional_attributes>1820.0;1290.0;1820.0;1530.0;10.0;1530.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>1945</x>
-      <y>1760</y>
+      <y>1770</y>
       <w>1105</w>
-      <h>795</h>
+      <h>785</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>2190.0;1310.0;2190.0;1570.0;10.0;1570.0;10.0;10.0</additional_attributes>
+    <additional_attributes>2190.0;1290.0;2190.0;1550.0;10.0;1550.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -4445,34 +4447,6 @@ layer=4</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;2380.0;80.0;2380.0;80.0;10.0;20.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>2295</x>
-      <y>2060</y>
-      <w>85</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>*done*
-fontsize=50
-bg=black
-layer=2</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>4430</x>
-      <y>635</y>
-      <w>85</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>*done*
-fontsize=50
-bg=black
-layer=2</panel_attributes>
-    <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
@@ -4990,5 +4964,147 @@ layer=4</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;240.0;10.0;90.0;250.0;90.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>200</x>
+      <y>495</y>
+      <w>215</w>
+      <h>205</h>
+    </coordinates>
+    <panel_attributes>*Note for the storage package:*
+Until further notice the work 
+on an indepdendent de-coupled
+storage system, which acts on 
+independent threads, is 
+deprecated. 
+
+The overhead for managing this
+kind of storage system is too
+high for this design.
+
+The classes will be kept to be
+directly integrated in specific
+external program jobs.
+fontsize=24
+bg=red
+layer=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>4480</x>
+      <y>705</y>
+      <w>160</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>modules.commands
+fontsize=24
+--
+layer=2
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>4490</x>
+      <y>725</y>
+      <w>60</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>/Commands/
+{Enumeration}
+--
+T, i, o, path
+--
+layer=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1625</x>
+      <y>1695</y>
+      <w>180</w>
+      <h>345</h>
+    </coordinates>
+    <panel_attributes>bg=red
+*VerifiedExternalProgams*
+{Singleton; static}
+--
+// Variables
+VerifiedExternalProgams verifiedExternalProgams
+samtoolsExe
+samtoolsPath
+samtoolsVersion
+cdhitExe
+cdhitPath
+cdhitVersion
+qpms9Exe
+qpms9Path
+qpms9Version
+bowtie2Exe
+bowtie2Path
+bowtie2Version	
+tomtomExe
+tomtomPath
+tomtomVersion
+workDirPath
+--
+// Methods
+private VerifiedExternalProgams()
+static setParam(ExtProgType type, 
+String exe, String path, String version)
+static String getSamtoolsExe ()
+static String getSamtoolsPath ()
+static String getSamtoolsVersion ()
+static String getCdhitExe ()
+static String getCdhitPath ()
+static String getCdhitVersion ()
+static String getQpms9Exe ()
+static String getQpms9Path ()
+static String getQpms9Version ()
+static String getbowtie2Exe ()
+static String getbowtie2Path ()
+static String getbowtie2Version ()
+static String gettomtomExe ()
+static String gettomtomPath ()
+static String gettomtomVersion ()
+static String getWorkingDirPath ()
+--
+Responsibilities:
+Singleton class which provides a resource 
+of all tested external programs.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>1690</x>
+      <y>1680</y>
+      <w>85</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>fg=red
+fontsize=20
+*SINGLETON*
+style=wordwrap
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1640</x>
+      <y>1670</y>
+      <w>15</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+layer=4</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

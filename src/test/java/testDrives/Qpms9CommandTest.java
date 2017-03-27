@@ -9,47 +9,43 @@ import java.util.logging.Level;
 
 // JUnit imports.
 import org.junit.Test;
-import junit.framework.TestCase;
 
-
-//Project-specific imports.
 import core.CoreController;
 import core.ModuleBuilder;
 import core.ModuleObserver;
 import core.common.ModuleState;
+import junit.framework.TestCase;
 import modules.commands.Commands;
 
-public class CdHitCommandTest extends TestCase {
-		
+public class Qpms9CommandTest extends TestCase {
+	
 	// Variables.
 	
 	// Logger.
 	private Logger logger;
 	
 	// Constructors.
-	public CdHitCommandTest () {
+	public Qpms9CommandTest () {
+		
 		// Call Logger to get a new logger.
 		this.logger = Logger.getLogger(this.getClass().getName());
 	}
 	
-	// JUnit test.
+	
+	// Methods.
 	
 	/**
 	 * JUnit test method.
 	 */
 	@Test
-	public void testThis () {
-				
-		// Run the core components.
-		this.start();
+	public void start() {
 		
-		
+		// Start the test.
+		this.testRun();
 	}
 	
-	/**
-	 * Run the test.
-	 */
-	public void start() {
+	
+	private void testRun () {
 		
 		// Create a new Singleton "CoreController"
 		CoreController.getInstance();
@@ -92,6 +88,6 @@ public class CdHitCommandTest extends TestCase {
 		
 		assertEquals(moduleObserver.getProducerState(), ModuleState.SUCCESS);
 		assertEquals(moduleObserver.getConsumerState(), ModuleState.SUCCESS);
-		
 	}
+
 }

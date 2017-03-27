@@ -183,7 +183,7 @@ public class CdHitJob extends Module {
 		
 		String [] newCommands = this.parseCommand();
 		
-		// TODO: Integrate external command.
+		// External command.
 		
 		String line="";
 		String cdHitOutput="";

@@ -26,10 +26,12 @@ import core.common.ModuleState;
 import core.common.ModuleType;
 
 import modules.commands.Commands;
+import storage.SequenceStorage;
 
 // Project-specific exceptions.
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
+import storage.exceptions.TruncatedFastaHeadException;
 
 public class QPMS9Job extends Module {
 
@@ -39,15 +41,24 @@ public class QPMS9Job extends Module {
 	// External commands for qpms9 software.
 	private Map<Commands, String> command;
 	
+	// Internal fasta storage.
+	private SequenceStorage fastaStorage;
+	
 	// Logger.
 	private Logger logger;
 	
 	// Constructors.
 	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
+		
+		// Initialize the command.
 		this.command = cmd;
+		
 		// Initialize the logger.
 		this.logger = Logger.getLogger(QPMS9Job.class.getName());
+		
+		// Create new sequence storage.
+		this.fastaStorage = new SequenceStorage();
 	}
 	
 	// Methods.
@@ -75,8 +86,6 @@ public class QPMS9Job extends Module {
 		// Variable holding the command string.
 		String newCommands [] = this.parseCommand();
 		
-		// Internal input is not required for this module.
-		/*
 		// Save input from pipe
 		String input = "";
 	
@@ -122,9 +131,24 @@ public class QPMS9Job extends Module {
 			ie.printStackTrace();
 		} 			
 		
-		this.logger.log(Level.INFO, "Here is the output:");
-		this.logger.log(Level.INFO, input);
-		*/
+		// Notify ModuleObserver of successful reading.
+		this.setModuleState(ModuleState.INPUT_DONE);
+		this.moduleNode.notifyModuleObserver();
+		
+		// Save the fasta file in the internal storage.
+		try {
+			this.fastaStorage.parseMultipleFasta(input);
+		} catch (TruncatedFastaHeadException te) {
+			this.logger.log(Level.SEVERE, te.getMessage());
+			te.printStackTrace();
+		} catch (Exception e) {
+			this.logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
+		}
+		
+		// Notify the ModuleObserver of successful saving.
+		this.setModuleState(ModuleState.STORRING_DONE);
+		this.moduleNode.notifyModuleObserver();
 		
 		// External command.
 		String line="";
@@ -155,6 +179,10 @@ public class QPMS9Job extends Module {
 		
 		cState = CommandState.SUCCESS;
 		
+		// Notify the ModuleObserver about a successful operation.
+		this.setModuleState(ModuleState.SUCCESS);
+		this.moduleNode.notifyModuleObserver();
+		
 		return cState;
 	}
 	
@@ -180,6 +208,10 @@ public class QPMS9Job extends Module {
 		// Parse the option q (min. portion of the quorum of the planted mortif search; PMS).
 		newCommand.add("-" + Commands.q.toString());
 		newCommand.add(this.command.get(Commands.q));
+		
+		// Parse the output location.
+		newCommand.add("-" + Commands.o.toString());
+		newCommand.add(this.command.get(Commands.o));
 		
 		// Convert to an String[] array.
 		

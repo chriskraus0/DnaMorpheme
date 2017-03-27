@@ -90,8 +90,8 @@ public class CdHitCommandTest extends TestCase {
 			e.printStackTrace();
 		}
 		
-		assertEquals(moduleObserver.getProducerState(), ModuleState.SUCCESS);
-		assertEquals(moduleObserver.getConsumerState(), ModuleState.SUCCESS);
+		assertEquals(ModuleState.SUCCESS, moduleObserver.getProducerState());
+		assertEquals(ModuleState.SUCCESS, moduleObserver.getConsumerState());
 		
 	}
 }

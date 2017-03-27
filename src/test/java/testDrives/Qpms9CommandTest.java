@@ -45,7 +45,7 @@ public class Qpms9CommandTest extends TestCase {
 	}
 	
 	
-	private void testRun () {
+	public void testRun () {
 		
 		// Create a new Singleton "CoreController"
 		CoreController.getInstance();
@@ -61,23 +61,25 @@ public class Qpms9CommandTest extends TestCase {
 		
 		// Create new InputReader module.
 		HashMap<Commands, String> inputReaderCommand = new HashMap<Commands, String>();
-		inputReaderCommand.put(Commands.path, "testFiles/testFile.fasta");
+		inputReaderCommand.put(Commands.path, "testFiles/testFile4.fasta");
 		int inputReaderID = moduleBuilder.createNewInputReader(inputReaderCommand);
 		
-		// Create new CdHitJob module.
-		HashMap<Commands, String> cdHitJobCommand = new HashMap<Commands, String>();
-		cdHitJobCommand.put(Commands.T, "1");
-		cdHitJobCommand.put(Commands.i, "testFiles/testFile.fasta");
-		cdHitJobCommand.put(Commands.o, "tmpData/test.out");
+		// Create new qpms9 module.
+		HashMap<Commands, String> qpms9JobCommand = new HashMap<Commands, String>();
+		qpms9JobCommand.put(Commands.fasta, "testFiles/testFile4.fasta");
+		qpms9JobCommand.put(Commands.l, "8");
+		qpms9JobCommand.put(Commands.d, "3");
+		qpms9JobCommand.put(Commands.q, "100");
+		qpms9JobCommand.put(Commands.o, "tmpData/qpms9Test.out");
 		
-		int cdHitJobID = moduleBuilder.createNewCdHitJob(cdHitJobCommand);
+		int qpms9JobID = moduleBuilder.createNewQpms9Job(qpms9JobCommand);
 		
 		// Prepare module nodes.
-		String inputReaderCdHitJobNodeName = moduleBuilder.prepareJobs(inputReaderID, cdHitJobID);
+		String inputReaderQpms9JobNodeName = moduleBuilder.prepareJobs(inputReaderID, qpms9JobID);
 		
 		// Start new thread for "inputReaderCdHitJobNodeName".
 		try {
-			moduleBuilder.startJobs(inputReaderCdHitJobNodeName);
+			moduleBuilder.startJobs(inputReaderQpms9JobNodeName);
 		} catch (InterruptedException intE) {
 			this.logger.log(Level.SEVERE, intE.getMessage());
 			intE.printStackTrace();
@@ -86,8 +88,8 @@ public class Qpms9CommandTest extends TestCase {
 			e.printStackTrace();
 		}
 		
-		assertEquals(moduleObserver.getProducerState(), ModuleState.SUCCESS);
-		assertEquals(moduleObserver.getConsumerState(), ModuleState.SUCCESS);
+		assertEquals(ModuleState.SUCCESS, moduleObserver.getProducerState());
+		assertEquals(ModuleState.SUCCESS, moduleObserver.getConsumerState());
 	}
 
 }

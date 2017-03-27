@@ -366,5 +366,18 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		
 	}
 	
+	
+	// Getters. 
+	
+	/**
+	 * Getter which returns the JobController.
+	 * @return JobController jobController
+	 */
+	public JobController getJobcontroller() {
+		return this.jobController;
+	}
+	
+	// End getters.
+	
 	// End methods.
 }

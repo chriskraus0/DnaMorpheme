@@ -48,6 +48,10 @@ public class JobController {
 	
 	// Getters.
 	
+	public ModuleObserver getModuleObserver() {
+		return (ModuleObserver) this.moduleObserver;
+	}
+	
 	public ModuleNode getModuleNode (String moduleNodeName) {
 		return this.moduleNodeMap.get(moduleNodeName);
 	}

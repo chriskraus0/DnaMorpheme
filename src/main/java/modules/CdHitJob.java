@@ -246,8 +246,8 @@ public class CdHitJob extends Module {
 		ArrayList<String> newCommand = new ArrayList<String>();
 		
 		// Add the absolute path and the executable to the command.
-		newCommand.add(VerifiedExternalPrograms.getCdhitPath());
-		newCommand.add(VerifiedExternalPrograms.getCdhitExe());
+		newCommand.add(VerifiedExternalPrograms.getCdhitPath() 
+				+ PhysicalConstants.getPathSeparator() + VerifiedExternalPrograms.getCdhitExe());
 		
 		// Parse the option T (number of threads/cores).
 		newCommand.add("-" + Commands.T.toString());

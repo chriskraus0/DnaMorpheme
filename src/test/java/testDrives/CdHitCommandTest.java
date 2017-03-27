@@ -11,9 +11,12 @@ import java.util.logging.Level;
 import org.junit.Test;
 import junit.framework.TestCase;
 import modules.commands.Commands;
+
 //Project-specific imports.
 import core.CoreController;
 import core.ModuleBuilder;
+import core.ModuleObserver;
+import core.common.ModuleState;
 
 public class CdHitCommandTest extends TestCase {
 		
@@ -56,6 +59,9 @@ public class CdHitCommandTest extends TestCase {
 		// Create the module builder.
 		ModuleBuilder moduleBuilder = CoreController.generateModuleBuilder();
 		
+		// Get ModuleObserver.
+		ModuleObserver moduleObserver = moduleBuilder.getJobcontroller().getModuleObserver();
+		
 		// Create new InputReader module.
 		HashMap<Commands, String> inputReaderCommand = new HashMap<Commands, String>();
 		inputReaderCommand.put(Commands.path, "testFiles/testFile.fasta");
@@ -82,6 +88,9 @@ public class CdHitCommandTest extends TestCase {
 			this.logger.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
 		}
+		
+		assertEquals(moduleObserver.getProducerState(), ModuleState.SUCCESS);
+		assertEquals(moduleObserver.getConsumerState(), ModuleState.SUCCESS);
 		
 	}
 }

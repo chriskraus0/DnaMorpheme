@@ -23,6 +23,11 @@ public class ModuleObserver implements ModuleObserverInterface {
 	
 	// Variables.
 	
+	private int producerID;
+	private int consumerID;
+	private ModuleState producerState;
+	private ModuleState consumerState;
+	
 	// Logger.
 	private Logger logger;
 		
@@ -40,13 +45,53 @@ public class ModuleObserver implements ModuleObserverInterface {
 	
 	// End getters.
 	
+	/**
+	 * Getter returns the ID of the currently updated producer.
+	 * @return int producerID
+	 */
+	public int getProducerID() {
+		return this.producerID;
+	}
+	
+	/**
+	 * Getter returns the ID of the currently updated consumer.
+	 * @return int consumerID
+	 */
+	public int getConsumerID() {
+		return this.consumerID;
+	}
+	
+	/**
+	 * Getter returns the state of the currently updated producer.
+	 * @return ModuleState producerState
+	 * @see core.common.ModuleState
+	 */
+	public ModuleState getProducerState() {
+		return this.producerState;
+	}
+	
+	/**
+	 Getter returns the state of the currently updated consumer.
+	 * @return ModuleState consumerState
+	 * @see core.common.ModuleState
+	 */
+	public ModuleState getConsumerState() {
+		return this.consumerState;
+	}
+	
 	// Setters.
 	
 	// End setters.
 	
 	// Overridden methods.
+	
 	@Override
 	public void update(int producerID, ModuleState producerState, int consumerID, ModuleState consumerState) {
+		this.producerID = producerID;
+		this.consumerID = consumerID;
+		this.producerState = producerState;
+		this.consumerState = consumerState;
+		
 		this.logger.log(Level.INFO, "ModuleNodes with IDs: \"" + producerID + "\" \"" + consumerID + "\"");
 		this.logger.log(Level.INFO, "Producer with ID \"" + producerID + "\" has state: \"" + producerState.toString() + "\"");
 		this.logger.log(Level.INFO, "Consumer with ID \"" + consumerID + "\" has state: \"" + consumerState.toString() + "\"");

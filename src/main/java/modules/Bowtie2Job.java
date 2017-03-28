@@ -65,6 +65,9 @@ public class Bowtie2Job extends Module {
 		
 		// Call Logger to get new instance.
 		this.logger = Logger.getLogger(this.getClass().getName());
+		
+		// Instantiate the fasta storage.
+		this.fastaStorage = new SequenceStorage();
 	}
 
 	// Methods.
@@ -266,11 +269,12 @@ public class Bowtie2Job extends Module {
 		
 		// Add the absolute path and the executable to the command.
 		newCommand.add(VerifiedExternalPrograms.getBowtie2BuildPath() 
+				+ PhysicalConstants.getPathSeparator()
 				+ VerifiedExternalPrograms.getBowtie2BuildExe());
 		
 		// Add the reference and the index base options.
-		newCommand.add(Commands.reference.toString());
-		newCommand.add(Commands.index_base.toString());
+		newCommand.add(this.command.get(Commands.reference));
+		newCommand.add(this.command.get(Commands.index_base));
 			
 		// Convert to an String[] array.		
 		String[] finishedCommand = new String[newCommand.size()];

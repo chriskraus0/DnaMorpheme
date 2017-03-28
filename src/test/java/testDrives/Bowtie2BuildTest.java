@@ -67,7 +67,7 @@ public class Bowtie2BuildTest extends TestCase {
 		bowtie2Command.put(Commands.U, "testFiles/testFile6.fastq");
 		bowtie2Command.put(Commands.S, "tmpData" + PhysicalConstants.getPathSeparator() + "testFile6.sam");
 		
-		int bowtie2JobID = moduleBuilder.createNewQpms9Job(bowtie2Command);
+		int bowtie2JobID = moduleBuilder.createNewBowtie2Job(bowtie2Command);
 		
 		// Prepare module nodes.
 		String inputReaderBowtie2JobNodeName = moduleBuilder.prepareJobs(inputReaderID, bowtie2JobID);

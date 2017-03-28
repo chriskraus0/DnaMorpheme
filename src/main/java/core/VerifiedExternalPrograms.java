@@ -159,15 +159,15 @@ public class VerifiedExternalPrograms {
 	
 	// Bowtie2-Build getters.
 	public static String getBowtie2BuildExe () {
-		return bowtie2Exe;
+		return bowtie2BuildExe;
 	}
 	
 	public static String getBowtie2BuildPath () {
-		return bowtie2Path;
+		return bowtie2BuildPath;
 	}
 	
 	public static String getBowtie2BuildVersion () {
-		return bowtie2Version;
+		return bowtie2BuildVersion;
 	}
 	
 	// TomTom getters.

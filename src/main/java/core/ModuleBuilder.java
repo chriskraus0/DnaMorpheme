@@ -16,6 +16,7 @@ import core.common.ModuleType;
 // Module imports.
 import modules.CdHitJob;
 import modules.QPMS9Job;
+import modules.Bowtie2Job;
 import modules.commands.Commands;
 
 // Test module imports.
@@ -160,25 +161,25 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newQpms9Job.getModuleID(), newQpms9Job);
 		
-		// Add module with the ID "moduleID" to the new module TreeMap. TODO: Is there a reason to use TreeMap instead of HashMap?
-		// TODO: Create QPMS9Job class.
-		//this.moduleMap.put(moduleID, new CdHitJob(moduleID, storageID, mType));
 		// TODO: implement "connectModuleObserver" method
 		//this.connectModuleObserver(this.moduleMap.get(moduleID);
 		
 		return moduleID;
 	}
 	
-	public void createNewBowtie2Job() {
+	public int createNewBowtie2Job(HashMap<Commands, String> command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.BOWTIE2_JOB;
 		
-		// Add module with the ID "moduleID" to the new module TreeMap. TODO: Is there a reason to use TreeMap instead of HashMap?
-		// TODO: Create QPMS9Job class.
-		//this.moduleMap.put(moduleID, new CdHitJob(moduleID, storageID, mType));
+		Module newBowtie2Job = this.createNewModule(moduleID, storageID, mType, command);
+		
+		// Add module with the "moduleID" and module to the new module TreeMap.
+		ModuleBuilder.moduleMap.put(newBowtie2Job.getModuleID(), newBowtie2Job);
+		
 		// TODO: implement "connectModuleObserver" method
 		//this.connectModuleObserver(this.moduleMap.get(moduleID);
+		return moduleID;
 	}
 	
 	public void createNewSamtoolsJob() {
@@ -316,6 +317,12 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 						ModulePortLinker.requestNewOutputPortID(moduleID),
 						command);
 				break;
+			case BOWTIE2_JOB:
+				newModule = new Bowtie2Job (moduleID, storageID, mType, 
+						ModulePortLinker.requestNewInputPortID(moduleID), 
+						ModulePortLinker.requestNewOutputPortID(moduleID),
+						command);
+				break;
 			case INPUT_TEST:
 				newModule = new InputTest (moduleID, storageID, mType,
 						ModulePortLinker.requestNewInputPortID(moduleID),
@@ -333,6 +340,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 						ModulePortLinker.requestNewInputPortID(moduleID),
 						ModulePortLinker.requestNewOutputPortID(moduleID),
 						command);
+				break;
 			case UNDEFINED:
 				break;
 			default:

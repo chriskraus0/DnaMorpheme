@@ -27,6 +27,7 @@ import extProgs.ExtProgType;
 import extProgs.ExternalProgram;
 import extProgs.Samtools;
 import extProgs.Bowtie2;
+import extProgs.Bowtie2_Build;
 import extProgs.Cdhit;
 import extProgs.Qpms9;
 import extProgs.Tomtom;
@@ -36,6 +37,14 @@ import extProgs.Workpath;
 import core.exceptions.SystemNotSupportedException;
 import core.exceptions.VersionNotCompatibleException;
 
+/**
+ * This class checks the availability and version of each external program.
+ * It compares the provided with the installed version. It also provides the 
+ * verified information for "VerifiedExternalPrograms" class.
+ * @see core.VerifiedExternalPrograms 
+ * @author Christopher Kraus
+ *
+ */
 public class CheckExternalPrograms {
 		
 	// Variables.
@@ -93,7 +102,7 @@ public class CheckExternalPrograms {
 						+ "\" is not compatible with this program.");
 			}
 		} catch (IOException ie) {
-			System.err.println("ERROR: " +ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		}
 		
@@ -110,12 +119,28 @@ public class CheckExternalPrograms {
 						+ "\" is not compatible with this program.");
 			}
 		} catch (IOException ie) {
-			System.err.println("ERROR: " +ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
+			ie.printStackTrace();
+		}
+		
+		// Test Bowtie2-Build.
+		try {
+			boolean bowtie2BuildState = this.testBowtie2Build();
+			if (bowtie2BuildState) {
+				this.logger.log(Level.INFO, "Installed bowtie2-build version \"" 
+						+ this.extProgMap.get(ExtProgType.BOWTIE2).getSeenVersion()
+						+ "\" is compatible with this program.");
+			} else {
+				throw new VersionNotCompatibleException("ERROR: The current version of bowtie2-build \""
+						+ this.extProgMap.get(ExtProgType.BOWTIE2).getSeenVersion() 
+						+ "\" is not compatible with this program.");
+			}
+		} catch (IOException ie) {
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		}
 		
 		// Test Cdhit.
-		
 		try {
 			boolean cdhitState = this.testCdhit();
 			if (cdhitState) {
@@ -128,13 +153,13 @@ public class CheckExternalPrograms {
 						+ "\" is not compatible with this program.");
 			}
 		} catch (IOException ie) {
-			System.err.println("ERROR: " +ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		}
 		
 		// Test Qpms9.
-		// Currently qpms9 cannot be tested! No such option included in the current version of qpms9!
-		// TODO: This need to be changed at some point.
+		// Currently qpms9 cannot be tested properly! 
+		// No such option included in the current version of qpms9!
 		try {
 			boolean qpms9State = this.testQpms9();
 			if (qpms9State) {
@@ -147,7 +172,7 @@ public class CheckExternalPrograms {
 						+ "\" is not compatible with this program.");
 			}
 		} catch (IOException ie) {
-			System.err.println("ERROR: " +ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		}
 		
@@ -165,7 +190,7 @@ public class CheckExternalPrograms {
 						+ "\" is not compatible with this program.");
 			}
 		} catch (IOException ie) {
-			System.err.println("ERROR: " +ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		}
 		
@@ -181,7 +206,7 @@ public class CheckExternalPrograms {
 						+ "\" is not reachable.");
 			}
 		} catch (IOException ie) {
-			System.err.println("ERROR: " +ie.getMessage());
+			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		}
 	}
@@ -255,7 +280,7 @@ public class CheckExternalPrograms {
 		
 		String exe = this.extProgMap.get(ExtProgType.QPMS9).getExecutable();
 		String path = this.extProgMap.get(ExtProgType.QPMS9).getPath();
-		// Currently qpms9 cannot properly be tested! No such option included in the current version of qpms9!
+		// TODO: Currently qpms9 cannot properly be tested! No such option included in the current version of qpms9!
 		/*
 		String[] command = new String[2];
 		command[0]=path + "/" + exe;
@@ -302,7 +327,7 @@ public class CheckExternalPrograms {
 	    		this.extProgMap.get(ExtProgType.QPMS9).getVersion());
 	 	
 	    // Switch artificially to true.
-	    // TODO: Change this at some point.
+	 // TODO: Change this at some point.
 	    correctVersion = true;
 	    
 	    return correctVersion;
@@ -420,6 +445,63 @@ public class CheckExternalPrograms {
 	    VerifiedExternalPrograms.setParam(ExtProgType.BOWTIE2, 
 	    		exe, path, 
 	    		this.extProgMap.get(ExtProgType.BOWTIE2).getSeenVersion());
+	    
+	    return isCompatible;
+	}
+	
+	/**
+	 * Test the current version of bowtie2 and check whether it is compatible
+	 * with the one provided by the configuration file.
+	 * @return boolean samtoolsState
+	 * @throws IOException
+	 */
+	private boolean testBowtie2Build() throws IOException {
+		boolean isCompatible = false;
+		
+		String exe = this.extProgMap.get(ExtProgType.BOWTIE2_BUILD).getExecutable();
+		String path = this.extProgMap.get(ExtProgType.BOWTIE2_BUILD).getPath();
+		String[] command = new String[2];
+		command[0]=path + "/" + exe;
+		command[1]="--version"; 
+		
+		// Define pattern for the expected bowtie2 version.
+		Pattern bowtie2Exp = Pattern.compile(this.extProgMap.get(ExtProgType.BOWTIE2_BUILD).getVersion());
+		
+		// Define pattern for bowtie2 version.
+		Pattern bowtie2Pat = Pattern.compile("\\Abowtie2-build version (\\S+)");
+		
+		// Define local variable line to save read lines.
+	    String line;
+	    
+	    // Start an external process with the pre-defined command array.
+	    Process process = Runtime.getRuntime().exec(command);
+	    
+	    // Read the STDIN from the unix process.
+	    Reader r = new InputStreamReader(process.getInputStream());
+	    
+	    // Read line by line using the BufferedReader.
+	    BufferedReader in = new BufferedReader(r);
+	    while((line = in.readLine()) != null) {
+	    	
+	    	// Check each line whether we find the line with the version.
+	    	Matcher samtoolsMatcher = bowtie2Pat.matcher(line);
+	    	
+	    	// If the current version was found then check whether the expected and the observed
+	    	// version are compatible. Return true if this is the case.
+	    	if (samtoolsMatcher.find()) {
+	    		this.extProgMap.get(ExtProgType.BOWTIE2_BUILD).setSeenVersion(samtoolsMatcher.group(1));
+	    		Matcher equalPat = bowtie2Exp.matcher(this.extProgMap.get(ExtProgType.BOWTIE2_BUILD).getSeenVersion());
+	    		if (equalPat.find()) {
+	    			isCompatible = true;
+	    		}
+	    	}
+	    }
+	    in.close();
+	    
+	    // Save the verified data about bowtie2 in Singleton class VerifiedExternalPrograms.
+	    VerifiedExternalPrograms.setParam(ExtProgType.BOWTIE2_BUILD, 
+	    		exe, path, 
+	    		this.extProgMap.get(ExtProgType.BOWTIE2_BUILD).getSeenVersion());
 	    
 	    return isCompatible;
 	}
@@ -548,6 +630,11 @@ public class CheckExternalPrograms {
 								configEntry[1], configEntry[2], configEntry[3]);
 						this.extProgMap.put(ExtProgType.BOWTIE2, newBowtie2);
 						break;
+					case BOWTIE2_BUILD:
+						ExternalProgram newBowtie2Build = new Bowtie2_Build (
+								configEntry[1], configEntry[2], configEntry[3]);
+						this.extProgMap.put(ExtProgType.BOWTIE2_BUILD, newBowtie2Build);
+						break;
 					case CDHIT:
 						ExternalProgram newCdhit = new Cdhit (
 								configEntry[1], configEntry[2], configEntry[3]);
@@ -611,6 +698,8 @@ public class CheckExternalPrograms {
 			return  ExtProgType.SAMTOOLS; 
 		else if (input.equals(ExtProgType.BOWTIE2.toString()))
 			return  ExtProgType.BOWTIE2;
+		else if (input.equals(ExtProgType.BOWTIE2_BUILD.toString()))
+			return ExtProgType.BOWTIE2_BUILD;
 		else if (input.equals(ExtProgType.CDHIT.toString()))
 			return ExtProgType.CDHIT;
 		else if (input.equals(ExtProgType.QPMS9.toString()))

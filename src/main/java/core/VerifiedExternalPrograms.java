@@ -34,6 +34,10 @@ public class VerifiedExternalPrograms {
 	private static String bowtie2Path;
 	private static String bowtie2Version;
 	
+	private static String bowtie2BuildExe;
+	private static String bowtie2BuildPath;
+	private static String bowtie2BuildVersion;
+	
 	private static String tomtomExe;
 	private static String tomtomPath;
 	private static String tomtomVersion;
@@ -80,6 +84,11 @@ public class VerifiedExternalPrograms {
 				bowtie2Path = path;
 				bowtie2Version = version;
 				break;
+			case BOWTIE2_BUILD:
+				bowtie2BuildExe = exe;
+				bowtie2BuildPath = path;
+				bowtie2BuildVersion = version;
+				break;
 			case TOMTOM:
 				tomtomExe = exe;
 				tomtomPath = path;
@@ -96,6 +105,8 @@ public class VerifiedExternalPrograms {
 	}
 	
 	// Getters.
+	
+	// Samtools getters.
 	public static String getSamtoolsExe () {
 		return samtoolsExe;
 	}
@@ -108,6 +119,7 @@ public class VerifiedExternalPrograms {
 		return samtoolsVersion;
 	}
 	
+	// Cdhit getters.
 	public static String getCdhitExe () {
 		return cdhitExe;
 	}
@@ -120,6 +132,7 @@ public class VerifiedExternalPrograms {
 		return cdhitVersion;
 	}
 	
+	// Qpms9 getters.
 	public static String getQpms9Exe () {
 		return qpms9Exe;
 	}
@@ -131,30 +144,46 @@ public class VerifiedExternalPrograms {
 		return qpms9Version;
 	}
 	
-	public static String getbowtie2Exe () {
+	// Bowtie2 getters.
+	public static String getBowtie2Exe () {
 		return bowtie2Exe;
 	}
 	
-	public static String getbowtie2Path () {
+	public static String getBowtie2Path () {
 		return bowtie2Path;
 	}
 	
-	public static String getbowtie2Version () {
+	public static String getBowtie2Version () {
 		return bowtie2Version;
 	}
 	
-	public static String gettomtomExe () {
+	// Bowtie2-Build getters.
+	public static String getBowtie2BuildExe () {
+		return bowtie2Exe;
+	}
+	
+	public static String getBowtie2BuildPath () {
+		return bowtie2Path;
+	}
+	
+	public static String getBowtie2BuildVersion () {
+		return bowtie2Version;
+	}
+	
+	// TomTom getters.
+	public static String getTomtomExe () {
 		return tomtomExe;
 	}
 	
-	public static String gettomtomPath () {
+	public static String getTomtomPath () {
 		return tomtomPath;
 	}
 	
-	public static String gettomtomVersion () {
+	public static String getTomtomVersion () {
 		return tomtomVersion;
 	}
 	
+	// Working directory getter.
 	public static String getWorkingDirPath () {
 		return workDirPath;
 	}

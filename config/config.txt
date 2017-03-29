@@ -1,7 +1,7 @@
 SAMTOOLS:/usr/local/bin:samtools:1.3.1
 CDHIT:/usr/bin:cdhit:4.6
 QPMS9:/home/christopher/programmes/qPMS9/qpms9/qpms9/NoMpi:qpms9:NA
-BOWTIE2:/usr/bin/:bowtie2:2.2.6
+BOWTIE2:/usr/bin:bowtie2:2.2.6
 BOWTIE2_BUILD:/usr/bin:bowtie2-build:2.2.6
 TOMTOM:/home/christopher/programmes/meme/meme_4.11.2/bin:tomtom:4.11.2
 WORKPATH:/home/christopher/testing/DnaMorphemeTest:NA:NA

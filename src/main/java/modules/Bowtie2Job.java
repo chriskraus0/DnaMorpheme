@@ -7,6 +7,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.OutputStream;
+import java.io.FileOutputStream;
+
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.PathMatcher;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.FileVisitResult;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 
 // Java utility imports.
 import java.util.logging.Logger;
@@ -14,6 +28,7 @@ import java.util.logging.Level;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 // Project-specific imports.
 import core.InputPort;
@@ -176,60 +191,163 @@ public class Bowtie2Job extends Module {
 			// Parse the bowtie2-build command.
 			String [] bowtie2BuildCommand = this.parseBowtie2BuildCommand();
 			
-			String line="";
-			String cdHitOutput="";
+			String stdInLine="";
+			String stdErrLine = "";
+			String bowtie2BuildOutput="";
+			String bowtie2BuildErr="";
 			
 			try {
 				// Start an external process with the pre-defined command array.
 			    Process process = Runtime.getRuntime().exec(bowtie2BuildCommand);
 			    
 			    // Read the STDIN from the unix process.
-			    Reader r = new InputStreamReader(process.getInputStream());
+			    Reader stdr = new InputStreamReader(process.getInputStream());
 			    
-			    // Read line by line using the BufferedReader.
-			    BufferedReader in = new BufferedReader(r);
-			    while((line = in.readLine()) != null) {
-			    	cdHitOutput += line + PhysicalConstants.getNewLine();
+			    // Read the STDERR fromt he unix process.
+			    Reader stderr = new InputStreamReader(process.getErrorStream());
+			    
+			    // Read line by line from the STDIN.
+			    BufferedReader stdIn = new BufferedReader(stdr);
+			    while((stdInLine = stdIn.readLine()) != null) {
+			    	bowtie2BuildOutput += stdInLine + PhysicalConstants.getNewLine();
 			    }
-			    in.close();
+			    
+			    // Read line by line from the STDERR.
+			    BufferedReader stdErr = new BufferedReader(stderr);
+			    while ((stdErrLine = stdErr.readLine()) != null) {
+			    	bowtie2BuildErr += stdErrLine + PhysicalConstants.getNewLine();
+			    }
+			    
+			    // Close the buffered readers.
+			    stdErr.close();
+			    stdIn.close();
+			    
 			} catch (IOException ie) {
 				this.logger.log(Level.SEVERE, ie.getMessage());
 				ie.printStackTrace();
 			}
 			
 			// Print the bowtie2 output.
-	    	this.logger.log(Level.INFO, cdHitOutput);
+	    	this.logger.log(Level.INFO, bowtie2BuildOutput);
+	    		    	
+	    	// If there was an error throw a new exception.
+	    	if (!bowtie2BuildErr.isEmpty()
+	    			&& !(bowtie2BuildErr.indexOf("Building a SMALL index") == 0)) {
+	    		throw new CommandFailedException (
+	    				VerifiedExternalPrograms.getBowtie2BuildPath() + 
+	    				PhysicalConstants.getPathSeparator() + 
+	    				VerifiedExternalPrograms.getBowtie2BuildExe() +
+	    				": ERROR: " + bowtie2BuildErr);
+	    	}
+	    	
 		}
 		
-
 		// Parse the bowtie2 command.
 		String [] bowtie2Command = this.parseBowtie2Command();
 		
 		// Run bowtie2 command.
-		String line="";
-		String cdHitOutput="";
+		String stdInLine = "";
+		String bowtie2Output = "";
+		String stdErrLine = "";
+		String bowtie2Err = "";
 		
 		try {
 			// Start an external process with the pre-defined command array.
 		    Process process = Runtime.getRuntime().exec(bowtie2Command);
 		    
 		    // Read the STDIN from the unix process.
-		    Reader r = new InputStreamReader(process.getInputStream());
+		    Reader stdInReader = new InputStreamReader(process.getInputStream());
 		    
-		    // Read line by line using the BufferedReader.
-		    BufferedReader in = new BufferedReader(r);
-		    while((line = in.readLine()) != null) {
-		    	cdHitOutput += line + PhysicalConstants.getNewLine();
+		    // Read the STDERR form the unix process.
+		    Reader stdErrReader = new InputStreamReader(process.getErrorStream());
+		    
+		    // Read line by line from the STDIN.
+		    BufferedReader stdIn = new BufferedReader(stdInReader);
+		    while((stdInLine = stdIn.readLine()) != null) {
+		    	bowtie2Output += stdInLine + PhysicalConstants.getNewLine();
 		    }
-		    in.close();
+		    
+		    // Read line by line from the STDERR.
+		    BufferedReader stdErr = new BufferedReader(stdErrReader);
+		    while ((stdErrLine = stdErr.readLine()) != null) {
+		    	bowtie2Err += stdErrLine + PhysicalConstants.getNewLine();
+		    }
+		    
+		    // Close buffered readers.
+		    stdErr.close();
+		    stdIn.close();
+		    
 		} catch (IOException ie) {
 			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		}
 		
 		// Print the bowtie2 output.
-    	this.logger.log(Level.INFO, cdHitOutput);
-		
+    	this.logger.log(Level.INFO, bowtie2Output);
+    	
+    	if (!bowtie2Err.isEmpty()
+    			&& !(bowtie2Err.indexOf("of these") > 8)) {
+    		throw new CommandFailedException(
+    				VerifiedExternalPrograms.getBowtie2Path()
+    				+ PhysicalConstants.getPathSeparator()
+    				+ VerifiedExternalPrograms.getBowtie2Exe()
+    				+ ": Error: " + bowtie2Err);
+    	} else {
+    		// If everything works fine bowtie2 will write the results to the STDERR.
+    		// I don't know why the authors intended to write it to the STDERR. *sigh*
+    		this.logger.log(Level.INFO, bowtie2Err);
+    	}
+	    	
+    	// Move the resulting index files to the folder tmpData
+    	
+    	// ArrayList<File> holding the bt2 files.
+    	ArrayList<Path> bt2Files = new ArrayList<Path>();
+    	
+    	// Globbing the *bt2 files by defining a PathMatcher.
+    	PathMatcher bt2matcher = FileSystems.getDefault().getPathMatcher("glob:**.bt2");
+    	
+    	try {
+	    	Files.walkFileTree(Paths.get("."), new SimpleFileVisitor<Path>()  {
+	    		@Override
+	    		public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+	    			if (bt2matcher.matches(file)) {
+	    				bt2Files.add(file);
+	    				
+	    				// Copy the file and delete afterwards.
+	    						    				
+	    				// Open a new output stream to copy the file to.
+	    				OutputStream ofStream = new FileOutputStream(
+	    						"."
+	    						+ PhysicalConstants.getPathSeparator()
+	    						+ "tmpData"
+	    						+ PhysicalConstants.getPathSeparator()
+	    						+ file.getFileName());
+	    				
+	    				
+	    				// Native I/O File.copy handles the copy process.
+	    				Files.copy(file, ofStream);
+	    						    				
+	    				// Close the output stream after finishing.
+	    				ofStream.close();
+	    				
+	    				// Delete the old file.
+	    				File oldFile = file.toFile();
+	    				oldFile.delete();
+	    				
+	    			}
+	    			return FileVisitResult.CONTINUE;
+	    		}
+	    		
+	    		@Override 
+	    		public FileVisitResult visitFileFailed (Path file, IOException iex) throws IOException {
+	    			return FileVisitResult.CONTINUE;
+	    		}
+	    	});
+    	} catch (IOException ie) {
+    		this.logger.log(Level.SEVERE, ie.getMessage());
+    		ie.printStackTrace();
+    	}
+						    	
 		/*
 		// Write to OutputPort (via CharPipe).
 		try {

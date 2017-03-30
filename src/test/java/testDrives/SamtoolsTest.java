@@ -60,13 +60,14 @@ public class SamtoolsTest extends TestCase {
 		
 		// Create new CdHitJob module.
 		HashMap<Commands, String> samtoolsJobCommand = new HashMap<Commands, String>();
+		samtoolsJobCommand.put(Commands.index, "");
 		samtoolsJobCommand.put(Commands.b, "");
 		samtoolsJobCommand.put(Commands.S, "");
 		samtoolsJobCommand.put(Commands.input, "testFiles" + PhysicalConstants.getPathSeparator() + "testFile7.sam");
 		samtoolsJobCommand.put(Commands.redirect, ">");
 		samtoolsJobCommand.put(Commands.output, "tmpData" + PhysicalConstants.getPathSeparator() + "testFile7.bam");
 		
-		int samtoolsJobID = moduleBuilder.createNewCdHitJob(samtoolsJobCommand);
+		int samtoolsJobID = moduleBuilder.createNewSamtoolsJob(samtoolsJobCommand);
 		
 		// Prepare module nodes.
 		String inputReaderSamtoolsJobNodeName = moduleBuilder.prepareJobs(inputReaderID, samtoolsJobID);

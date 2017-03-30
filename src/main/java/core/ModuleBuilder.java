@@ -17,6 +17,7 @@ import core.common.ModuleType;
 import modules.CdHitJob;
 import modules.QPMS9Job;
 import modules.Bowtie2Job;
+import modules.SamtoolsJob;
 import modules.commands.Commands;
 
 // Test module imports.
@@ -182,16 +183,20 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return moduleID;
 	}
 	
-	public void createNewSamtoolsJob() {
+	public int createNewSamtoolsJob(HashMap<Commands, String> command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.SAMTOOLS_JOB;
 		
-		// Add module with the ID "moduleID" to the new module TreeMap. TODO: Is there a reason to use TreeMap instead of HashMap?
-		// TODO: Create SamtoolsJob class.
-		//this.moduleMap.put(moduleID, new CdHitJob(moduleID, storageID, mType));
+		Module samtoolsJob = this.createNewModule(moduleID, storageID, mType, command);
+		
+		// Add module with the "moduleID" and module to the new module TreeMap.
+		ModuleBuilder.moduleMap.put(samtoolsJob.getModuleID(), samtoolsJob);
+		
 		// TODO: implement "connectModuleObserver" method
 		//this.connectModuleObserver(this.moduleMap.get(moduleID);
+		
+		return moduleID;
 	}
 	
 	public void createNewTomtomJob() {
@@ -319,6 +324,12 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 				break;
 			case BOWTIE2_JOB:
 				newModule = new Bowtie2Job (moduleID, storageID, mType, 
+						ModulePortLinker.requestNewInputPortID(moduleID), 
+						ModulePortLinker.requestNewOutputPortID(moduleID),
+						command);
+				break;
+			case SAMTOOLS_JOB:
+				newModule = new SamtoolsJob (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
 						ModulePortLinker.requestNewOutputPortID(moduleID),
 						command);

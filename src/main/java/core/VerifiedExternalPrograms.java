@@ -49,6 +49,10 @@ public class VerifiedExternalPrograms {
 	
 	// Methods.
 	
+	/**
+	 * Create new Singleton Class by calling this method.
+	 * @return VerifiedExternalPrograms verifiedExternalPrograms
+	 */
 	public static VerifiedExternalPrograms getInstance() {
 		return verifiedExternalPrograms;
 	}
@@ -107,83 +111,167 @@ public class VerifiedExternalPrograms {
 	// Getters.
 	
 	// Samtools getters.
+	
+	/**
+	 * Getter returns the name of the executable for samtools.
+	 * @return String exe
+	 */
 	public static String getSamtoolsExe () {
 		return samtoolsExe;
 	}
 	
+	/**
+	 * Getter returns the path for samtools.
+	 * @return String path
+	 */
 	public static String getSamtoolsPath () {
 		return samtoolsPath;
 	}
 
+	/**
+	 * Getter returns version of samtools.
+	 * @return String version
+	 */
 	public static String getSamtoolsVersion () {
 		return samtoolsVersion;
 	}
 	
 	// Cdhit getters.
+	
+	/**
+	 * Getter returns the name of the executable for cd-hit.
+	 * @return String exe
+	 */
 	public static String getCdhitExe () {
 		return cdhitExe;
 	}
 	
+	/**
+	 * Getter returns the path for cd-hit.
+	 * @return String path
+	 */
 	public static String getCdhitPath () {
 		return cdhitPath;
 	}
 	
+	/**
+	 * Getter returns version of cd-hit.
+	 * @return String version
+	 */
 	public static String getCdhitVersion () {
 		return cdhitVersion;
 	}
 	
 	// Qpms9 getters.
+	
+	/**
+	 * Getter returns the name of the executable for qPMS9.
+	 * @return String exe
+	 */
 	public static String getQpms9Exe () {
 		return qpms9Exe;
 	}
 	
+	/**
+	 * Getter returns the path for qPMS9.
+	 * @return String path
+	 */
 	public static String getQpms9Path () {
 		return qpms9Path;
 	}
+	
+	/**
+	 * Getter returns version of qPMS9.
+	 * @return String version
+	 */
 	public static String getQpms9Version () {
 		return qpms9Version;
 	}
 	
 	// Bowtie2 getters.
+	
+	/**
+	 * Getter returns the name of the executable for bowtie2.
+	 * @return String exe
+	 */
 	public static String getBowtie2Exe () {
 		return bowtie2Exe;
 	}
 	
+	/**
+	 * Getter returns the path for bowtie2.
+	 * @return String path
+	 */
 	public static String getBowtie2Path () {
 		return bowtie2Path;
 	}
 	
+	/**
+	 * Getter returns version of bowtie2.
+	 * @return String version
+	 */
 	public static String getBowtie2Version () {
 		return bowtie2Version;
 	}
 	
 	// Bowtie2-Build getters.
+	
+	/**
+	 * Getter returns the name of the executable for bowtie2-build.
+	 * @return String exe
+	 */
 	public static String getBowtie2BuildExe () {
 		return bowtie2BuildExe;
 	}
 	
+	/**
+	 * Getter returns the path for bowtie2-build.
+	 * @return String path
+	 */
 	public static String getBowtie2BuildPath () {
 		return bowtie2BuildPath;
 	}
 	
+	/**
+	 * Getter returns version of bowtie2-build.
+	 * @return String version
+	 */
 	public static String getBowtie2BuildVersion () {
 		return bowtie2BuildVersion;
 	}
 	
 	// TomTom getters.
+	
+	/**
+	 * Getter returns the name of the executable for TomTom.
+	 * @return String exe
+	 */
 	public static String getTomtomExe () {
 		return tomtomExe;
 	}
 	
+	/**
+	 * Getter returns the path for TomTom.
+	 * @return String path
+	 */
 	public static String getTomtomPath () {
 		return tomtomPath;
 	}
 	
+	/**
+	 * Getter returns version of TomTom.
+	 * @return String version
+	 */
 	public static String getTomtomVersion () {
 		return tomtomVersion;
 	}
 	
 	// Working directory getter.
+	
+	/**
+	 * Getter returns the location of the working directory.
+	 * @return String workDirPath
+	 */
 	public static String getWorkingDirPath () {
 		return workDirPath;
 	}

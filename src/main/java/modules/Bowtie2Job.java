@@ -298,6 +298,10 @@ public class Bowtie2Job extends Module {
     		this.logger.log(Level.INFO, bowtie2Err);
     	}
 	    	
+    	// TODO: This is not satisfactory. We can not do calculations in the root folder and move
+    	// files afterwards. We have to change to a working directory either in the space the 
+    	// user intended, or in the tmpData folder. This need to be changed.
+    	 
     	// Move the resulting index files to the folder tmpData
     	
     	// ArrayList<File> holding the bt2 files.

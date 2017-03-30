@@ -1,0 +1,7 @@
+@HD	VN:1.0	SO:unsorted
+@SQ	SN:testFile5|sequence	LN:312
+@PG	ID:bowtie2	PN:bowtie2	VN:2.2.6	CL:"/usr/bin/bowtie2-align-s --wrapper basic-0 -x test5 -S tmpData/testFile6.sam -U testFiles/testFile6.fastq"
+read1	0	testFile5|sequence	293	1	14M	*	0	0	AAAAAAAGGGGGGG	IIIIIIIIIIIIII	AS:i:0	XS:i:0	XN:i:0	XM:i:0	XO:i:0	XG:i:0	NM:i:0	MD:Z:14	YT:Z:UU
+read2	0	testFile5|sequence	157	1	11M	*	0	0	ATGGGAGGGAG	IIIIIIIIIII	AS:i:0	XS:i:0	XN:i:0	XM:i:0	XO:i:0	XG:i:0	NM:i:0	MD:Z:11	YT:Z:UU
+read3	0	testFile5|sequence	254	0	14M	*	0	0	AAAAAATGGGGGGG	IIIIIIIIIIIIII	AS:i:-6	XS:i:-6	XN:i:0	XM:i:1	XO:i:0	XG:i:0	NM:i:1	MD:Z:6A7	YT:Z:UU
+read4	0	testFile5|sequence	274	0	11M	*	0	0	ATGGTAGGGAG	IIIIIIIIIII	AS:i:-6	XS:i:-6	XN:i:0	XM:i:1	XO:i:0	XG:i:0	NM:i:1	MD:Z:4G6	YT:Z:UU

@@ -9,6 +9,7 @@ import java.util.logging.Level;
 // Project specific imports.
 import core.common.ModuleState;
 import core.common.ModuleObserverInterface;
+import externalStorage.FileState;
 
 /**
  * This class updates the STATE of each module.
@@ -96,6 +97,13 @@ public class ModuleObserver implements ModuleObserverInterface {
 		this.logger.log(Level.INFO, "Producer with ID \"" + producerID + "\" has state: \"" + producerState.toString() + "\"");
 		this.logger.log(Level.INFO, "Consumer with ID \"" + consumerID + "\" has state: \"" + consumerState.toString() + "\"");
 		
+	}
+	
+	@Override
+	public void update(int moduleID, FileState fileState) {
+		this.logger.log(Level.INFO, "External Storage of module with ID: \""
+				+ moduleID + "\" has the state \""
+				+ fileState + "\".");
 	}
 	
 }

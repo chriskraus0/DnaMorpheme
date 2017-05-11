@@ -5571,9 +5571,9 @@ getModuleType()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>5754</x>
-      <y>1374</y>
+      <y>1362</y>
       <w>174</w>
-      <h>216</h>
+      <h>228</h>
     </coordinates>
     <panel_attributes>*CdHitExtStroage*
 Package::externalStorage
@@ -5585,6 +5585,7 @@ String fileName
 String filePath
 File file
 FileState fileState
+CdHitClusterMap cdHitClusterMap
 --
 // Methods
 CdHitExtStorage()
@@ -5629,10 +5630,10 @@ UNDEFINED</panel_attributes>
       <x>5826</x>
       <y>1344</y>
       <w>180</w>
-      <h>42</h>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>280.0;10.0;10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>280.0;10.0;10.0;10.0;10.0;30.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -5928,5 +5929,140 @@ Save name and path of sequence files.
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>160.0;10.0;160.0;470.0;10.0;470.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>6318</x>
+      <y>1464</y>
+      <w>168</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>*CdHitClusterParser*
+Package::externalStorage
+{extends ExtStorage}
+--
+// Variables
+File file
+Logger logger
+--
+// Methods
+CdHitClusterParser(File file)
+CdHitClusterMap parseCdHitCluster()
+--
+Responsibilities:
+Reads and parses CdHit clusters and 
+creates CdHitCluster objects.
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>6084</x>
+      <y>1620</y>
+      <w>216</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>*CdHitClusterMap*
+Package::externalStorage
+{extends ExtStorage}
+--
+// Variables
+HashMap &lt;String, CdHitCluster&gt; cdhitClusterMap
+--
+// Methods
+CdHitClusterMap()
+HashMap &lt;String, CdHitCluster&gt; 
+getCdHitCluster()
+
+setCdHitCluster(String name, 
+CdHitCluster cCluster)
+--
+Responsibilities:
+Save a HashMap which holds all clusters.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>5922</x>
+      <y>1482</y>
+      <w>408</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>660.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>6336</x>
+      <y>1620</y>
+      <w>216</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>*CdHitCluster*
+Package::externalStorage
+{extends ExtStorage}
+--
+// Variables
+String name
+ArrayList &lt;String&gt; entries
+--
+// Methods
+CdHitCluster()
+CdHitCluster(String name)
+addEntryCdHitCluster()
+
+setCdHitCluster(CdHitCluster cCluster)
+--
+Responsibilities:
+Save one Cd-Hit cluster.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>6450</x>
+      <y>1572</y>
+      <w>18</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>6294</x>
+      <y>1662</y>
+      <w>54</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>6270</x>
+      <y>1572</y>
+      <w>138</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>210.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>5922</x>
+      <y>1494</y>
+      <w>408</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;660.0;10.0</additional_attributes>
   </element>
 </diagram>

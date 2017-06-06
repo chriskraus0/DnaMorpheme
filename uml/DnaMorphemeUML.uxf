@@ -5317,7 +5317,7 @@ external program.</panel_attributes>
     </coordinates>
     <panel_attributes>bg=red
 layer=2
-*/ExtStorrage/*
+*/ExtStorage/*
 Package::externalStorage
 {Model; abstract class}
 --
@@ -5575,7 +5575,7 @@ getModuleType()</panel_attributes>
       <w>174</w>
       <h>228</h>
     </coordinates>
-    <panel_attributes>*CdHitExtStroage*
+    <panel_attributes>*CdHitExtStorage*
 Package::externalStorage
 {extends ExtStorage}
 --
@@ -5691,7 +5691,7 @@ lt=&lt;&lt;.</panel_attributes>
       <w>174</w>
       <h>222</h>
     </coordinates>
-    <panel_attributes>*Bowtie2ExtStroage*
+    <panel_attributes>*Bowtie2ExtStorage*
 Package::externalStorage
 {extends ExtStorage}
 --
@@ -5868,7 +5868,7 @@ Save name and path of sam files.
       <w>174</w>
       <h>216</h>
     </coordinates>
-    <panel_attributes>*QPMS9Stroage*
+    <panel_attributes>*QPMS9Storage*
 Package::externalStorage
 {extends ExtStorage}
 --
@@ -6064,5 +6064,24 @@ Save one Cd-Hit cluster.</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;660.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>5742</x>
+      <y>1008</y>
+      <w>228</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>fontsize=20
+Does the external storage live 
+on the same thread-stack as 
+the calling module?
+No! The whole external 
+storage will live on the 
+original thread-stack as the 
+modulebuilder and the controller.
+bg=white</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

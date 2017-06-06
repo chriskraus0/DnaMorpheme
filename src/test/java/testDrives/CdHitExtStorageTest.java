@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import org.junit.Test;
 import junit.framework.TestCase;
 
+// Project-specific imports.
 //Project-specific imports.
 import core.CoreController;
 import core.ModuleBuilder;
@@ -18,37 +19,39 @@ import core.ModuleObserver;
 import core.common.ModuleState;
 import modules.commands.Commands;
 
-public class CdHitCommandTest extends TestCase {
-		
+/**
+ * Test case to test the external storage for Cd-Hit clustering files.
+ * @author christopher
+ *
+ */
+
+public class CdHitExtStorageTest extends TestCase {
+
 	// Variables.
 	
-	// Logger.
 	private Logger logger;
 	
 	// Constructors.
-	public CdHitCommandTest () {
-		// Call Logger to get a new logger.
+	
+	public CdHitExtStorageTest () {
+		
+		// Call Logger method to generate a new logger for this class.
 		this.logger = Logger.getLogger(this.getClass().getName());
 	}
 	
 	// JUnit test.
-	
-	/**
-	 * JUnit test method.
-	 */
 	@Test
-	public void testThis () {
-				
-		// Run the core components.
-		this.start();
+	public void thisTest () {
 		
+		// Run the core components and the external storage.
+		this.start();
 	}
 	
 	/**
 	 * Run the test.
 	 */
 	public void start() {
-		
+
 		// Create a new Singleton "CoreController"
 		CoreController.getInstance();
 		
@@ -60,6 +63,8 @@ public class CdHitCommandTest extends TestCase {
 		
 		// Get ModuleObserver.
 		ModuleObserver moduleObserver = moduleBuilder.getJobcontroller().getModuleObserver();
+		
+		// TODO: Create a calls for the external storage.
 		
 		// Create new InputReader module.
 		HashMap<Commands, String> inputReaderCommand = new HashMap<Commands, String>();

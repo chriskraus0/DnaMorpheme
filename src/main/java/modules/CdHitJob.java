@@ -209,6 +209,7 @@ public class CdHitJob extends Module {
 		// Print the cd-hit output.
     	this.logger.log(Level.INFO, cdHitOutput);
 		
+    	// TODO: Add the call for the external storage output here.
 		
 		/*
 		// Write to OutputPort (via CharPipe).

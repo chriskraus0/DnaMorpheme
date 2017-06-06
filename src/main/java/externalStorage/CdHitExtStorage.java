@@ -11,6 +11,12 @@ import java.io.File;
 import core.ModuleObserver;
 import core.common.ModuleType;
 
+/**
+ * This class saves the names an paths of Cd-Hit cluster files.
+ * @author Christopher Kraus
+ *
+ */
+
 public class CdHitExtStorage extends ExtStorage {
 
 	// Constants.

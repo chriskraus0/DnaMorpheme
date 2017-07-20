@@ -12,6 +12,7 @@ import java.util.HashMap;
 import core.common.Module;
 import core.common.ModuleBuilderInterface;
 import core.common.ModuleType;
+import core.ExtStorageController;
 
 // Module imports.
 import modules.CdHitJob;
@@ -35,7 +36,11 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	
 	// Variables.
 	
+	// Variable holds the JobController.
 	private JobController jobController;
+	
+	// Variable holds the ExtStorageController.
+	private ExtStorageController extStorageController;
 	
 	// Keep an instance independent sorted map of all modules and IDs.
 	private static Map <Integer, Module> moduleMap;
@@ -48,9 +53,10 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	
 	// Constructors.
 	
-	public ModuleBuilder (JobController jController) {
+	public ModuleBuilder (JobController jController, ExtStorageController extStrController) {
 		super();
 		this.jobController = jController;
+		this.extStorageController = extStrController;
 		ModuleBuilder.moduleMap = new TreeMap<Integer, Module> ();
 		ModuleBuilder.moduleCount = 0;
 		
@@ -396,6 +402,13 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return this.jobController;
 	}
 	
+	/**
+	 * Getter which returns the ExtStorageController.
+	 * @return ExtStorageController extStorageController
+	 */
+	public ExtStorageController getExtStorageController() {
+		return this.extStorageController;
+	}
 	// End getters.
 	
 	// End methods.

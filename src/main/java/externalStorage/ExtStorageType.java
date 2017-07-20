@@ -1,0 +1,9 @@
+package externalStorage;
+
+public enum ExtStorageType {
+	CDHIT_EXT_STORAGE,
+	QPMS9_EXT_STORAGE,
+	BOWTIE2_EXT_STORAGE,
+	SAMTOOLS_EXT_STORAGE,
+	TOMTOM_EXT_STORAGE
+}

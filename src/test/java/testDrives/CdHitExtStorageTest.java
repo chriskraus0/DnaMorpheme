@@ -21,7 +21,8 @@ import modules.commands.Commands;
 
 /**
  * Test case to test the external storage for Cd-Hit clustering files.
- * @author christopher
+ * @see externalStorage.CdHitExtStorage
+ * @author Christopher Kraus
  *
  */
 
@@ -41,7 +42,7 @@ public class CdHitExtStorageTest extends TestCase {
 	
 	// JUnit test.
 	@Test
-	public void thisTest () {
+	public void testFunction () {
 		
 		// Run the core components and the external storage.
 		this.start();
@@ -78,6 +79,8 @@ public class CdHitExtStorageTest extends TestCase {
 		cdHitJobCommand.put(Commands.o, "tmpData/test.out");
 		
 		int cdHitJobID = moduleBuilder.createNewCdHitJob(cdHitJobCommand);
+		
+		// TODO: Thread for external storage needs to be incorporated.
 		
 		// Prepare module nodes.
 		String inputReaderCdHitJobNodeName = moduleBuilder.prepareJobs(inputReaderID, cdHitJobID);

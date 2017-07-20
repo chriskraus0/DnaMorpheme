@@ -52,7 +52,7 @@ public class CdHitJob extends Module {
 	// Logger.
 	private Logger logger;
 	
-	// External commands for cdhit software.
+	// External commands for Cd-Hit software.
 	private Map<Commands, String> command;
 	
 	// Module node of the current job.
@@ -179,7 +179,7 @@ public class CdHitJob extends Module {
 		}
 				
 		
-		// Parse the cdhit command.
+		// Parse the Cd-Hit command.
 		
 		String [] newCommands = this.parseCommand();
 		
@@ -206,10 +206,15 @@ public class CdHitJob extends Module {
 			ie.printStackTrace();
 		}
 		
-		// Print the cd-hit output.
+		// Print the Cd-Hit output.
     	this.logger.log(Level.INFO, cdHitOutput);
 		
-    	// TODO: Add the call for the external storage output here.
+    
+    	//TODO: Find a way to tell the module observer that a new external file was created.    	
+    	// Retrieve the file to the generated Cd-Hit cluster output file.
+    	String outFilePath = this.command.get(Commands.o);
+    	
+    	
 		
 		/*
 		// Write to OutputPort (via CharPipe).

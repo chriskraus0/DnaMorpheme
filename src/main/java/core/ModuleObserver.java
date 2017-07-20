@@ -106,4 +106,6 @@ public class ModuleObserver implements ModuleObserverInterface {
 				+ fileState + "\".");
 	}
 	
+	//TODO: Inform ExtStorageController about newly created external file(s).
+	
 }

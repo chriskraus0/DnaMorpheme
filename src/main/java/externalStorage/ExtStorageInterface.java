@@ -5,6 +5,12 @@ package externalStorage;
 // Project-specific imports.
 import core.common.ModuleType;
 
+/**
+ * Interface which defines the public methods for all external storage classes. 
+ * @author Christopher Kraus
+ *
+ */
+
 public interface ExtStorageInterface {
 	
 	/**

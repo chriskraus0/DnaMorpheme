@@ -8,7 +8,7 @@ import core.exceptions.VersionNotCompatibleException;
 
 /**
  * Singleton which creates all major core components.
- * @author christopher
+ * @author Christopher Kraus
  *
  */
 public class CoreController {
@@ -87,8 +87,17 @@ public class CoreController {
 	 */
 	public static ModuleBuilder generateModuleBuilder() {
 		JobController jobController = new JobController();
-		ModuleBuilder moduleBuilder = new ModuleBuilder(jobController);
+		ExtStorageController extStorageController = generateExtStorageController();
+		ModuleBuilder moduleBuilder = new ModuleBuilder(jobController, extStorageController);
 		return moduleBuilder;
 	}
 
+	/**
+	 * Generate the ExtStorageController.
+	 * @return ExtStorageController extStorageController
+	 */
+	private static ExtStorageController generateExtStorageController() {
+		ExtStorageController extStorageController = new ExtStorageController();
+		return extStorageController;
+	}
 }

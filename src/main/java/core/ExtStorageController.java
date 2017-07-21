@@ -2,6 +2,9 @@ package core;
 
 // Imports.
 
+// Java I/O imports.
+import java.io.File;
+
 // Java utility imports.
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -61,7 +64,10 @@ public class ExtStorageController {
 	 * Request a new external storage for a specific module.
 	 * @param ExtStorageType exsType
 	 */
-	public void requestStorage(ExtStorageType exsType) {
+	public void requestStorage(String filePath, ExtStorageType exsType) {
+		
+		// Parse the file path properly.
+		File file = new File(filePath);
 		
 		// Parse new extID.
 		String newExtID = exsType.toString() + ":" + this.extStorageCounter;
@@ -70,7 +76,10 @@ public class ExtStorageController {
 		this.extStorageCounter ++;
 		
 		// Create the new external storage.
-		ExtStorage newExtStorage = this.extStorageFactory.createNewStorage(exsType, newExtID);
+		ExtStorage newExtStorage = this.extStorageFactory.createNewStorage(exsType, newExtID, file);
+		
+		// Check the file, its state and save its content.
+		newExtStorage.checkFile();
 		
 		// Inform about the creation of a new external storage.
 		this.logger.log(Level.INFO, "External Storage of type: " + exsType.toString() + " ID: " +  newExtID 

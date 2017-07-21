@@ -1,17 +1,24 @@
 package externalStorage;
 
+// Imports.
+
+// Java I/O imports.
 import java.io.File;
 
-import core.ModuleObserver;
-import core.common.ModuleType;
-
 public class Bowtie2ExtStorage extends ExtStorage {
-
-	public Bowtie2ExtStorage(int moduleID, ModuleObserver mObserver, File file) {
-		super(moduleID, mObserver, file);
+	
+	// Constants.
+	
+	private final ExtStorageType EXT_TYPE = ExtStorageType.BOWTIE2_EXT_STORAGE;
+	// Variables.
+	
+	// Constructors.
+	public Bowtie2ExtStorage(String extID, File file) {
+		super(extID, file);
 		// TODO Auto-generated constructor stub
 	}
 
+	// Methods.
 	@Override
 	public FileState checkFile() {
 		// TODO Auto-generated method stub
@@ -19,9 +26,8 @@ public class Bowtie2ExtStorage extends ExtStorage {
 	}
 
 	@Override
-	public ModuleType getModuleType() {
-		// TODO Auto-generated method stub
-		return null;
+	public ExtStorageType getStorageType() {
+		return this.EXT_TYPE;
 	}
 
 }

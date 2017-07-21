@@ -14,7 +14,7 @@ public class CdHitCluster {
 	
 	// Variables.
 	
-	private String name;
+	private String name="";
 	ArrayList <String> entries;
 	
 	// Constructors.

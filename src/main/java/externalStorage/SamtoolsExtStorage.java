@@ -1,17 +1,25 @@
 package externalStorage;
 
+// Imports.
+
+// Java I/O imports.
 import java.io.File;
 
-import core.ModuleObserver;
-import core.common.ModuleType;
-
 public class SamtoolsExtStorage extends ExtStorage {
-
-	public SamtoolsExtStorage(int moduleID, ModuleObserver mObserver, File file) {
-		super(moduleID, mObserver, file);
+	
+	// Constants.
+	private final ExtStorageType EXT_TYPE = ExtStorageType.SAMTOOLS_EXT_STORAGE;
+	
+	// Constructors.
+	public SamtoolsExtStorage(String extID, File file) {
+		super(extID, file);
 		// TODO Auto-generated constructor stub
 	}
 
+	// Methods.
+	
+	// Overridden methods.
+	
 	@Override
 	public FileState checkFile() {
 		// TODO Auto-generated method stub
@@ -19,9 +27,8 @@ public class SamtoolsExtStorage extends ExtStorage {
 	}
 
 	@Override
-	public ModuleType getModuleType() {
-		// TODO Auto-generated method stub
-		return null;
+	public ExtStorageType getStorageType() {
+		return this.EXT_TYPE;
 	}
 
 }

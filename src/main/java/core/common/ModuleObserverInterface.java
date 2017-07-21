@@ -1,10 +1,14 @@
 package core.common;
 
+// Imports.
+
+// Project-specific imports.
 import externalStorage.FileState;
+import externalStorage.ExtStorageType;
 
 /**
  * This interface indicates the required methods for the ModuleObserver.
- * @author christopher
+ * @author Christopher Kraus
  *
  */
 public interface ModuleObserverInterface {
@@ -25,5 +29,14 @@ public interface ModuleObserverInterface {
 	 * @param fileState
 	 */
 	public void update(int moduleID, FileState fileState);
+	
+	/**
+	 * Updates the ExtStorageController with new file which should be read
+	 * and saved. This method takes the path to the file and the type 
+	 * of external storage required. 
+	 * @param String outFile
+	 * @param ExtStorageType exsType
+	 */
+	public void updateOutFile (String outFile, ExtStorageType exsType);
 	
 }

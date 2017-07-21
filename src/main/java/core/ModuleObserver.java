@@ -9,13 +9,15 @@ import java.util.logging.Level;
 // Project specific imports.
 import core.common.ModuleState;
 import core.common.ModuleObserverInterface;
+import core.ExtStorageController;
+import externalStorage.ExtStorageType;
 import externalStorage.FileState;
 
 /**
  * This class updates the STATE of each module.
  * This class also acts as an "Model" (Observer) in the MVC (Model-View-Controller) design pattern.
  * @see Model-View-Controller pattern.
- * @author christopher
+ * @author Christopher Kraus
  *
  */
 public class ModuleObserver implements ModuleObserverInterface {
@@ -29,11 +31,17 @@ public class ModuleObserver implements ModuleObserverInterface {
 	private ModuleState producerState;
 	private ModuleState consumerState;
 	
+	// Instance of the ExtStorage.
+	private ExtStorageController extStorageController;
+	
 	// Logger.
 	private Logger logger;
 		
 	// Constructors.
-	public ModuleObserver () {
+	public ModuleObserver (ExtStorageController extScontroller) {
+		
+		// Save the instance of the external storage controller.
+		this.extStorageController = extScontroller;
 		
 		// Call Logger factory to create new logger.
 		this.logger = Logger.getLogger(this.getClass().getName());
@@ -106,6 +114,9 @@ public class ModuleObserver implements ModuleObserverInterface {
 				+ fileState + "\".");
 	}
 	
-	//TODO: Inform ExtStorageController about newly created external file(s).
+	@Override
+	public void updateOutFile (String outFile, ExtStorageType exsType) {
+		this.extStorageController.requestStorage(outFile, exsType);
+	}
 	
 }

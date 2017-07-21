@@ -5,20 +5,14 @@ package externalStorage;
 // Java I/O imports.
 import java.io.File;
 
-// Project-specific imports.
-import core.ModuleObserver;
-
 public abstract class ExtStorage implements ExtStorageInterface {
 	
 	// Constants.
 	
-	private final int CALLING_MODULE_ID;
+	private final String EXT_STORAGE_ID;
 	
 	// Variables.
-	
-	// Variable holding the module observer.
-	private ModuleObserver mObserver;
-	
+		
 	// The name of the file.
 	private String fileName;
 	
@@ -33,11 +27,8 @@ public abstract class ExtStorage implements ExtStorageInterface {
 	
 	// Constructors.
 	
-	public ExtStorage (int moduleID, ModuleObserver mObserver, File file) {
-		this.CALLING_MODULE_ID = moduleID;
-
-		// Save the observer.
-		this.mObserver = mObserver;
+	public ExtStorage (String extID, File file) {
+		this.EXT_STORAGE_ID = extID;
 
 		this.file = file;
 		
@@ -64,15 +55,10 @@ public abstract class ExtStorage implements ExtStorageInterface {
 	
 	// Override methods.
 	@Override 
-	public int getCallingModuleID () {
-		return this.CALLING_MODULE_ID;
+	public String getExternalStorageID () {
+		return this.EXT_STORAGE_ID;
 	}
-	
-	@Override
-	public void notifyObserver(FileState fileState) {
-		mObserver.update(this.CALLING_MODULE_ID, fileState);
-	}
-	
+		
 	@Override
 	public FileState deleteFile () {
 		this.file.delete();

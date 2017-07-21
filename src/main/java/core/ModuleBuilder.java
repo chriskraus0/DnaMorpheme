@@ -38,10 +38,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	
 	// Variable holds the JobController.
 	private JobController jobController;
-	
-	// Variable holds the ExtStorageController.
-	private ExtStorageController extStorageController;
-	
+		
 	// Keep an instance independent sorted map of all modules and IDs.
 	private static Map <Integer, Module> moduleMap;
 	
@@ -53,10 +50,9 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	
 	// Constructors.
 	
-	public ModuleBuilder (JobController jController, ExtStorageController extStrController) {
+	public ModuleBuilder (JobController jController) {
 		super();
 		this.jobController = jController;
-		this.extStorageController = extStrController;
 		ModuleBuilder.moduleMap = new TreeMap<Integer, Module> ();
 		ModuleBuilder.moduleCount = 0;
 		
@@ -402,13 +398,6 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return this.jobController;
 	}
 	
-	/**
-	 * Getter which returns the ExtStorageController.
-	 * @return ExtStorageController extStorageController
-	 */
-	public ExtStorageController getExtStorageController() {
-		return this.extStorageController;
-	}
 	// End getters.
 	
 	// End methods.

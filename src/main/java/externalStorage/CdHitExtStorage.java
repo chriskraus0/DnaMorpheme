@@ -1,15 +1,11 @@
 package externalStorage;
 
-import core.ModuleBuilder;
-
 // Imports.
 
 // Java I/O imports.
 import java.io.File;
 
 // Project-specific imports.
-import core.ModuleObserver;
-import core.common.ModuleType;
 
 /**
  * This class saves the names an paths of Cd-Hit cluster files.
@@ -18,9 +14,10 @@ import core.common.ModuleType;
  */
 
 public class CdHitExtStorage extends ExtStorage {
-
+	
 	// Constants.
-	private final ModuleType mType;
+	
+	private final ExtStorageType EXT_TYPE = ExtStorageType.CDHIT_EXT_STORAGE;
 	
 	// Variables.
 	
@@ -34,13 +31,9 @@ public class CdHitExtStorage extends ExtStorage {
 	
 	
 	// Constructors.
-	public CdHitExtStorage (int moduleID, ModuleObserver mObserver, File file) {
-		super(moduleID, mObserver, file);
-		
-		// Set the module type of the calling module.
-		this.mType = ModuleBuilder.getModule(moduleID).getModuleType();
-		
-		
+	public CdHitExtStorage (String extID, File file) {
+		super(extID, file);
+				
 		// Initialize the file state.
 		this.fileState = FileState.AVAILABLE;
 		
@@ -52,17 +45,18 @@ public class CdHitExtStorage extends ExtStorage {
 	
 	// Getters.
 	
+	/**
+	 * Getter which returns the Map with all included clusters.
+	 * @return CdHitClusterMap cdHitClusterMap
+	 */
+	public CdHitClusterMap getClusters() {
+		return this.cdHitClusterMap;
+	}
+	
 	// Setters.
 	
 	// End setters.
 	
-	/**
-	 * Method notifies Observer over current state of the file.
-	 */
-	public void notifyObserver() {
-		 super.notifyObserver(this.fileState);
-	}
-
 	/**
 	 * Delete external file.
 	 * @return FileState fileState
@@ -104,11 +98,12 @@ public class CdHitExtStorage extends ExtStorage {
 		FileState currState = parseCdHitClusterFile( super.getFile() );
 		
 		return currState;
-	}	
+	}
+	
 	
 	@Override
-	public ModuleType getModuleType() {
-		return this.getModuleType();
+	public ExtStorageType getStorageType() {
+		return this.EXT_TYPE;
 	}
 	
 	// Private methods.

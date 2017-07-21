@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2">
-  <zoom_level>7</zoom_level>
+  <zoom_level>5</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5579</x>
-      <y>287</y>
-      <w>161</w>
-      <h>84</h>
+      <x>3985</x>
+      <y>205</y>
+      <w>115</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>bg=red
 GuiController
@@ -27,10 +27,10 @@ Update GUI</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>861</x>
-      <y>679</y>
-      <w>294</w>
-      <h>266</h>
+      <x>615</x>
+      <y>485</y>
+      <w>210</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>bg=red
 *InternalStorageFactory*
@@ -65,10 +65,10 @@ Generate new storage ID</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>602</x>
-      <y>1106</y>
-      <w>273</w>
-      <h>245</h>
+      <x>430</x>
+      <y>790</y>
+      <w>195</w>
+      <h>175</h>
     </coordinates>
     <panel_attributes>*/InternalStorage/*
 Package::storage
@@ -101,10 +101,10 @@ Connect Observer
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2996</x>
-      <y>2058</y>
-      <w>294</w>
-      <h>483</h>
+      <x>2140</x>
+      <y>1470</y>
+      <w>210</w>
+      <h>345</h>
     </coordinates>
     <panel_attributes>bg=red
 *ModuleBuilder*
@@ -158,10 +158,10 @@ create and destroy module objects</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>189</x>
-      <y>294</y>
-      <w>252</w>
-      <h>112</h>
+      <x>135</x>
+      <y>210</y>
+      <w>180</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>*InputReader*
 Package::core
@@ -179,10 +179,10 @@ to pipes after ports are connected</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>434</x>
-      <y>322</y>
-      <w>4858</w>
-      <h>301</h>
+      <x>310</x>
+      <y>230</y>
+      <w>3470</w>
+      <h>215</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>6920.0;410.0;1860.0;410.0;1860.0;10.0;10.0;10.0</additional_attributes>
@@ -190,10 +190,10 @@ to pipes after ports are connected</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5999</x>
-      <y>952</y>
-      <w>217</w>
-      <h>196</h>
+      <x>4285</x>
+      <y>680</y>
+      <w>155</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>*CdHitjob*
 Package::modules
@@ -221,10 +221,10 @@ Query and evaluate external cluster files.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1148</x>
-      <y>777</y>
-      <w>4865</w>
-      <h>231</h>
+      <x>820</x>
+      <y>555</y>
+      <w>3475</w>
+      <h>165</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;6410.0;10.0;6410.0;310.0;6930.0;310.0</additional_attributes>
@@ -232,10 +232,10 @@ Query and evaluate external cluster files.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5845</x>
-      <y>602</y>
-      <w>161</w>
-      <h>140</h>
+      <x>4175</x>
+      <y>430</y>
+      <w>115</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>bg=red
 JobFactory
@@ -262,10 +262,10 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5950</x>
-      <y>735</y>
-      <w>63</w>
-      <h>266</h>
+      <x>4250</x>
+      <y>525</y>
+      <w>45</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>70.0;360.0;10.0;360.0;10.0;10.0</additional_attributes>
@@ -273,10 +273,10 @@ layer=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>6006</x>
-      <y>791</y>
-      <w>217</w>
-      <h>98</h>
+      <x>4290</x>
+      <y>565</y>
+      <w>155</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>*ModuleObserver*
 //Package::FatClass
@@ -301,10 +301,10 @@ and status</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5264</x>
-      <y>819</y>
-      <w>756</w>
-      <h>1757</h>
+      <x>3760</x>
+      <y>585</y>
+      <w>540</w>
+      <h>1255</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;2490.0;750.0;2490.0;750.0;330.0;1020.0;330.0;1020.0;10.0;1060.0;10.0</additional_attributes>
@@ -312,10 +312,10 @@ and status</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>6272</x>
-      <y>679</y>
-      <w>140</w>
-      <h>70</h>
+      <x>4480</x>
+      <y>485</y>
+      <w>100</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>ErrorListener
 //Package::FatClass
@@ -335,10 +335,10 @@ and status</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6328</x>
-      <y>595</y>
-      <w>105</w>
-      <h>98</h>
+      <x>4520</x>
+      <y>425</y>
+      <w>75</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>130.0;10.0;10.0;10.0;10.0;120.0</additional_attributes>
@@ -346,10 +346,10 @@ and status</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>6279</x>
-      <y>2247</y>
-      <w>196</w>
-      <h>70</h>
+      <x>4485</x>
+      <y>1605</y>
+      <w>140</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>ConsensusPlantedMotifBuilder
 //Package::FatClass
@@ -369,10 +369,10 @@ and status</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>2282</y>
-      <w>84</w>
-      <h>21</h>
+      <x>4435</x>
+      <y>1630</y>
+      <w>60</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
@@ -380,10 +380,10 @@ and status</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>6279</x>
-      <y>2422</y>
-      <w>161</w>
-      <h>70</h>
+      <x>4485</x>
+      <y>1730</y>
+      <w>115</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>NucleotideFrequencyTable
 //Package::FatClass
@@ -403,10 +403,10 @@ and status</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>2443</y>
-      <w>84</w>
-      <h>21</h>
+      <x>4435</x>
+      <y>1745</y>
+      <w>60</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
@@ -414,10 +414,10 @@ and status</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>6300</x>
-      <y>1974</y>
-      <w>161</w>
-      <h>70</h>
+      <x>4500</x>
+      <y>1410</y>
+      <w>115</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>SequenceLogoBuilder
 //Package::FatClass
@@ -437,10 +437,10 @@ and status</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3794</x>
-      <y>1001</y>
-      <w>2219</w>
-      <h>931</h>
+      <x>2710</x>
+      <y>715</y>
+      <w>1585</w>
+      <h>665</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;1310.0;3080.0;1310.0;3080.0;10.0;3150.0;10.0</additional_attributes>
@@ -448,10 +448,10 @@ and status</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>6307</x>
-      <y>2079</y>
-      <w>161</w>
-      <h>70</h>
+      <x>4505</x>
+      <y>1485</y>
+      <w>115</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>DrawDevice
 //Package::FatClass
@@ -471,10 +471,10 @@ and status</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6384</x>
-      <y>2037</y>
-      <w>21</w>
-      <h>56</h>
+      <x>4560</x>
+      <y>1455</y>
+      <w>15</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
@@ -482,10 +482,10 @@ and status</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>4963</x>
-      <y>2506</y>
-      <w>308</w>
-      <h>217</h>
+      <x>3545</x>
+      <y>1790</y>
+      <w>220</w>
+      <h>155</h>
     </coordinates>
     <panel_attributes>bg=blue
 // ClassName
@@ -519,10 +519,10 @@ Execute the algorithm logic.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5264</x>
-      <y>630</y>
-      <w>595</w>
-      <h>1988</h>
+      <x>3760</x>
+      <y>450</y>
+      <w>425</w>
+      <h>1420</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>830.0;10.0;780.0;10.0;780.0;2820.0;10.0;2820.0</additional_attributes>
@@ -530,10 +530,10 @@ Execute the algorithm logic.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5908</x>
-      <y>455</y>
-      <w>133</w>
-      <h>161</h>
+      <x>4220</x>
+      <y>325</y>
+      <w>95</w>
+      <h>115</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>50.0;10.0;170.0;10.0;170.0;190.0;10.0;190.0;10.0;210.0</additional_attributes>
@@ -541,10 +541,10 @@ Execute the algorithm logic.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2821</x>
-      <y>2597</y>
-      <w>175</w>
-      <h>70</h>
+      <x>2015</x>
+      <y>1855</y>
+      <w>125</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>bg=yellow
 *UserInputRegulation*
@@ -565,10 +565,10 @@ to modules</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>6391</x>
-      <y>595</y>
-      <w>63</w>
-      <h>63</h>
+      <x>4565</x>
+      <y>425</y>
+      <w>45</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>/Listener/
 {Interface}
@@ -581,9 +581,9 @@ to modules</panel_attributes>
     <id>UMLSpecialState</id>
     <coordinates>
       <x>0</x>
-      <y>315</y>
-      <w>14</w>
-      <h>14</h>
+      <y>225</y>
+      <w>10</w>
+      <h>10</h>
     </coordinates>
     <panel_attributes>type=initial
 </panel_attributes>
@@ -592,10 +592,10 @@ to modules</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7</x>
-      <y>315</y>
-      <w>196</w>
-      <h>21</h>
+      <x>5</x>
+      <y>225</y>
+      <w>140</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>260.0;10.0;10.0;10.0</additional_attributes>
@@ -603,10 +603,10 @@ to modules</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>6811</x>
-      <y>945</y>
-      <w>14</w>
-      <h>14</h>
+      <x>4865</x>
+      <y>675</y>
+      <w>10</w>
+      <h>10</h>
     </coordinates>
     <panel_attributes>type=final</panel_attributes>
     <additional_attributes/>
@@ -614,10 +614,10 @@ to modules</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6692</x>
-      <y>945</y>
-      <w>133</w>
-      <h>21</h>
+      <x>4780</x>
+      <y>675</y>
+      <w>95</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>170.0;10.0;10.0;10.0</additional_attributes>
@@ -625,10 +625,10 @@ to modules</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5642</x>
-      <y>4200</y>
-      <w>154</w>
-      <h>28</h>
+      <x>4030</x>
+      <y>3000</y>
+      <w>110</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lw=2
 CD-HIT</panel_attributes>
@@ -637,10 +637,10 @@ CD-HIT</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5642</x>
-      <y>4270</y>
-      <w>154</w>
-      <h>28</h>
+      <x>4030</x>
+      <y>3050</y>
+      <w>110</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lw=2
 qPMS9</panel_attributes>
@@ -649,10 +649,10 @@ qPMS9</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5642</x>
-      <y>4347</y>
-      <w>154</w>
-      <h>28</h>
+      <x>4030</x>
+      <y>3105</y>
+      <w>110</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lw=2
 bowtie2</panel_attributes>
@@ -661,10 +661,10 @@ bowtie2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5642</x>
-      <y>4417</y>
-      <w>154</w>
-      <h>28</h>
+      <x>4030</x>
+      <y>3155</y>
+      <w>110</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lw=2
 samtools v1.3</panel_attributes>
@@ -673,10 +673,10 @@ samtools v1.3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5642</x>
-      <y>4494</y>
-      <w>154</w>
-      <h>28</h>
+      <x>4030</x>
+      <y>3210</y>
+      <w>110</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lw=2
 tomtom/Jaspar</panel_attributes>
@@ -685,10 +685,10 @@ tomtom/Jaspar</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3794</x>
-      <y>1953</y>
-      <w>1862</w>
-      <h>2275</h>
+      <x>2710</x>
+      <y>1395</y>
+      <w>1330</w>
+      <h>1625</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>2640.0;3230.0;2610.0;3230.0;2610.0;10.0;10.0;10.0</additional_attributes>
@@ -696,10 +696,10 @@ tomtom/Jaspar</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3794</x>
-      <y>1960</y>
-      <w>1862</w>
-      <h>2338</h>
+      <x>2710</x>
+      <y>1400</y>
+      <w>1330</w>
+      <h>1670</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>2640.0;3320.0;2600.0;3320.0;2600.0;10.0;10.0;10.0</additional_attributes>
@@ -707,10 +707,10 @@ tomtom/Jaspar</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3794</x>
-      <y>1967</y>
-      <w>1862</w>
-      <h>2408</h>
+      <x>2710</x>
+      <y>1405</y>
+      <w>1330</w>
+      <h>1720</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>2640.0;3420.0;2590.0;3420.0;2590.0;10.0;10.0;10.0</additional_attributes>
@@ -718,10 +718,10 @@ tomtom/Jaspar</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3794</x>
-      <y>1974</y>
-      <w>1862</w>
-      <h>2471</h>
+      <x>2710</x>
+      <y>1410</y>
+      <w>1330</w>
+      <h>1765</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>2640.0;3510.0;2580.0;3510.0;2580.0;10.0;10.0;10.0</additional_attributes>
@@ -729,10 +729,10 @@ tomtom/Jaspar</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3794</x>
-      <y>1981</y>
-      <w>1862</w>
-      <h>2541</h>
+      <x>2710</x>
+      <y>1415</y>
+      <w>1330</w>
+      <h>1815</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>2640.0;3610.0;2570.0;3610.0;2570.0;10.0;10.0;10.0</additional_attributes>
@@ -740,10 +740,10 @@ tomtom/Jaspar</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3283</x>
-      <y>2471</y>
-      <w>2597</w>
-      <h>2310</h>
+      <x>2345</x>
+      <y>1765</y>
+      <w>1855</w>
+      <h>1650</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=4</panel_attributes>
@@ -752,10 +752,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>6090</x>
-      <y>4578</y>
-      <w>112</w>
-      <h>105</h>
+      <x>4350</x>
+      <y>3270</y>
+      <w>80</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>type=decision</panel_attributes>
     <additional_attributes/>
@@ -763,10 +763,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5698</x>
-      <y>4515</y>
-      <w>406</w>
-      <h>133</h>
+      <x>4070</x>
+      <y>3225</y>
+      <w>290</w>
+      <h>95</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>560.0;170.0;10.0;170.0;10.0;10.0</additional_attributes>
@@ -774,10 +774,10 @@ layer=4</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>6118</x>
-      <y>4606</y>
-      <w>70</w>
-      <h>49</h>
+      <x>4370</x>
+      <y>3290</y>
+      <w>50</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>If no motif cannot be validated
 style=wordwrap</panel_attributes>
@@ -786,10 +786,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>6412</x>
-      <y>4340</y>
-      <w>126</w>
-      <h>63</h>
+      <x>4580</x>
+      <y>3100</y>
+      <w>90</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>fontsize=20
 Abbort/Warning</panel_attributes>
@@ -798,10 +798,10 @@ Abbort/Warning</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6195</x>
-      <y>4396</y>
-      <w>287</w>
-      <h>252</h>
+      <x>4425</x>
+      <y>3140</y>
+      <w>205</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>390.0;10.0;390.0;340.0;10.0;340.0</additional_attributes>
@@ -809,10 +809,10 @@ Abbort/Warning</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6377</x>
-      <y>742</y>
-      <w>154</w>
-      <h>3612</h>
+      <x>4555</x>
+      <y>530</y>
+      <w>110</w>
+      <h>2580</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;320.0;200.0;320.0;200.0;5070.0;140.0;5070.0;140.0;5140.0</additional_attributes>
@@ -820,10 +820,10 @@ Abbort/Warning</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>6237</x>
-      <y>4620</y>
-      <w>189</w>
-      <h>14</h>
+      <x>4455</x>
+      <y>3300</y>
+      <w>135</w>
+      <h>10</h>
     </coordinates>
     <panel_attributes>If hammingDistance == 1
 style=wordwrap</panel_attributes>
@@ -832,10 +832,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5789</x>
-      <y>4277</y>
-      <w>371</w>
-      <h>315</h>
+      <x>4135</x>
+      <y>3055</y>
+      <w>265</w>
+      <h>225</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;510.0;10.0;510.0;430.0</additional_attributes>
@@ -843,10 +843,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>5936</x>
-      <y>4270</y>
-      <w>217</w>
-      <h>28</h>
+      <x>4240</x>
+      <y>3050</y>
+      <w>155</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>decrement hammingDistance (if Dh &gt; 1)
 style=wordwrap</panel_attributes>
@@ -855,10 +855,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>5880</x>
-      <y>4396</y>
-      <w>140</w>
-      <h>70</h>
+      <x>4200</x>
+      <y>3140</y>
+      <w>100</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>If any consensus sequences are &gt;= 20% of whole
 quorum length AND hammingDistance &gt;= 1
@@ -868,10 +868,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>5852</x>
-      <y>4347</y>
-      <w>182</w>
-      <h>161</h>
+      <x>4180</x>
+      <y>3105</y>
+      <w>130</w>
+      <h>115</h>
     </coordinates>
     <panel_attributes>type=decision</panel_attributes>
     <additional_attributes/>
@@ -879,10 +879,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5789</x>
-      <y>4424</y>
-      <w>77</w>
-      <h>21</h>
+      <x>4135</x>
+      <y>3160</y>
+      <w>55</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
@@ -890,10 +890,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5789</x>
-      <y>4277</y>
-      <w>371</w>
-      <h>168</h>
+      <x>4135</x>
+      <y>3055</y>
+      <w>265</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;510.0;10.0;510.0;220.0;350.0;220.0</additional_attributes>
@@ -901,10 +901,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5936</x>
-      <y>4340</y>
-      <w>490</w>
-      <h>21</h>
+      <x>4240</x>
+      <y>3100</y>
+      <w>350</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>680.0;10.0;10.0;10.0</additional_attributes>
@@ -912,10 +912,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>6209</x>
-      <y>4333</y>
-      <w>189</w>
-      <h>14</h>
+      <x>4435</x>
+      <y>3095</y>
+      <w>135</w>
+      <h>10</h>
     </coordinates>
     <panel_attributes>If hammingDistance == 1
 style=wordwrap</panel_attributes>
@@ -924,10 +924,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>5873</x>
-      <y>4158</y>
-      <w>98</w>
-      <h>42</h>
+      <x>4195</x>
+      <y>2970</y>
+      <w>70</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>If &lt; 50% of all sequences are in greatest cluster
 style=wordwrap</panel_attributes>
@@ -936,10 +936,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>5852</x>
-      <y>4130</y>
-      <w>126</w>
-      <h>98</h>
+      <x>4180</x>
+      <y>2950</y>
+      <w>90</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>type=decision</panel_attributes>
     <additional_attributes/>
@@ -947,10 +947,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5789</x>
-      <y>4172</y>
-      <w>77</w>
-      <h>56</h>
+      <x>4135</x>
+      <y>2980</y>
+      <w>55</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>90.0;10.0;50.0;60.0;10.0;60.0</additional_attributes>
@@ -958,10 +958,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5712</x>
-      <y>4221</y>
-      <w>217</w>
-      <h>42</h>
+      <x>4080</x>
+      <y>3015</y>
+      <w>155</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0;290.0;40.0;290.0;10.0</additional_attributes>
@@ -969,10 +969,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>5726</x>
-      <y>4235</y>
-      <w>119</w>
-      <h>28</h>
+      <x>4090</x>
+      <y>3025</y>
+      <w>85</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>reduce identity by 5% (if identity &gt;= 60%)
 style=wordwrap</panel_attributes>
@@ -981,10 +981,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5971</x>
-      <y>4172</y>
-      <w>483</w>
-      <h>182</h>
+      <x>4265</x>
+      <y>2980</y>
+      <w>345</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>670.0;240.0;670.0;100.0;10.0;100.0;10.0;10.0</additional_attributes>
@@ -992,10 +992,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>5985</x>
-      <y>4228</y>
-      <w>217</w>
-      <h>28</h>
+      <x>4275</x>
+      <y>3020</y>
+      <w>155</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>If identity &lt; 60%
 style=wordwrap</panel_attributes>
@@ -1004,10 +1004,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5243</x>
-      <y>2716</y>
-      <w>686</w>
-      <h>1428</h>
+      <x>3745</x>
+      <y>1940</y>
+      <w>490</w>
+      <h>1020</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0;960.0;50.0;960.0;2020.0</additional_attributes>
@@ -1015,10 +1015,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>5859</x>
-      <y>441</y>
-      <w>161</w>
-      <h>119</h>
+      <x>4185</x>
+      <y>315</y>
+      <w>115</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>/JobFactoryInterface/
 --
@@ -1035,10 +1035,10 @@ layer=1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>448</x>
-      <y>196</y>
-      <w>6083</w>
-      <h>3899</h>
+      <x>320</x>
+      <y>140</y>
+      <w>4345</w>
+      <h>2785</h>
     </coordinates>
     <panel_attributes>fontsize=80
 Swing GUI
@@ -1053,9 +1053,9 @@ layer=0</panel_attributes>
     <id>Text</id>
     <coordinates>
       <x>0</x>
-      <y>287</y>
-      <w>112</w>
-      <h>21</h>
+      <y>205</y>
+      <w>80</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>Arbitrary Sequences
 style=wordwrap</panel_attributes>
@@ -1064,10 +1064,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>6699</x>
-      <y>938</y>
-      <w>112</w>
-      <h>21</h>
+      <x>4785</x>
+      <y>670</y>
+      <w>80</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>motifs/token/units
 style=wordwrap</panel_attributes>
@@ -1076,10 +1076,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>6559</x>
-      <y>910</y>
-      <w>140</w>
-      <h>70</h>
+      <x>4685</x>
+      <y>650</y>
+      <w>100</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>OutputWriter
 //Package::FatClass
@@ -1099,10 +1099,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5733</x>
-      <y>315</y>
-      <w>574</w>
-      <h>378</h>
+      <x>4095</x>
+      <y>225</y>
+      <w>410</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;800.0;10.0;800.0;520.0</additional_attributes>
@@ -1110,10 +1110,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5971</x>
-      <y>973</y>
-      <w>672</w>
-      <h>3773</h>
+      <x>4265</x>
+      <y>695</y>
+      <w>480</w>
+      <h>2695</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>940.0;10.0;940.0;5370.0;10.0;5370.0</additional_attributes>
@@ -1121,10 +1121,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5558</x>
-      <y>4515</y>
-      <w>329</w>
-      <h>231</h>
+      <x>3970</x>
+      <y>3225</y>
+      <w>235</w>
+      <h>165</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>450.0;310.0;10.0;310.0;10.0;110.0;160.0;110.0;160.0;10.0</additional_attributes>
@@ -1132,10 +1132,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5558</x>
-      <y>4438</y>
-      <w>329</w>
-      <h>308</h>
+      <x>3970</x>
+      <y>3170</y>
+      <w>235</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>450.0;420.0;10.0;420.0;10.0;40.0;220.0;40.0;220.0;10.0</additional_attributes>
@@ -1143,10 +1143,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5558</x>
-      <y>4368</y>
-      <w>329</w>
-      <h>378</h>
+      <x>3970</x>
+      <y>3120</y>
+      <w>235</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>450.0;520.0;10.0;520.0;10.0;40.0;220.0;40.0;220.0;10.0</additional_attributes>
@@ -1154,10 +1154,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5558</x>
-      <y>4291</y>
-      <w>329</w>
-      <h>455</h>
+      <x>3970</x>
+      <y>3065</y>
+      <w>235</w>
+      <h>325</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>450.0;630.0;10.0;630.0;10.0;40.0;220.0;40.0;220.0;10.0</additional_attributes>
@@ -1165,10 +1165,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5558</x>
-      <y>4221</y>
-      <w>329</w>
-      <h>525</h>
+      <x>3970</x>
+      <y>3015</y>
+      <w>235</w>
+      <h>375</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>450.0;730.0;10.0;730.0;10.0;40.0;210.0;40.0;210.0;10.0</additional_attributes>
@@ -1176,10 +1176,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5264</x>
-      <y>735</y>
-      <w>721</w>
-      <h>1820</h>
+      <x>3760</x>
+      <y>525</y>
+      <w>515</w>
+      <h>1300</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>1010.0;10.0;1010.0;280.0;910.0;280.0;910.0;2580.0;10.0;2580.0</additional_attributes>
@@ -1187,10 +1187,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5264</x>
-      <y>364</y>
-      <w>532</w>
-      <h>2240</h>
+      <x>3760</x>
+      <y>260</y>
+      <w>380</w>
+      <h>1600</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -1199,10 +1199,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>889</x>
-      <y>1155</y>
-      <w>273</w>
-      <h>189</h>
+      <x>635</x>
+      <y>825</y>
+      <w>195</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>SequenceStorage
 //Package::FatClass
@@ -1232,10 +1232,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>868</x>
-      <y>1134</y>
-      <w>175</w>
-      <h>35</h>
+      <x>620</x>
+      <y>810</y>
+      <w>125</w>
+      <h>25</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;230.0;10.0;230.0;30.0</additional_attributes>
@@ -1243,10 +1243,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5250</x>
-      <y>602</y>
-      <w>441</w>
-      <h>1918</h>
+      <x>3750</x>
+      <y>430</y>
+      <w>315</w>
+      <h>1370</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>550.0;10.0;610.0;10.0;610.0;2600.0;10.0;2600.0;10.0;2720.0</additional_attributes>
@@ -1254,10 +1254,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>1225</x>
-      <y>476</y>
-      <w>203</w>
-      <h>189</h>
+      <x>875</x>
+      <y>340</y>
+      <w>145</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>*/InternalStorageFactoryInterface/*
 {Interface}
@@ -1280,10 +1280,10 @@ layer=2</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>5950</x>
-      <y>4333</y>
-      <w>217</w>
-      <h>28</h>
+      <x>4250</x>
+      <y>3095</y>
+      <w>155</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>increment hammingDistance
 style=wordwrap</panel_attributes>
@@ -1292,10 +1292,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>5061</x>
-      <y>2485</y>
-      <w>112</w>
-      <h>28</h>
+      <x>3615</x>
+      <y>1775</y>
+      <w>80</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -1307,10 +1307,10 @@ layer=1</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>5852</x>
-      <y>413</y>
-      <w>175</w>
-      <h>28</h>
+      <x>4180</x>
+      <y>295</y>
+      <w>125</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -1322,10 +1322,10 @@ layer=1</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>2814</x>
-      <y>1057</y>
-      <w>168</w>
-      <h>28</h>
+      <x>2010</x>
+      <y>755</y>
+      <w>120</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -1337,10 +1337,10 @@ layer=1</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1239</x>
-      <y>455</y>
-      <w>182</w>
-      <h>28</h>
+      <x>885</x>
+      <y>325</y>
+      <w>130</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -1352,10 +1352,10 @@ layer=1</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>6055</x>
-      <y>763</y>
-      <w>91</w>
-      <h>28</h>
+      <x>4325</x>
+      <y>545</y>
+      <w>65</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -1367,10 +1367,10 @@ layer=1</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>3556</x>
-      <y>1855</y>
-      <w>112</w>
-      <h>28</h>
+      <x>2540</x>
+      <y>1325</y>
+      <w>80</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -1382,10 +1382,10 @@ layer=1</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>3941</x>
-      <y>1078</y>
-      <w>364</w>
-      <h>98</h>
+      <x>2815</x>
+      <y>770</y>
+      <w>260</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>/*ModuleNodeInterface*/
 --
@@ -1400,10 +1400,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3150</x>
-      <y>840</y>
-      <w>2331</w>
-      <h>1680</h>
+      <x>2250</x>
+      <y>600</y>
+      <w>1665</w>
+      <h>1200</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=5</panel_attributes>
@@ -1412,10 +1412,10 @@ layer=5</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5278</x>
-      <y>462</y>
-      <w>357</w>
-      <h>280</h>
+      <x>3770</x>
+      <y>330</y>
+      <w>255</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>bg=blue
 StorageController
@@ -1447,10 +1447,10 @@ layer=2</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>5411</x>
-      <y>441</y>
-      <w>119</w>
-      <h>28</h>
+      <x>3865</x>
+      <y>315</y>
+      <w>85</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -1462,10 +1462,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1148</x>
-      <y>735</y>
-      <w>4480</w>
-      <h>35</h>
+      <x>820</x>
+      <y>525</y>
+      <w>3200</w>
+      <h>25</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;30.0;6380.0;30.0;6380.0;10.0</additional_attributes>
@@ -1473,10 +1473,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5999</x>
-      <y>1162</y>
-      <w>217</w>
-      <h>175</h>
+      <x>4285</x>
+      <y>830</y>
+      <w>155</w>
+      <h>125</h>
     </coordinates>
     <panel_attributes>*QPMS9Job*
 Package::modules
@@ -1502,10 +1502,10 @@ Call external qpms9 command.</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>5733</x>
-      <y>469</y>
-      <w>84</w>
-      <h>154</h>
+      <x>4095</x>
+      <y>335</y>
+      <w>60</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>/JOBTYPES/
 {Enumeration}
@@ -1525,10 +1525,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5775</x>
-      <y>476</y>
-      <w>98</w>
-      <h>140</h>
+      <x>4125</x>
+      <y>340</y>
+      <w>70</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;80.0;10.0;80.0;160.0;120.0;160.0;120.0;180.0</additional_attributes>
@@ -1536,10 +1536,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>3101</x>
-      <y>1078</y>
-      <w>98</w>
-      <h>168</h>
+      <x>2215</x>
+      <y>770</y>
+      <w>70</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>/*MODULESTATE*/
 {Enumeration}
@@ -1560,10 +1560,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2891</x>
-      <y>1085</y>
-      <w>161</w>
-      <h>987</h>
+      <x>2065</x>
+      <y>775</y>
+      <w>115</w>
+      <h>705</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=3</panel_attributes>
@@ -1572,10 +1572,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>819</y>
-      <w>56</w>
-      <h>182</h>
+      <x>4435</x>
+      <y>585</y>
+      <w>40</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;240.0;60.0;240.0;60.0;10.0;20.0;10.0</additional_attributes>
@@ -1583,10 +1583,10 @@ layer=3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2044</x>
-      <y>1673</y>
-      <w>217</w>
-      <h>308</h>
+      <x>1460</x>
+      <y>1195</y>
+      <w>155</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>*CharPipe*
 Package::core.common
@@ -1624,10 +1624,10 @@ write to char buffer / string</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5999</x>
-      <y>1358</y>
-      <w>217</w>
-      <h>189</h>
+      <x>4285</x>
+      <y>970</y>
+      <w>155</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>*Bowtie2Job*
 Package::modules
@@ -1654,10 +1654,10 @@ Call external bowties2 command.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5999</x>
-      <y>1568</y>
-      <w>217</w>
-      <h>182</h>
+      <x>4285</x>
+      <y>1120</y>
+      <w>155</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>*SamtoolsJob*
 Package::modules
@@ -1683,10 +1683,10 @@ Call external samtools command.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5999</x>
-      <y>1771</y>
-      <w>217</w>
-      <h>175</h>
+      <x>4285</x>
+      <y>1265</y>
+      <w>155</w>
+      <h>125</h>
     </coordinates>
     <panel_attributes>*TomTomJob*
 Package::modules
@@ -1712,10 +1712,10 @@ Call external tomtom command.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5999</x>
-      <y>1974</y>
-      <w>217</w>
-      <h>189</h>
+      <x>4285</x>
+      <y>1410</y>
+      <w>155</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>*SequenceLogoJob*
 Package::modules
@@ -1742,10 +1742,10 @@ analysed data.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5999</x>
-      <y>2191</y>
-      <w>217</w>
-      <h>189</h>
+      <x>4285</x>
+      <y>1565</y>
+      <w>155</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>*PMSconsensusJob*
 Package::modules
@@ -1772,10 +1772,10 @@ planted motif search (PMS) candidate.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>1995</y>
-      <w>105</w>
-      <h>21</h>
+      <x>4435</x>
+      <y>1425</y>
+      <w>75</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>130.0;10.0;10.0;10.0</additional_attributes>
@@ -1783,10 +1783,10 @@ planted motif search (PMS) candidate.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5999</x>
-      <y>2408</y>
-      <w>217</w>
-      <h>203</h>
+      <x>4285</x>
+      <y>1720</y>
+      <w>155</w>
+      <h>145</h>
     </coordinates>
     <panel_attributes>*NucFreqJob*
 Package::modules
@@ -1814,10 +1814,10 @@ output.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3689</x>
-      <y>1239</y>
-      <w>2324</w>
-      <h>238</h>
+      <x>2635</x>
+      <y>885</y>
+      <w>1660</w>
+      <h>170</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;320.0;3260.0;320.0;3260.0;10.0;3300.0;10.0</additional_attributes>
@@ -1825,10 +1825,10 @@ output.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3689</x>
-      <y>1029</y>
-      <w>2324</w>
-      <h>448</h>
+      <x>2635</x>
+      <y>735</y>
+      <w>1660</w>
+      <h>320</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;620.0;3260.0;620.0;3260.0;10.0;3300.0;10.0</additional_attributes>
@@ -1836,10 +1836,10 @@ output.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3696</x>
-      <y>1456</y>
-      <w>2317</w>
-      <h>217</h>
+      <x>2640</x>
+      <y>1040</y>
+      <w>1655</w>
+      <h>155</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;3250.0;10.0;3250.0;290.0;3290.0;290.0</additional_attributes>
@@ -1847,10 +1847,10 @@ output.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3689</x>
-      <y>1456</y>
-      <w>2324</w>
-      <h>420</h>
+      <x>2635</x>
+      <y>1040</y>
+      <w>1660</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;3260.0;10.0;3260.0;580.0;3300.0;580.0</additional_attributes>
@@ -1858,10 +1858,10 @@ output.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3689</x>
-      <y>1456</y>
-      <w>2324</w>
-      <h>630</h>
+      <x>2635</x>
+      <y>1040</y>
+      <w>1660</w>
+      <h>450</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;3260.0;10.0;3260.0;880.0;3300.0;880.0</additional_attributes>
@@ -1869,10 +1869,10 @@ output.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3689</x>
-      <y>1456</y>
-      <w>2324</w>
-      <h>840</h>
+      <x>2635</x>
+      <y>1040</y>
+      <w>1660</w>
+      <h>600</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;3260.0;10.0;3260.0;1180.0;3300.0;1180.0</additional_attributes>
@@ -1880,10 +1880,10 @@ output.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3689</x>
-      <y>1456</y>
-      <w>2324</w>
-      <h>1057</h>
+      <x>2635</x>
+      <y>1040</y>
+      <w>1660</w>
+      <h>755</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;3260.0;10.0;3260.0;1490.0;3300.0;1490.0</additional_attributes>
@@ -1891,10 +1891,10 @@ output.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3794</x>
-      <y>1211</y>
-      <w>2219</w>
-      <h>721</h>
+      <x>2710</x>
+      <y>865</y>
+      <w>1585</w>
+      <h>515</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;1010.0;3080.0;1010.0;3080.0;10.0;3150.0;10.0</additional_attributes>
@@ -1902,10 +1902,10 @@ output.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3794</x>
-      <y>1449</y>
-      <w>2219</w>
-      <h>483</h>
+      <x>2710</x>
+      <y>1035</y>
+      <w>1585</w>
+      <h>345</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;670.0;3080.0;670.0;3080.0;10.0;3150.0;10.0</additional_attributes>
@@ -1913,10 +1913,10 @@ output.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3794</x>
-      <y>1638</y>
-      <w>2219</w>
-      <h>294</h>
+      <x>2710</x>
+      <y>1170</y>
+      <w>1585</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;400.0;3080.0;400.0;3080.0;10.0;3150.0;10.0</additional_attributes>
@@ -1924,10 +1924,10 @@ output.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3794</x>
-      <y>1841</y>
-      <w>2219</w>
-      <h>91</h>
+      <x>2710</x>
+      <y>1315</y>
+      <w>1585</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;110.0;3080.0;110.0;3080.0;10.0;3150.0;10.0</additional_attributes>
@@ -1935,10 +1935,10 @@ output.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1148</x>
-      <y>476</y>
-      <w>196</w>
-      <h>252</h>
+      <x>820</x>
+      <y>340</y>
+      <w>140</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>260.0;10.0;80.0;10.0;80.0;340.0;10.0;340.0</additional_attributes>
@@ -1946,10 +1946,10 @@ output.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1148</x>
-      <y>427</y>
-      <w>364</w>
-      <h>266</h>
+      <x>820</x>
+      <y>305</y>
+      <w>260</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=3</panel_attributes>
@@ -1958,10 +1958,10 @@ layer=3</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>5117</x>
-      <y>441</y>
-      <w>91</w>
-      <h>28</h>
+      <x>3655</x>
+      <y>315</y>
+      <w>65</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -1973,10 +1973,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5096</x>
-      <y>462</y>
-      <w>140</w>
-      <h>105</h>
+      <x>3640</x>
+      <y>330</y>
+      <w>100</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>StorageObserver
 //Package::FatClass
@@ -1998,10 +1998,10 @@ and status</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5229</x>
-      <y>497</y>
-      <w>63</w>
-      <h>105</h>
+      <x>3735</x>
+      <y>355</y>
+      <w>45</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>70.0;130.0;40.0;130.0;40.0;10.0;10.0;10.0</additional_attributes>
@@ -2009,10 +2009,10 @@ and status</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>868</x>
-      <y>560</y>
-      <w>4256</w>
-      <h>581</h>
+      <x>620</x>
+      <y>400</y>
+      <w>3040</w>
+      <h>415</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;810.0;680.0;810.0;680.0;370.0;6060.0;370.0;6060.0;10.0</additional_attributes>
@@ -2020,10 +2020,10 @@ and status</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1204</x>
-      <y>1162</y>
-      <w>280</w>
-      <h>119</h>
+      <x>860</x>
+      <y>830</y>
+      <w>200</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>FastaFile
 //Package::FatClass
@@ -2046,10 +2046,10 @@ Save one fasta string per object.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1155</x>
-      <y>1176</y>
-      <w>63</w>
-      <h>21</h>
+      <x>825</x>
+      <y>840</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
@@ -2057,10 +2057,10 @@ Save one fasta string per object.</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>1463</x>
-      <y>427</y>
-      <w>84</w>
-      <h>98</h>
+      <x>1045</x>
+      <y>305</y>
+      <w>60</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>*/StorageState/*
 {Enumeration}
@@ -2075,10 +2075,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1491</x>
-      <y>427</y>
-      <w>3864</w>
-      <h>49</h>
+      <x>1065</x>
+      <y>305</y>
+      <w>2760</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;5500.0;10.0;5500.0;50.0</additional_attributes>
@@ -2086,10 +2086,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>595</x>
-      <y>749</y>
-      <w>154</w>
-      <h>154</h>
+      <x>425</x>
+      <y>535</y>
+      <w>110</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>*/STORAGETYPE/*
 {Enumeration}
@@ -2109,10 +2109,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>672</x>
-      <y>756</y>
-      <w>112</w>
-      <h>364</h>
+      <x>480</x>
+      <y>540</y>
+      <w>80</w>
+      <h>260</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=3</panel_attributes>
@@ -2121,10 +2121,10 @@ layer=3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>889</x>
-      <y>1365</y>
-      <w>273</w>
-      <h>140</h>
+      <x>635</x>
+      <y>975</y>
+      <w>195</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>LogoStorage
 //Package::FatClass
@@ -2151,10 +2151,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>826</x>
-      <y>427</y>
-      <w>686</w>
-      <h>693</h>
+      <x>590</x>
+      <y>305</y>
+      <w>490</w>
+      <h>495</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>960.0;10.0;500.0;10.0;500.0;340.0;10.0;340.0;10.0;970.0</additional_attributes>
@@ -2162,10 +2162,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1204</x>
-      <y>1365</y>
-      <w>245</w>
-      <h>112</h>
+      <x>860</x>
+      <y>975</y>
+      <w>175</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>SeqLogo
 //Package::FatClass
@@ -2187,10 +2187,10 @@ Save single sequence logo</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1155</x>
-      <y>1379</y>
-      <w>63</w>
-      <h>21</h>
+      <x>825</x>
+      <y>985</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
@@ -2198,10 +2198,10 @@ Save single sequence logo</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>749</x>
-      <y>1344</y>
-      <w>154</w>
-      <h>49</h>
+      <x>535</x>
+      <y>960</y>
+      <w>110</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0;200.0;50.0</additional_attributes>
@@ -2209,10 +2209,10 @@ Save single sequence logo</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>889</x>
-      <y>1540</y>
-      <w>273</w>
-      <h>84</h>
+      <x>635</x>
+      <y>1100</y>
+      <w>195</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>CdHitClusterStorage
 //Package::FatClass
@@ -2232,10 +2232,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1204</x>
-      <y>1540</y>
-      <w>161</w>
-      <h>133</h>
+      <x>860</x>
+      <y>1100</y>
+      <w>115</w>
+      <h>95</h>
     </coordinates>
     <panel_attributes>CdHitCluster
 //Package::FatClass
@@ -2259,10 +2259,10 @@ with represenative sequence</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1155</x>
-      <y>1554</y>
-      <w>63</w>
-      <h>21</h>
+      <x>825</x>
+      <y>1110</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
@@ -2270,10 +2270,10 @@ with represenative sequence</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>749</x>
-      <y>1344</y>
-      <w>154</w>
-      <h>224</h>
+      <x>535</x>
+      <y>960</y>
+      <w>110</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;300.0;200.0;300.0</additional_attributes>
@@ -2281,10 +2281,10 @@ with represenative sequence</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>896</x>
-      <y>1687</y>
-      <w>273</w>
-      <h>84</h>
+      <x>640</x>
+      <y>1205</y>
+      <w>195</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>SamTableStorage
 //Package::FatClass
@@ -2305,10 +2305,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1211</x>
-      <y>1687</y>
-      <w>161</w>
-      <h>112</h>
+      <x>865</x>
+      <y>1205</y>
+      <w>115</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>SamtTable
 //Package::FatClass
@@ -2330,10 +2330,10 @@ Save one SAM-table</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1162</x>
-      <y>1701</y>
-      <w>63</w>
-      <h>21</h>
+      <x>830</x>
+      <y>1215</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
@@ -2341,10 +2341,10 @@ Save one SAM-table</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>749</x>
-      <y>1344</y>
-      <w>161</w>
-      <h>371</h>
+      <x>535</x>
+      <y>960</y>
+      <w>115</w>
+      <h>265</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;510.0;210.0;510.0</additional_attributes>
@@ -2352,10 +2352,10 @@ Save one SAM-table</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>889</x>
-      <y>1932</y>
-      <w>273</w>
-      <h>98</h>
+      <x>635</x>
+      <y>1380</y>
+      <w>195</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>QConsPMS9candidateStorage
 //Package::FatClass
@@ -2376,10 +2376,10 @@ Create new storage candidate locally</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>749</x>
-      <y>1344</y>
-      <w>154</w>
-      <h>616</h>
+      <x>535</x>
+      <y>960</y>
+      <w>110</w>
+      <h>440</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;860.0;200.0;860.0</additional_attributes>
@@ -2387,10 +2387,10 @@ Create new storage candidate locally</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>896</x>
-      <y>2051</y>
-      <w>273</w>
-      <h>119</h>
+      <x>640</x>
+      <y>1465</y>
+      <w>195</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>ConsensusMotifsStorage
 //Package::FatClass
@@ -2413,10 +2413,10 @@ problability matrix</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>749</x>
-      <y>1344</y>
-      <w>161</w>
-      <h>742</h>
+      <x>535</x>
+      <y>960</y>
+      <w>115</w>
+      <h>530</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;1040.0;210.0;1040.0</additional_attributes>
@@ -2424,10 +2424,10 @@ problability matrix</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>896</x>
-      <y>2198</y>
-      <w>273</w>
-      <h>98</h>
+      <x>640</x>
+      <y>1570</y>
+      <w>195</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>VerifiedDatabaseMotifs
 //Package::FatClass
@@ -2447,10 +2447,10 @@ get new storrage for database results</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1211</x>
-      <y>2051</y>
-      <w>336</w>
-      <h>119</h>
+      <x>865</x>
+      <y>1465</y>
+      <w>240</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>ProbabilityMatrix
 //Package::FatClass
@@ -2473,10 +2473,10 @@ Save one SAM-table</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1162</x>
-      <y>2072</y>
-      <w>63</w>
-      <h>21</h>
+      <x>830</x>
+      <y>1480</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
@@ -2484,10 +2484,10 @@ Save one SAM-table</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1211</x>
-      <y>2198</y>
-      <w>161</w>
-      <h>112</h>
+      <x>865</x>
+      <y>1570</y>
+      <w>115</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>DatabaseResults
 //Package::FatClass
@@ -2506,10 +2506,10 @@ Save database results for one query</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1162</x>
-      <y>2205</y>
-      <w>63</w>
-      <h>21</h>
+      <x>830</x>
+      <y>1575</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
@@ -2517,10 +2517,10 @@ Save database results for one query</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>749</x>
-      <y>1344</y>
-      <w>161</w>
-      <h>896</h>
+      <x>535</x>
+      <y>960</y>
+      <w>115</w>
+      <h>640</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;1260.0;210.0;1260.0</additional_attributes>
@@ -2528,10 +2528,10 @@ Save database results for one query</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>2212</x>
-      <y>1351</y>
-      <w>168</w>
-      <h>119</h>
+      <x>1580</x>
+      <y>965</y>
+      <w>120</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>*/Pipe/*
 --
@@ -2549,10 +2549,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2128</x>
-      <y>1330</y>
-      <w>84</w>
-      <h>357</h>
+      <x>1520</x>
+      <y>950</y>
+      <w>60</w>
+      <h>255</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=3</panel_attributes>
@@ -2561,10 +2561,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2170</x>
-      <y>2387</y>
-      <w>980</w>
-      <h>490</h>
+      <x>1550</x>
+      <y>1705</y>
+      <w>700</w>
+      <h>350</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;680.0;1380.0;680.0;1380.0;220.0</additional_attributes>
@@ -2572,10 +2572,10 @@ layer=3</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>2968</x>
-      <y>2884</y>
-      <w>2030</w>
-      <h>532</h>
+      <x>2120</x>
+      <y>2060</y>
+      <w>1450</w>
+      <h>380</h>
     </coordinates>
     <panel_attributes>fontsize=60
 *extProgs*
@@ -2586,10 +2586,10 @@ layer=0</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>462</x>
-      <y>336</y>
-      <w>1113</w>
-      <h>2828</h>
+      <x>330</x>
+      <y>240</y>
+      <w>795</w>
+      <h>2020</h>
     </coordinates>
     <panel_attributes>fontsize=60
 *storage*
@@ -2600,10 +2600,10 @@ layer=0</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1610</x>
-      <y>994</y>
-      <w>2723</w>
-      <h>665</h>
+      <x>1150</x>
+      <y>710</y>
+      <w>1945</w>
+      <h>475</h>
     </coordinates>
     <panel_attributes>fontsize=40
 *core.common*
@@ -2613,10 +2613,10 @@ fg=black</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1918</x>
-      <y>2065</y>
-      <w>287</w>
-      <h>329</h>
+      <x>1370</x>
+      <y>1475</y>
+      <w>205</w>
+      <h>235</h>
     </coordinates>
     <panel_attributes>*InputPort*
 Package::core
@@ -2655,10 +2655,10 @@ pipe (or sink) to the consumer.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1603</x>
-      <y>2065</y>
-      <w>301</w>
-      <h>329</h>
+      <x>1145</x>
+      <y>1475</y>
+      <w>215</w>
+      <h>235</h>
     </coordinates>
     <panel_attributes>*OutputPort*
 Package::core
@@ -2698,10 +2698,10 @@ producer to the pipe (and the sink).
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1638</x>
-      <y>1365</y>
-      <w>322</w>
-      <h>280</h>
+      <x>1170</x>
+      <y>975</y>
+      <w>230</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>*/AbstractPort/*
 Package::core.common
@@ -2737,10 +2737,10 @@ encapsulates common attributes of OutputPort and InputPort</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>1841</x>
-      <y>1057</y>
-      <w>329</w>
-      <h>203</h>
+      <x>1315</x>
+      <y>755</y>
+      <w>235</w>
+      <h>145</h>
     </coordinates>
     <panel_attributes>*/Port/*
 --
@@ -2765,10 +2765,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1813</x>
-      <y>1071</y>
-      <w>203</w>
-      <h>308</h>
+      <x>1295</x>
+      <y>765</y>
+      <w>145</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=3
@@ -2778,10 +2778,10 @@ layer=3
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1722</x>
-      <y>1638</y>
-      <w>21</w>
-      <h>441</h>
+      <x>1230</x>
+      <y>1170</y>
+      <w>15</w>
+      <h>315</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=4</panel_attributes>
@@ -2790,10 +2790,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1876</x>
-      <y>1638</y>
-      <w>126</w>
-      <h>441</h>
+      <x>1340</x>
+      <y>1170</y>
+      <w>90</w>
+      <h>315</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=4</panel_attributes>
@@ -2802,10 +2802,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1771</x>
-      <y>2387</y>
-      <w>1393</w>
-      <h>504</h>
+      <x>1265</x>
+      <y>1705</y>
+      <w>995</w>
+      <h>360</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;700.0;1970.0;700.0;1970.0;220.0</additional_attributes>
@@ -2813,10 +2813,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2275</x>
-      <y>1673</y>
-      <w>217</w>
-      <h>308</h>
+      <x>1625</x>
+      <y>1195</y>
+      <w>155</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>*BytePipe*
 Package::core.common
@@ -2855,10 +2855,10 @@ write to byte buffer</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2296</x>
-      <y>1358</y>
-      <w>112</w>
-      <h>329</h>
+      <x>1640</x>
+      <y>970</y>
+      <w>80</w>
+      <h>235</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=3</panel_attributes>
@@ -2867,10 +2867,10 @@ layer=3</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>2086</x>
-      <y>1323</y>
-      <w>84</w>
-      <h>98</h>
+      <x>1490</x>
+      <y>945</y>
+      <w>60</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>*/PIPETYPE/*
 {Enumeration}
@@ -2885,10 +2885,10 @@ layer=3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1834</x>
-      <y>2527</y>
-      <w>280</w>
-      <h>238</h>
+      <x>1310</x>
+      <y>1805</y>
+      <w>200</w>
+      <h>170</h>
     </coordinates>
     <panel_attributes>bg=red
 *ModulePortLinker*
@@ -2921,10 +2921,10 @@ connected pairs</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1925</x>
-      <y>2499</y>
-      <w>119</w>
-      <h>28</h>
+      <x>1375</x>
+      <y>1785</y>
+      <w>85</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -2936,10 +2936,10 @@ layer=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3409</x>
-      <y>1260</y>
-      <w>294</w>
-      <h>378</h>
+      <x>2435</x>
+      <y>900</y>
+      <w>210</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>*/Module/*
 bg=red
@@ -2985,10 +2985,10 @@ Template for a concrete module implementation</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3150</x>
-      <y>1022</y>
-      <w>329</w>
-      <h>252</h>
+      <x>2250</x>
+      <y>730</y>
+      <w>235</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=4
@@ -2998,10 +2998,10 @@ layer=4
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3066</x>
-      <y>1085</y>
-      <w>91</w>
-      <h>987</h>
+      <x>2190</x>
+      <y>775</y>
+      <w>65</w>
+      <h>705</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=3</panel_attributes>
@@ -3010,10 +3010,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3241</x>
-      <y>1267</y>
-      <w>182</w>
-      <h>805</h>
+      <x>2315</x>
+      <y>905</y>
+      <w>130</w>
+      <h>575</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>240.0;10.0;10.0;10.0;10.0;1130.0</additional_attributes>
@@ -3021,10 +3021,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3479</x>
-      <y>1078</y>
-      <w>154</w>
-      <h>196</h>
+      <x>2485</x>
+      <y>770</y>
+      <w>110</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=4</panel_attributes>
@@ -3033,10 +3033,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>3213</x>
-      <y>1078</y>
-      <w>210</w>
-      <h>147</h>
+      <x>2295</x>
+      <y>770</y>
+      <w>150</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>/*MODULETYPE*/
 {Enumeration}
@@ -3055,10 +3055,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3304</x>
-      <y>1085</y>
-      <w>140</w>
-      <h>189</h>
+      <x>2360</x>
+      <y>775</y>
+      <w>100</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=4</panel_attributes>
@@ -3067,10 +3067,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>3794</x>
-      <y>1057</y>
-      <w>112</w>
-      <h>119</h>
+      <x>2710</x>
+      <y>755</y>
+      <w>80</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>/*COMMANDSTATE*/
 {Enumeration}
@@ -3087,10 +3087,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3682</x>
-      <y>1064</y>
-      <w>189</w>
-      <h>210</h>
+      <x>2630</x>
+      <y>760</y>
+      <w>135</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=4</panel_attributes>
@@ -3099,10 +3099,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2219</x>
-      <y>2058</y>
-      <w>273</w>
-      <h>287</h>
+      <x>1585</x>
+      <y>1470</y>
+      <w>195</w>
+      <h>205</h>
     </coordinates>
     <panel_attributes>*CheckExternalPrograms*
 bg=red
@@ -3140,10 +3140,10 @@ Check if the OS is compatible.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3360</x>
-      <y>2121</y>
-      <w>217</w>
-      <h>119</h>
+      <x>2400</x>
+      <y>1515</y>
+      <w>155</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>*CommandFailedException*
 Package::core.exceptions
@@ -3162,10 +3162,10 @@ unchecked exception for failed commands</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2548</x>
-      <y>2002</y>
-      <w>371</w>
-      <h>161</h>
+      <x>1820</x>
+      <y>1430</y>
+      <w>265</w>
+      <h>115</h>
     </coordinates>
     <panel_attributes>bg=red
 *CoreController*
@@ -3190,10 +3190,10 @@ builds ModuleBuilder and checkExternalPrograms</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>2688</x>
-      <y>1974</y>
-      <w>119</w>
-      <h>28</h>
+      <x>1920</x>
+      <y>1410</y>
+      <w>85</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -3205,10 +3205,10 @@ layer=1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>2429</x>
-      <y>4109</y>
-      <w>1981</w>
-      <h>833</h>
+      <x>1735</x>
+      <y>2935</y>
+      <w>1415</w>
+      <h>595</h>
     </coordinates>
     <panel_attributes>JUnit tests
 src/test/java
@@ -3222,10 +3222,10 @@ fg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2471</x>
-      <y>4235</y>
-      <w>294</w>
-      <h>224</h>
+      <x>1765</x>
+      <y>3025</y>
+      <w>210</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>*CoreControllerModulesExternalProgrammesTest*
 Package::testDrives
@@ -3256,10 +3256,10 @@ module.TomTomJob</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3199</x>
-      <y>1085</y>
-      <w>126</w>
-      <h>987</h>
+      <x>2285</x>
+      <y>775</y>
+      <w>90</w>
+      <h>705</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=4</panel_attributes>
@@ -3268,10 +3268,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>5985</x>
-      <y>896</y>
-      <w>518</w>
-      <h>1827</h>
+      <x>4275</x>
+      <y>640</y>
+      <w>370</w>
+      <h>1305</h>
     </coordinates>
     <panel_attributes>fontsize=60
 *modules*
@@ -3282,10 +3282,10 @@ layer=0</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2667</x>
-      <y>2156</y>
-      <w>105</w>
-      <h>2093</h>
+      <x>1905</x>
+      <y>1540</y>
+      <w>75</w>
+      <h>1495</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -3294,10 +3294,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2912</x>
-      <y>2072</y>
-      <w>98</w>
-      <h>21</h>
+      <x>2080</x>
+      <y>1480</y>
+      <w>70</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>120.0;10.0;10.0;10.0</additional_attributes>
@@ -3305,10 +3305,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1939</x>
-      <y>1330</y>
-      <w>196</w>
-      <h>49</h>
+      <x>1385</x>
+      <y>950</y>
+      <w>140</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>260.0;10.0;10.0;10.0;10.0;50.0</additional_attributes>
@@ -3316,10 +3316,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>3318</x>
-      <y>2065</y>
-      <w>2030</w>
-      <h>343</h>
+      <x>2370</x>
+      <y>1475</y>
+      <w>1450</w>
+      <h>245</h>
     </coordinates>
     <panel_attributes>fontsize=40
 *core.exceptions*
@@ -3330,10 +3330,10 @@ layer=0</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>2422</x>
-      <y>1323</y>
-      <w>84</w>
-      <h>98</h>
+      <x>1730</x>
+      <y>945</y>
+      <w>60</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>*/PIPESTATE/*
 {Enumeration}
@@ -3348,10 +3348,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1932</x>
-      <y>1071</y>
-      <w>350</w>
-      <h>308</h>
+      <x>1380</x>
+      <y>765</y>
+      <w>250</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=+1</panel_attributes>
@@ -3360,10 +3360,10 @@ layer=+1</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>1701</x>
-      <y>1057</y>
-      <w>84</w>
-      <h>91</h>
+      <x>1215</x>
+      <y>755</y>
+      <w>60</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>*/PORTTYPE/*
 {Enumeration}
@@ -3377,10 +3377,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1645</x>
-      <y>1064</y>
-      <w>105</w>
-      <h>315</h>
+      <x>1175</x>
+      <y>760</y>
+      <w>75</w>
+      <h>225</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>130.0;10.0;10.0;10.0;10.0;430.0</additional_attributes>
@@ -3388,10 +3388,10 @@ layer=3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>4403</x>
-      <y>1036</y>
-      <w>364</w>
-      <h>420</h>
+      <x>3145</x>
+      <y>740</y>
+      <w>260</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>*ModuleNode*
 bg=red
@@ -3439,10 +3439,10 @@ pairs per module</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3927</x>
-      <y>2121</y>
-      <w>273</w>
-      <h>119</h>
+      <x>2805</x>
+      <y>1515</y>
+      <w>195</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>*NotFoundException*
 Package::core.exceptions
@@ -3462,10 +3462,10 @@ Thrown exception in case of a missing pipe.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>4816</x>
-      <y>2121</y>
-      <w>210</w>
-      <h>119</h>
+      <x>3440</x>
+      <y>1515</y>
+      <w>150</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>*OccupiedException*
 Package::core.exceptions
@@ -3484,10 +3484,10 @@ Uncheck exception for occupied pipes.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>4235</x>
-      <y>2121</y>
-      <w>259</w>
-      <h>119</h>
+      <x>3025</x>
+      <y>1515</y>
+      <w>185</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>*SystemNotSupportedException*
 Package::core.exceptions
@@ -3508,10 +3508,10 @@ Unchecked exception for unsupported OS.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5047</x>
-      <y>2121</y>
-      <w>259</w>
-      <h>119</h>
+      <x>3605</x>
+      <y>1515</y>
+      <w>185</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>*PipeTypeNotSupportedException*
 Package::core.exceptions
@@ -3530,10 +3530,10 @@ Unchecked exception for incompatible pipes.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>4529</x>
-      <y>2121</y>
-      <w>259</w>
-      <h>119</h>
+      <x>3235</x>
+      <y>1515</y>
+      <w>185</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>*VersionNotCompatibleException*
 Package::core.exceptions
@@ -3553,10 +3553,10 @@ versions of external programs.</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>3521</x>
-      <y>1064</y>
-      <w>203</w>
-      <h>112</h>
+      <x>2515</x>
+      <y>760</y>
+      <w>145</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>/*ModuleInterface*/
 --
@@ -3572,10 +3572,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>4123</x>
-      <y>1043</y>
-      <w>294</w>
-      <h>63</h>
+      <x>2945</x>
+      <y>745</y>
+      <w>210</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0;400.0;10.0</additional_attributes>
@@ -3583,10 +3583,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>4011</x>
-      <y>1505</y>
-      <w>259</w>
-      <h>77</h>
+      <x>2865</x>
+      <y>1075</y>
+      <w>185</w>
+      <h>55</h>
     </coordinates>
     <panel_attributes>/*ModuleObserverInterface*/
 --
@@ -3599,10 +3599,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>2751</x>
-      <y>1071</y>
-      <w>280</w>
-      <h>133</h>
+      <x>1965</x>
+      <y>765</y>
+      <w>200</w>
+      <h>95</h>
     </coordinates>
     <panel_attributes>*/ModuleBuilderInterface/*
 --
@@ -3621,10 +3621,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>2233</x>
-      <y>1064</y>
-      <w>84</w>
-      <h>98</h>
+      <x>1595</x>
+      <y>760</y>
+      <w>60</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>*/PORTSTATE/*
 {Enumeration}
@@ -3639,10 +3639,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2009</x>
-      <y>1064</y>
-      <w>273</w>
-      <h>21</h>
+      <x>1435</x>
+      <y>760</y>
+      <w>195</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=3</panel_attributes>
@@ -3651,10 +3651,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1743</x>
-      <y>1057</y>
-      <w>266</w>
-      <h>28</h>
+      <x>1245</x>
+      <y>755</y>
+      <w>190</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4
@@ -3664,10 +3664,10 @@ layer=4
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2296</x>
-      <y>1330</y>
-      <w>175</w>
-      <h>42</h>
+      <x>1640</x>
+      <y>950</y>
+      <w>125</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=3</panel_attributes>
@@ -3676,10 +3676,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2128</x>
-      <y>1330</y>
-      <w>175</w>
-      <h>42</h>
+      <x>1520</x>
+      <y>950</y>
+      <w>125</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4
@@ -3689,10 +3689,10 @@ layer=4
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2387</x>
-      <y>1330</y>
-      <w>84</w>
-      <h>357</h>
+      <x>1705</x>
+      <y>950</y>
+      <w>60</w>
+      <h>255</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=3</panel_attributes>
@@ -3701,10 +3701,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2191</x>
-      <y>1358</y>
-      <w>112</w>
-      <h>329</h>
+      <x>1565</x>
+      <y>970</y>
+      <w>80</w>
+      <h>235</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=3</panel_attributes>
@@ -3713,10 +3713,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2212</x>
-      <y>1330</y>
-      <w>259</w>
-      <h>357</h>
+      <x>1580</x>
+      <y>950</y>
+      <w>185</w>
+      <h>255</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=3</panel_attributes>
@@ -3725,10 +3725,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2128</x>
-      <y>1330</y>
-      <w>266</w>
-      <h>357</h>
+      <x>1520</x>
+      <y>950</y>
+      <w>190</w>
+      <h>255</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=3</panel_attributes>
@@ -3737,10 +3737,10 @@ layer=3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2485</x>
-      <y>2072</y>
-      <w>77</w>
-      <h>21</h>
+      <x>1775</x>
+      <y>1480</y>
+      <w>55</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -3749,10 +3749,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3409</x>
-      <y>1883</y>
-      <w>392</w>
-      <h>175</h>
+      <x>2435</x>
+      <y>1345</y>
+      <w>280</w>
+      <h>125</h>
     </coordinates>
     <panel_attributes>bg=red
 *ExternalCommandHandler*
@@ -3779,10 +3779,10 @@ Observe state of external programs.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3423</x>
-      <y>1631</y>
-      <w>21</w>
-      <h>266</h>
+      <x>2445</x>
+      <y>1165</y>
+      <w>15</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=4</panel_attributes>
@@ -3791,10 +3791,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3556</x>
-      <y>2051</y>
-      <w>98</w>
-      <h>84</h>
+      <x>2540</x>
+      <y>1465</y>
+      <w>70</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;100.0;120.0;50.0;120.0;10.0</additional_attributes>
@@ -3802,10 +3802,10 @@ layer=4</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>3920</x>
-      <y>2583</y>
-      <w>119</w>
-      <h>28</h>
+      <x>2800</x>
+      <y>1845</y>
+      <w>85</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -3817,10 +3817,10 @@ layer=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3773</x>
-      <y>2611</y>
-      <w>385</w>
-      <h>126</h>
+      <x>2695</x>
+      <y>1865</y>
+      <w>275</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>bg=red
 *ListExternalPrograms*
@@ -3842,10 +3842,10 @@ Handling of information about external programs.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3269</x>
-      <y>2534</y>
-      <w>1708</w>
-      <h>42</h>
+      <x>2335</x>
+      <y>1810</y>
+      <w>1220</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -3854,10 +3854,10 @@ layer=4</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>4501</x>
-      <y>994</y>
-      <w>189</w>
-      <h>42</h>
+      <x>3215</x>
+      <y>710</y>
+      <w>135</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -3870,10 +3870,10 @@ layer=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>4410</x>
-      <y>1512</y>
-      <w>273</w>
-      <h>147</h>
+      <x>3150</x>
+      <y>1080</y>
+      <w>195</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>*ModuleObserver*
 bg=red
@@ -3898,10 +3898,10 @@ about the states of the jobs/modules.</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>4508</x>
-      <y>1491</y>
-      <w>112</w>
-      <h>35</h>
+      <x>3220</x>
+      <y>1065</y>
+      <w>80</w>
+      <h>25</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -3913,10 +3913,10 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>4137</x>
-      <y>1512</y>
-      <w>294</w>
-      <h>21</h>
+      <x>2955</x>
+      <y>1080</y>
+      <w>210</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=4</panel_attributes>
@@ -3925,10 +3925,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2051</x>
-      <y>2387</y>
-      <w>21</w>
-      <h>154</h>
+      <x>1465</x>
+      <y>1705</y>
+      <w>15</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;200.0</additional_attributes>
@@ -3936,10 +3936,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1799</x>
-      <y>2387</y>
-      <w>49</w>
-      <h>182</h>
+      <x>1285</x>
+      <y>1705</y>
+      <w>35</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;240.0;50.0;240.0</additional_attributes>
@@ -3947,10 +3947,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2534</x>
-      <y>2240</y>
-      <w>203</w>
-      <h>245</h>
+      <x>1810</x>
+      <y>1600</y>
+      <w>145</w>
+      <h>175</h>
     </coordinates>
     <panel_attributes>bg=red
 *PhysicalConstants*
@@ -3983,10 +3983,10 @@ Test key-parameters of the OS and PC.</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>2590</x>
-      <y>2219</y>
-      <w>119</w>
-      <h>28</h>
+      <x>1850</x>
+      <y>1585</y>
+      <w>85</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -3998,10 +3998,10 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2485</x>
-      <y>2254</y>
-      <w>63</w>
-      <h>21</h>
+      <x>1775</x>
+      <y>1610</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -4010,10 +4010,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1589</x>
-      <y>945</y>
-      <w>3843</w>
-      <h>1925</h>
+      <x>1135</x>
+      <y>675</y>
+      <w>2745</w>
+      <h>1375</h>
     </coordinates>
     <panel_attributes>fontsize=60
 *core*
@@ -4024,10 +4024,10 @@ layer=0</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3003</x>
-      <y>3157</y>
-      <w>245</w>
-      <h>224</h>
+      <x>2145</x>
+      <y>2255</y>
+      <w>175</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>*Bowtie2*
 Package::extProgs
@@ -4058,10 +4058,10 @@ external program.</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>3668</x>
-      <y>2961</y>
-      <w>168</w>
-      <h>133</h>
+      <x>2620</x>
+      <y>2115</y>
+      <w>120</w>
+      <h>95</h>
     </coordinates>
     <panel_attributes>*/ExternalProgram/*
 {Interface}
@@ -4077,10 +4077,10 @@ String getVersion()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3556</x>
-      <y>3157</y>
-      <w>245</w>
-      <h>224</h>
+      <x>2540</x>
+      <y>2255</y>
+      <w>175</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>*Cdhit*
 Package::extProgs
@@ -4111,10 +4111,10 @@ external program.</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>3045</x>
-      <y>2961</y>
-      <w>84</w>
-      <h>140</h>
+      <x>2175</x>
+      <y>2115</y>
+      <w>60</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>*/ExtProgType/*
 {Enumeration}
@@ -4131,10 +4131,10 @@ UNDEFINED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3843</x>
-      <y>3157</y>
-      <w>245</w>
-      <h>224</h>
+      <x>2745</x>
+      <y>2255</y>
+      <w>175</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>*Qpms9*
 Package::extProgs
@@ -4166,10 +4166,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>4123</x>
-      <y>3157</y>
-      <w>245</w>
-      <h>224</h>
+      <x>2945</x>
+      <y>2255</y>
+      <w>175</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>*Samtools*
 Package::extProgs
@@ -4201,10 +4201,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>4403</x>
-      <y>3157</y>
-      <w>245</w>
-      <h>224</h>
+      <x>3145</x>
+      <y>2255</y>
+      <w>175</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>*Tomtom*
 Package::extProgs
@@ -4236,10 +4236,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3087</x>
-      <y>2961</y>
-      <w>672</w>
-      <h>21</h>
+      <x>2205</x>
+      <y>2115</y>
+      <w>480</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;940.0;10.0</additional_attributes>
@@ -4247,10 +4247,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3164</x>
-      <y>2968</y>
-      <w>595</w>
-      <h>203</h>
+      <x>2260</x>
+      <y>2120</y>
+      <w>425</w>
+      <h>145</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>830.0;10.0;10.0;10.0;10.0;270.0</additional_attributes>
@@ -4258,10 +4258,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3409</x>
-      <y>2968</y>
-      <w>350</w>
-      <h>203</h>
+      <x>2435</x>
+      <y>2120</y>
+      <w>250</w>
+      <h>145</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>480.0;10.0;10.0;10.0;10.0;270.0</additional_attributes>
@@ -4269,10 +4269,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3633</x>
-      <y>2968</y>
-      <w>126</w>
-      <h>203</h>
+      <x>2595</x>
+      <y>2120</y>
+      <w>90</w>
+      <h>145</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>160.0;10.0;10.0;10.0;10.0;270.0</additional_attributes>
@@ -4280,10 +4280,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3752</x>
-      <y>2968</y>
-      <w>245</w>
-      <h>203</h>
+      <x>2680</x>
+      <y>2120</y>
+      <w>175</w>
+      <h>145</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;330.0;10.0;330.0;270.0</additional_attributes>
@@ -4291,10 +4291,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3752</x>
-      <y>2968</y>
-      <w>525</w>
-      <h>203</h>
+      <x>2680</x>
+      <y>2120</y>
+      <w>375</w>
+      <h>145</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;730.0;10.0;730.0;270.0</additional_attributes>
@@ -4302,10 +4302,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2660</x>
-      <y>2478</y>
-      <w>462</w>
-      <h>1043</h>
+      <x>1900</x>
+      <y>1770</y>
+      <w>330</w>
+      <h>745</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>640.0;1290.0;640.0;1470.0;10.0;1470.0;10.0;10.0</additional_attributes>
@@ -4313,10 +4313,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2674</x>
-      <y>2478</y>
-      <w>742</w>
-      <h>1057</h>
+      <x>1910</x>
+      <y>1770</y>
+      <w>530</w>
+      <h>755</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>1040.0;1290.0;1040.0;1490.0;10.0;1490.0;10.0;10.0</additional_attributes>
@@ -4324,10 +4324,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2688</x>
-      <y>2478</y>
-      <w>1036</w>
-      <h>1071</h>
+      <x>1920</x>
+      <y>1770</y>
+      <w>740</w>
+      <h>765</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>1460.0;1290.0;1460.0;1510.0;10.0;1510.0;10.0;10.0</additional_attributes>
@@ -4335,10 +4335,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2702</x>
-      <y>2478</y>
-      <w>1288</w>
-      <h>1085</h>
+      <x>1930</x>
+      <y>1770</y>
+      <w>920</w>
+      <h>775</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>1820.0;1290.0;1820.0;1530.0;10.0;1530.0;10.0;10.0</additional_attributes>
@@ -4346,10 +4346,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2723</x>
-      <y>2478</y>
-      <w>1547</w>
-      <h>1099</h>
+      <x>1945</x>
+      <y>1770</y>
+      <w>1105</w>
+      <h>785</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>2190.0;1290.0;2190.0;1550.0;10.0;1550.0;10.0;10.0</additional_attributes>
@@ -4357,10 +4357,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>833</y>
-      <w>70</w>
-      <h>427</h>
+      <x>4435</x>
+      <y>595</y>
+      <w>50</w>
+      <h>305</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;590.0;80.0;590.0;80.0;10.0;20.0;10.0</additional_attributes>
@@ -4368,10 +4368,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6202</x>
-      <y>833</y>
-      <w>77</w>
-      <h>630</h>
+      <x>4430</x>
+      <y>595</y>
+      <w>55</w>
+      <h>450</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;880.0;90.0;880.0;90.0;10.0;30.0;10.0</additional_attributes>
@@ -4379,10 +4379,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>833</y>
-      <w>70</w>
-      <h>840</h>
+      <x>4435</x>
+      <y>595</y>
+      <w>50</w>
+      <h>600</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;1180.0;80.0;1180.0;80.0;10.0;20.0;10.0</additional_attributes>
@@ -4390,10 +4390,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>833</y>
-      <w>70</w>
-      <h>1029</h>
+      <x>4435</x>
+      <y>595</y>
+      <w>50</w>
+      <h>735</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;1450.0;80.0;1450.0;80.0;10.0;20.0;10.0</additional_attributes>
@@ -4401,10 +4401,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>833</y>
-      <w>70</w>
-      <h>1253</h>
+      <x>4435</x>
+      <y>595</y>
+      <w>50</w>
+      <h>895</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;1770.0;80.0;1770.0;80.0;10.0;20.0;10.0</additional_attributes>
@@ -4412,10 +4412,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>833</y>
-      <w>70</w>
-      <h>1449</h>
+      <x>4435</x>
+      <y>595</y>
+      <w>50</w>
+      <h>1035</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;2050.0;80.0;2050.0;80.0;10.0;20.0;10.0</additional_attributes>
@@ -4423,10 +4423,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>833</y>
-      <w>70</w>
-      <h>1680</h>
+      <x>4435</x>
+      <y>595</y>
+      <w>50</w>
+      <h>1200</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;2380.0;80.0;2380.0;80.0;10.0;20.0;10.0</additional_attributes>
@@ -4434,10 +4434,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2786</x>
-      <y>4235</y>
-      <w>294</w>
-      <h>154</h>
+      <x>1990</x>
+      <y>3025</y>
+      <w>210</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>*FirstExternalCommandTest*
 Package::testDrives
@@ -4462,10 +4462,10 @@ Available programs, paths and versions.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2765</x>
-      <y>2156</y>
-      <w>196</w>
-      <h>2093</h>
+      <x>1975</x>
+      <y>1540</y>
+      <w>140</w>
+      <h>1495</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -4474,10 +4474,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3108</x>
-      <y>4235</y>
-      <w>217</w>
-      <h>203</h>
+      <x>2220</x>
+      <y>3025</y>
+      <w>155</w>
+      <h>145</h>
     </coordinates>
     <panel_attributes>*TestPortsPipesInterModuleCommTest*
 Package::testDrives
@@ -4506,10 +4506,10 @@ testFiles/testFile1.txt</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2779</x>
-      <y>2156</y>
-      <w>490</w>
-      <h>2093</h>
+      <x>1985</x>
+      <y>1540</y>
+      <w>350</w>
+      <h>1495</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -4518,10 +4518,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>483</x>
-      <y>469</y>
-      <w>266</w>
-      <h>154</h>
+      <x>345</x>
+      <y>335</y>
+      <w>190</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>*/InternalStorageInterface/*
 {Interface}
@@ -4541,10 +4541,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>616</x>
-      <y>476</y>
-      <w>196</w>
-      <h>644</h>
+      <x>440</x>
+      <y>340</y>
+      <w>140</w>
+      <h>460</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=3</panel_attributes>
@@ -4553,10 +4553,10 @@ layer=3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>847</x>
-      <y>532</y>
-      <w>217</w>
-      <h>105</h>
+      <x>605</x>
+      <y>380</y>
+      <w>155</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>*StorageObserver*
 Package::storage
@@ -4578,10 +4578,10 @@ display updates.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>805</x>
-      <y>581</y>
-      <w>56</w>
-      <h>539</h>
+      <x>575</x>
+      <y>415</y>
+      <w>40</w>
+      <h>385</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>60.0;10.0;10.0;10.0;10.0;750.0</additional_attributes>
@@ -4589,10 +4589,10 @@ display updates.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3108</x>
-      <y>4480</y>
-      <w>238</w>
-      <h>126</h>
+      <x>2220</x>
+      <y>3200</y>
+      <w>170</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>*TestPortsPipesInterModuleCommRunner*
 Package::testDrives
@@ -4614,10 +4614,10 @@ Run the JUnit test for the module
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3206</x>
-      <y>4431</y>
-      <w>21</w>
-      <h>63</h>
+      <x>2290</x>
+      <y>3165</y>
+      <w>15</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -4626,10 +4626,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>2443</x>
-      <y>4186</y>
-      <w>1953</w>
-      <h>427</h>
+      <x>1745</x>
+      <y>2990</y>
+      <w>1395</w>
+      <h>305</h>
     </coordinates>
     <panel_attributes>testDrives
 fontsize=32
@@ -4641,10 +4641,10 @@ layer=3</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>2443</x>
-      <y>4627</y>
-      <w>588</w>
-      <h>301</h>
+      <x>1745</x>
+      <y>3305</y>
+      <w>420</w>
+      <h>215</h>
     </coordinates>
     <panel_attributes>de.dna.Morpheme
 fontsize=32
@@ -4656,10 +4656,10 @@ layer=3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2828</x>
-      <y>4480</y>
-      <w>238</w>
-      <h>126</h>
+      <x>2020</x>
+      <y>3200</y>
+      <w>170</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>*FirstExternalCommandTestRunner*
 Package::testDrives
@@ -4681,10 +4681,10 @@ Run the JUnit test for the module
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2457</x>
-      <y>4480</y>
-      <w>322</w>
-      <h>126</h>
+      <x>1755</x>
+      <y>3200</y>
+      <w>230</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>*CoreControllerModulesExternalProgrammesTestRunner*
 Package::testDrives
@@ -4706,10 +4706,10 @@ Run the JUnit test for the module
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2933</x>
-      <y>4382</y>
-      <w>21</w>
-      <h>112</h>
+      <x>2095</x>
+      <y>3130</y>
+      <w>15</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -4718,10 +4718,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2611</x>
-      <y>4452</y>
-      <w>21</w>
-      <h>42</h>
+      <x>1865</x>
+      <y>3180</y>
+      <w>15</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -4730,10 +4730,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2450</x>
-      <y>4662</y>
-      <w>322</w>
-      <h>126</h>
+      <x>1750</x>
+      <y>3330</y>
+      <w>230</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>*AppTest*
 Package::testDrives
@@ -4755,10 +4755,10 @@ JUnit test suite to start all tests.</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>5621</x>
+      <x>4015</x>
       <y>0</y>
-      <w>98</w>
-      <h>49</h>
+      <w>70</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>Placeholder..</panel_attributes>
     <additional_attributes/>
@@ -4766,10 +4766,10 @@ JUnit test suite to start all tests.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>665</x>
-      <y>385</y>
-      <w>4655</w>
-      <h>385</h>
+      <x>475</x>
+      <y>275</y>
+      <w>3325</w>
+      <h>275</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=4</panel_attributes>
@@ -4778,10 +4778,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1211</x>
-      <y>1806</y>
-      <w>161</w>
-      <h>112</h>
+      <x>865</x>
+      <y>1290</y>
+      <w>115</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>BamtTable
 //Package::FatClass
@@ -4803,10 +4803,10 @@ Save one BAM-table</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1162</x>
-      <y>1820</y>
-      <w>63</w>
-      <h>21</h>
+      <x>830</x>
+      <y>1300</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
@@ -4814,10 +4814,10 @@ Save one BAM-table</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>896</x>
-      <y>1806</y>
-      <w>273</w>
-      <h>84</h>
+      <x>640</x>
+      <y>1290</y>
+      <w>195</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>BamTableStorage
 //Package::FatClass
@@ -4838,10 +4838,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>749</x>
-      <y>1344</y>
-      <w>161</w>
-      <h>490</h>
+      <x>535</x>
+      <y>960</y>
+      <w>115</w>
+      <h>350</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;680.0;210.0;680.0</additional_attributes>
@@ -4849,10 +4849,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>854</x>
-      <y>392</y>
-      <w>217</w>
-      <h>119</h>
+      <x>610</x>
+      <y>280</y>
+      <w>155</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>*/StorageObserverInterface/*
 {Interface}
@@ -4869,10 +4869,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>833</x>
-      <y>399</y>
-      <w>140</w>
-      <h>161</h>
+      <x>595</x>
+      <y>285</y>
+      <w>100</w>
+      <h>115</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=3</panel_attributes>
@@ -4881,10 +4881,10 @@ layer=3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3619</x>
-      <y>2121</y>
-      <w>273</w>
-      <h>119</h>
+      <x>2585</x>
+      <y>1515</y>
+      <w>195</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>*NeitherConsumerProducerException*
 Package::core.exceptions
@@ -4905,10 +4905,10 @@ roducer and consumer do not form a pair.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
-      <y>2387</y>
-      <w>273</w>
-      <h>119</h>
+      <x>350</x>
+      <y>1705</y>
+      <w>195</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>*TruncatedFastaHeadException*
 Package::core.exceptions
@@ -4928,10 +4928,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>469</x>
-      <y>2331</y>
-      <w>1092</w>
-      <h>812</h>
+      <x>335</x>
+      <y>1665</y>
+      <w>780</w>
+      <h>580</h>
     </coordinates>
     <panel_attributes>fontsize=46
 *storage.exceptions*</panel_attributes>
@@ -4940,10 +4940,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>847</x>
-      <y>938</y>
-      <w>189</w>
-      <h>182</h>
+      <x>605</x>
+      <y>670</y>
+      <w>135</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;240.0;10.0;90.0;250.0;90.0;250.0;10.0</additional_attributes>
@@ -4951,10 +4951,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>280</x>
-      <y>693</y>
-      <w>301</w>
-      <h>287</h>
+      <x>200</x>
+      <y>495</y>
+      <w>215</w>
+      <h>205</h>
     </coordinates>
     <panel_attributes>*Note for the storage package:*
 Until further notice the work 
@@ -4978,10 +4978,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>6272</x>
-      <y>987</y>
-      <w>224</w>
-      <h>294</h>
+      <x>4480</x>
+      <y>705</y>
+      <w>160</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>modules.commands
 fontsize=24
@@ -4993,10 +4993,10 @@ layer=2
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>6279</x>
-      <y>1015</y>
-      <w>98</w>
-      <h>98</h>
+      <x>4485</x>
+      <y>725</y>
+      <w>70</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>/Commands/
 {Enumeration}
@@ -5011,10 +5011,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2275</x>
-      <y>2373</y>
-      <w>252</w>
-      <h>483</h>
+      <x>1625</x>
+      <y>1695</y>
+      <w>180</w>
+      <h>345</h>
     </coordinates>
     <panel_attributes>bg=red
 *VerifiedExternalProgams*
@@ -5068,10 +5068,10 @@ of all tested external programs.</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>2366</x>
-      <y>2352</y>
-      <w>119</w>
-      <h>28</h>
+      <x>1690</x>
+      <y>1680</y>
+      <w>85</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -5083,10 +5083,10 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2296</x>
-      <y>2338</y>
-      <w>21</w>
-      <h>49</h>
+      <x>1640</x>
+      <y>1670</y>
+      <w>15</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -5095,10 +5095,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3381</x>
-      <y>4235</y>
-      <w>217</w>
-      <h>203</h>
+      <x>2415</x>
+      <y>3025</y>
+      <w>155</w>
+      <h>145</h>
     </coordinates>
     <panel_attributes>*Qpms9CommandTest*
 Package::testDrives
@@ -5125,10 +5125,10 @@ Output file: tmpData/qpms9Test.out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3479</x>
-      <y>4431</y>
-      <w>21</w>
-      <h>63</h>
+      <x>2485</x>
+      <y>3165</y>
+      <w>15</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -5137,10 +5137,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3367</x>
-      <y>4480</y>
-      <w>238</w>
-      <h>126</h>
+      <x>2405</x>
+      <y>3200</y>
+      <w>170</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>*Qpms9CommandTestRunner*
 Package::testDrives
@@ -5162,10 +5162,10 @@ Run the JUnit test for the module
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2793</x>
-      <y>2156</y>
-      <w>714</w>
-      <h>2093</h>
+      <x>1995</x>
+      <y>1540</y>
+      <w>510</w>
+      <h>1495</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -5174,10 +5174,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3640</x>
-      <y>4235</y>
-      <w>217</w>
-      <h>203</h>
+      <x>2600</x>
+      <y>3025</y>
+      <w>155</w>
+      <h>145</h>
     </coordinates>
     <panel_attributes>*Bowtie2CommandTest*
 Package::testDrives
@@ -5205,10 +5205,10 @@ Output file: tmpData/qpms9Test.out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3738</x>
-      <y>4431</y>
-      <w>21</w>
-      <h>63</h>
+      <x>2670</x>
+      <y>3165</y>
+      <w>15</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -5217,10 +5217,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3626</x>
-      <y>4480</y>
-      <w>238</w>
-      <h>126</h>
+      <x>2590</x>
+      <y>3200</y>
+      <w>170</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>*Bowtie2CommandTestRunner*
 Package::testDrives
@@ -5242,10 +5242,10 @@ Run the JUnit test for the module
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2807</x>
-      <y>2156</y>
-      <w>952</w>
-      <h>2093</h>
+      <x>2005</x>
+      <y>1540</y>
+      <w>680</w>
+      <h>1495</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -5254,10 +5254,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3262</x>
-      <y>3157</y>
-      <w>273</w>
-      <h>224</h>
+      <x>2330</x>
+      <y>2255</y>
+      <w>195</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>*Bowtie2_Build*
 Package::extProgs
@@ -5288,10 +5288,10 @@ external program.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2730</x>
-      <y>2450</y>
-      <w>1813</w>
-      <h>1141</h>
+      <x>1950</x>
+      <y>1750</y>
+      <w>1295</w>
+      <h>815</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>2570.0;1330.0;2570.0;1610.0;20.0;1610.0;20.0;10.0;10.0;10.0</additional_attributes>
@@ -5299,10 +5299,10 @@ external program.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3752</x>
-      <y>2968</y>
-      <w>791</w>
-      <h>203</h>
+      <x>2680</x>
+      <y>2120</y>
+      <w>565</w>
+      <h>145</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;1110.0;10.0;1110.0;270.0</additional_attributes>
@@ -5310,10 +5310,10 @@ external program.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>6993</x>
-      <y>1554</y>
-      <w>294</w>
-      <h>154</h>
+      <x>4995</x>
+      <y>1110</y>
+      <w>210</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>bg=red
 layer=2
@@ -5336,10 +5336,10 @@ external data.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>7091</x>
-      <y>1127</y>
-      <w>294</w>
-      <h>154</h>
+      <x>5065</x>
+      <y>805</y>
+      <w>210</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>bg=red
 layer=2
@@ -5365,10 +5365,10 @@ Get notifications about the state of the ExtStorage.
   <element>
     <id>Text</id>
     <coordinates>
-      <x>7182</x>
-      <y>1099</y>
-      <w>119</w>
-      <h>28</h>
+      <x>5130</x>
+      <y>785</y>
+      <w>85</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -5380,10 +5380,10 @@ layer=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>7434</x>
-      <y>1309</y>
-      <w>294</w>
-      <h>154</h>
+      <x>5310</x>
+      <y>935</y>
+      <w>210</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>bg=red
 layer=2
@@ -5406,10 +5406,10 @@ any external storage changes.
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>7504</x>
-      <y>1190</y>
-      <w>168</w>
-      <h>63</h>
+      <x>5360</x>
+      <y>850</y>
+      <w>120</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>*ExtStorageObserverInterface*
 layer=2
@@ -5420,10 +5420,10 @@ update()</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>7539</x>
-      <y>1176</y>
-      <w>119</w>
-      <h>28</h>
+      <x>5385</x>
+      <y>840</y>
+      <w>85</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -5436,10 +5436,10 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7280</x>
-      <y>1456</y>
-      <w>308</w>
-      <h>168</h>
+      <x>5200</x>
+      <y>1040</y>
+      <w>220</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -5448,10 +5448,10 @@ layer=4</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>7105</x>
-      <y>1533</y>
-      <w>77</w>
-      <h>28</h>
+      <x>5075</x>
+      <y>1095</y>
+      <w>55</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -5463,10 +5463,10 @@ layer=1</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>7560</x>
-      <y>1155</y>
-      <w>119</w>
-      <h>28</h>
+      <x>5400</x>
+      <y>825</y>
+      <w>85</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 layer=2
@@ -5479,10 +5479,10 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7378</x>
-      <y>1190</y>
-      <w>217</w>
-      <h>133</h>
+      <x>5270</x>
+      <y>850</y>
+      <w>155</w>
+      <h>95</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -5491,10 +5491,10 @@ layer=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7224</x>
-      <y>1274</y>
-      <w>21</w>
-      <h>294</h>
+      <x>5160</x>
+      <y>910</y>
+      <w>15</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 layer=4</panel_attributes>
@@ -5503,10 +5503,10 @@ layer=4</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>5901</x>
-      <y>4704</y>
-      <w>70</w>
-      <h>49</h>
+      <x>4215</x>
+      <y>3360</y>
+      <w>50</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>If no motif was be validated
 style=wordwrap</panel_attributes>
@@ -5515,10 +5515,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>5873</x>
-      <y>4676</y>
-      <w>112</w>
-      <h>105</h>
+      <x>4195</x>
+      <y>3340</y>
+      <w>80</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>type=decision</panel_attributes>
     <additional_attributes/>
@@ -5526,10 +5526,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>6671</x>
-      <y>1043</y>
-      <w>1981</w>
-      <h>1981</h>
+      <x>4765</x>
+      <y>745</y>
+      <w>1415</w>
+      <h>1415</h>
     </coordinates>
     <panel_attributes>externalStorage
 fontsize=44
@@ -5542,10 +5542,10 @@ fg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7588</x>
-      <y>1197</y>
-      <w>112</w>
-      <h>126</h>
+      <x>5420</x>
+      <y>855</y>
+      <w>80</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=4</panel_attributes>
@@ -5554,10 +5554,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>7084</x>
-      <y>1386</y>
-      <w>126</w>
-      <h>105</h>
+      <x>5060</x>
+      <y>990</y>
+      <w>90</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>*/ExtStorageInterface/*
 layer=2
@@ -5572,10 +5572,10 @@ getModuleType()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>6713</x>
-      <y>1589</y>
-      <w>203</w>
-      <h>266</h>
+      <x>4795</x>
+      <y>1135</y>
+      <w>145</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>*CdHitExtStorage*
 Package::externalStorage
@@ -5610,10 +5610,10 @@ Save name and path of cluster files.
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>6951</x>
-      <y>1386</y>
-      <w>91</w>
-      <h>119</h>
+      <x>4965</x>
+      <y>990</y>
+      <w>65</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>*/FileState/*
 {Enumeration}
@@ -5629,10 +5629,10 @@ UNDEFINED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6797</x>
-      <y>1568</y>
-      <w>210</w>
-      <h>35</h>
+      <x>4855</x>
+      <y>1120</y>
+      <w>150</w>
+      <h>25</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>280.0;10.0;10.0;10.0;10.0;30.0</additional_attributes>
@@ -5640,10 +5640,10 @@ UNDEFINED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6993</x>
-      <y>1393</y>
-      <w>84</w>
-      <h>175</h>
+      <x>4995</x>
+      <y>995</y>
+      <w>60</w>
+      <h>125</h>
     </coordinates>
     <panel_attributes>layer=4
 lt=&lt;&lt;.</panel_attributes>
@@ -5652,10 +5652,10 @@ lt=&lt;&lt;.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7056</x>
-      <y>1393</y>
-      <w>98</w>
-      <h>175</h>
+      <x>5040</x>
+      <y>995</y>
+      <w>70</w>
+      <h>125</h>
     </coordinates>
     <panel_attributes>layer=4
 lt=&lt;&lt;.</panel_attributes>
@@ -5664,10 +5664,10 @@ lt=&lt;&lt;.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>6713</x>
-      <y>2177</y>
-      <w>203</w>
-      <h>259</h>
+      <x>4795</x>
+      <y>1555</y>
+      <w>145</w>
+      <h>185</h>
     </coordinates>
     <panel_attributes>*Bowtie2ExtStorage*
 Package::externalStorage
@@ -5701,10 +5701,10 @@ Save name and path of sam files.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>6713</x>
-      <y>2464</y>
-      <w>203</w>
-      <h>259</h>
+      <x>4795</x>
+      <y>1760</y>
+      <w>145</w>
+      <h>185</h>
     </coordinates>
     <panel_attributes>*SamtoolsExtStorage*
 Package::externalStorage
@@ -5738,10 +5738,10 @@ Save name and path of sam files.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>6713</x>
-      <y>2751</y>
-      <w>203</w>
-      <h>259</h>
+      <x>4795</x>
+      <y>1965</y>
+      <w>145</w>
+      <h>185</h>
     </coordinates>
     <panel_attributes>*TomTomExtStorage*
 Package::externalStorage
@@ -5775,10 +5775,10 @@ Save name and path of sam files.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6909</x>
-      <y>1701</y>
-      <w>140</w>
-      <h>637</h>
+      <x>4935</x>
+      <y>1215</y>
+      <w>100</w>
+      <h>455</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>180.0;10.0;180.0;890.0;10.0;890.0</additional_attributes>
@@ -5786,10 +5786,10 @@ Save name and path of sam files.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6909</x>
-      <y>1701</y>
-      <w>154</w>
-      <h>917</h>
+      <x>4935</x>
+      <y>1215</y>
+      <w>110</w>
+      <h>655</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>200.0;10.0;200.0;1290.0;10.0;1290.0</additional_attributes>
@@ -5797,10 +5797,10 @@ Save name and path of sam files.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6909</x>
-      <y>1701</y>
-      <w>168</w>
-      <h>1204</h>
+      <x>4935</x>
+      <y>1215</y>
+      <w>120</w>
+      <h>860</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>220.0;10.0;220.0;1700.0;10.0;1700.0</additional_attributes>
@@ -5808,10 +5808,10 @@ Save name and path of sam files.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>1078</y>
-      <w>518</w>
-      <h>623</h>
+      <x>4435</x>
+      <y>770</y>
+      <w>370</w>
+      <h>445</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>720.0;870.0;50.0;870.0;50.0;10.0;10.0;10.0</additional_attributes>
@@ -5819,10 +5819,10 @@ Save name and path of sam files.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>1281</y>
-      <w>518</w>
-      <h>672</h>
+      <x>4435</x>
+      <y>915</y>
+      <w>370</w>
+      <h>480</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>720.0;940.0;50.0;940.0;50.0;10.0;10.0;10.0</additional_attributes>
@@ -5830,10 +5830,10 @@ Save name and path of sam files.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>1484</y>
-      <w>518</w>
-      <h>756</h>
+      <x>4435</x>
+      <y>1060</y>
+      <w>370</w>
+      <h>540</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>720.0;1060.0;50.0;1060.0;50.0;10.0;10.0;10.0</additional_attributes>
@@ -5841,10 +5841,10 @@ Save name and path of sam files.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>6713</x>
-      <y>1883</y>
-      <w>203</w>
-      <h>252</h>
+      <x>4795</x>
+      <y>1345</y>
+      <w>145</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>*QPMS9Storage*
 Package::externalStorage
@@ -5878,10 +5878,10 @@ Save name and path of sequence files.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>1701</y>
-      <w>518</w>
-      <h>861</h>
+      <x>4435</x>
+      <y>1215</y>
+      <w>370</w>
+      <h>615</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>720.0;1210.0;50.0;1210.0;50.0;10.0;10.0;10.0</additional_attributes>
@@ -5889,10 +5889,10 @@ Save name and path of sequence files.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6209</x>
-      <y>1890</y>
-      <w>518</w>
-      <h>959</h>
+      <x>4435</x>
+      <y>1350</y>
+      <w>370</w>
+      <h>685</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>720.0;1350.0;50.0;1350.0;50.0;10.0;10.0;10.0</additional_attributes>
@@ -5900,10 +5900,10 @@ Save name and path of sequence files.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6909</x>
-      <y>1701</y>
-      <w>126</w>
-      <h>343</h>
+      <x>4935</x>
+      <y>1215</y>
+      <w>90</w>
+      <h>245</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>160.0;10.0;160.0;470.0;10.0;470.0</additional_attributes>
@@ -5911,10 +5911,10 @@ Save name and path of sequence files.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>7371</x>
-      <y>1708</y>
-      <w>196</w>
-      <h>133</h>
+      <x>5265</x>
+      <y>1220</y>
+      <w>140</w>
+      <h>95</h>
     </coordinates>
     <panel_attributes>*CdHitClusterParser*
 Package::externalStorage
@@ -5937,10 +5937,10 @@ creates CdHitCluster objects.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>7098</x>
-      <y>1890</y>
-      <w>252</w>
-      <h>154</h>
+      <x>5070</x>
+      <y>1350</y>
+      <w>180</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>*CdHitClusterMap*
 Package::externalStorage
@@ -5964,10 +5964,10 @@ Save a HashMap which holds all clusters.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6909</x>
-      <y>1729</y>
-      <w>476</w>
-      <h>21</h>
+      <x>4935</x>
+      <y>1235</y>
+      <w>340</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>660.0;10.0;10.0;10.0</additional_attributes>
@@ -5975,10 +5975,10 @@ Save a HashMap which holds all clusters.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>7392</x>
-      <y>1890</y>
-      <w>252</w>
-      <h>154</h>
+      <x>5280</x>
+      <y>1350</y>
+      <w>180</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>*CdHitCluster*
 Package::externalStorage
@@ -6002,10 +6002,10 @@ Save one Cd-Hit cluster.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7525</x>
-      <y>1834</y>
-      <w>21</w>
-      <h>70</h>
+      <x>5375</x>
+      <y>1310</y>
+      <w>15</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
@@ -6013,10 +6013,10 @@ Save one Cd-Hit cluster.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7343</x>
-      <y>1939</y>
-      <w>63</w>
-      <h>21</h>
+      <x>5245</x>
+      <y>1385</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
@@ -6024,10 +6024,10 @@ Save one Cd-Hit cluster.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7315</x>
-      <y>1834</y>
-      <w>161</w>
-      <h>70</h>
+      <x>5225</x>
+      <y>1310</y>
+      <w>115</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>210.0;10.0;10.0;80.0</additional_attributes>
@@ -6035,10 +6035,10 @@ Save one Cd-Hit cluster.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>6909</x>
-      <y>1743</y>
-      <w>476</w>
-      <h>21</h>
+      <x>4935</x>
+      <y>1245</y>
+      <w>340</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;660.0;10.0</additional_attributes>
@@ -6046,10 +6046,10 @@ Save one Cd-Hit cluster.</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>6699</x>
-      <y>1176</y>
-      <w>266</w>
-      <h>175</h>
+      <x>4785</x>
+      <y>840</y>
+      <w>190</w>
+      <h>125</h>
     </coordinates>
     <panel_attributes>fontsize=20
 Does the external storage live 
@@ -6065,10 +6065,10 @@ bg=white</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>7791</x>
-      <y>1323</y>
-      <w>294</w>
-      <h>280</h>
+      <x>5565</x>
+      <y>945</y>
+      <w>210</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>bg=red
 layer=2
@@ -6095,10 +6095,10 @@ When requested by controller
   <element>
     <id>Text</id>
     <coordinates>
-      <x>7840</x>
-      <y>1134</y>
-      <w>175</w>
-      <h>28</h>
+      <x>5600</x>
+      <y>810</y>
+      <w>125</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>fg=red
 fontsize=20
@@ -6110,10 +6110,10 @@ layer=1</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>7840</x>
-      <y>1155</y>
-      <w>168</w>
-      <h>119</h>
+      <x>5600</x>
+      <y>825</y>
+      <w>120</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>*ExtStorageFactoryInterface*
 layer=2
@@ -6129,10 +6129,10 @@ createNewStorage()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7924</x>
-      <y>1162</y>
-      <w>112</w>
-      <h>175</h>
+      <x>5660</x>
+      <y>830</y>
+      <w>80</w>
+      <h>125</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 layer=4</panel_attributes>
@@ -6141,10 +6141,10 @@ layer=4</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>6804</x>
-      <y>1386</y>
-      <w>147</w>
-      <h>119</h>
+      <x>4860</x>
+      <y>990</y>
+      <w>105</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>*/ExtStorageType/*
 {Enumeration}

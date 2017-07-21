@@ -30,6 +30,10 @@ public class JobController {
 	
 	// Variables.
 	
+
+	// Variable holds the ExtStorageController.
+	private ExtStorageController extStorageController;
+	
 	// HashMap to save all moduleNodes.
 	private Map <String, ModuleNode> moduleNodeMap;
 	
@@ -37,8 +41,9 @@ public class JobController {
 	private Map <Integer, Thread> threadMap;
 	
 	// Constructors.
-	public JobController () {
-		this.moduleObserver = new ModuleObserver();
+	public JobController (ExtStorageController extScontroller) {
+		this.extStorageController = extScontroller;
+		this.moduleObserver = new ModuleObserver(this.extStorageController);
 		this.moduleNodeMap = new HashMap <String, ModuleNode>();
 		this.threadMap = new HashMap<Integer, Thread>();
 		
@@ -48,12 +53,29 @@ public class JobController {
 	
 	// Getters.
 	
+	/**
+	 * Getter to get the ModuleObserver instance.
+	 * @return ModuleObserver moduleObserver
+	 */
 	public ModuleObserver getModuleObserver() {
 		return (ModuleObserver) this.moduleObserver;
 	}
 	
+	/**
+	 * Getter to get the ModuleNode.
+	 * @param moduleNodeName
+	 * @return ModuleNode moduleNode
+	 */
 	public ModuleNode getModuleNode (String moduleNodeName) {
 		return this.moduleNodeMap.get(moduleNodeName);
+	}
+	
+	/**
+	 * Getter which returns the ExtStorageController.
+	 * @return ExtStorageController extStorageController
+	 */
+	public ExtStorageController getExtStorageController() {
+		return this.extStorageController;
 	}
 	
 	// End getters.

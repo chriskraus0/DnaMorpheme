@@ -14,13 +14,14 @@ import core.common.ModuleObserverInterface;
 import core.exceptions.NeitherConsumerProducerException;
 import core.exceptions.OccupiedException;
 import core.exceptions.PipeTypeNotSupportedException;
+import externalStorage.ExtStorageType;
 
 /**
  * This class creates nodes for each interacting thread pair. These nodes serve as queues 
  * which are used for the "Consumer-Producer" pattern/problem underlying multi-threading.
  * This class acts also a "View" in the MVC (Model-View-Controller) design pattern.
  * @see Model-View-Controller pattern.
- * @author christopher
+ * @author Christopher Kraus
  *
  */
 public class ModuleNode implements ModuleNodeInterface {
@@ -161,6 +162,11 @@ public class ModuleNode implements ModuleNodeInterface {
 		this.consumerState = ModuleBuilder.getModule(this.consumerID).getModuleState();	
 			
 		this.moduleObserver.update(this.producerID, this.producerState, this.consumerID, this.consumerState);
+	}
+	
+	@Override 
+	public void notifyModuleObserverOutput(String outFile, ExtStorageType exsType) {
+		this.moduleObserver.updateOutFile(outFile, exsType);
 	}
 	
 	// End methods.

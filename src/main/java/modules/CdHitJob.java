@@ -32,6 +32,8 @@ import core.ModuleNode;
 import storage.SequenceStorage;
 import modules.commands.Commands;
 
+import externalStorage.ExtStorageType;
+
 // Project specific exceptions.
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
@@ -63,6 +65,9 @@ public class CdHitJob extends Module {
 	
 	// Output to save a specified location.
 	private String output;
+	
+	// Save the file path to the Cd-Hit cluster file.
+	private String cdHitClusterFilePath = "";
 		
 	// SequenceStorage object for storing fasta data.
 	private SequenceStorage fastaStorage;
@@ -83,7 +88,15 @@ public class CdHitJob extends Module {
 			CommandState cState = this.callCommand();
 			if (cState.equals(CommandState.SUCCESS)) {
 				this.setModuleState(ModuleState.SUCCESS);
+				
+				// Notify the ModuleObserver about the state of this ModuleNode.
 				this.moduleNode.notifyModuleObserver();
+				
+				// If there was an output file, 
+				// notify the ModuleObserver about the written output of this Module.
+				if (!this.cdHitClusterFilePath.isEmpty())
+					this.moduleNode.notifyModuleObserverOutput(this.cdHitClusterFilePath, 
+							ExtStorageType.CDHIT_EXT_STORAGE);
 			}
 		} catch (CommandFailedException ce) {
 			this.logger.log(Level.SEVERE, ce.getMessage());
@@ -101,9 +114,7 @@ public class CdHitJob extends Module {
 		this.moduleNode = this.getSuperModuleNode();
 		
 		CommandState cState = CommandState.STARTING;
-					
-		// Checked exception. TODO: Add ExternalCommandHandler
-		
+							
 		// Save input from pipe
 		this.input = "";
 				
@@ -208,14 +219,12 @@ public class CdHitJob extends Module {
 		
 		// Print the Cd-Hit output.
     	this.logger.log(Level.INFO, cdHitOutput);
-		
-    
-    	//TODO: Find a way to tell the module observer that a new external file was created.    	
-    	// Retrieve the file to the generated Cd-Hit cluster output file.
-    	String outFilePath = this.command.get(Commands.o);
-    	
-    	
-		
+		    	
+    	// Save the path to the created Cd-Hit cluster after writing it.
+    	// ATTENTION: CD-HIT CREATS ITS OWN OUTPUT WITH AN SUFFIX ".clstr"
+    	// THIS MAY CHANGE IN A DIFFERENT VERSION OF CD-HIT!!!
+    	this.cdHitClusterFilePath = this.command.get(Commands.o) + ".clstr";
+    	   			
 		/*
 		// Write to OutputPort (via CharPipe).
 		try {

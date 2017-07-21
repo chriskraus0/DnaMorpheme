@@ -1,14 +1,17 @@
 package externalStorage;
 
+// Imports.
+
+// Java I/O imports.
 import java.io.File;
 
-import core.ModuleObserver;
-import core.common.ModuleType;
-
 public class QPMS9ExtStorage extends ExtStorage {
+	
+	// Constants.
+	private final ExtStorageType EXT_TYPE = ExtStorageType.QPMS9_EXT_STORAGE;
 
-	public QPMS9ExtStorage(int moduleID, ModuleObserver mObserver, File file) {
-		super(moduleID, mObserver, file);
+	public QPMS9ExtStorage(String extID, File file) {
+		super(extID, file);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -19,9 +22,8 @@ public class QPMS9ExtStorage extends ExtStorage {
 	}
 
 	@Override
-	public ModuleType getModuleType() {
-		// TODO Auto-generated method stub
-		return null;
+	public ExtStorageType getStorageType() {
+		return this.EXT_TYPE;
 	}
 
 }

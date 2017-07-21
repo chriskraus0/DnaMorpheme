@@ -49,7 +49,7 @@ public class CdHitClusterParser {
 			Pattern nPat = Pattern.compile("\\A>(Cluster\\s+\\d+)");
 			
 			// Define a pattern for a cluster entry.
-			Pattern ePat = Pattern.compile("\\A\\d+\\s+.+,\\s+(>.+)\\s+");
+			Pattern ePat = Pattern.compile("\\A\\d+\\s+\\w+,\\s+(>.+)");
 			
 			FileReader fr = new FileReader(this.file);
 			
@@ -67,8 +67,11 @@ public class CdHitClusterParser {
 			// Save Cd-Hit cluster.
 			CdHitCluster cdHitCluster = new CdHitCluster();
 			
+			// Read initial line.
+			line = br.readLine();
+			
 			while (line != null) {
-				line = br.readLine();
+				
 				if (nPat.matcher(line).matches()) {
 					Matcher nMatch = nPat.matcher(line);
 					
@@ -78,14 +81,21 @@ public class CdHitClusterParser {
 						cdHitClusterMap.setCdHitCluster(
 								cdHitCluster.getClusterName(), cdHitCluster);
 					
-					
+					// Find the pattern.
+					nMatch.find();
+					// Save the group as name.
 					clusterName = nMatch.group(1);
+					
 					cdHitCluster = new CdHitCluster(clusterName);
 				} else if (ePat.matcher(line).matches()) {
 					Matcher eMatch = ePat.matcher(line);
+					
+					// Find the matching pattern.
+					eMatch.find();
 					clusterEntry = eMatch.group(1);
 					cdHitCluster.addEntryToCdHitCluster(clusterEntry);
 				}
+				line = br.readLine();
 			}
 			
 			// Add the last cluster to the cdHitClusterMap.

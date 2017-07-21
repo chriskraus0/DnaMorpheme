@@ -7,8 +7,12 @@ import core.common.ModuleType;
 
 public class TomTomExtStorage extends ExtStorage {
 
-	public TomTomExtStorage(int moduleID, ModuleObserver mObserver, File file) {
-		super(moduleID, mObserver, file);
+	// Constants.
+	
+	private final ExtStorageType EXT_TYPE = ExtStorageType.TOMTOM_EXT_STORAGE;
+	
+	public TomTomExtStorage(String extID, File file) {
+		super(extID, file);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -19,9 +23,8 @@ public class TomTomExtStorage extends ExtStorage {
 	}
 
 	@Override
-	public ModuleType getModuleType() {
-		// TODO Auto-generated method stub
-		return null;
+	public ExtStorageType getStorageType() {
+		return this.EXT_TYPE;
 	}
 
 }

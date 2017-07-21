@@ -5,6 +5,7 @@ package core.common;
 // Project specific exceptions.
 import core.exceptions.OccupiedException;
 import core.exceptions.PipeTypeNotSupportedException;
+import externalStorage.ExtStorageType;
 
 /**
  * ModuleNode interface to integrate required methods for the observer design pattern.
@@ -27,6 +28,17 @@ public interface ModuleNodeInterface {
 	 * Notify the ModuleObserver.
 	 */
 	public void notifyModuleObserver();
+	
+	/**
+	 * Notify the ModuleObserver about output file.
+	 * This method takes an String array for all paths to the 
+	 * output files. As second parameter this method takes the 
+	 * type of storage in which the created output file should
+	 * be stored.
+	 * @param String outFiles
+	 * @param ExtStorage exsType
+	 */
+	public void notifyModuleObserverOutput(String outFiles, ExtStorageType exsType);
 	
 	/**
 	 * Connects the Producer to the Consumer.

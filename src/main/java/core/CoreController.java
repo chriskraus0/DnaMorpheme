@@ -86,9 +86,16 @@ public class CoreController {
 	 * @return ModuleBuilder moduleBuilder.
 	 */
 	public static ModuleBuilder generateModuleBuilder() {
-		JobController jobController = new JobController();
+		
+		// Create an instance of the ExtStorageController.
 		ExtStorageController extStorageController = generateExtStorageController();
-		ModuleBuilder moduleBuilder = new ModuleBuilder(jobController, extStorageController);
+		
+		// Create an instance of the JobController.
+		JobController jobController = new JobController(extStorageController);
+		
+		// Create the moduleBuilder factory.
+		ModuleBuilder moduleBuilder = new ModuleBuilder(jobController);
+		
 		return moduleBuilder;
 	}
 

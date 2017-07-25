@@ -94,6 +94,8 @@ public class Bowtie2Job extends Module {
 			if (cState.equals(CommandState.SUCCESS)) {
 				this.setModuleState(ModuleState.SUCCESS);
 				this.moduleNode.notifyModuleObserver();
+				// TODO: Add 
+				// this.moduleNode.notifyModuleObserverOutput(outFile, exsType);
 			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());
@@ -229,6 +231,8 @@ public class Bowtie2Job extends Module {
 			
 			// Print the bowtie2 output.
 	    	this.logger.log(Level.INFO, bowtie2BuildOutput);
+	    	
+	    	// TODO: Add variable holding the output file of the bowtie2 step.
 	    		    	
 	    	// If there was an error throw a new exception.
 	    	if (!bowtie2BuildErr.isEmpty()

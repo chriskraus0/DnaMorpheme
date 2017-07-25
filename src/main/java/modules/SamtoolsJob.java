@@ -61,7 +61,7 @@ public class SamtoolsJob extends Module {
 		// Create new fasta storage.
 		this.fastaStorage = new SequenceStorage();
 		
-		// Call Logger to get a new intance.
+		// Call Logger to get a new instance.
 		this.logger = Logger.getLogger(this.getClass().getName());
 	}
 	
@@ -73,6 +73,8 @@ public class SamtoolsJob extends Module {
 			if (cState.equals(CommandState.SUCCESS)) {
 				this.setModuleState(ModuleState.SUCCESS);
 				this.moduleNode.notifyModuleObserver();
+				// TODO: Add 
+				// this.moduleNode.notifyModuleObserverOutput(outFile, exsType);
 			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());

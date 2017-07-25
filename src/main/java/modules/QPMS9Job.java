@@ -70,6 +70,8 @@ public class QPMS9Job extends Module {
 			if (cState.equals(CommandState.SUCCESS)) {
 				this.setModuleState(ModuleState.SUCCESS);
 				this.moduleNode.notifyModuleObserver();
+				// TODO: Add 
+				// this.moduleNode.notifyModuleObserverOutput(outFile, exsType);
 			}
 		} catch (CommandFailedException ce) {
 			this.logger.log(Level.SEVERE, ce.getMessage());

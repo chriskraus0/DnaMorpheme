@@ -45,6 +45,7 @@ import modules.commands.Commands;
 // Project-specific exceptions.
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
+import externalStorage.ExtStorageType;
 import storage.SequenceStorage;
 import storage.exceptions.TruncatedFastaHeadException;
 
@@ -70,6 +71,9 @@ public class Bowtie2Job extends Module {
 	// SequenceStorage object for storing fasta data.
 	private SequenceStorage fastaStorage;
 	
+	// Save path and file name of an external SAM mapping file.
+	private String outputFile;
+	
 	// Logger.
 	private Logger logger;
 	
@@ -94,8 +98,8 @@ public class Bowtie2Job extends Module {
 			if (cState.equals(CommandState.SUCCESS)) {
 				this.setModuleState(ModuleState.SUCCESS);
 				this.moduleNode.notifyModuleObserver();
-				// TODO: Add 
-				// this.moduleNode.notifyModuleObserverOutput(outFile, exsType);
+				// Notify the ModuleObserver about the created external SAM file.
+				this.moduleNode.notifyModuleObserverOutput(this.outputFile, ExtStorageType.BOWTIE2_EXT_STORAGE);
 			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());
@@ -285,6 +289,9 @@ public class Bowtie2Job extends Module {
 			this.logger.log(Level.SEVERE, ie.getMessage());
 			ie.printStackTrace();
 		}
+		
+		// Save the external SAM mapping file and its path.
+		this.outputFile = this.command.get(Commands.S);
 		
 		// Print the bowtie2 output.
     	this.logger.log(Level.INFO, bowtie2Output);

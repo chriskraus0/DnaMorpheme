@@ -31,6 +31,7 @@ import storage.SequenceStorage;
 // Project-specific exceptions.
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
+import externalStorage.ExtStorageType;
 import storage.exceptions.TruncatedFastaHeadException;
 
 public class QPMS9Job extends Module {
@@ -43,6 +44,9 @@ public class QPMS9Job extends Module {
 	
 	// Internal fasta storage.
 	private SequenceStorage fastaStorage;
+	
+	// Save path and file of an external file.
+	private String outputFile;
 	
 	// Logger.
 	private Logger logger;
@@ -70,8 +74,8 @@ public class QPMS9Job extends Module {
 			if (cState.equals(CommandState.SUCCESS)) {
 				this.setModuleState(ModuleState.SUCCESS);
 				this.moduleNode.notifyModuleObserver();
-				// TODO: Add 
-				// this.moduleNode.notifyModuleObserverOutput(outFile, exsType);
+				// Notify the ModuleObserver about the path and file name of an external file. 
+				this.moduleNode.notifyModuleObserverOutput(this.outputFile, ExtStorageType.QPMS9_EXT_STORAGE);
 			}
 		} catch (CommandFailedException ce) {
 			this.logger.log(Level.SEVERE, ce.getMessage());
@@ -176,6 +180,9 @@ public class QPMS9Job extends Module {
 		
 		// Print the qpms9 output.
     	this.logger.log(Level.INFO, qpms9Output);
+    	
+    	// Save the external path and file.
+    	this.outputFile = this.command.get(Commands.o);
 		
 		// Checked exception. TODO: Add ExternalCommandHandler
 		

@@ -30,6 +30,7 @@ import storage.SequenceStorage;
 import storage.exceptions.TruncatedFastaHeadException;
 import core.exceptions.CommandFailedException;
 import core.exceptions.PipeTypeNotSupportedException;
+import externalStorage.ExtStorageType;
 
 public class SamtoolsJob extends Module {
 	
@@ -49,6 +50,9 @@ public class SamtoolsJob extends Module {
 		
 		// Output to save a specified location.
 		private String output;
+		
+		// External output file.
+		private String outputFile;
 			
 		// SequenceStorage object for storing fasta data.
 		private SequenceStorage fastaStorage;
@@ -73,8 +77,8 @@ public class SamtoolsJob extends Module {
 			if (cState.equals(CommandState.SUCCESS)) {
 				this.setModuleState(ModuleState.SUCCESS);
 				this.moduleNode.notifyModuleObserver();
-				// TODO: Add 
-				// this.moduleNode.notifyModuleObserverOutput(outFile, exsType);
+				// Notify the ModuleObserver about the saved external file.
+				this.moduleNode.notifyModuleObserverOutput(this.outputFile, ExtStorageType.SAMTOOLS_EXT_STORAGE);
 			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());
@@ -206,7 +210,8 @@ public class SamtoolsJob extends Module {
 					+ ": Error: Required options were not provided.");
 		}
 		
-		
+		// Save output file and path.
+		this.outputFile = this.command.get(Commands.output);
 		
 		// External command.
 		

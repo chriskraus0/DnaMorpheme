@@ -28,7 +28,7 @@ import extProgs.ExtProgType;
 * @see core.ModuleBuilder#createNewCdHitJob()
 * @see core.Module
 * @see modules.CdHitJob
-* @author christopher
+* @author Christopher Kraus
 *
 */
 

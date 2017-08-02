@@ -79,6 +79,19 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 	
 	/**
+	 * Create a new thread for a module and save it, start and put it to sleep (100 ms).
+	 * Take the moduleID of this module but without connecting to any other module.
+	 * @param int moduleID
+	 * @param int connectedModuleID
+	 * @return String nodeName
+	 */
+	public String prepareJobs (int moduleID) {
+		String nodeName = this.jobController.addNewModuleNode(moduleID);
+		this.jobController.connect(nodeName);
+		return nodeName;
+	}
+	
+	/**
 	 * Method to start one thread per module.
 	 * @param moduleNodeName
 	 * @throws InterruptedException
@@ -138,6 +151,12 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return moduleID;
 	}
 	
+	/**
+	 * This method creates a Cd-Hit job which will be executed on a new thread.
+	 * @param HashMap<Commands, String> command
+	 * @see modules.command.Commands
+	 * @return int moduleID
+	 */
 	public int createNewCdHitJob(HashMap<Commands, String> command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();

@@ -62,9 +62,11 @@ public class ExtStorageController {
 	
 	/**
 	 * Request a new external storage for a specific module.
+	 * This method returns the newest ID external storage.
 	 * @param ExtStorageType exsType
+	 * @return String newExtID
 	 */
-	public void requestStorage(String filePath, ExtStorageType exsType) {
+	public String requestStorage(String filePath, ExtStorageType exsType) {
 		
 		// Parse the file path properly.
 		File file = new File(filePath);
@@ -87,5 +89,18 @@ public class ExtStorageController {
 		
 		// Push the newExtStorage and its newExtID into the extStorageMap.
 		this.extStorageMap.put(newExtID, newExtStorage);
+		
+		// Return the newest addition to the storage.
+		return newExtID;
 	}
+	
+	/**
+	 * Getter returns the external storage which is saved by the ID extID.
+	 * @param String extID
+	 * @return ExtStorage extStorage
+	 */
+	public ExtStorage getExtStorage(String extID) {
+		return this.extStorageMap.get(extID);
+	}
+	
 }

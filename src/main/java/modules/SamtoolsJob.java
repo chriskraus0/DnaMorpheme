@@ -21,7 +21,7 @@ import core.common.CommandState;
 import core.common.Module;
 import core.common.ModuleState;
 import core.common.ModuleType;
-
+import core.common.PortState;
 import modules.commands.Commands;
 
 import storage.SequenceStorage;
@@ -110,6 +110,8 @@ public class SamtoolsJob extends Module {
 		// Read from InputPort (via CharPipe).		
 		try {
 			
+			// Test whether this port is connected.
+			if (this.getInputPort().getPortState() == PortState.CONNECTED) {
 				charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
 				
 				while (charNumber != -1) {
@@ -138,6 +140,7 @@ public class SamtoolsJob extends Module {
 
 				this.getInputPort().getPipe().readClose();
 		
+			}
 						
 		} catch (PipeTypeNotSupportedException pe) {
 			this.logger.log(Level.SEVERE, pe.getMessage());

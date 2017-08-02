@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 // Project specific imports.
+import algorithmLogic.AlgorithmController;
 import core.common.ModuleState;
 import core.common.ModuleObserverInterface;
 import core.ExtStorageController;
@@ -34,14 +35,20 @@ public class ModuleObserver implements ModuleObserverInterface {
 	// Instance of the ExtStorage.
 	private ExtStorageController extStorageController;
 	
+	// Instance of the AlgorithmController.
+	private AlgorithmController algorithmController;
+	
 	// Logger.
 	private Logger logger;
 		
 	// Constructors.
-	public ModuleObserver (ExtStorageController extScontroller) {
+	public ModuleObserver (ExtStorageController extScontroller, AlgorithmController aController) {
 		
 		// Save the instance of the external storage controller.
 		this.extStorageController = extScontroller;
+		
+		// Save the instance of the algorithm controller.
+		this.algorithmController = aController;
 		
 		// Call Logger factory to create new logger.
 		this.logger = Logger.getLogger(this.getClass().getName());
@@ -116,7 +123,10 @@ public class ModuleObserver implements ModuleObserverInterface {
 	
 	@Override
 	public void updateOutFile (String outFile, ExtStorageType exsType) {
-		this.extStorageController.requestStorage(outFile, exsType);
+		// Request a new external storage.
+		String newExtID = this.extStorageController.requestStorage(outFile, exsType);
+		// Notify the AlgorithmController about the new storage.
+		// TODO: Add command: this.algorithmController.
 	}
 	
 }

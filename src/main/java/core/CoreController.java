@@ -3,6 +3,7 @@ package core;
 // Imports.
 
 // Project-specific imports.
+import algorithmLogic.AlgorithmController;
 import core.exceptions.SystemNotSupportedException;
 import core.exceptions.VersionNotCompatibleException;
 
@@ -85,13 +86,33 @@ public class CoreController {
 	 * Generate ModuleBuilder.
 	 * @return ModuleBuilder moduleBuilder.
 	 */
-	public static ModuleBuilder generateModuleBuilder() {
+	public static ModuleBuilder generateModuleBuilder(AlgorithmController algorithmController) {
 		
 		// Create an instance of the ExtStorageController.
 		ExtStorageController extStorageController = generateExtStorageController();
 		
 		// Create an instance of the JobController.
-		JobController jobController = new JobController(extStorageController);
+		JobController jobController = new JobController(extStorageController, algorithmController);
+		
+		// Create the moduleBuilder factory.
+		ModuleBuilder moduleBuilder = new ModuleBuilder(jobController);
+		
+		return moduleBuilder;
+	}
+	
+	/**
+	 * Generate ModuleBuilder.
+	 * @return ModuleBuilder moduleBuilder.
+	 */
+	public static ModuleBuilder generateModuleBuilder() {
+		
+		// Create an instance of the ExtStorageController.
+		ExtStorageController extStorageController = generateExtStorageController();
+		
+		AlgorithmController algorithmController = new AlgorithmController();
+		
+		// Create an instance of the JobController.
+		JobController jobController = new JobController(extStorageController, algorithmController);
 		
 		// Create the moduleBuilder factory.
 		ModuleBuilder moduleBuilder = new ModuleBuilder(jobController);

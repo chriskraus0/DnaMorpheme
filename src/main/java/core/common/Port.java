@@ -64,7 +64,7 @@ public interface Port {
 	
 	/**
 	 * Test to see whether a port is connected.
-	 * @return boolean
+	 * @return PortState
 	 */
 	public PortState getPortState();
 	

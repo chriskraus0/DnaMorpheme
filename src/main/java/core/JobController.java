@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 // Project-specific imports.
+import algorithmLogic.AlgorithmController;
 import core.common.ModuleState;
 import core.common.ModuleObserverInterface;
 import core.exceptions.NeitherConsumerProducerException;
@@ -34,6 +35,9 @@ public class JobController {
 	// Variable holds the ExtStorageController.
 	private ExtStorageController extStorageController;
 	
+	// Variable holds the AlgorithmController.
+	private AlgorithmController algorithmController;
+	
 	// HashMap to save all moduleNodes.
 	private Map <String, ModuleNode> moduleNodeMap;
 	
@@ -41,9 +45,11 @@ public class JobController {
 	private Map <Integer, Thread> threadMap;
 	
 	// Constructors.
-	public JobController (ExtStorageController extScontroller) {
+	public JobController (ExtStorageController extScontroller, AlgorithmController aController) {
 		this.extStorageController = extScontroller;
-		this.moduleObserver = new ModuleObserver(this.extStorageController);
+		this.algorithmController = aController;
+		this.moduleObserver = new ModuleObserver(
+				this.extStorageController, this.algorithmController);
 		this.moduleNodeMap = new HashMap <String, ModuleNode>();
 		this.threadMap = new HashMap<Integer, Thread>();
 		
@@ -100,6 +106,19 @@ public class JobController {
 		
 		return newNode.getModuleNodeName();
 		
+	}
+	
+	public String addNewModuleNode (int moduleID) {
+		
+		ModuleNode newNode = new ModuleNode (moduleID, (ModuleObserver) this.moduleObserver);
+		String moduleNodeName = newNode.getModuleNodeName();
+		this.moduleNodeMap.put(moduleNodeName, newNode);
+		
+		// Familiarize the module objects with their ModuleNodeNames.
+		ModuleBuilder.getModule(moduleID).setConsumerModuleNodeName(moduleNodeName);
+		ModuleBuilder.getModule(moduleID).setProducerModuleNodeName(moduleNodeName);
+		
+		return newNode.getModuleNodeName();
 	}
 	
 	public void connect(String moduleNodeName) {

@@ -21,6 +21,7 @@ import java.io.BufferedReader;
 import core.common.Module;
 import core.common.ModuleState;
 import core.common.ModuleType;
+import core.common.PortState;
 import core.common.CommandState;
 
 import core.VerifiedExternalPrograms;
@@ -130,34 +131,37 @@ public class CdHitJob extends Module {
 		
 		// Read from InputPort (via CharPipe).		
 		try {
-			
-				charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
-				
-				while (charNumber != -1) {
-												
-					// Check for interrupted threads.
-					
-					if (Thread.interrupted()) {
-						this.getInputPort().getPipe().readClose();
-						this.getOutputPort().getPipe().writeClose();
-						throw new InterruptedException ("Thread interrupted");
-					}
-					
-					// If the number of read characters is greater than the buffer limit 
-					// write the remaining characters from the data[] char array 
-					// as new String into the variable "input".
-					if (charNumber < bufferSize) {
-						for (int i = 0; i < charNumber; i++)
-						this.input += data[i];
-					} else {
-						this.input += new String(data);
-					}
-					
+				// Test whether the port is connected before transferring data.
+				if (this.getInputPort().getPortState() == PortState.CONNECTED) {
 					charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
 					
+					while (charNumber != -1) {
+													
+						// Check for interrupted threads.
+						
+						if (Thread.interrupted()) {
+							this.getInputPort().getPipe().readClose();
+							this.getOutputPort().getPipe().writeClose();
+							throw new InterruptedException ("Thread interrupted");
+						}
+						
+						// If the number of read characters is greater than the buffer limit 
+						// write the remaining characters from the data[] char array 
+						// as new String into the variable "input".
+						if (charNumber < bufferSize) {
+							for (int i = 0; i < charNumber; i++)
+							this.input += data[i];
+						} else {
+							this.input += new String(data);
+						}
+						
+						charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
+						
+					}
+	
+					this.getInputPort().getPipe().readClose();
+					
 				}
-
-				this.getInputPort().getPipe().readClose();
 		
 						
 		} catch (PipeTypeNotSupportedException pe) {

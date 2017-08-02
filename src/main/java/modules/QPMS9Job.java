@@ -24,7 +24,7 @@ import core.common.CommandState;
 import core.common.Module;
 import core.common.ModuleState;
 import core.common.ModuleType;
-
+import core.common.PortState;
 import modules.commands.Commands;
 import storage.SequenceStorage;
 
@@ -105,27 +105,30 @@ public class QPMS9Job extends Module {
 		// Read from InputPort (via CharPipe).
 		
 		try {
-			charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
-			while (charNumber != -1) {
-									
-				// If the number of read characters is smaller than the buffer limit 
-				// write the remaining characters in the String variable input.
-				if (charNumber < bufferSize) {
-					for (int i = 0; i < charNumber; i++)
-					input += data[i];
-				} else {
-					input += new String(data);
+			// Test whether this port is connected.
+			if (this.getInputPort().getPortState() == PortState.CONNECTED) {
+				charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
+				while (charNumber != -1) {
+										
+					// If the number of read characters is smaller than the buffer limit 
+					// write the remaining characters in the String variable input.
+					if (charNumber < bufferSize) {
+						for (int i = 0; i < charNumber; i++)
+						input += data[i];
+					} else {
+						input += new String(data);
+					}
+					
+					charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
 				}
 				
-				charNumber = ((InputPort) this.getInputPort()).readFromCharPipe(data, 0, bufferSize);
+				// Close input pipe.
+				((CharPipe) this.getInputPort().getPipe()).readClose();
+				
+				// Signal done reading input.
+				this.setModuleState(ModuleState.INPUT_DONE);
+				this.moduleNode.notifyModuleObserver();
 			}
-			
-			// Close input pipe.
-			((CharPipe) this.getInputPort().getPipe()).readClose();
-			
-			// Signal done reading input.
-			this.setModuleState(ModuleState.INPUT_DONE);
-			this.moduleNode.notifyModuleObserver();
 						
 		} catch (PipeTypeNotSupportedException pe) {
 			this.logger.log(Level.SEVERE, pe.getMessage());

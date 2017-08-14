@@ -206,10 +206,10 @@ public class AlgorithmController {
 	public static void main (String[] args) {
 		
 		// File name of the sequence fasta file.
-		String fileName = args[1];
+		String fileName = args[0];
 		
 		// Target path.
-		String targetPath = args[2];
+		String targetPath = args[1];
 		
 		// Create a new Singleton "CoreController"
 		CoreController.getInstance();

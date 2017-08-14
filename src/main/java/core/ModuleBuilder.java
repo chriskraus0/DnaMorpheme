@@ -11,6 +11,7 @@ import java.util.HashMap;
 // Project specific imports.
 import core.common.Module;
 import core.common.ModuleBuilderInterface;
+import core.common.ModuleState;
 import core.common.ModuleType;
 import core.ExtStorageController;
 
@@ -19,7 +20,9 @@ import modules.CdHitJob;
 import modules.QPMS9Job;
 import modules.Bowtie2Job;
 import modules.SamtoolsJob;
+import modules.DummyJob;
 import modules.commands.Commands;
+
 
 // Test module imports.
 import testModules.InputTest;
@@ -58,6 +61,11 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		
 		// Get a single instance for ModulePortLinker.
 		ModulePortLinker.getInstance();
+		
+		// Create a dummy module with the ID "-1" for all modules which
+		// do not need to transfer data via pipes.
+		this.createNewDummyJob();
+		ModuleBuilder.moduleMap.get(-1).setModuleState(ModuleState.UNDEFINED);
 	}
 
 
@@ -87,7 +95,8 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	 */
 	public String prepareJobs (int moduleID) {
 		String nodeName = this.jobController.addNewModuleNode(moduleID);
-		this.jobController.connect(nodeName);
+		// TODO delete this:
+		//this.jobController.connect(nodeName);
 		return nodeName;
 	}
 	
@@ -133,6 +142,19 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	 */
 	public static Module getModule(int moduleID) {
 		return ModuleBuilder.moduleMap.get(moduleID);
+	}
+	
+	public void createNewDummyJob() {
+		int moduleID = -1;
+		int storageID = -1;
+		ModuleType mType = ModuleType.DUMMY;
+		HashMap<Commands, String> command = new HashMap<Commands, String>();
+		command.put(Commands.dummy, "dummy");
+		
+		Module newDummyJob = this.createNewModule(moduleID, storageID, mType, command);
+		
+		// Add module with the "moduleID" and module to the new module TreeMap.
+		ModuleBuilder.moduleMap.put(newDummyJob.getModuleID(), newDummyJob);
 	}
 	
 	public int createNewInputReader(HashMap<Commands, String> command) {
@@ -373,6 +395,8 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 						ModulePortLinker.requestNewOutputPortID(moduleID),
 						command);
 				break;
+			case DUMMY:
+				newModule = new DummyJob (moduleID, storageID, mType, -1, -1, command);
 			case UNDEFINED:
 				break;
 			default:

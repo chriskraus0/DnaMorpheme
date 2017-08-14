@@ -17,5 +17,7 @@ public enum Commands {
 	// Shared options between bowtie2 and samtools.
 	S,
 	// Shared options between cdhit and samtools.
-	o
+	o,
+	// Dummy command for dummy module.
+	dummy
 }

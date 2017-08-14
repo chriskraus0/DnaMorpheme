@@ -12,6 +12,12 @@ import externalStorage.SamtoolsExtStorage;
 import externalStorage.BAMExtStorage;
 import externalStorage.Bowtie2ExtStorage;
 
+/**
+ * This class holds ArrayLists of all files which are created through running the program.
+ * @author Christopher Kraus
+ *
+ */
+
 public class DataSet {
 	
 	// Variables.
@@ -28,77 +34,82 @@ public class DataSet {
 	// BAM files.
 	private ArrayList<BAMExtStorage> bamFiles;
 	
-	// Uniquely mapped bam files:
+	// Uniquely mapped bam files.
 	private ArrayList<BAMExtStorage> bamMappedUniqueFiles;
+	
+	// SAM files created by bowtie2.
+	private ArrayList<Bowtie2ExtStorage> bowtie2SAMfiles;
 	
 	// End variables.
 	
 	// Constructors.
 	public DataSet() {
-		// TODO: empty stub
+		
+		// Initialize the different ArrayLists.
+		this.cdHitClusters = new ArrayList<CdHitExtStorage>();
+		this.qPMS9files = new ArrayList<QPMS9ExtStorage>();
+		this.samtoolsSAMfiles = new ArrayList<SamtoolsExtStorage>();
+		this.bamFiles = new ArrayList<BAMExtStorage>();
+		this.bamMappedUniqueFiles = new ArrayList<BAMExtStorage>();
+		this.bowtie2SAMfiles = new ArrayList<Bowtie2ExtStorage>();
+		
 	}
 	
 	// End constructors.
 	
 	// Methods.
-	/*
+	
 	// Getters.
 	public ArrayList<CdHitExtStorage> getCdHitClusters() {
-		// TODO: empty stub.
-		return null;
+		return this.cdHitClusters;
 	}
 	
 	public ArrayList<QPMS9ExtStorage> getQPMS9files() {
-		// TODO: empty stub.
-		return null;
+		return this.qPMS9files;
 	}
 	
 	public ArrayList<Bowtie2ExtStorage> getBowtie2SAMfiles() {
-		// TODO: empty stub.
-		return null;
+		return this.bowtie2SAMfiles;
 	}
 	public ArrayList<SamtoolsExtStorage> getSamtoolsSAMfiles() {
-		// TODO: empty stub.
-		return null;
+		return this.samtoolsSAMfiles;
 	}
 	
 	public ArrayList<BAMExtStorage> getBamFiles() {
-		// TODO: empty stub.
-		return null;
+		return this.bamFiles;
 	}
 	
 	public ArrayList<BAMExtStorage> getBamMappedUniqueFiles() {
-		// TODO: empty stub.
-		return null;
+		return this.bamMappedUniqueFiles;
 	}
 
 	// End getters.
 	
 	// Setters.
-	public void addCdHitCluster(CdHitExtStorage){
-		// TODO: empty stub.
+	public void addCdHitCluster(CdHitExtStorage cdHitExtStorage){
+		this.cdHitClusters.add(cdHitExtStorage);
 	}
 	
-	public void addQpms9File(QPMS9ExtStorage){
-		// TODO: empty stub.
+	public void addQpms9File(QPMS9ExtStorage qPMS9ExtStorage){
+		this.qPMS9files.add(qPMS9ExtStorage);
 	}
 	
-	public void addBowtie2SAMfile(Bowtie2ExtStorage){
-		// TODO: empty stub.
+	public void addBowtie2SAMfile(Bowtie2ExtStorage bowtie2ExtStorage){
+		this.bowtie2SAMfiles.add(bowtie2ExtStorage);
 	}
 	
-	public void addSamtoolsSAMfile(SamtoolsExtStorage){
-		// TODO: empty stub.
+	public void addSamtoolsSAMfile(SamtoolsExtStorage samtoolsExtStorage){
+		this.samtoolsSAMfiles.add(samtoolsExtStorage);
 	}
 	
-	public void addBamFile(BAMExtStorage){
-		// TODO: empty stub.
+	public void addBamFile(BAMExtStorage bamExtStorage){
+		this.bamFiles.add(bamExtStorage);
 	}
 	
-	public void addBamMappedUniqFile(BAMExtStorage){
-		// TODO: empty stub.
+	public void addBamMappedUniqFile(BAMExtStorage bamExtStorage){
+		this.bamMappedUniqueFiles.add(bamExtStorage);
 	}
-	*/
+
 	// End setters.
 
 }

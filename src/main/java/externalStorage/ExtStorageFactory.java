@@ -25,25 +25,23 @@ public class ExtStorageFactory implements ExtStorageFactoryInterface {
 
 	@Override
 	public QPMS9ExtStorage createQPMS9Storage(String extID, File file) {
-		// TODO Auto-generated method stub
-		return null;
+		return new QPMS9ExtStorage(extID, file);
 	}
 
 	@Override
 	public Bowtie2ExtStorage createBowtie2Storage(String extID, File file) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Bowtie2ExtStorage(extID, file);
 	}
 
 	@Override
 	public SamtoolsExtStorage createSamtoolsStorage(String extID, File file) {
-		// TODO Auto-generated method stub
-		return null;
+		return new SamtoolsExtStorage(extID, file);
 	}
 
 	@Override
 	public TomTomExtStorage createTomTomExtStorage(String extID, File file) {
 		// TODO Auto-generated method stub
+		// TomTom is not implemented in this version of the program!
 		return null;
 	}
 

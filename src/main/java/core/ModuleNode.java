@@ -52,7 +52,7 @@ public class ModuleNode implements ModuleNodeInterface {
 		this.producerID = moduleID;
 		this.producerState = ModuleBuilder.getModule(moduleID).getModuleState();
 		this.consumerID = -1;
-		this.producerState = ModuleState.UNDEFINED;
+		this.consumerState = ModuleState.UNDEFINED;
 		this.moduleNodeName = Integer.toString(this.producerID) + "." + Integer.toString(this.consumerID);
 	}
 	

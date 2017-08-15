@@ -95,8 +95,10 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	 */
 	public String prepareJobs (int moduleID) {
 		String nodeName = this.jobController.addNewModuleNode(moduleID);
-		// TODO delete this:
-		//this.jobController.connect(nodeName);
+		
+		// Set up producer.
+		this.jobController.connect(nodeName, true);
+			
 		return nodeName;
 	}
 	

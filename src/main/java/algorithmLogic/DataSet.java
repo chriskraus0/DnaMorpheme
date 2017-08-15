@@ -6,6 +6,8 @@ package algorithmLogic;
 import java.util.ArrayList;
 
 // Project-specific imports.
+import externalStorage.ExtStorage;
+import externalStorage.ExtStorageType;
 import externalStorage.CdHitExtStorage;
 import externalStorage.QPMS9ExtStorage;
 import externalStorage.SamtoolsExtStorage;

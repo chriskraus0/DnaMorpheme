@@ -17,11 +17,16 @@ import core.ModuleBuilder;
 import core.ModuleNode;
 import core.ModuleObserver;
 import core.PhysicalConstants;
+import core.ExtStorageController;
 
 import modules.commands.Commands;
-
+import externalStorage.BAMExtStorage;
+import externalStorage.Bowtie2ExtStorage;
+import externalStorage.CdHitExtStorage;
 import externalStorage.ExtStorage;
 import externalStorage.ExtStorageType;
+import externalStorage.QPMS9ExtStorage;
+import externalStorage.SamtoolsExtStorage;
 
 /**
  * This central controller executes the logic of the algorithm.
@@ -47,8 +52,12 @@ public class AlgorithmController {
 	// Longest possible predicted consensus of a motif.
 	private int longestConsensusSeq;
 	
+	// THIS IS OBSOLETE AT THE MOMENT.
 	// HashMap holding the relevant data; includes an DataSetID for each data set.
-	private HashMap <Integer, DataSet> dataSetMap;
+	//private HashMap <Integer, DataSet> dataSetMap;
+	
+	// Variable holding the dataSet.
+	private DataSet dataSet;
 	
 	// Variable which holds the current DataSetID;
 	private int currDataSetID;
@@ -63,6 +72,9 @@ public class AlgorithmController {
 	// Keep a reference of the ModuleObserver.
 	private ModuleObserver moduleObserver;
 	
+	// Keep a reference to the ExtStorageController.
+	private ExtStorageController extStorageController;
+	
 	// End Variables.
 	
 	// Constructors.
@@ -72,7 +84,10 @@ public class AlgorithmController {
 		this.logger = Logger.getLogger(this.getClass().getName());
 		
 		// Initialize the dataSetMap.
-		this.dataSetMap = new HashMap <Integer, DataSet>();
+		//this.dataSetMap = new HashMap <Integer, DataSet>();
+		
+		// Initialize the DataSet.
+		this.dataSet = new DataSet();
 		
 		// Initialize the current data set ID.
 		this.currDataSetID = 1;
@@ -97,16 +112,15 @@ public class AlgorithmController {
 	private void setModuleObserver(ModuleObserver mObserver) {
 		this.moduleObserver = mObserver;
 	}
+	
+	private void setExtStorageController(ExtStorageController eController){
+		this.extStorageController = eController;
+	}
+	
 	// End setters.
 	
 	// Getters.
-	
-	private void setNewDataSet(ExtStorage extStorage, ExtStorageType extType) {
-		DataSet newDataSet = new DataSet();
-		// TODO: Add routines in DataSet to save this new information
-		// this.dataSetMap.put(this.currDataSetID, value);
-	}
-	
+		
 	// End getters.
 	
 	/**
@@ -132,7 +146,7 @@ public class AlgorithmController {
 				moduleID = this.moduleBuilder.createNewBowtie2Job(command);
 				break;
 			case SAMTOOLS_JOB:
-				moduleID = this.moduleBuilder.createInputTestJob(command);
+				moduleID = this.moduleBuilder.createNewSamtoolsJob(command);
 				break;
 			default:
 				// An value of "-1" indicates an error.
@@ -142,8 +156,39 @@ public class AlgorithmController {
 		return moduleID;
 	}
 	
-	public void notifyAlgorithmController(int moduleID) {
-		// TODO: empty stub		
+	public void notifyAlgorithmController(String extID, ExtStorageType extType) {
+		
+		switch (extType) {
+			case CDHIT_EXT_STORAGE:
+				this.dataSet.addCdHitCluster( (CdHitExtStorage) 
+						this.extStorageController.getExtStorage(extID) );
+				
+				// If cluster is too small reduce identity value by 5% and try again.
+				/*if ( ((CdHitExtStorage) this.extStorageController.getExtStorage(extID))
+					.areClustersTooSmall() )
+					this.orderNewJob(ModuleType.CDHIT_JOB, command)*/
+				
+				break;
+			case QPMS9_EXT_STORAGE:
+				this.dataSet.addQpms9File((QPMS9ExtStorage) 
+						this.extStorageController.getExtStorage(extID) );
+				break;
+			case BOWTIE2_EXT_STORAGE:
+				this.dataSet.addBowtie2SAMfile((Bowtie2ExtStorage) 
+						this.extStorageController.getExtStorage(extID) );
+				break;
+			case SAMTOOLS_EXT_STORAGE:
+				this.dataSet.addSamtoolsSAMfile((SamtoolsExtStorage) 
+						this.extStorageController.getExtStorage(extID) );
+				break;
+			case TOMTOM_EXT_STORAGE:
+				// TODO: Not implemented yet.
+				break;
+			case BAM_EXT_STORAGE:
+				this.dataSet.addBamFile((BAMExtStorage) 
+						this.extStorageController.getExtStorage(extID) );
+				break;
+		}
 	}
 	
 	/**
@@ -154,6 +199,8 @@ public class AlgorithmController {
 	 * @param String targetPath
 	 */
 	public void runAlgorithm (String fileName, String targetPath) {
+		
+		/* RUN THE FIRST CLUSTERING. */
 		
 		// Convert the String of of the fasta file into a proper file path.
 		File fastaFile = new File(fileName);
@@ -180,7 +227,7 @@ public class AlgorithmController {
 		firstClusteringCommand.put(Commands.c, Double.toString(this.cdHitIdentity));
 		
 		// Define the output file.
-		firstClusteringCommand.put(Commands.o, absTargetPath.getAbsolutePath());
+		firstClusteringCommand.put(Commands.o, absTargetPath.getAbsolutePath() + PhysicalConstants.getPathSeparator() + "firstClustering0.9");
 		
 		// Create a new Cd-Hit job.
 		int cdHitModuleId = this.orderNewJob(ModuleType.CDHIT_JOB, firstClusteringCommand);
@@ -196,6 +243,8 @@ public class AlgorithmController {
 			this.logger.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
 		}
+		
+		/* END OF THE FIRST CLUSTERING */
 		
 	}
 	
@@ -225,6 +274,9 @@ public class AlgorithmController {
 		
 		// Set the ModuleBuilder for AlgorithmController.
 		algorithmController.setModuleBuilder(moduleBuilder);
+		
+		// Set ExtStorageController for the AlgorithmController.
+		algorithmController.setExtStorageController(moduleBuilder.getJobcontroller().getExtStorageController());
 		
 		// Get ModuleObserver.
 		ModuleObserver moduleObserver = moduleBuilder.getJobcontroller().getModuleObserver();

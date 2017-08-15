@@ -183,16 +183,18 @@ public class CdHitJob extends Module {
 		this.moduleNode.notifyModuleObserver();
 		
 		// Store fasta input in SequenceStorage.class.
-		try {
-			this.fastaStorage.parseMultipleFasta(this.input);
-		} catch (TruncatedFastaHeadException te) {
-			this.logger.log(Level.SEVERE, te.getMessage());
-			te.printStackTrace();
-		} catch (Exception e) {
-			this.logger.log(Level.SEVERE, e.getMessage());
-			e.printStackTrace();
+		// Store if any input was read.
+		if (! this.input.isEmpty()) {
+			try {
+				this.fastaStorage.parseMultipleFasta(this.input);
+			} catch (TruncatedFastaHeadException te) {
+				this.logger.log(Level.SEVERE, te.getMessage());
+				te.printStackTrace();
+			} catch (Exception e) {
+				this.logger.log(Level.SEVERE, e.getMessage());
+				e.printStackTrace();
+			}
 		}
-				
 		
 		// Parse the Cd-Hit command.
 		

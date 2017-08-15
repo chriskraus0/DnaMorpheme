@@ -149,6 +149,30 @@ public class JobController {
 	}
 	
 	/**
+	 * This method "connects" a mono-node (not connected) node to nothing and registers it.
+	 * @param moduleNodeName
+	 * @param mono
+	 */
+	public void connect(String moduleNodeName, boolean mono) {
+		
+		// Check if this is a mono node (not connected to other nodes).
+		if (mono == true) {
+		
+			// Give each producer and consumer the moduleNode.
+			
+			// Set up producer.
+			ModuleBuilder.getModule(
+					this.moduleNodeMap.get(moduleNodeName).getProducerID()
+					).setSuperModuleNode(this.moduleNodeMap.get(moduleNodeName));
+			
+			// Set up consumer.
+			ModuleBuilder.getModule(
+					this.moduleNodeMap.get(moduleNodeName).getConsumerID()
+					).setSuperModuleNode(this.moduleNodeMap.get(moduleNodeName));
+		}
+	}
+	
+	/**
 	 * Create a new thread for the Producer and for the Consumer.
 	 * @param String moduleNodeName
 	 */

@@ -125,6 +125,7 @@ public class ModuleObserver implements ModuleObserverInterface {
 	public void updateOutFile (String outFile, ExtStorageType exsType) {
 		// Request a new external storage.
 		String newExtID = this.extStorageController.requestStorage(outFile, exsType);
+		this.algorithmController.notifyAlgorithmController(newExtID, exsType);
 		// Notify the AlgorithmController about the new storage.
 		// TODO: Add command: this.algorithmController.
 	}

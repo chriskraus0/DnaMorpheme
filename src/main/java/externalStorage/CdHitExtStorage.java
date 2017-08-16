@@ -27,15 +27,21 @@ public class CdHitExtStorage extends ExtStorage {
 	// CdHitClusterMap Object holding the current cluster.
 	private CdHitClusterMap cdHitClusterMap;
 	
+	// Save Cd-hit identity parameter.
+	private double identity;
+	
 	// End variables.
 	
 	
 	// Constructors.
-	public CdHitExtStorage (String extID, File file) {
+	public CdHitExtStorage (String extID, File file, double identity) {
 		super(extID, file);
 				
 		// Initialize the file state.
 		this.fileState = FileState.AVAILABLE;
+		
+		// Save the Cd-Hit identity.
+		this.identity = identity;
 		
 	}
 	
@@ -89,6 +95,14 @@ public class CdHitExtStorage extends ExtStorage {
 				return true;
 		else 
 			return false;
+	}
+	
+	/**
+	 * Method returns the Cd-Hit identity parameter.
+	 * @return double identity
+	 */
+	public double getIdentity () {
+		return this.identity;
 	}
 	
 	// Override methods.

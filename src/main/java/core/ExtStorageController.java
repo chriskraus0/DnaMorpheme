@@ -63,10 +63,12 @@ public class ExtStorageController {
 	/**
 	 * Request a new external storage for a specific module.
 	 * This method returns the newest ID external storage.
+	 * @param String filePath
 	 * @param ExtStorageType exsType
+	 * @param double parameter
 	 * @return String newExtID
 	 */
-	public String requestStorage(String filePath, ExtStorageType exsType) {
+	public String requestStorage(String filePath, ExtStorageType exsType, double parameter) {
 		
 		// Parse the file path properly.
 		File file = new File(filePath);
@@ -78,7 +80,7 @@ public class ExtStorageController {
 		this.extStorageCounter ++;
 		
 		// Create the new external storage.
-		ExtStorage newExtStorage = this.extStorageFactory.createNewStorage(exsType, newExtID, file);
+		ExtStorage newExtStorage = this.extStorageFactory.createNewStorage(exsType, newExtID, file, parameter);
 		
 		// Check the file, its state and save its content.
 		newExtStorage.checkFile();

@@ -78,7 +78,7 @@ public class CdHitExtStorageTest extends TestCase {
 		cdHitJobCommand.put(Commands.i, "testFiles/testFile.fasta");
 		cdHitJobCommand.put(Commands.o, "tmpData/test.out");
 		
-		int cdHitJobID = moduleBuilder.createNewCdHitJob(cdHitJobCommand);
+		int cdHitJobID = moduleBuilder.createNewCdHitJob(cdHitJobCommand, 0.9);
 		
 		// TODO: Thread for external storage needs to be incorporated.
 		

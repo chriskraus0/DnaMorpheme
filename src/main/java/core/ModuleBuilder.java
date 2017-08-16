@@ -149,11 +149,12 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	public void createNewDummyJob() {
 		int moduleID = -1;
 		int storageID = -1;
+		double parameter = 0;
 		ModuleType mType = ModuleType.DUMMY;
 		HashMap<Commands, String> command = new HashMap<Commands, String>();
 		command.put(Commands.dummy, "dummy");
 		
-		Module newDummyJob = this.createNewModule(moduleID, storageID, mType, command);
+		Module newDummyJob = this.createNewModule(moduleID, storageID, mType, command, parameter);
 		
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newDummyJob.getModuleID(), newDummyJob);
@@ -162,9 +163,10 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	public int createNewInputReader(HashMap<Commands, String> command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
+		double parameter = -1;
 		ModuleType mType = ModuleType.INPUT_READER;
 		
-		Module newInputReader = this.createNewModule(moduleID, storageID, mType, command);
+		Module newInputReader = this.createNewModule(moduleID, storageID, mType, command, parameter);
 		
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newInputReader.getModuleID(), newInputReader);
@@ -181,12 +183,12 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	 * @see modules.command.Commands
 	 * @return int moduleID
 	 */
-	public int createNewCdHitJob(HashMap<Commands, String> command) {
+	public int createNewCdHitJob(HashMap<Commands, String> command, double identity) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.CDHIT_JOB;
 		
-		Module newCdHitJob = this.createNewModule(moduleID, storageID, mType, command);
+		Module newCdHitJob = this.createNewModule(moduleID, storageID, mType, command, identity);
 		
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newCdHitJob.getModuleID(), newCdHitJob);
@@ -197,12 +199,12 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return moduleID;
 	}
 	
-	public int createNewQpms9Job(HashMap<Commands, String> command) {
+	public int createNewQpms9Job(HashMap<Commands, String> command, double hammingDistance) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.QPMS9_JOB;
 		
-		Module newQpms9Job = this.createNewModule(moduleID, storageID, mType, command);
+		Module newQpms9Job = this.createNewModule(moduleID, storageID, mType, command, hammingDistance);
 		
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newQpms9Job.getModuleID(), newQpms9Job);
@@ -216,9 +218,10 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	public int createNewBowtie2Job(HashMap<Commands, String> command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
+		double parameter = -1;
 		ModuleType mType = ModuleType.BOWTIE2_JOB;
 		
-		Module newBowtie2Job = this.createNewModule(moduleID, storageID, mType, command);
+		Module newBowtie2Job = this.createNewModule(moduleID, storageID, mType, command, parameter);
 		
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newBowtie2Job.getModuleID(), newBowtie2Job);
@@ -228,12 +231,12 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		return moduleID;
 	}
 	
-	public int createNewSamtoolsJob(HashMap<Commands, String> command) {
+	public int createNewSamtoolsJob(HashMap<Commands, String> command, double hammingDistance) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.SAMTOOLS_JOB;
 		
-		Module samtoolsJob = this.createNewModule(moduleID, storageID, mType, command);
+		Module samtoolsJob = this.createNewModule(moduleID, storageID, mType, command, hammingDistance);
 		
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(samtoolsJob.getModuleID(), samtoolsJob);
@@ -307,9 +310,10 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	public int createInputTestJob(HashMap<Commands, String> command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
+		double parameter = -1;
 		ModuleType mType = ModuleType.INPUT_TEST;
 		
-		Module newInputTest = this.createNewModule(moduleID, storageID, mType, command);
+		Module newInputTest = this.createNewModule(moduleID, storageID, mType, command, parameter);
 		
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newInputTest.getModuleID(), newInputTest);
@@ -321,8 +325,9 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
 		ModuleType mType = ModuleType.TEST_TRANSFER;
+		double paramter = -1;
 		
-		Module newTestransfer = this.createNewModule(moduleID, storageID, mType, command);
+		Module newTestransfer = this.createNewModule(moduleID, storageID, mType, command, paramter);
 		
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newTestransfer.getModuleID(), newTestransfer);
@@ -333,9 +338,10 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	public int createTestoutputJob(HashMap<Commands, String> command) {
 		int moduleID = ModuleBuilder.generateNewModuleID();
 		int storageID = this.requestStorage();
+		double paramter = -1;
 		ModuleType mType = ModuleType.TEST_OUTPUT;
 		
-		Module newTestoutput = this.createNewModule(moduleID, storageID, mType, command);
+		Module newTestoutput = this.createNewModule(moduleID, storageID, mType, command, paramter);
 		
 		// Add module with the "moduleID" and module to the new module TreeMap.
 		ModuleBuilder.moduleMap.put(newTestoutput.getModuleID(), newTestoutput);
@@ -344,7 +350,7 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 	}
 	
 	@Override
-	public Module createNewModule(int moduleID, int storageID, ModuleType mType, HashMap<Commands, String> command) {
+	public Module createNewModule(int moduleID, int storageID, ModuleType mType, HashMap<Commands, String> command, double parameter) {
 		
 		Module newModule = null;
 		
@@ -365,19 +371,19 @@ public class ModuleBuilder implements ModuleBuilderInterface {
 				newModule = new QPMS9Job (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
 						ModulePortLinker.requestNewOutputPortID(moduleID),
-						command);
+						command, parameter);
 				break;
 			case BOWTIE2_JOB:
 				newModule = new Bowtie2Job (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
 						ModulePortLinker.requestNewOutputPortID(moduleID),
-						command);
+						command, parameter);
 				break;
 			case SAMTOOLS_JOB:
 				newModule = new SamtoolsJob (moduleID, storageID, mType, 
 						ModulePortLinker.requestNewInputPortID(moduleID), 
 						ModulePortLinker.requestNewOutputPortID(moduleID),
-						command);
+						command, parameter);
 				break;
 			case INPUT_TEST:
 				newModule = new InputTest (moduleID, storageID, mType,

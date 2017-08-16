@@ -19,13 +19,13 @@ public class ExtStorageFactory implements ExtStorageFactoryInterface {
 	
 	// Overridden methods.
 	@Override
-	public CdHitExtStorage createCdHitStorage(String extID, File file) {
-		return new CdHitExtStorage(extID, file);
+	public CdHitExtStorage createCdHitStorage(String extID, File file, double identity) {
+		return new CdHitExtStorage(extID, file, identity);
 	}
 
 	@Override
-	public QPMS9ExtStorage createQPMS9Storage(String extID, File file) {
-		return new QPMS9ExtStorage(extID, file);
+	public QPMS9ExtStorage createQPMS9Storage(String extID, File file, double hammingDistance) {
+		return new QPMS9ExtStorage(extID, file, hammingDistance);
 	}
 
 	@Override
@@ -34,8 +34,8 @@ public class ExtStorageFactory implements ExtStorageFactoryInterface {
 	}
 
 	@Override
-	public SamtoolsExtStorage createSamtoolsStorage(String extID, File file) {
-		return new SamtoolsExtStorage(extID, file);
+	public SamtoolsExtStorage createSamtoolsStorage(String extID, File file, double hammingDistance) {
+		return new SamtoolsExtStorage(extID, file, hammingDistance);
 	}
 
 	@Override
@@ -46,25 +46,25 @@ public class ExtStorageFactory implements ExtStorageFactoryInterface {
 	}
 
 	@Override
-	public ExtStorage createNewStorage(ExtStorageType exsType, String extID, File file) {
+	public ExtStorage createNewStorage(ExtStorageType exsType, String extID, File file, double parameter) {
 				
 		ExtStorage extStorage;
 		
 		switch (exsType) {
 			case CDHIT_EXT_STORAGE:
-				extStorage = this.createCdHitStorage(extID, file);
+				extStorage = this.createCdHitStorage(extID, file, parameter);
 				break;
 			case QPMS9_EXT_STORAGE:
-				extStorage = this.createQPMS9Storage(extID, file);
+				extStorage = this.createQPMS9Storage(extID, file, parameter);
 				break;
 			case BOWTIE2_EXT_STORAGE:
 				extStorage = this.createBowtie2Storage(extID, file);
 				break;
 			case SAMTOOLS_EXT_STORAGE:
-				extStorage = this.createSamtoolsStorage(extID, file);
+				extStorage = this.createSamtoolsStorage(extID, file, parameter);
 				break;
 			case TOMTOM_EXT_STORAGE:
-				extStorage = this.createSamtoolsStorage(extID, file);
+				extStorage = this.createSamtoolsStorage(extID, file, parameter);
 				break;
 			default:
 				extStorage = null;

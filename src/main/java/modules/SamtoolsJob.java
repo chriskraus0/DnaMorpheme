@@ -51,6 +51,9 @@ public class SamtoolsJob extends Module {
 		// Output to save a specified location.
 		private String output;
 		
+		// Variable holding the hammingDistance.
+		private double hammingDistance;
+		
 		// External output file.
 		private String outputFile;
 			
@@ -58,12 +61,15 @@ public class SamtoolsJob extends Module {
 		private SequenceStorage fastaStorage;
 		
 	// Constructors.
-	public SamtoolsJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd) {
+	public SamtoolsJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd, double hammingDistance) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
 		
 		// Create new fasta storage.
 		this.fastaStorage = new SequenceStorage();
+		
+		// Initialize the hammingDistance.
+		this.hammingDistance = hammingDistance;
 		
 		// Call Logger to get a new instance.
 		this.logger = Logger.getLogger(this.getClass().getName());
@@ -78,7 +84,7 @@ public class SamtoolsJob extends Module {
 				this.setModuleState(ModuleState.SUCCESS);
 				this.moduleNode.notifyModuleObserver();
 				// Notify the ModuleObserver about the saved external file.
-				this.moduleNode.notifyModuleObserverOutput(this.outputFile, ExtStorageType.SAMTOOLS_EXT_STORAGE);
+				this.moduleNode.notifyModuleObserverOutput(this.outputFile, ExtStorageType.SAMTOOLS_EXT_STORAGE, this.hammingDistance);
 			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());

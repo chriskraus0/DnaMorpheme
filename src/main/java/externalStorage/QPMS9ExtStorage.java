@@ -2,6 +2,9 @@ package externalStorage;
 
 // Imports.
 
+// Java utility imports.
+import java.util.ArrayList;
+
 // Java I/O imports.
 import java.io.File;
 
@@ -18,14 +21,20 @@ public class QPMS9ExtStorage extends ExtStorage {
 	// QPMS9file object to hold path and get information about the quorum planted motifs.
 	private QPMS9File qPMS9File;
 	
+	// Save the provided hammingDistance.
+	private double hammingDistance;
+	
 	// End variables.
 	
 	// Constructors.
-	public QPMS9ExtStorage(String extID, File file) {
+	public QPMS9ExtStorage(String extID, File file, double hammingDistance) {
 		super(extID, file);
 		
 		// Initialize the file state.
 		this.fileState = FileState.AVAILABLE;
+		
+		// Initialize the hammingDistance parameter.
+		this.hammingDistance = hammingDistance;
 	}
 	
 	// End constructors.
@@ -47,6 +56,14 @@ public class QPMS9ExtStorage extends ExtStorage {
 	// Getters.
 	
 	/**
+	 * Method returns the Hamming distance.
+	 * @return double hammingDistance
+	 */
+	public double getHammingDistance () {
+		return this.hammingDistance;
+	}
+	
+	/**
 	 * Getter returns the number of predicted quorum planted motifs (qPMs)
 	 * @return int numberOfqPMs
 	 */
@@ -62,6 +79,14 @@ public class QPMS9ExtStorage extends ExtStorage {
 	public FileState deleteFile() {
 		this.qPMS9File = null;
 		return super.deleteFile();
+	}
+	
+	/**
+	 * Getter returns the retrieved motifs.
+	 * @return ArrayList<String> motifs
+	 */
+	public ArrayList<String> getMotifs() {
+		return this.qPMS9File.getMotifs();
 	}
 
 }

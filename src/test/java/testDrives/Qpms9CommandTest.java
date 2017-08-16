@@ -69,7 +69,7 @@ public class Qpms9CommandTest extends TestCase {
 		qpms9JobCommand.put(Commands.q, "100");
 		qpms9JobCommand.put(Commands.o, "tmpData/qpms9Test.out");
 		
-		int qpms9JobID = moduleBuilder.createNewQpms9Job(qpms9JobCommand);
+		int qpms9JobID = moduleBuilder.createNewQpms9Job(qpms9JobCommand, 3);
 		
 		// Prepare module nodes.
 		String inputReaderQpms9JobNodeName = moduleBuilder.prepareJobs(inputReaderID, qpms9JobID);

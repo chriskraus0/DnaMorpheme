@@ -74,13 +74,19 @@ public class Bowtie2Job extends Module {
 	// Save path and file name of an external SAM mapping file.
 	private String outputFile;
 	
+	// A dummy parameter which is not important for this module (but for others).
+	private double dummyParameter;
+	
 	// Logger.
 	private Logger logger;
 	
 	// Constructors.
-	public Bowtie2Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd) {
+	public Bowtie2Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd, double parameter) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		this.command = cmd;
+		
+		// Initialize the dummyParamter for this job.
+		this.dummyParameter = parameter;
 		
 		// Call Logger to get new instance.
 		this.logger = Logger.getLogger(this.getClass().getName());
@@ -99,7 +105,7 @@ public class Bowtie2Job extends Module {
 				this.setModuleState(ModuleState.SUCCESS);
 				this.moduleNode.notifyModuleObserver();
 				// Notify the ModuleObserver about the created external SAM file.
-				this.moduleNode.notifyModuleObserverOutput(this.outputFile, ExtStorageType.BOWTIE2_EXT_STORAGE);
+				this.moduleNode.notifyModuleObserverOutput(this.outputFile, ExtStorageType.BOWTIE2_EXT_STORAGE, this.dummyParameter);
 			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());

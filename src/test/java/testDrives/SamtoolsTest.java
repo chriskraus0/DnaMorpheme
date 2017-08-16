@@ -67,7 +67,7 @@ public class SamtoolsTest extends TestCase {
 		samtoolsJobCommand.put(Commands.redirect, ">");
 		samtoolsJobCommand.put(Commands.output, "tmpData" + PhysicalConstants.getPathSeparator() + "testFile7.bam");
 		
-		int samtoolsJobID = moduleBuilder.createNewSamtoolsJob(samtoolsJobCommand);
+		int samtoolsJobID = moduleBuilder.createNewSamtoolsJob(samtoolsJobCommand, 3);
 		
 		// Prepare module nodes.
 		String inputReaderSamtoolsJobNodeName = moduleBuilder.prepareJobs(inputReaderID, samtoolsJobID);

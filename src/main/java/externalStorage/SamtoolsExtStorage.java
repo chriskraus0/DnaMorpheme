@@ -18,14 +18,20 @@ public class SamtoolsExtStorage extends ExtStorage {
 	// SamtoolsFile holding the current content of the SAM table with all entries.
 	private SamtoolsFile samtoolsFile;
 	
+	// Variable holding the provided hammingDistance.
+	private double hammingDistance;
+	
 	// End variables.
 	
 	// Constructors.
-	public SamtoolsExtStorage(String extID, File file) {
+	public SamtoolsExtStorage(String extID, File file, double hammingDistance) {
 		super(extID, file);
 		
 		// Initialize the file state.
 		this.fileState = FileState.AVAILABLE;
+		
+		// Initialize the Hamming distance.
+		this.hammingDistance = hammingDistance;
 	}
 
 	// End constructors.
@@ -40,6 +46,14 @@ public class SamtoolsExtStorage extends ExtStorage {
 	 */
 	public SamtoolsFile getSamtoolsfile() {
 		return this.samtoolsFile;
+	}
+	
+	/**
+	 * Getter returns the provided Hamming distance.
+	 * @return double hammingDistance.
+	 */
+	public double getHammingDistance() {
+		return this.hammingDistance;
 	}
 	
 	// Overridden methods.

@@ -23,10 +23,12 @@ public interface ModuleBuilderInterface {
 	 * @param String moduleID
 	 * @param String storageID
 	 * @param ModuleType mType
+	 * @param double parameter
 	 * @see enum ModuleType
 	 * @return Module
 	 */
-	public Module createNewModule(int moduleID, int storageID, ModuleType mType, HashMap<Commands, String> command);
+	public Module createNewModule(int moduleID, int storageID, ModuleType mType, HashMap<Commands, String> command,
+			double parameter);
 	
 	/**
 	 * Create new InputPort for given module.

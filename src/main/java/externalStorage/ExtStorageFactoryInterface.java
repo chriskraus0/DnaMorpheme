@@ -17,14 +17,16 @@ public interface ExtStorageFactoryInterface {
 	/**
 	 * Creation of a Cd-Hit specific external storage.
 	 * @param String extID
+	 * @param double identity
 	 */
-	public CdHitExtStorage createCdHitStorage(String extID, File file);
+	public CdHitExtStorage createCdHitStorage(String extID, File file, double identity);
 	
 	/**
 	 * Creation of a QPMS9 specific external storage.
 	 * @param String extID
+	 * @param double hammingDistance
 	 */
-	public QPMS9ExtStorage createQPMS9Storage(String extID, File file);
+	public QPMS9ExtStorage createQPMS9Storage(String extID, File file, double hammingDistance);
 	
 	/**
 	 * Creation of a bowtie2 specific external storage.
@@ -35,8 +37,9 @@ public interface ExtStorageFactoryInterface {
 	/**
 	 * Creation of a Samtools specific external storage.
 	 * @param String extID
+	 * @param double hammingDistance
 	 */
-	public SamtoolsExtStorage createSamtoolsStorage(String extID, File file);
+	public SamtoolsExtStorage createSamtoolsStorage(String extID, File file, double hammingDistance);
 	
 	/**
 	 * Creation of a TomTom specific external storage.
@@ -49,5 +52,5 @@ public interface ExtStorageFactoryInterface {
 	 * @param ExtStorageType exsType
 	 * @param String extID
 	 */
-	public ExtStorage createNewStorage(ExtStorageType exsType, String extID, File file);
+	public ExtStorage createNewStorage(ExtStorageType exsType, String extID, File file, double parameter);
 }

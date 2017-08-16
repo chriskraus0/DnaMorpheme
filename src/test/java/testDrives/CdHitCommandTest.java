@@ -72,7 +72,7 @@ public class CdHitCommandTest extends TestCase {
 		cdHitJobCommand.put(Commands.i, "testFiles/testFile.fasta");
 		cdHitJobCommand.put(Commands.o, "tmpData/test.out");
 		
-		int cdHitJobID = moduleBuilder.createNewCdHitJob(cdHitJobCommand);
+		int cdHitJobID = moduleBuilder.createNewCdHitJob(cdHitJobCommand, 0.9);
 		
 		// Prepare module nodes.
 		String inputReaderCdHitJobNodeName = moduleBuilder.prepareJobs(inputReaderID, cdHitJobID);

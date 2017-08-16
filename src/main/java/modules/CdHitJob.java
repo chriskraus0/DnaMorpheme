@@ -73,6 +73,9 @@ public class CdHitJob extends Module {
 	// SequenceStorage object for storing fasta data.
 	private SequenceStorage fastaStorage;
 	
+	// Save the identity given to this command.
+	private double identity;
+	
 	// Constructors.
 	public CdHitJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
@@ -97,7 +100,7 @@ public class CdHitJob extends Module {
 				// notify the ModuleObserver about the written output of this Module.
 				if (!this.cdHitClusterFilePath.isEmpty())
 					this.moduleNode.notifyModuleObserverOutput(this.cdHitClusterFilePath, 
-							ExtStorageType.CDHIT_EXT_STORAGE);
+							ExtStorageType.CDHIT_EXT_STORAGE, this.identity);
 			}
 		} catch (CommandFailedException ce) {
 			this.logger.log(Level.SEVERE, ce.getMessage());
@@ -230,6 +233,9 @@ public class CdHitJob extends Module {
     	// ATTENTION: CD-HIT CREATS ITS OWN OUTPUT WITH AN SUFFIX ".clstr"
     	// THIS MAY CHANGE IN A DIFFERENT VERSION OF CD-HIT!!!
     	this.cdHitClusterFilePath = this.command.get(Commands.o) + ".clstr";
+    	
+    	// Save the given identity parameter.
+    	this.identity = Double.parseDouble(this.command.get(Commands.c));
     	   			
 		/*
 		// Write to OutputPort (via CharPipe).

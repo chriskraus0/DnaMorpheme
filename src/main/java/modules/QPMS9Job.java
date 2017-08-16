@@ -48,15 +48,21 @@ public class QPMS9Job extends Module {
 	// Save path and file of an external file.
 	private String outputFile;
 	
+	// Save the hammingDistance.
+	private double hammingDistance;
+	
 	// Logger.
 	private Logger logger;
 	
 	// Constructors.
-	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd) {
+	public QPMS9Job(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd, double hammingDistance) {
 		super(moduleID, storageID, mType, iPortID, oPortID);
 		
 		// Initialize the command.
 		this.command = cmd;
+		
+		// Initialize the hammingDistance.
+		this.hammingDistance = hammingDistance;
 		
 		// Initialize the logger.
 		this.logger = Logger.getLogger(QPMS9Job.class.getName());
@@ -75,7 +81,7 @@ public class QPMS9Job extends Module {
 				this.setModuleState(ModuleState.SUCCESS);
 				this.moduleNode.notifyModuleObserver();
 				// Notify the ModuleObserver about the path and file name of an external file. 
-				this.moduleNode.notifyModuleObserverOutput(this.outputFile, ExtStorageType.QPMS9_EXT_STORAGE);
+				this.moduleNode.notifyModuleObserverOutput(this.outputFile, ExtStorageType.QPMS9_EXT_STORAGE, this.hammingDistance);
 			}
 		} catch (CommandFailedException ce) {
 			this.logger.log(Level.SEVERE, ce.getMessage());

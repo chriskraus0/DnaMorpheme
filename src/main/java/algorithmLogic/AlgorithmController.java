@@ -4,11 +4,15 @@ package algorithmLogic;
 
 // Java utility imports.
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
 // Java I/O imports.
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
 
 // Project-specific imports.
 import core.common.ModuleType;
@@ -28,6 +32,9 @@ import externalStorage.ExtStorageType;
 import externalStorage.QPMS9ExtStorage;
 import externalStorage.SamtoolsExtStorage;
 
+// Project-specific exceptions
+import algorithmLogic.exceptions.NotEnoughIdentityException;
+
 /**
  * This central controller executes the logic of the algorithm.
  * @author Christopher Kraus
@@ -46,8 +53,9 @@ public class AlgorithmController {
 	// Identity threshold for Cd-Hit.
 	private double cdHitIdentity;
 	
-	// Distance as Hamming distance between two motifs.
-	private int hammingDistance;
+	// Distance as hamming distance between two motifs.
+	// TODO: ATTENTION hard-coded start parameter.
+	private int hammingDistance = 3;
 	
 	// Longest possible predicted consensus of a motif.
 	private int longestConsensusSeq;
@@ -61,6 +69,9 @@ public class AlgorithmController {
 	
 	// Variable which holds the current DataSetID;
 	private int currDataSetID;
+	
+	// Path to the target folder.
+	private File absTargetPath;
 	
 	// Logger.
 	private Logger logger;
@@ -130,23 +141,23 @@ public class AlgorithmController {
 	 * @see modules.commands.Commands
 	 * @return int moduleID
 	 */
-	public int orderNewJob (ModuleType mType, HashMap<Commands, String> command) {
+	public int orderNewJob (ModuleType mType, HashMap<Commands, String> command, double parameter) {
 		
 		// Save the moduleID of a new job.
 		int moduleID;
 		
 		switch(mType) {
 			case CDHIT_JOB:
-				moduleID = this.moduleBuilder.createNewCdHitJob(command);
+				moduleID = this.moduleBuilder.createNewCdHitJob(command, parameter);
 				break;
 			case QPMS9_JOB:
-				moduleID = this.moduleBuilder.createNewQpms9Job(command);
+				moduleID = this.moduleBuilder.createNewQpms9Job(command, parameter);
 				break;
 			case BOWTIE2_JOB: 
 				moduleID = this.moduleBuilder.createNewBowtie2Job(command);
 				break;
 			case SAMTOOLS_JOB:
-				moduleID = this.moduleBuilder.createNewSamtoolsJob(command);
+				moduleID = this.moduleBuilder.createNewSamtoolsJob(command, parameter);
 				break;
 			default:
 				// An value of "-1" indicates an error.
@@ -156,22 +167,97 @@ public class AlgorithmController {
 		return moduleID;
 	}
 	
-	public void notifyAlgorithmController(String extID, ExtStorageType extType) {
+	public void notifyAlgorithmController(String extID, ExtStorageType extType) throws NotEnoughIdentityException {
 		
 		switch (extType) {
 			case CDHIT_EXT_STORAGE:
+				
+				// Save the Cd-Hit cluster as a new DataSet.
 				this.dataSet.addCdHitCluster( (CdHitExtStorage) 
 						this.extStorageController.getExtStorage(extID) );
 				
 				// If cluster is too small reduce identity value by 5% and try again.
-				/*if ( ((CdHitExtStorage) this.extStorageController.getExtStorage(extID))
-					.areClustersTooSmall() )
-					this.orderNewJob(ModuleType.CDHIT_JOB, command)*/
+				if ( ((CdHitExtStorage) this.extStorageController.getExtStorage(extID))
+					.areClustersTooSmall() ) {
+					
+					// Retrieve the name of the saved clustering file.
+					File file = ((CdHitExtStorage) this.extStorageController.getExtStorage(extID)).getFile();
+					
+					// Get last identity value.
+					double lastIdentity = ((CdHitExtStorage) this.extStorageController.getExtStorage(extID)).getIdentity();
+					
+					// Calculate new identity value.
+					// TODO: ATTENTION this value is hard coded!
+					double identity = lastIdentity - 0.05;
+					
+					// Check if sufficient identity is still available.
+					// Otherwise throw exception and stop the processing (abort).
+					if (identity >= 0.6) {
+						
+						// Parse the Cd-Hit command.
+						HashMap<Commands,String> command = this.parseCdhitCommand(
+								file, identity);
+						
+						// Request a new Cd-Hit job.
+						int moduleID = this.orderNewJob(ModuleType.CDHIT_JOB, command, identity);
+						this.logger.log(Level.INFO, "Cd-Hit job with an identity of "
+								+ identity
+								+ " started."
+								+ " Job-ID:" + moduleID);
+					} else 
+						throw new NotEnoughIdentityException("ABBORT: "
+								+ "Sequences show too much similarity."
+								+ " Cd-Hit clustering yield one cluster with more than 50% identity.");
+				} 
+				
+				// Otherwise call qPMS9 command. 
+				else {
+					
+					// Retrieve the name of the saved clustering file.
+					File file = ((CdHitExtStorage) this.extStorageController.getExtStorage(extID)).getFile();
+					
+					// Parse the qPMS9 command.
+					HashMap<Commands,String> command = this.parseQPMS9Command(file, this.hammingDistance);
+					
+					// Request a new qPMS9 job.
+					int moduleID = this.orderNewJob(ModuleType.QPMS9_JOB, command, this.hammingDistance);
+					
+					this.logger.log(Level.INFO, "qPMS9 job with an hamming distance of "
+							+ this.hammingDistance
+							+ " started."
+							+ " Job-ID:" + moduleID);
+				}
 				
 				break;
+				
 			case QPMS9_EXT_STORAGE:
+				
+				// Save the qPMS9 motifs as a new DataSet.
 				this.dataSet.addQpms9File((QPMS9ExtStorage) 
 						this.extStorageController.getExtStorage(extID) );
+				
+				// Define the name of the new SAM file.
+				String samFile = ((QPMS9ExtStorage) 
+						this.extStorageController.getExtStorage(extID) ).getFile().getAbsolutePath()
+						+ ".bowtie2.sam";
+				
+				// Define name for a new fastq file.
+				String fastqFile = ((QPMS9ExtStorage) 
+						this.extStorageController.getExtStorage(extID) ).getFile().getAbsolutePath()
+						+ ".fastq";
+				
+				// Convert qPMS9 motifs to fastq format.
+				ArrayList<String> motifs = ((QPMS9ExtStorage) 
+						this.extStorageController.getExtStorage(extID) ).getMotifs();
+				
+				this.convert2fastq(motifs, fastqFile);
+				
+				// Parse bowtie2 command.
+				// TODO: Contiue here.
+				//HashMap<Commands,String> command = this.parseBowtie2Command(fastqFile);
+				
+				// Start a new mapping process.
+				//int moduleID = this.orderNewJob(ModuleType.BOWTIE2_JOB, command, -1);
 				break;
 			case BOWTIE2_EXT_STORAGE:
 				this.dataSet.addBowtie2SAMfile((Bowtie2ExtStorage) 
@@ -208,6 +294,9 @@ public class AlgorithmController {
 		// Convert the path where the results will be saved into a proper path.
 		File absTargetPath = new File(targetPath);
 		
+		// Remember the target path in a object-wide variable.
+		this.absTargetPath = absTargetPath;
+		
 		// Determine the coverage and number of clusters.
 		
 		// Define the clusting command for Cd-Hit:
@@ -230,7 +319,7 @@ public class AlgorithmController {
 		firstClusteringCommand.put(Commands.o, absTargetPath.getAbsolutePath() + PhysicalConstants.getPathSeparator() + "firstClustering0.9");
 		
 		// Create a new Cd-Hit job.
-		int cdHitModuleId = this.orderNewJob(ModuleType.CDHIT_JOB, firstClusteringCommand);
+		int cdHitModuleId = this.orderNewJob(ModuleType.CDHIT_JOB, firstClusteringCommand, this.cdHitIdentity);
 		
 		// Start the Cd-Hit job.
 		String firstCdHitJob = this.moduleBuilder.prepareJobs(cdHitModuleId);
@@ -247,6 +336,143 @@ public class AlgorithmController {
 		/* END OF THE FIRST CLUSTERING */
 		
 	}
+	
+	// Methods to parse commands.
+	
+	private HashMap<Commands,String> parseCdhitCommand (File file, double identity) {
+		
+		// Define the command.
+		HashMap<Commands, String> command = new HashMap<Commands, String>();
+		
+		// Retrieve number of cpu cores.
+		String cpuNum = Integer.toString(PhysicalConstants.getCpuCoreNum());
+		
+		// Define the number of usable cpu cores for Cd-Hit.
+		command.put(Commands.T, cpuNum);
+				
+		// Define the absolute path to the fasta file.
+		command.put(Commands.i, file.getAbsolutePath());
+		
+		// Identity to String.
+		String ident = Double.toString(identity);
+				
+		// Define identity parameter.
+		command.put(Commands.c,ident);
+			
+		// Define the output file.
+		command.put(Commands.o, this.absTargetPath.getAbsolutePath() 
+				+ PhysicalConstants.getPathSeparator() + "cdHitClust" + ident);
+		
+		return command;
+	}
+	
+	private HashMap<Commands,String> parseQPMS9Command (File file, double hammingDistance) {
+		
+		// Parse the hamming distance as a String.
+		String hamDist = Double.toString(hammingDistance);
+		
+		// Define the command.
+		HashMap<Commands, String> command = new HashMap<Commands, String>();
+		
+		// TODO: Add parameter for usage of multiple cores.
+		
+		// Provide the parameter to the file.
+		command.put(Commands.fasta, file.getAbsolutePath());
+		
+		// Define constant length of each identified motif.
+		// TODO: ATTENTION hard-coded parameter!
+		command.put(Commands.l, "8");
+		
+		// Define the hammingDistance.
+		command.put(Commands.d, hamDist);
+		
+		// Define the quorum coverage (percentage of minimum occurrences in the quorum).
+		// TODO: ATTENTION hard-coded parameter!
+		command.put(Commands.q, "100");
+		
+		// Define the target file.
+		command.put(Commands.o, this.absTargetPath.toString() 
+				+ PhysicalConstants.getPathSeparator() 
+				+ file.getName() + ".qPMS." 
+				+ hamDist);
+		
+		return command;
+	}
+	
+	private HashMap<Commands,String> parseBowtie2Command (File file) {
+		
+		// Create new command.
+		HashMap<Commands, String> command = new HashMap<Commands, String>();
+		
+		// Define the target path.
+		command.put(Commands.reference, file.getAbsolutePath());
+		command.put(Commands.index_base, "test5");
+		command.put(Commands.x, "test5");
+		command.put(Commands.U, "testFiles" + PhysicalConstants.getPathSeparator() + "testFile6.fastq");
+		command.put(Commands.S, "tmpData" + PhysicalConstants.getPathSeparator() + "testFile6.sam");
+		
+		return command;
+	}
+	
+	// TODO: Continue here.
+	/*private HashMap<Commands,String> parseSamtoolsUniqueCommand () {
+		
+	}
+	
+	// TODO: Continue here.
+	private HashMap<Commands,String> parseSamtoolsSortCommand () {
+		
+	}*/
+	
+	// End command parse methods.
+	
+	// Conversion methods.
+	
+	private void convert2fastq (ArrayList<String> motifs, String fastqFile) {
+		
+		// TODO: Create a separate class for this operation with a distinct responsibility.
+		
+		// Initialize the ArrayList fastqMotifs.
+		ArrayList<String> fastqMotifs = new ArrayList<String>();
+		
+		// Iterate through the found motifs.
+		for (String i : motifs) {
+
+			// Add a fastq header.
+			String header = '@' + i + "\n";
+			fastqMotifs.add(header);
+			
+			// Add the sequence.
+			fastqMotifs.add(i + "\n");
+			
+			// Add the quality header.
+			fastqMotifs.add('+' + "\n");
+			
+			// Add a pseudo quality string.
+			String qualString = "";
+			for (int j = 0; j < i.length(); j ++)
+				qualString += "I";
+			qualString += "\n";
+			fastqMotifs.add(qualString);
+		}
+		
+		// Write the fastq file.
+		try {
+			FileWriter fw = new FileWriter(fastqFile);
+			BufferedWriter bw = new BufferedWriter(fw);
+			
+			for (String i : fastqMotifs) {
+				bw.write(i);
+			}
+			bw.close();
+			fw.close();
+		} catch (IOException ie) {
+			this.logger.log(Level.SEVERE, ie.getMessage());
+			ie.printStackTrace();
+		}
+		
+	}
+	// End conversion methods.
 	
 	/**
 	 * main

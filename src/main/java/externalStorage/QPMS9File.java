@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 // Java utility imports.
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.ArrayList;
 
 /**
  * This class creates objects which hold the path to a (text) file containing
@@ -35,6 +36,9 @@ public class QPMS9File {
 	
 	// Current State of the file.
 	private FileState fileState;
+	
+	// Save the motifs.
+	private ArrayList<String> motifs;
 	
 	// Constructors.
 	
@@ -81,6 +85,9 @@ public class QPMS9File {
 				// Increment counter for each line.
 				counter ++;
 				
+				// Add each motif to the motifs ArrayList.
+				this.motifs.add(line);
+				
 				// Read next line.
 				line = br.readLine();
 			}
@@ -126,6 +133,14 @@ public class QPMS9File {
 	 */
 	FileState getQPMSFileState() {
 		return this.fileState;
+	}
+	
+	/**
+	 * Getter returns all retrieved motifs.
+	 * @return ArrayList<String> motifs
+	 */
+	ArrayList<String> getMotifs() {
+		return this.motifs;
 	}
 	
 	// End Getters.

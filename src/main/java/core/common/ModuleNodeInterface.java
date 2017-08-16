@@ -37,8 +37,9 @@ public interface ModuleNodeInterface {
 	 * be stored.
 	 * @param String outFiles
 	 * @param ExtStorage exsType
+	 * @param double parameter
 	 */
-	public void notifyModuleObserverOutput(String outFiles, ExtStorageType exsType);
+	public void notifyModuleObserverOutput(String outFiles, ExtStorageType exsType, double parameter);
 	
 	/**
 	 * Connects the Producer to the Consumer.

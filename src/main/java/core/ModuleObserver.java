@@ -14,6 +14,9 @@ import core.ExtStorageController;
 import externalStorage.ExtStorageType;
 import externalStorage.FileState;
 
+// Project specific exceptions.
+import algorithmLogic.exceptions.NotEnoughIdentityException;
+
 /**
  * This class updates the STATE of each module.
  * This class also acts as an "Model" (Observer) in the MVC (Model-View-Controller) design pattern.
@@ -122,12 +125,21 @@ public class ModuleObserver implements ModuleObserverInterface {
 	}
 	
 	@Override
-	public void updateOutFile (String outFile, ExtStorageType exsType) {
+	public void updateOutFile (String outFile, ExtStorageType exsType, double parameter) {
 		// Request a new external storage.
-		String newExtID = this.extStorageController.requestStorage(outFile, exsType);
-		this.algorithmController.notifyAlgorithmController(newExtID, exsType);
-		// Notify the AlgorithmController about the new storage.
-		// TODO: Add command: this.algorithmController.
+		String newExtID = this.extStorageController.requestStorage(outFile, exsType, parameter);
+		
+		// Notify the AlgorithmController about the new ExternalStorage.
+		try {
+			this.algorithmController.notifyAlgorithmController(newExtID, exsType);
+		} catch (NotEnoughIdentityException neie) {
+			this.logger.log(Level.SEVERE, neie.getMessage());
+			neie.printStackTrace();
+		} catch (Exception e) {
+			this.logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

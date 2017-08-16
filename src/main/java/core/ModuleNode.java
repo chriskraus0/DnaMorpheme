@@ -165,8 +165,8 @@ public class ModuleNode implements ModuleNodeInterface {
 	}
 	
 	@Override 
-	public void notifyModuleObserverOutput(String outFile, ExtStorageType exsType) {
-		this.moduleObserver.updateOutFile(outFile, exsType);
+	public void notifyModuleObserverOutput(String outFile, ExtStorageType exsType, double parameter) {
+		this.moduleObserver.updateOutFile(outFile, exsType, parameter);
 	}
 	
 	// End methods.

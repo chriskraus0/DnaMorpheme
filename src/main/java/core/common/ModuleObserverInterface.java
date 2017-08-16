@@ -36,7 +36,8 @@ public interface ModuleObserverInterface {
 	 * of external storage required. 
 	 * @param String outFile
 	 * @param ExtStorageType exsType
+	 * @param double parameter
 	 */
-	public void updateOutFile (String outFile, ExtStorageType exsType);
+	public void updateOutFile (String outFile, ExtStorageType exsType, double parameter);
 	
 }

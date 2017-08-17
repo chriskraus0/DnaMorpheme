@@ -5,6 +5,9 @@ package externalStorage;
 // Java I/O imports.
 import java.io.File;
 
+// Project-specific imports.
+import modules.SamtoolsJobType;
+
 public class BAMExtStorage extends ExtStorage {
 
 	// Constants.
@@ -19,14 +22,26 @@ public class BAMExtStorage extends ExtStorage {
 	// Variable holding the current location of the BAM file. 
 	private File bamFile;
 	
+	// Provided hamming distance.
+	private double hammingDistance;
+	
+	// Provided samtools specific job type.
+	private SamtoolsJobType samtoolsJobType;
+	
 	// End variables.
 	
 	// Constructors.
-	public BAMExtStorage (String extID, File file) {
+	public BAMExtStorage (String extID, File file, double hamDistance, SamtoolsJobType samtoolsJobType) {
 		super(extID, file);
 		
 		// Initialize the file state.
 		this.fileState = FileState.AVAILABLE;
+		
+		// Initialize the hamming distance.
+		this.hammingDistance = hamDistance;
+		
+		// Initialize the samtools specific job type.
+		this.samtoolsJobType = samtoolsJobType;
 	}
 
 	
@@ -61,6 +76,21 @@ public class BAMExtStorage extends ExtStorage {
 		return super.getFile().getName();
 	}
 	
+	/**
+	 * Getter returns the provided value for the hamming distance.
+	 * @return double hamming distance
+	 */
+	public double getHammingDistance() {
+		return this.hammingDistance;
+	}
+	
+	/**
+	 * Getter returns the job-type which was completed by Samtools.
+	 * @return SamtoolsJobType samtoolsJobType
+	 */
+	public SamtoolsJobType getSamtoolsJobType() {
+		return this.samtoolsJobType;
+	}
 	// End getters.
 	
 	@Override

@@ -19,14 +19,20 @@ public class Bowtie2ExtStorage extends ExtStorage {
 	// This SAM file was created during the mapping process through Bowtie2.
 	private SamtoolsFile samtoolsFile;
 	
+	// Save the provided parameter.
+	private double parameter;
+	
 	// End variables.
 	
 	// Constructors.
-	public Bowtie2ExtStorage(String extID, File file) {
+	public Bowtie2ExtStorage(String extID, File file, double parameter) {
 		super(extID, file);
 		
 		// Initialize the file state.
 		this.fileState = FileState.AVAILABLE;
+		
+		// Initialize the provided parameter.
+		this.parameter = parameter;
 	}
 	
 	// End constructors.
@@ -41,6 +47,14 @@ public class Bowtie2ExtStorage extends ExtStorage {
 	 */
 	public SamtoolsFile getSamFile() {
 		return this.samtoolsFile;
+	}
+	
+	/**
+	 * Getter returns the provided parameter to this job.
+	 * @return double parameter
+	 */
+	public double getParameter() {
+		return this.parameter;
 	}
 	
 	// Overridden methods.

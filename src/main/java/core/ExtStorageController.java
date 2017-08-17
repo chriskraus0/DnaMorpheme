@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import externalStorage.ExtStorage;
 import externalStorage.ExtStorageFactory;
 import externalStorage.ExtStorageType;
+import modules.SamtoolsJobType;
 
 public class ExtStorageController {
 
@@ -81,6 +82,34 @@ public class ExtStorageController {
 		
 		// Create the new external storage.
 		ExtStorage newExtStorage = this.extStorageFactory.createNewStorage(exsType, newExtID, file, parameter);
+		
+		// Check the file, its state and save its content.
+		newExtStorage.checkFile();
+		
+		// Inform about the creation of a new external storage.
+		this.logger.log(Level.INFO, "External Storage of type: " + exsType.toString() + " ID: " +  newExtID 
+				+ " created.");
+		
+		// Push the newExtStorage and its newExtID into the extStorageMap.
+		this.extStorageMap.put(newExtID, newExtStorage);
+		
+		// Return the newest addition to the storage.
+		return newExtID;
+	}
+	
+	public String requestStorage(String filePath, ExtStorageType exsType, double parameter, SamtoolsJobType samtoolsJobType) {
+		
+		// Parse the file path properly.
+		File file = new File(filePath);
+		
+		// Parse new extID.
+		String newExtID = exsType.toString() + ":" + this.extStorageCounter;
+		
+		// Increment the extStorageCounter.
+		this.extStorageCounter ++;
+		
+		// Create the new external storage.
+		ExtStorage newExtStorage = this.extStorageFactory.createNewStorage(exsType, newExtID, file, parameter, samtoolsJobType);
 		
 		// Check the file, its state and save its content.
 		newExtStorage.checkFile();

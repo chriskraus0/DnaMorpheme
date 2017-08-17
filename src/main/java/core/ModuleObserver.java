@@ -13,6 +13,7 @@ import core.common.ModuleObserverInterface;
 import core.ExtStorageController;
 import externalStorage.ExtStorageType;
 import externalStorage.FileState;
+import modules.SamtoolsJobType;
 
 // Project specific exceptions.
 import algorithmLogic.exceptions.NotEnoughIdentityException;
@@ -139,6 +140,17 @@ public class ModuleObserver implements ModuleObserverInterface {
 			this.logger.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
 		}
+		
+	}
+	
+	@Override
+	public void updateOutFile (String outFile, ExtStorageType exsType, double parameter, SamtoolsJobType samtoolsJobType) {
+		// Request a new external storage.
+		String newExtID = this.extStorageController.requestStorage(outFile, exsType, parameter, samtoolsJobType);
+		
+		// Notify the AlgorithmController about the new ExternalStorage.
+		this.algorithmController.notifyAlgorithmController(newExtID, exsType, samtoolsJobType);
+		
 		
 	}
 	

@@ -18,6 +18,8 @@ public enum Commands {
 	S,
 	// Shared options between cdhit and samtools.
 	o,
+	// For several commands in sequence use the semicolon.
+	semicolon,
 	// Dummy command for dummy module.
 	dummy
 }

@@ -5,6 +5,8 @@ package externalStorage;
 // Java I/O imports.
 import java.io.File;
 
+import modules.SamtoolsJobType;
+
 /**
  * External Storage Interface defines the public methods for 
  * generation of new external storage.
@@ -31,8 +33,9 @@ public interface ExtStorageFactoryInterface {
 	/**
 	 * Creation of a bowtie2 specific external storage.
 	 * @param String extID
+	 * @param double parameter
 	 */
-	public Bowtie2ExtStorage createBowtie2Storage(String extID, File file);
+	public Bowtie2ExtStorage createBowtie2Storage(String extID, File file, double parameter);
 	
 	/**
 	 * Creation of a Samtools specific external storage.
@@ -53,4 +56,25 @@ public interface ExtStorageFactoryInterface {
 	 * @param String extID
 	 */
 	public ExtStorage createNewStorage(ExtStorageType exsType, String extID, File file, double parameter);
+	
+	/**
+	 * This method creates a specific BAM external storage.
+	 * @param exsType
+	 * @param extID
+	 * @param file
+	 * @param parameter
+	 * @param samtoolsJobType
+	 * @return ExtStorage
+	 */
+	public ExtStorage createNewStorage(ExtStorageType exsType, String extID, File file, double parameter, SamtoolsJobType samtoolsJobType);
+	
+	/**
+	 * This method creates a specific external storage for BAM files.
+	 * @param extID
+	 * @param file
+	 * @param hammingDistance
+	 * @param samtoolsJobType
+	 * @return BAMExtStorage 
+	 */
+	public BAMExtStorage createBAMStorage(String extID, File file, double hammingDistance, SamtoolsJobType samtoolsJobType);
 }

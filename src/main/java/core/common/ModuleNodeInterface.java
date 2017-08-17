@@ -6,6 +6,7 @@ package core.common;
 import core.exceptions.OccupiedException;
 import core.exceptions.PipeTypeNotSupportedException;
 import externalStorage.ExtStorageType;
+import modules.SamtoolsJobType;
 
 /**
  * ModuleNode interface to integrate required methods for the observer design pattern.
@@ -40,6 +41,16 @@ public interface ModuleNodeInterface {
 	 * @param double parameter
 	 */
 	public void notifyModuleObserverOutput(String outFiles, ExtStorageType exsType, double parameter);
+	
+	/**
+	 * This notification of the ModuleObserver is reserved only for different
+	 * Samtools jobs.
+	 * @param String outFile
+	 * @param ExtStorageType exsType
+	 * @param double parameter
+	 * @param SamtoolsJobType samtoolsJobType
+	 */
+	public void notifyModuleObserverOutput(String outFile, ExtStorageType exsType, double parameter, SamtoolsJobType samtoolsJobType);
 	
 	/**
 	 * Connects the Producer to the Consumer.

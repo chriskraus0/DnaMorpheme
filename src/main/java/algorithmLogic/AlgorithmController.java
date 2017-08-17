@@ -24,6 +24,7 @@ import core.PhysicalConstants;
 import core.ExtStorageController;
 
 import modules.commands.Commands;
+import modules.SamtoolsJobType;
 import externalStorage.BAMExtStorage;
 import externalStorage.Bowtie2ExtStorage;
 import externalStorage.CdHitExtStorage;
@@ -200,6 +201,22 @@ public class AlgorithmController {
 						
 						// Request a new Cd-Hit job.
 						int moduleID = this.orderNewJob(ModuleType.CDHIT_JOB, command, identity);
+						
+						// Prepare the job.
+						String cdHitJobNodeName = moduleBuilder.prepareJobs(moduleID);
+						
+						// Start new thread for "cdHitJobNodeName".
+						try {
+							moduleBuilder.startJobs(cdHitJobNodeName);
+						} catch (InterruptedException intE) {
+							this.logger.log(Level.SEVERE, intE.getMessage());
+							intE.printStackTrace();
+						} catch (Exception e) {
+							this.logger.log(Level.SEVERE, e.getMessage());
+							e.printStackTrace();
+						}
+						
+						// Write a log.
 						this.logger.log(Level.INFO, "Cd-Hit job with an identity of "
 								+ identity
 								+ " started."
@@ -222,6 +239,21 @@ public class AlgorithmController {
 					// Request a new qPMS9 job.
 					int moduleID = this.orderNewJob(ModuleType.QPMS9_JOB, command, this.hammingDistance);
 					
+					// Prepare the job.
+					String qPMS9JobNodeName = moduleBuilder.prepareJobs(moduleID);
+					
+					// Start new thread for "qPMS9JobNodeName".
+					try {
+						moduleBuilder.startJobs(qPMS9JobNodeName);
+					} catch (InterruptedException intE) {
+						this.logger.log(Level.SEVERE, intE.getMessage());
+						intE.printStackTrace();
+					} catch (Exception e) {
+						this.logger.log(Level.SEVERE, e.getMessage());
+						e.printStackTrace();
+					}
+					
+					// Write a log.
 					this.logger.log(Level.INFO, "qPMS9 job with an hamming distance of "
 							+ this.hammingDistance
 							+ " started."
@@ -236,44 +268,129 @@ public class AlgorithmController {
 				this.dataSet.addQpms9File((QPMS9ExtStorage) 
 						this.extStorageController.getExtStorage(extID) );
 				
+				// Get the provided parameter to qPMS9 (hammingDistance).
+				double parameter = ((QPMS9ExtStorage) 
+						this.extStorageController.getExtStorage(extID) ).getHammingDistance();
+				
 				// Define the name of the new SAM file.
-				String samFile = ((QPMS9ExtStorage) 
+				String samFileName = ((QPMS9ExtStorage) 
 						this.extStorageController.getExtStorage(extID) ).getFile().getAbsolutePath()
 						+ ".bowtie2.sam";
 				
+				File samFile = new File(samFileName);
+				
 				// Define name for a new fastq file.
-				String fastqFile = ((QPMS9ExtStorage) 
+				String fastqFileName = ((QPMS9ExtStorage) 
 						this.extStorageController.getExtStorage(extID) ).getFile().getAbsolutePath()
 						+ ".fastq";
+				File fastqFile = new File(fastqFileName);
 				
 				// Convert qPMS9 motifs to fastq format.
 				ArrayList<String> motifs = ((QPMS9ExtStorage) 
 						this.extStorageController.getExtStorage(extID) ).getMotifs();
 				
-				this.convert2fastq(motifs, fastqFile);
+				this.convert2fastq(motifs, fastqFileName);
 				
 				// Parse bowtie2 command.
-				// TODO: Contiue here.
-				//HashMap<Commands,String> command = this.parseBowtie2Command(fastqFile);
+				
+				HashMap<Commands,String> command = this.parseBowtie2Command(fastqFile, samFile);
 				
 				// Start a new mapping process.
-				//int moduleID = this.orderNewJob(ModuleType.BOWTIE2_JOB, command, -1);
+				int moduleID = this.orderNewJob(ModuleType.BOWTIE2_JOB, command, parameter);
+				
+				// Prepare the job.
+				String bowtie2JobNodeName = moduleBuilder.prepareJobs(moduleID);
+				
+				// Start new thread for "bowti2JobNodeName".
+				try {
+					moduleBuilder.startJobs(bowtie2JobNodeName);
+				} catch (InterruptedException intE) {
+					this.logger.log(Level.SEVERE, intE.getMessage());
+					intE.printStackTrace();
+				} catch (Exception e) {
+					this.logger.log(Level.SEVERE, e.getMessage());
+					e.printStackTrace();
+				}
+				
+				// Write a log.
+				this.logger.log(Level.INFO, "bowtie2 job with an hamming distance of "
+						+ parameter
+						+ " started."
+						+ " Job-ID:" + moduleID);
+				
 				break;
+				
 			case BOWTIE2_EXT_STORAGE:
+				
+				// Save the SAM file as a new DataSet.
 				this.dataSet.addBowtie2SAMfile((Bowtie2ExtStorage) 
 						this.extStorageController.getExtStorage(extID) );
+				
+				// Get the provided parameter from bowtie2.
+				double bowtie2Parameter = ((Bowtie2ExtStorage) 
+						this.extStorageController.getExtStorage(extID) ).getParameter();
+				
+				// Get the file name of the SAM file created by bowtie2.
+				File bowtie2SAMfile = ((Bowtie2ExtStorage) 
+						this.extStorageController.getExtStorage(extID) ).getFile();
+				
+				// Define the output file.
+				File samtoolsOutputFile = new File(bowtie2SAMfile.getAbsolutePath() + ".bam");
+				
+				// Convert the resulting SAM to a BAM file.
+				HashMap<Commands,String> samtoolsCommand = this.parseSamtoolsSAM2BAM(bowtie2SAMfile, samtoolsOutputFile);
+				
+				// Start the Samtools job.
+				int samtoolsModuleID = this.orderNewJob(ModuleType.SAMTOOLS_JOB, samtoolsCommand, bowtie2Parameter);
+				
+				// Prepare the job.
+				String samtoolsConversionJobNodeName = moduleBuilder.prepareJobs(samtoolsModuleID);
+				
+				// Start new thread for "samtoolsConversionJobNodeName".
+				try {
+					moduleBuilder.startJobs(samtoolsConversionJobNodeName);
+				} catch (InterruptedException intE) {
+					this.logger.log(Level.SEVERE, intE.getMessage());
+					intE.printStackTrace();
+				} catch (Exception e) {
+					this.logger.log(Level.SEVERE, e.getMessage());
+					e.printStackTrace();
+				}
+				
+				// Write a log.
+				this.logger.log(Level.INFO, "Samtools SAM to BAM conversion job started. Hamming distance: "
+						+ bowtie2Parameter
+						+ " "
+						+ " Job-ID:" + samtoolsModuleID);
+				
 				break;
+				
 			case SAMTOOLS_EXT_STORAGE:
+				
+				// Save the SAM file as a new DataSet.
 				this.dataSet.addSamtoolsSAMfile((SamtoolsExtStorage) 
 						this.extStorageController.getExtStorage(extID) );
+				
+				// TODO: This a feature currently not used, or required.
+				
 				break;
+				
 			case TOMTOM_EXT_STORAGE:
 				// TODO: Not implemented yet.
 				break;
-			case BAM_EXT_STORAGE:
-				this.dataSet.addBamFile((BAMExtStorage) 
-						this.extStorageController.getExtStorage(extID) );
-				break;
+				
+			
+		}
+	}
+	
+	public void notifyAlgorithmController(String extID, ExtStorageType extType, SamtoolsJobType samtoosJobType) {
+		switch (extType) {
+		case BAM_EXT_STORAGE:
+			
+			// Save the BAM file as a new DataSet.
+			this.dataSet.addBamFile((BAMExtStorage) 
+					this.extStorageController.getExtStorage(extID) );
+			break;
 		}
 	}
 	
@@ -399,28 +516,62 @@ public class AlgorithmController {
 		return command;
 	}
 	
-	private HashMap<Commands,String> parseBowtie2Command (File file) {
+	private HashMap<Commands,String> parseBowtie2Command (File file, File outputFile) {
 		
 		// Create new command.
 		HashMap<Commands, String> command = new HashMap<Commands, String>();
 		
-		// Define the target path.
+		// Define the target path for the input.
 		command.put(Commands.reference, file.getAbsolutePath());
-		command.put(Commands.index_base, "test5");
-		command.put(Commands.x, "test5");
-		command.put(Commands.U, "testFiles" + PhysicalConstants.getPathSeparator() + "testFile6.fastq");
-		command.put(Commands.S, "tmpData" + PhysicalConstants.getPathSeparator() + "testFile6.sam");
+		
+		// Define the base name for the index.
+		command.put(Commands.index_base, file.getName());
+		
+		// Define the numbers of available CPUs.
+		int cpus = PhysicalConstants.getCpuCoreNum();
+		command.put(Commands.p, Integer.toString(cpus));
+		
+		// Call the the base name of the index.
+		command.put(Commands.x, file.getName());
+		
+		// Call the input.
+		command.put(Commands.U, file.getAbsolutePath());
+		
+		// Define the output file.
+		command.put(Commands.S, outputFile.getAbsolutePath());
 		
 		return command;
 	}
 	
-	// TODO: Continue here.
-	/*private HashMap<Commands,String> parseSamtoolsUniqueCommand () {
+	
+	private HashMap<Commands,String> parseSamtoolsSAM2BAM (File samFile, File outputFile) {
+	
+		// Create a new command.
+		HashMap<Commands, String> command = new HashMap<Commands, String>();
+						
+		// Define the index of the bowtie2 mapping step.
+		command.put(Commands.index, samFile.getName());
 		
+		// Convert the SAM file into a BAM file.
+		command.put(Commands.b, "");
+		
+		// The input is in SAM format.
+		command.put(Commands.S, "");
+		
+		// Get the input from SAM file.
+		command.put(Commands.input, samFile.getAbsolutePath());
+		
+		// Write the output via redirect.
+		command.put(Commands.redirect, ">");
+		
+		// Write the output into this output file.
+		command.put(Commands.output, outputFile.getAbsolutePath());
+				
+		return command;
 	}
 	
 	// TODO: Continue here.
-	private HashMap<Commands,String> parseSamtoolsSortCommand () {
+	/*private HashMap<Commands,String> parseSamtoolsSortCommand () {
 		
 	}*/
 	

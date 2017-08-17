@@ -39,7 +39,7 @@ public class SamtoolsJob extends Module {
 		// Logger.
 		private Logger logger;
 		
-		// External commands for cdhit software.
+		// External commands for the Samtools software.
 		private Map<Commands, String> command;
 		
 		// Module node of the current job.
@@ -59,6 +59,9 @@ public class SamtoolsJob extends Module {
 			
 		// SequenceStorage object for storing fasta data.
 		private SequenceStorage fastaStorage;
+		
+		// The type of current samtools job.
+		private SamtoolsJobType samtoolsJobType;
 		
 	// Constructors.
 	public SamtoolsJob(int moduleID, int storageID, ModuleType mType, int iPortID, int oPortID, HashMap<Commands, String> cmd, double hammingDistance) {
@@ -84,7 +87,10 @@ public class SamtoolsJob extends Module {
 				this.setModuleState(ModuleState.SUCCESS);
 				this.moduleNode.notifyModuleObserver();
 				// Notify the ModuleObserver about the saved external file.
-				this.moduleNode.notifyModuleObserverOutput(this.outputFile, ExtStorageType.SAMTOOLS_EXT_STORAGE, this.hammingDistance);
+				if (! (this.samtoolsJobType == SamtoolsJobType.TVIEW_BAM))
+					this.moduleNode.notifyModuleObserverOutput(this.outputFile, ExtStorageType.BAM_EXT_STORAGE, this.hammingDistance);
+				// TODO: else
+					// this.moduleNode.notifyModuleObserverOutput(this.outputFile, ExtStorageType.TVIEW_EXT_STORAGE, this.hammingDistance);
 			}
 		} catch (CommandFailedException ce) {
 			System.err.println(ce.getMessage());
@@ -167,14 +173,16 @@ public class SamtoolsJob extends Module {
 		this.moduleNode.notifyModuleObserver();
 		
 		// Store fasta input in SequenceStorage.class.
-		try {
-			this.fastaStorage.parseMultipleFasta(this.input);
-		} catch (TruncatedFastaHeadException te) {
-			this.logger.log(Level.SEVERE, te.getMessage());
-			te.printStackTrace();
-		} catch (Exception e) {
-			this.logger.log(Level.SEVERE, e.getMessage());
-			e.printStackTrace();
+		if (!this.input.isEmpty()) {
+			try {
+				this.fastaStorage.parseMultipleFasta(this.input);
+			} catch (TruncatedFastaHeadException te) {
+				this.logger.log(Level.SEVERE, te.getMessage());
+				te.printStackTrace();
+			} catch (Exception e) {
+				this.logger.log(Level.SEVERE, e.getMessage());
+				e.printStackTrace();
+			}
 		}
 				
 		
@@ -187,28 +195,34 @@ public class SamtoolsJob extends Module {
 				&& this.command.containsKey(Commands.b)
 				&& this.command.containsKey(Commands.S)) {
 			newCommands = this.parseSamToBamCommand();
+			this.samtoolsJobType = SamtoolsJobType.SAM_2_BAM;
 		} 
 		// Parse "remove non-mapping reads from BAM" command.
 		else if (this.command.containsKey(Commands.view)
 				&& this.command.containsKey(Commands.F)
 				&& this.command.containsKey(Commands.b)) {
 			newCommands = this.parseSamRemoveUnmappedCommand();
+			this.samtoolsJobType = SamtoolsJobType.REMOVE_READS_BAM;
 		} 
 		// Parse the "sort SAM file" command.
 		else if (this.command.containsKey(Commands.sort)) {
 			newCommands = this.parseBamSortCommand();
+			this.samtoolsJobType = SamtoolsJobType.SORT_BAM;
 		} 
 		// Parse the "index BAM file" command.
 		else if (this.command.containsKey(Commands.index)) {
 			newCommands = this.parseBamIndexCommand();
+			this.samtoolsJobType = SamtoolsJobType.INDEX_BAM;
 		}
 		// Parse the "index reference" command.
 		else if (this.command.containsKey(Commands.faidx)) {
 			newCommands = this.parseSamRefIndexCommand();
+			this.samtoolsJobType = SamtoolsJobType.INDEX_FASTA;
 		} 
 		// Parse the "show tview for specific region and convert to text" command.
 		else if (this.command.containsKey(Commands.tview)) {
 			newCommands = this.parseSamTviewCommand();
+			this.samtoolsJobType = SamtoolsJobType.TVIEW_BAM;
 		} 		
 		// If crucial options for samtools are missing throw an exception.
 		else {

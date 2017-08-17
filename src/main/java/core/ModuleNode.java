@@ -15,6 +15,7 @@ import core.exceptions.NeitherConsumerProducerException;
 import core.exceptions.OccupiedException;
 import core.exceptions.PipeTypeNotSupportedException;
 import externalStorage.ExtStorageType;
+import modules.SamtoolsJobType;
 
 /**
  * This class creates nodes for each interacting thread pair. These nodes serve as queues 
@@ -167,6 +168,11 @@ public class ModuleNode implements ModuleNodeInterface {
 	@Override 
 	public void notifyModuleObserverOutput(String outFile, ExtStorageType exsType, double parameter) {
 		this.moduleObserver.updateOutFile(outFile, exsType, parameter);
+	}
+	
+	@Override
+	public void notifyModuleObserverOutput(String outFile, ExtStorageType exsType, double parameter, SamtoolsJobType samtoolsJobType) {
+		this.moduleObserver.updateOutFile(outFile, exsType, parameter, samtoolsJobType);
 	}
 	
 	// End methods.

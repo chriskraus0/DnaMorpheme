@@ -4,6 +4,7 @@ package core.common;
 
 // Project-specific imports.
 import externalStorage.FileState;
+import modules.SamtoolsJobType;
 import externalStorage.ExtStorageType;
 
 /**
@@ -39,5 +40,17 @@ public interface ModuleObserverInterface {
 	 * @param double parameter
 	 */
 	public void updateOutFile (String outFile, ExtStorageType exsType, double parameter);
+	
+	/**
+	 * Updates the ExtStorageController with new file which should be read
+	 * and saved. This method takes the path to the file and the type 
+	 * of external storage required. Additionally it takes Samtools job 
+	 * specific parameters.
+	 * @param String outFile
+	 * @param ExtStorageType exsType
+	 * @param double parameter
+	 * @param SamtoolsJobType samtoolsJobType
+	 */
+	public void updateOutFile (String outFile, ExtStorageType exsType, double parameter, SamtoolsJobType samtoolsJobType);
 	
 }
